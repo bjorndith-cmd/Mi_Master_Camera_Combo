@@ -10,6 +10,7 @@ Usage:
 
 import os
 import sys
+import html
 import argparse
 import urllib.request
 import urllib.error
@@ -141,10 +142,10 @@ def get_announcement_text():
     )
 
 def get_release_text(tag, title, notes):
-    header = f"🚀 <b>Новый релиз: {title or tag}</b> ⚡\n\n"
+    header = f"🚀 <b>Новый релиз: {html.escape(title or tag)}</b> ⚡\n\n"
     body = ""
     if notes:
-        body = f"📝 <b>Что нового:</b>\n{notes}\n\n"
+        body = f"📝 <b>Что нового:</b>\n{html.escape(notes)}\n\n"
     footer = (
         "📦 <b>Файлы релиза доступны на GitHub:</b>\n"
         f"👉 <a href=\"https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases\">Скачать обновление</a>\n\n"
@@ -152,9 +153,31 @@ def get_release_text(tag, title, notes):
     )
     return header + body + footer
 
+def get_push_text(commit_hash, author, message):
+    short_hash = commit_hash[:7] if commit_hash else "latest"
+    author_clean = html.escape(author or "borndead")
+    lines = [l.strip() for l in (message or "").split("\n") if l.strip()]
+    header_msg = html.escape(lines[0]) if lines else "Новое обновление кодовой базы"
+    details = html.escape("\n".join(lines[1:4])) if len(lines) > 1 else ""
+
+    text = (
+        "🚀 <b>В репозиторий Mi_Master_Camera_Combo загружено новое обновление!</b> ⚡\n\n"
+        f"📌 <b>Коммит:</b> <code>{short_hash}</code>\n"
+        f"👤 <b>Автор:</b> {author_clean}\n"
+        f"💬 <b>Изменения:</b>\n<b>{header_msg}</b>\n"
+    )
+    if details:
+        text += f"<i>{details}</i>\n"
+    text += (
+        f"\n🔗 <a href=\"https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/commit/{commit_hash}\">Посмотреть изменения на GitHub</a>\n"
+        "📦 <a href=\"https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/tree/main/releases\">Каталог модулей Releases</a>\n\n"
+        "💬 <b>Канал и чат:</b> @Mi_Master_Camera_Combo"
+    )
+    return text
+
 def main():
     parser = argparse.ArgumentParser(description="Send updates to Telegram Channel")
-    parser.add_argument("--type", choices=["announcement", "release", "custom"], default="announcement")
+    parser.add_argument("--type", choices=["announcement", "release", "push", "custom"], default="announcement")
     parser.add_argument("--tag", default="")
     parser.add_argument("--title", default="")
     parser.add_argument("--notes", default="")
@@ -185,6 +208,8 @@ def main():
         content = get_announcement_text()
     elif args.type == "release":
         content = get_release_text(args.tag, args.title, args.notes)
+    elif args.type == "push":
+        content = get_push_text(args.tag, args.title, args.notes)
     else:
         content = args.text or "⚡ <b>Обновление Mi Master Camera Combo</b>"
 

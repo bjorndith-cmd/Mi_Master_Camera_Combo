@@ -1,6 +1,8 @@
 name: Telegram Channel Notification
 
 on:
+  push:
+    branches: [ "main" ]
   release:
     types: [published]
   workflow_dispatch:
@@ -13,6 +15,7 @@ on:
         options:
           - announcement
           - release
+          - push
           - custom
       custom_title:
         description: 'Custom Title (optional)'
@@ -42,12 +45,24 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ]; then
+            echo "::warning ::TELEGRAM_BOT_TOKEN is not set in GitHub Secrets. Please configure TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in repository settings (Settings -> Secrets and variables -> Actions)."
+            exit 0
+          fi
+
           if [ "${{ github.event_name }}" = "release" ]; then
             python3 tools/send_telegram_post.py \
               --type release \
               --tag "${{ github.event.release.tag_name }}" \
               --title "${{ github.event.release.name }}" \
               --notes "${{ github.event.release.body }}" \
+              --photo "assets/LOGO.jpg"
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            python3 tools/send_telegram_post.py \
+              --type push \
+              --tag "${{ github.sha }}" \
+              --title "${{ github.event.head_commit.author.name }}" \
+              --notes "${{ github.event.head_commit.message }}" \
               --photo "assets/LOGO.jpg"
           else
             python3 tools/send_telegram_post.py \
