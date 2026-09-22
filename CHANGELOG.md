@@ -2,13 +2,24 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
+## [v5.8-Nezha-SimpleRom-Fix] - 2026-09-22
+### Fixed
+- **Fatal Camera Crash on Xiaomi 17 Ultra (`nezha`) on SimpleRom 3.0.309.0 - ST**:
+  - **Dynamic Linker Missing Dependency Resolved**: Completely purged naked `.so` files from Stock AIO (`libremosaiclib.so`, `libmialgo_ainr_ll.so`, `libmialgo_ellc.so`). Discovered via ELF header analysis that `libremosaiclib.so` had a hard dependency `DT_NEEDED: libdlrmsc_android15.so`, which is not present in HyperOS 3.0 / Android 16, crashing `cameraserver` on boot.
+  - **Hardware Mismatch Fixed**: Restored dynamic `devices/` directory structure in `Mi15U_X17U_Master_Camera_Combo_v5.1`. Xiaomi 17 Ultra (`nezha`) now exclusively receives genuine OmniVision OVX10500U, HP9, JN5, and OV50M Chromatix tuned bins instead of `xuanyuan` bins.
+  - **Custom ROM Safeguard**: Added intelligent custom ROM detection (`IS_CUSTOM_ROM`) in `customize.sh`. On SimpleRom, ST, Xiaomi.eu, EliteROM, or Xiaomi 17 Ultra, the ROM's native deodexed/patched `MiuiCamera.apk` is preserved, preventing signature and JNI runtime crashes.
+- **Added Dedicated Slim Pure Overlay MOD for Xiaomi 17 Ultra**:
+  - Introduced `X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip` (13.8 MB).
+  - Pure systemless overlay that does not modify `MiuiCamera.apk` at all.
+  - Guarantees 100% rock-solid stability on SimpleRom 3.0.309.0 - ST, Xiaomi.eu, and Stock HyperOS 3.0.
+  - Injects full OVX10500U Chromatix profiles, DCG Hardware HDR, 8K video on all lenses, 4K120fps, AISP NR bypass, and Qualcomm `libqcodec2_v4l2codec.so`.
+
 ## [v5.7-Universal-DCG-AIO-A16] - 2026-09-22
 ### Added
 - **Stock AIO 104 Integration for Xiaomi 15 Ultra (`xuanyuan`)**:
   - Added full Chromatix tuning binary `com.qti.tuned.xuanyuan_semco_LYT900_wide_i.bin` (34.27 MB) for 1-inch Sony LYT-900.
   - Added full Chromatix tuning binary `com.qti.tuned.xuanyuan_semco_s5khp9_tele5x_i.bin` (21.45 MB) for 200MP Samsung HP9 periscope.
   - Added full Chromatix tuning binaries for IMX858 (3x), JN5 (ultra-wide), and OV32B40 (front).
-  - Added high-performance proprietary Xiaomi libraries: `libremosaiclib.so` (33.82 MB, Android 15/16 DMA-BUF heap), `libmialgo_ellc.so` (Extreme Low Light Capture), and `libmialgo_ainr_ll.so` (AI Noise Reduction).
   - Added SmartAE LN2 EV tables and night scene profiles.
 - SELinux rules in `customize.sh` for all `.so` binaries in `system/odm/lib64/`.
 

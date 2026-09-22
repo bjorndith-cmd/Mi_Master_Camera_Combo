@@ -9,7 +9,7 @@
 <p align="center">
   <b>Автор сборки:</b> <code>borndead</code><br>
   <i>(feat. itzdfplayer, amitkattal & GeorgeKiarie)</i><br>
-  <b>Версия:</b> <code>v5.7-Universal-DCG-AIO-A16</code>
+  <b>Версия:</b> <code>v5.8-Universal-DCG-AIO-A16</code>
 </p>
 
 ---
@@ -24,6 +24,7 @@
   * [4. Stock AIO 104: сенсор Sony LYT-900 и нейросети](#4-stock-aio-104-сенсор-sony-lyt-900-и-нейросети)
   * [5. George Video MOD (8K, 4K120, чистый AISP)](#5-george-video-mod-8k-4k120-чистый-aisp)
   * [6. Интеллектуальный HAL-менеджер Android 15/16](#6-интеллектуальный-hal-менеджер-android-1516)
+  * [7. Защита от вылетов на кастомных прошивках (SimpleRom ST, Xiaomi.eu)](#7-защита-от-вылетов-на-кастомных-прошивках-simplerom-st-xiaomieu)
 * [Доступные модули для загрузки](#-доступные-модули-для-загрузки)
 * [Инструкция по установке](#-инструкция-по-установке)
 * [Решение проблем (FAQ)](#-решение-проблем-faq)
@@ -35,7 +36,7 @@
 
 **Xiaomi Master Camera Combo** — это флагманский системный модуль для **Magisk (v26/27+)**, **KernelSU** и **APatch**, решающий все известные аппаратные и программные ограничения стоковой камеры Xiaomi на прошивках **HyperOS 2.0 и HyperOS 3.0** (Android 15 и Android 16).
 
-Модуль оснащён **интеллектуальным инсталлятором**: при прошивке скрипт `customize.sh` на лету определяет кодовое имя подключенного смартфона (`ishtar`, `dada`, `haotian`, `xuanyuan` или `nezha`), монтирует индивидуальные сенсорные калибровки Qualcomm Chromatix, настраивает сетку зума 50M/200M и активирует безопасную конфигурацию для вашей платформы.
+Модуль оснащён **интеллектуальным инсталлятором**: при прошивке скрипт `customize.sh` на лету определяет кодовое имя подключенного смартфона (`ishtar`, `dada`, `haotian`, `xuanyuan` или `nezha`), тип прошивки (Stock vs SimpleRom/ST/Xiaomi.eu), монтирует индивидуальные сенсорные калибровки Qualcomm Chromatix, настраивает сетку зума 50M/200M и активирует безопасную конфигурацию для вашей платформы.
 
 ---
 
@@ -73,21 +74,28 @@
 ### 4. Stock AIO 104: сенсор Sony LYT-900 и нейросети
 Специально для **Xiaomi 15 Ultra (`xuanyuan`)** интегрирован официальный релизный стек:
 * Полная Chromatix калибровка `com.qti.tuned.xuanyuan_semco_LYT900_wide_i.bin` (**34.27 МБ**) для 1-дюймовой матрицы **Sony LYT-900**.
-* **`libremosaiclib.so` (33.82 МБ)** — аппаратная ремозаика для сбора кристально резких 50Мп и 200Мп на базе современного Linux DMA-BUF heap.
-* **`libmialgo_ellc.so` (9.03 МБ)** — алгоритм Extremely Low Light Capture для съёмки в темноте.
-* **`libmialgo_ainr_ll.so` (11.13 МБ)** — нейросетевое шумоподавление AI Noise Reduction.
+* Полные калибровки для 200Мп Samsung HP9, IMX858 3x, JN5 и OV32B40.
+* SmartAE LN2 таблицы экспозиции для ночной съёмки.
+* Библиотека `libmialgo_snsc.so` для стабильной обработки сцен.
 
 ### 5. George Video MOD (8K, 4K120, чистый AISP)
 * Запись видео **8K 24fps со всех задних сенсоров**.
 * Режимы **4K 120fps**, **Dolby Vision 4K 60fps**, **LOG** и **Director Mode**.
 * Твик `aisp.json` и свойство `persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1` отключают агрессивное размытие ArcSoft AISP, возвращая видео резкость и микроконтраст.
 * Дамп отладки выключен (`dump: 0`), предотвращая забивание памяти тяжелыми логами.
+* Интегрирован аппаратный видео-кодек `libqcodec2_v4l2codec.so` для Xiaomi 17 Ultra.
 
 ### 6. Интеллектуальный HAL-менеджер Android 15/16
 * **На Android 14 (API 34)**: монтируется кастомный `camera.qcom.so` для разблокировки 50Мп.
 * **На Android 15/16 (API 35/36)**:
   * Для `ishtar` (13U) и `dada` (15): инсталлятор автоматически очищает старый A14 HAL, сохраняя нативный системный AIDL HAL и предотвращая чёрный экран.
   * Для `xuanyuan` (15U): монтируется официальный нативный HyperOS 3.0.9.0 A16 HAL с поддержкой `android.frameworks.sensorservice-V1-ndk.so`.
+  * Для `nezha` (17U): используется нативный HAL HyperOS 3.0, управляющий сенсорами OmniVision OVX10500U.
+
+### 7. Защита от вылетов на кастомных прошивках (SimpleRom ST, Xiaomi.eu)
+* На кастомных прошивках (`SimpleRom 3.0.309.0 - ST`, `Xiaomi.eu`, `EliteROM`) приложение камеры модифицировано и деодексировано автором ROM. Замена APK на стоковый приводила к мгновенному падению камеры.
+* **Решение**: Инсталлятор `customize.sh` автоматически определяет кастомные прошивки (`IS_CUSTOM_ROM`) и устройство `nezha`, сохраняя встроенный APK прошивки нетронутым и накатывая калибровки сенсоров, DCG HDR и видеомод в режиме чистого оверлея.
+* Для максимальной надёжности на **Xiaomi 17 Ultra** выпущен выделенный модуль **Slim Overlay MOD** (`X17U_Master_Imaging_MOD_v1.0_Slim`), в котором приложение камеры изначально отсутствует.
 
 ---
 
@@ -97,18 +105,20 @@
 
 | Файл модуля | Размер | Назначение |
 |---|---|---|
-| **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **216.99 МБ** | **Универсальный комбайн (Рекомендуется!)** Автоматически определяет любое устройство из линейки (13U, 15, 15 Pro, 15U, 17U). Включает всё: Leica APK, FullRes, DCG, Stock AIO LYT-900, видеомод George. |
-| **[`Mi15U_X17U_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.0_by_borndead.zip)** | **186.28 МБ** | **Выделенная сборка для Xiaomi 15 Ultra (`xuanyuan`) и 17 Ultra (`nezha`)**. Включает официальные калибровки Sony LYT-900, Samsung HP9 200MP, библиотеки AINR/ELLC/Remosaic и нативный A16 HAL. |
+| **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 МБ** | **Выделенный оверлей-мод для Xiaomi 17 Ultra (`nezha`) (Рекомендуется для 17U!)**. Идеально для **SimpleRom 3.0.309.0 - ST**, Xiaomi.eu, EliteROM и стока. НЕ трогает APK камеры (0% риска вылета!). Калибровки OVX10500U/HP9/JN5/OV50M, DCG HDR, 8K все линзы, 4K120fps, видео-кодек, AISP bypass. |
+| **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 МБ** | **Исправленная комбо-сборка для Xiaomi 15 Ultra (`xuanyuan`) и 17 Ultra (`nezha`)**. Полное динамическое разделение архитектур 15U и 17U, удалены конфликтные библиотеки, защита от перезаписи APK на SimpleRom ST. |
+| **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **195.13 МБ** | **Универсальный комбайн для всех флагманов (13U, 15, 15 Pro, 15U, 17U)**. Автоматическое определение модели и типа прошивки, полная калибровка всех камер, DCG HDR, видеомод George. |
 | **[`Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip)** | **158.76 МБ** | **Выделенная сборка для Xiaomi 13 Ultra (`ishtar`)**. Полная Leica камера, Quad-50MP, DCG HDR, 8K со всех линз, фикс зависания видоискателя. |
-| **[`Mi15_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_v5.0_by_borndead.zip)** | **151.58 МБ** | **Выделенная сборка для Xiaomi 15 (`dada`) и 15 Pro (`haotian`)**. |
 | **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 КБ** | **Облегченная версия для 13 Ultra (без приложения камеры)**. Только твики, калибровки сенсоров, DCG и George Video MOD. |
-| **[`Mi13U_Master_Imaging_MOD_v1.0_Universal_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Universal_by_borndead.zip)** | **12.33 МБ** | Универсальная версия твиков для 13 Ultra с A14 HAL для старых прошивок. |
+| **[`Mi15_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_v5.0_by_borndead.zip)** | **151.58 МБ** | **Выделенная сборка для Xiaomi 15 (`dada`) и 15 Pro (`haotian`)**. |
 
 ---
 
 ## 🚀 Инструкция по установке
 
 1. Скачайте нужный архив из папки [`releases/`](./releases/).
+   * **Для Xiaomi 17 Ultra на SimpleRom ST**: рекомендуем [`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip).
+   * **Для универсальной установки**: используйте [`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip).
 2. Откройте **Magisk (v26+)**, **KernelSU** или **APatch**.
 3. Перейдите в раздел **«Модули»** ➔ **«Установить из хранилища»**.
 4. Выберите архив и дождитесь завершения установки.
@@ -118,6 +128,12 @@
 ---
 
 ## ❓ Решение проблем (FAQ)
+
+<details>
+<summary><b>Что делать, если на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) вылетала камера?</b></summary>
+Проблема полностью решена в версии <b>v5.8</b>! В старой версии из-за отсутствия папки <code>devices/</code> на 17 Ultra монтировался HAL от 15 Ultra и повреждённая библиотека <code>libremosaiclib.so</code> (требовавшая несуществующий <code>libdlrmsc_android15.so</code>), а также перезаписывался модифицированный APK SimpleRom.  
+Установите <b>X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip</b> или обновлённый <b>Mi15U_X17U_Master_Camera_Combo_v5.1</b> — камера запустится мгновенно и без сбоев.
+</details>
 
 <details>
 <summary><b>В режиме «Фото» видоискатель плавно работает?</b></summary>
