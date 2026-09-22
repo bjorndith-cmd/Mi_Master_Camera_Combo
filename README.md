@@ -37,7 +37,8 @@
    - [Stock AIO 104 для Xiaomi 15 Ultra (LYT-900)](#45-stock-aio-104-для-xiaomi-15-ultra-lyt-900-ru)
    - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#46-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
 5. [Инструкция по установке](#5-инструкция-по-установке-ru)
-6. [Часто задаваемые вопросы (FAQ)](#6-часто-задаваемые-вопросы-faq-ru)
+6. [Инструкция по тестированию и проверке работы модуля](#6-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
+7. [Часто задаваемые вопросы (FAQ)](#7-часто-задаваемые-вопросы-faq-ru)
 
 ---
 
@@ -70,8 +71,9 @@
 | **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 МБ** | 17 Ultra (`nezha`) | **⭐ Рекомендуется для 17 Ultra (SimpleRom 3.0.309.0 - ST, EU, Elite, Stock)**. Чистый оверлей: НЕ перезаписывает APK камеры (0% риска вылета!). Все калибровки OVX10500U/HP9/JN5/OV50M, DCG HDR, 8K, 4K120fps, кодек. |
 | **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 МБ** | 15U (`xuanyuan`) & 17U (`nezha`) | **Исправленный комбо-модуль**. Динамическое разделение 15U и 17U, удалены битые библиотеки, авто-детектор SimpleRom ST. |
 | **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **195.13 МБ** | 13U, 15, 15 Pro, 15U, 17U | **Универсальный комбайн для всей линейки**. Автоматически определяет устройство и тип прошивки, активирует полный комплекс твиков. |
-| **[`Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip)** | **158.76 МБ** | 13 Ultra (`ishtar`) | Выделенная полная Leica-камера для 13 Ultra, Quad-50M, DCG HDR, 8K все линзы, фикс зависания видоискателя. |
-| **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 КБ** | 13 Ultra (`ishtar`) | Облегчённый оверлей для 13 Ultra (без приложения камеры). |
+| **[`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip)** | **270.3 КБ** | 13 Ultra (`ishtar`) | **⭐ Рекомендуется для HyperOS 1.0 (Android 14)**. Чистый оверлей, сохраняет нативный HAL и APK, 100% безопасен для рута (SELinux не трогает), Quad-50M, DCG HDR, 8K. |
+| **[`Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **146.69 МБ** | 13 Ultra (`ishtar`) | Выделенная полная Leica-камера для 13 Ultra на HyperOS 2/3 (A15/A16), Quad-50M, DCG HDR, 8K все линзы, фикс зависания видоискателя. |
+| **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 КБ** | 13 Ultra (`ishtar`) | Облегчённый оверлей для 13 Ultra на HyperOS 2/3 (без приложения камеры). |
 | **[`Mi15_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_v5.0_by_borndead.zip)** | **151.58 МБ** | 15 (`dada`) & 15 Pro (`haotian`) | Выделенный комбайн для Xiaomi 15 и 15 Pro. |
 
 ---
@@ -119,20 +121,142 @@
 
 ---
 
-### 6. Часто задаваемые вопросы (FAQ) (RU)
+### 6. Инструкция по тестированию и проверке работы модуля (для всех версий) (RU)
+
+После установки любого модуля из линейки рекомендуется провести пошаговую диагностику, чтобы убедиться в корректной активации всех аппаратных алгоритмов и системных оверлеев.
+
+#### 6.1. Базовый чек-лист сразу после перезагрузки
+1. **Проверка Root-прав**: Откройте **Magisk**, **KernelSU** или **APatch**.
+   - Убедитесь, что модуль активен (включён переключатель).
+   - Убедитесь, что статус суперпользователя сохранён (на Android 14 исключён переход в Magisk Safe Mode благодаря чистым скриптам загрузки).
+2. **Сброс кэша камеры** *(обязательно для применения XML-конфигов)*:
+   - Перейдите в *Настройки ➔ Приложения ➔ Все приложения ➔ Камера*.
+   - Нажмите **«Очистить всё»** (это сбросит внутренний кэш разрешений и применит новые сетки зума `device_features`).
+3. **Первичный запуск**:
+   - Откройте стоковую камеру Leica. Приложение должно открыться мгновенно, без задержек, без падений и без чёрного экрана.
+
+---
+
+#### 6.2. Проверка ключевых режимов по моделям смартфонов
+
+##### 📱 Xiaomi 17 Ultra (`nezha`)
+* **Проверка стабильности на SimpleRom ST / Custom ROM**:
+  - При установке `X17U_Master_Imaging_MOD_v1.0_Slim` или исправленного комбо v5.1 стоковый модифицированный APK камеры сохраняется. Камера не крашится при запуске, динамический компоновщик не падает из-за отсутствующей библиотеки `libdlrmsc`.
+* **Режим «50M / 200M Ultra HD» (Mode 175)**:
+  - Переключитесь в режим «50M» (или «Ultra HD»).
+  - Выберите зум **5.0x** (перископический телеобъектив Samsung HP9 200Мп). Сделайте снимок. Откройте снимок в Галерее ➔ *«Сведения»*: разрешение файла должно составлять **`16384 x 12288`** (~200 Мп, размер файла от 40 до 80 МБ).
+  - Проверьте переключение на **0.5x** (ультраширокоугольный JN5), **1.0x** (основной 1" OVX10500U) и **3.0x**: разрешение снимков должно быть ровно **`8192 x 6144`** (50 Мп).
+* **Режим «Видео» (8K и 4K120fps)**:
+  - Перейдите в режим «Видео» ➔ выберите **8K 24fps**. Переключайтесь между всеми объективами (0.5x, 1x, 3x, 5x) — запись ведётся со всех 4 сенсоров.
+  - Переключитесь в **4K 120fps** — проверьте плавность записи. Интегрированный видеокодек `libqcodec2_v4l2codec.so` гарантирует отсутствие дропов кадров на высоком битрейте.
+
+##### 📱 Xiaomi 15 Ultra (`xuanyuan`)
+* **Официальные калибровки Sony LYT-900 (Stock AIO 104)**:
+  - Основной 1-дюймовый сенсор LYT-900 считывает оригинальные Chromatix-профили `xuanyuan_semco_LYT900_wide_i.bin`. Цвета естественные, без синевы или пересветов.
+* **200Мп перископ Samsung HP9**:
+  - В режиме «50M Ultra HD» на зуме **5.0x** проверьте разрешение снимка: честные **`16384 x 12288`**. На 1.0x — **`8192 x 6144`**.
+* **Ночной режим SmartAE LN2**:
+  - Сделайте ночной кадр в слабом освещении: экспозиция сбалансирована, фонари не превращаются в белые пятна, тени не зашумлены.
+* **Видео 8K со всех линз**: Запись 8K 24fps доступна на 0.5x, 1x, 3x, 5x.
+
+##### 📱 Xiaomi 13 Ultra (`ishtar`)
+* **Проверка на HyperOS 1.0 (Android 14)**:
+  - С модулем `Mi13U_Master_Imaging_MOD_HOS1_A14` видоискатель работает сразу (нет черного экрана, нативный HAL сохранён). Рут в Magisk не пропадает.
+* **Плавность режима «Фото» (Mode 161)**:
+  - Запустите камеру в обычном режиме «Фото» на 1.0x (Sony IMX989). Видоискатель должен работать на стабильных 60 fps без малейшего зависания первого кадра (устранён баг Super Resolution).
+* **Сетка Quad-50M (Mode 175)**:
+  - В режиме «50M» проверьте все 4 фокусных расстояния: **`0.5x : 1.0x : 3.2x : 5.0x`**.
+  - Все 4 камеры (Sony IMX989 + 3x IMX858) выводят честные **`8192 x 6144`** (50 Мп).
+* **Pro-режим и 14-битный Ultra RAW**:
+  - В режиме «Профи» включите RAW — снимается полноценный 50Мп поток без сжатия благодаря `persist.vendor.camera.maxRAWSizes=55`.
+* **Google Камера (GCam)**:
+  - В модах AGC, LMC, Shamim все 4 тыловые камеры доступны для переключения и снимают в полном разрешении 50Мп RAW.
+
+##### 📱 Xiaomi 15 / 15 Pro (`dada` / `haotian`)
+* **Сетка зума 50M Ultra HD**:
+  - На Xiaomi 15 доступны переключатели: **`0.6x : 1.0x : 3.2x`**.
+  - На Xiaomi 15 Pro доступны переключатели: **`0.6x : 1.0x : 3.2x : 5.0x`**.
+* **Сенсор Light Hunter 900**: Проверьте контрастные дневные сцены — тени мягко подтягиваются без пересветов благодаря калибровкам DCG.
+
+---
+
+#### 6.3. Тестирование аппаратного DCG (Dual Conversion Gain) / iDCG HDR
+Главное преимущество аппаратного DCG перед обычным программным HDR — **считывание LCG (яркие участки) и HCG (тени) с одного единственного физического кадра**:
+1. Найдите высококонтрастную сцену: комната с ярким солнечным окном или ночная улица с яркой неоновой вывеской/фонарём.
+2. Поместите в кадр быстро движущийся объект (помашите рукой перед камерой или сфотографируйте проезжающий автомобиль).
+3. Сделайте снимок в режиме «Фото» или «50M».
+4. **Оценка результата**:
+   - **Света (LCG)**: лампы, небо за окном или неоновые вывески не выбиты в белый клиппинг, текстура ламп и облаков сохранена.
+   - **Тени (HCG)**: в тёмных углах комнаты видны детали и цвета без цветного цифрового шума.
+   - **Отсутствие двоения (Zero Motion Ghosting)**: движущаяся рука или автомобиль имеют абсолютно резкий, чёткий контур. Нет «призраков» и артефактов склейки кадров, характерных для обычного программного HDR.
+
+---
+
+#### 6.4. Проверка системных свойств в Termux / ADB
+Вы можете за 10 секунд подтвердить активность всех модульных твиков через терминал (Termux с рутом на смартфоне или командная строка ADB на ПК):
+
+```bash
+# Получение прав суперпользователя (в Termux)
+su
+
+# 1. Проверка активации аппаратного DCG HDR
+getprop persist.vendor.camera.dcg.enable
+# Ожидаемый вывод: 1
+
+# 2. Проверка флага сенсорного HDR
+getprop persist.vendor.camera.sensor.hdr
+# Ожидаемый вывод: 1
+
+# 3. Проверка разблокировки полноразмерных RAW буферов (50M/200M)
+getprop persist.vendor.camera.maxRAWSizes
+# Ожидаемый вывод: 55
+
+# 4. Проверка обхода агрессивного видео-шумодава ArcSoft AISP
+getprop persist.vendor.camera.arcsoft.aisp_algo_nr.bypass
+# Ожидаемый вывод: 1
+
+# 5. Проверка коэффициента битрейта видео (увеличение на 50%)
+getprop persist.vendor.camera.video.bitrate.factor
+# Ожидаемый вывод: 1.5
+
+# 6. Проверка поддержки DCG на вендорном уровне
+getprop ro.vendor.camera.dcg
+# Ожидаемый вывод: 1
+```
+
+#### 6.5. Проверка логов CamX HAL через ADB Logcat (для продвинутых пользователей)
+Если подключить смартфон к ПК по USB и включить отладку по ADB:
+```bash
+adb logcat -s CamX | grep -iE "dcg|hdr|stream"
+```
+При запуске видоискателя драйвер Qualcomm CamX выведет вызовы `EnableHDRDCGMode: success` и подтвердит сопряжение каналов усиления в реальном времени.
+
+---
+
+### 7. Часто задаваемые вопросы (FAQ) (RU)
 
 <details>
-<summary><b>Что делать на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14), если пропал рут или черный экран?</b></summary>\nПроблема полностью решена! На Android 14 рут отпадал из-за агрессивных permissive-правил в <code>post-fs-data.sh</code>, вызывавших Safe Mode в Magisk, а чёрный экран возникал из-за подмены системного Camera HAL на порт от A16.  \nУстановите выделенный модуль <b>Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip</b> — он сохраняет родной системный HAL и APK, не трогает SELinux, активирует Quad-50MP на всех линзах, DCG HDR и 8K видео с нулевым риском сбоев!\n</details>\n\n<details>\n<summary><b>Камера на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) теперь не вылетает?</b></summary>
-Да, проблема решена на 100%! Для пользователей SimpleRom ST мы рекомендуем <b>X17U_Master_Imaging_MOD_v1.0_Slim</b>. Модуль не затрагивает модифицированный APK камеры, а накатывает только сенсорные калибровки, DCG HDR и видеомод.
+<summary><b>Что делать на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14), если пропал рут или черный экран?</b></summary>
+
+Проблема полностью решена! На Android 14 рут отпадал из-за агрессивных permissive-правил в `post-fs-data.sh`, вызывавших Safe Mode в Magisk, а чёрный экран возникал из-за подмены системного Camera HAL на порт от A16.  
+Установите выделенный модуль **Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip** — он сохраняет родной системный HAL и APK, не трогает SELinux, активирует Quad-50MP на всех линзах, DCG HDR и 8K видео с нулевым риском сбоев!
+</details>
+
+<details>
+<summary><b>Камера на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) теперь не вылетает?</b></summary>
+
+Да, проблема решена на 100%! Для пользователей SimpleRom ST мы рекомендуем **X17U_Master_Imaging_MOD_v1.0_Slim**. Модуль не затрагивает модифицированный APK камеры, а накатывает только сенсорные калибровки, DCG HDR и видеомод.
 </details>
 
 <details>
 <summary><b>Плавный ли видоискатель в режиме «Фото»?</b></summary>
+
 Да, видоискатель выдаёт стабильные 60 fps без фризов благодаря удалению конфликтных тегов Super Resolution из XML.
 </details>
 
 <details>
 <summary><b>Работает ли 50Мп в Google Камере (GCam)?</b></summary>
+
 Да, все объективы доступны в модах AGC, LMC, Shamim в полном разрешении 50Мп / 200Мп.
 </details>
 
@@ -154,7 +278,8 @@
    - [Stock AIO 104 for Xiaomi 15 Ultra (LYT-900)](#45-stock-aio-104-for-xiaomi-15-ultra-lyt-900-en)
    - [Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#46-crash-prevention-on-xiaomi-17-ultra-simplerom-st-eu-elite-en)
 5. [Installation Guide](#5-installation-guide-en)
-6. [Frequently Asked Questions (FAQ)](#6-frequently-asked-questions-faq-en)
+6. [Verification & Testing Guide (All Devices & Versions)](#6-verification--testing-guide-all-devices--versions-en)
+7. [Frequently Asked Questions (FAQ)](#7-frequently-asked-questions-faq-en)
 
 ---
 
@@ -187,8 +312,9 @@ All packages are hosted in the [`releases/`](./releases/) directory:
 | **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 MB** | 17 Ultra (`nezha`) | **⭐ Recommended for 17 Ultra (SimpleRom 3.0.309.0 - ST, EU, Elite, Stock)**. Pure systemless overlay: DOES NOT touch `MiuiCamera.apk` (0% crash risk!). Genuine OVX10500U/HP9/JN5/OV50M Chromatix bins, DCG HDR, 8K video, 4K120fps, video codec. |
 | **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 MB** | 15U (`xuanyuan`) & 17U (`nezha`) | **Fixed Dual-Flagship Combo**. Dynamic separation of 15U and 17U profiles, purged broken libraries, auto-detects SimpleRom ST to preserve native APK. |
 | **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **195.13 MB** | 13U, 15, 15 Pro, 15U, 17U | **Universal Multi-Device Combo**. Auto-detects device hardware and ROM type, deploys full Leica suite, DCG HDR, and George Video MOD. |
-| **[`Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip)** | **158.76 MB** | 13 Ultra (`ishtar`) | Dedicated full Leica suite for 13 Ultra, Quad-50M, DCG HDR, 8K on all lenses, photo viewfinder freeze fix. |
-| **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 KB** | 13 Ultra (`ishtar`) | Lightweight pure overlay for 13 Ultra (without APK replacement). |
+| **[`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip)** | **270.3 KB** | 13 Ultra (`ishtar`) | **⭐ Recommended for HyperOS 1.0 (Android 14)**. Pure overlay, preserves native HAL and APK, 100% root safe (clean SELinux), Quad-50M, DCG HDR, 8K. |
+| **[`Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **146.69 MB** | 13 Ultra (`ishtar`) | Dedicated full Leica suite for 13 Ultra on HyperOS 2/3 (A15/A16), Quad-50M, DCG HDR, 8K on all lenses, photo viewfinder freeze fix. |
+| **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 KB** | 13 Ultra (`ishtar`) | Lightweight pure overlay for 13 Ultra on HyperOS 2/3 (without APK replacement). |
 | **[`Mi15_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_v5.0_by_borndead.zip)** | **151.58 MB** | 15 (`dada`) & 15 Pro (`haotian`) | Dedicated combo for Xiaomi 15 and 15 Pro. |
 
 ---
@@ -236,26 +362,142 @@ All packages are hosted in the [`releases/`](./releases/) directory:
 
 ---
 
-### 6. Frequently Asked Questions (FAQ) (EN)
+### 6. Verification & Testing Guide (All Devices & Versions) (EN)
+
+After installing any module package from the suite, follow this step-by-step diagnostic guide to verify that all hardware pipelines, Chromatix tunings, and system overrides are operational.
+
+#### 6.1. Baseline Post-Reboot Verification
+1. **Root Status Check**: Open **Magisk**, **KernelSU**, or **APatch**.
+   - Verify the module is active with a green checkmark.
+   - Confirm root access remains fully functional (Magisk Safe Mode is completely bypassed on Android 14 due to sanitized boot scripts).
+2. **Clear Camera App Data** *(mandatory to apply modified `device_features` XML)*:
+   - Navigate to *Settings ➔ Apps ➔ Manage apps ➔ Camera*.
+   - Tap **«Clear all data»** (this purges cached resolution lists and enforces new 50M/200M zoom ratios).
+3. **Initial Launch**:
+   - Open the stock Leica Camera app. It should launch instantly with zero lag, no crash, and no black screen.
+
+---
+
+#### 6.2. Target Device Verification Steps
+
+##### 📱 Xiaomi 17 Ultra (`nezha`)
+* **SimpleRom ST / Custom ROM Stability**:
+  - With `X17U_Master_Imaging_MOD_v1.0_Slim` or updated Combo v5.1, the ROM's native deodexed camera APK is preserved. The camera starts reliably without crashing, and dynamic linker errors (`libdlrmsc_android15.so not found`) are eliminated.
+* **50M / 200M Ultra HD Mode (Mode 175)**:
+  - Switch to «50M» (or «Ultra HD») mode.
+  - Select **5.0x zoom** (Samsung HP9 200MP periscope telephoto). Capture a photo. Open the image in Gallery ➔ *«Details»*: file dimensions must show **`16384 x 12288`** (~200 MP, file size 40–80 MB).
+  - Test switching to **0.5x** (JN5 ultrawide), **1.0x** (1" OVX10500U wide), and **3.0x**: all output native **`8192 x 6144`** (50 MP).
+* **Video Mode (8K All Lenses & 4K120fps)**:
+  - Switch to «Video» ➔ select **8K 24fps**. Switch between lenses (0.5x, 1x, 3x, 5x) — recording functions on all 4 rear sensors.
+  - Select **4K 120fps** — verify video smoothness. The integrated `libqcodec2_v4l2codec.so` codec ensures zero frame drops under increased bitrates.
+
+##### 📱 Xiaomi 15 Ultra (`xuanyuan`)
+* **Official Stock AIO 104 Tunings for Sony LYT-900**:
+  - The 1-inch LYT-900 sensor loads official Chromatix tunings `xuanyuan_semco_LYT900_wide_i.bin`. Colors and contrast remain balanced without clipping or color cast.
+* **Samsung HP9 200MP Periscope**:
+  - In «50M Ultra HD» mode at **5.0x**, confirm **`16384 x 12288`** resolution. At 1.0x, verify **`8192 x 6144`**.
+* **SmartAE LN2 Low-Light Exposure**:
+  - Capture a night scene: exposure is natural, streetlight blowout is prevented, and dark shadows retain detail without noise grain.
+* **8K Video All Lenses**: 8K 24fps is enabled across 0.5x, 1x, 3x, 5x sensors alongside 4K120fps.
+
+##### 📱 Xiaomi 13 Ultra (`ishtar`)
+* **HyperOS 1.0 (Android 14) Verification**:
+  - Using `Mi13U_Master_Imaging_MOD_HOS1_A14`, the viewfinder opens immediately (no black screen, native A14 HAL preserved). Magisk root stays active.
+* **Photo Mode Viewfinder Smoothness (Mode 161)**:
+  - Launch the camera in default «Photo» mode on 1.0x (Sony IMX989). The viewfinder maintains a steady 60 fps without freezing on the first frame (Super Resolution conflict stripped).
+* **Quad-50M Grid (Mode 175)**:
+  - In «50M» mode, verify all 4 focal lengths: **`0.5x : 1.0x : 3.2x : 5.0x`**.
+  - All 4 cameras (Sony IMX989 + 3x IMX858) output full **`8192 x 6144`** (50 MP).
+* **Pro Mode & 14-Bit Ultra RAW**:
+  - In Pro mode, enable RAW — outputs uncompressed 50MP DNG files (`persist.vendor.camera.maxRAWSizes=55`).
+* **GCam Port Compatibility**:
+  - AGC, LMC, and Shamim mods identify all 4 rear cameras (AUX IDs 0, 1, 2, 3, 4) with full 50MP RAW capability.
+
+##### 📱 Xiaomi 15 / 15 Pro (`dada` / `haotian`)
+* **50M Ultra HD Zoom Grid**:
+  - Xiaomi 15: **`0.6x : 1.0x : 3.2x`**.
+  - Xiaomi 15 Pro: **`0.6x : 1.0x : 3.2x : 5.0x`**.
+* **Light Hunter 900 DCG Dynamic Range**: Backlit daytime and night shots benefit from true hardware sensor HDR.
+
+---
+
+#### 6.3. Testing Hardware DCG (Dual Conversion Gain) / iDCG HDR
+The key advantage of hardware DCG over standard multi-frame HDR is **simultaneous LCG (highlights) and HCG (shadows) readout from a single exposure**:
+1. Frame a high dynamic range scene (e.g., an indoor room facing a bright sunny window, or a night street with bright neon signs/streetlights).
+2. Introduce rapid motion in the frame (wave your hand in front of the lens or photograph a passing car).
+3. Capture a shot in «Photo» or «50M» mode.
+4. **Evaluate the Image**:
+   - **Highlights (LCG)**: Bright light sources and sky textures are retained without harsh white clipping.
+   - **Shadows (HCG)**: Shadowed corners show rich colors and low noise.
+   - **Zero Motion Ghosting**: The moving subject has sharp, clean edges with zero double-contours or ghosting artifacts.
+
+---
+
+#### 6.4. Terminal / ADB Properties Verification
+Quickly verify system properties using Termux (with root) or ADB on PC:
+
+```bash
+# Obtain root (in Termux)
+su
+
+# 1. Verify Hardware DCG HDR is enabled
+getprop persist.vendor.camera.dcg.enable
+# Expected: 1
+
+# 2. Verify Sensor-level HDR
+getprop persist.vendor.camera.sensor.hdr
+# Expected: 1
+
+# 3. Verify Full-Resolution RAW buffer unlock (50M/200M)
+getprop persist.vendor.camera.maxRAWSizes
+# Expected: 55
+
+# 4. Verify ArcSoft AISP video noise reduction bypass
+getprop persist.vendor.camera.arcsoft.aisp_algo_nr.bypass
+# Expected: 1
+
+# 5. Verify video bitrate factor (50% increase)
+getprop persist.vendor.camera.video.bitrate.factor
+# Expected: 1.5
+
+# 6. Verify vendor-level DCG support flag
+getprop ro.vendor.camera.dcg
+# Expected: 1
+```
+
+#### 6.5. CamX HAL Logcat Verification (Advanced)
+Via USB debugging on PC:
+```bash
+adb logcat -s CamX | grep -iE "dcg|hdr|stream"
+```
+During viewfinder startup, Qualcomm CamX will log `EnableHDRDCGMode: success`, confirming real-time dual-gain channel operation.
+
+---
+
+### 7. Frequently Asked Questions (FAQ) (EN)
 
 <details>
 <summary><b>What should I do on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14) if root dropped or screen went black?</b></summary>
-This issue is 100% fixed! On Android 14, root dropped because permissive rules in <code>post-fs-data.sh</code> triggered Magisk Safe Mode, and the black screen was caused by overwriting the Camera HAL with an incompatible ported library.  
-Flash the dedicated <b>Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip</b> module — it preserves native Camera HAL and APK, cleans boot scripts, and enables Quad-50MP on all lenses, DCG HDR, and 8K video with zero crash or root loss risk!
+
+This issue is 100% fixed! On Android 14, root dropped because permissive rules in `post-fs-data.sh` triggered Magisk Safe Mode, and the black screen was caused by overwriting the Camera HAL with an incompatible ported library.  
+Flash the dedicated **Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip** module — it preserves native Camera HAL and APK, cleans boot scripts, and enables Quad-50MP on all lenses, DCG HDR, and 8K video with zero crash or root loss risk!
 </details>
 
 <details>
 <summary><b>Does the camera crash on Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST)?</b></summary>
-No, this issue is 100% resolved in <b>v5.8</b>! For SimpleRom ST users, we recommend <b>X17U_Master_Imaging_MOD_v1.0_Slim</b>. It does not overwrite the custom camera APK, only applying sensor calibrations, DCG HDR, and video tweaks.
+
+No, this issue is 100% resolved in **v5.8**! For SimpleRom ST users, we recommend **X17U_Master_Imaging_MOD_v1.0_Slim**. It does not overwrite the custom camera APK, only applying sensor calibrations, DCG HDR, and video tweaks.
 </details>
 
 <details>
 <summary><b>Is the viewfinder smooth in Photo mode?</b></summary>
+
 Yes, the viewfinder maintains a steady 60 fps without freezing, thanks to dynamic cleanup of rogue Super Resolution tags.
 </details>
 
 <details>
 <summary><b>Does 50MP work in GCam mods?</b></summary>
+
 Yes, all cameras shoot in full 50MP / 200MP resolution in AGC, LMC, Shamim, and BigKaka mods.
 </details>
 

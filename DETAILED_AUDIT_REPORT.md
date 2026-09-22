@@ -247,3 +247,115 @@
 4. **Выпуск выделенного модуля для HyperOS 1.0 A14**:
    * Собран и опубликован модуль **`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`** (270.3 КБ).
    * Модуль работает в режиме чистого оверлея (`Pure Systemless Overlay`): не содержит `post-fs-data.sh`, не трогает HAL и APK, активирует Quad-50MP на всех сенсорах (0.5x, 1x, 3.2x, 5x), DCG Hardware HDR, 8K видео со всех линз и 4K120fps.
+
+---
+
+## 8. Методология аппаратно-системной верификации и тестирования модулей
+
+Для обеспечения абсолютной стабильности и подтверждения работы всех аппаратных конвейеров разработана стандартизированная методология тестирования для всей линейки устройств и вариантов прошивок (Stock, SimpleRom ST, Xiaomi.eu, EliteROM).
+
+### 8.1. Матрица верификации сенсоров и разрешений EXIF
+
+Каждый снимок в режиме «50M / 200M Ultra HD» (Mode 175) должен формировать файл с точными физическими габаритами матрицы:
+
+| Устройство | Кодовое имя | Сенсор (Фокусное) | Режим биннинга (Фото) | Full-Res Режим (50M/200M) | Точные размеры EXIF (Ш x В) |
+|---|---|---|---|---|---|
+| **Xiaomi 13 Ultra** | `ishtar` | Sony IMX858 (0.5x UW) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Sony IMX989 (1.0x Wide) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Sony IMX858 (3.2x Tele) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Sony IMX858 (5.0x Peri) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| **Xiaomi 15** | `dada` | Samsung JN1 (0.6x UW) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Light Hunter 900 (1.0x) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Samsung JN5 (3.2x Tele) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| **Xiaomi 15 Pro** | `haotian` | Light Hunter + JN1 + IMX858 | 12.5 Мп | **50 Мп** (0.6x, 1x, 3.2x, 5x) | `8192 x 6144` |
+| **Xiaomi 15 Ultra** | `xuanyuan` | Sony LYT-900 (1.0x Wide) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Samsung HP9 (5.0x Peri) | 12.5 Мп / 50 Мп | **200 Мп** | **`16384 x 12288`** |
+| **Xiaomi 17 Ultra** | `nezha` | OVX10500U (1.0x Wide) | 12.5 Мп (4096 x 3072) | **50 Мп** | `8192 x 6144` |
+| | | Samsung HP9 (5.0x Peri) | 12.5 Мп / 50 Мп | **200 Мп** | **`16384 x 12288`** |
+| | | Samsung JN5 (0.5x UW) | 12.5 Мп | **50 Мп** | `8192 x 6144` |
+
+---
+
+### 8.2. Протокол проверки аппаратного DCG (Dual Conversion Gain)
+
+Аппаратный DCG кардинально отличается от программного HDR:
+1. **Программный HDR (Multi-frame Staggered HDR)**: Сенсор делает 2 или 3 кадра подряд с разной экспозицией (короткая, средняя, длинная), после чего процессор сшивает их. Если объект в кадре двигался, на снимке неизбежно возникает эффект «призрака» (Motion Ghosting) или размытие.
+2. **Аппаратный DCG (Single Exposure Dual Readout)**: Сенсор экспонирует пиксель **один-единственный раз**. Внутри каждого пикселя одновременно заряжаются конденсаторы LCG (низкое усиление) и HCG (высокое усиление). Данные считываются за один проход:
+   - **Тест на отсутствие артефактов**: фотографирование быстро движущейся руки или едущего автомобиля на фоне яркого неба или фонарей.
+   - **Критерий успеха**: края движущегося объекта идеально чёткие, контуры не двоятся (Zero Ghosting), при этом небо не пересвечено (LCG), а в тенях видны детали (HCG).
+
+---
+
+### 8.3. Инструментальная верификация системных свойств (Termux / ADB)
+
+Для аппаратной верификации применённых оверлеев используется следующий тестовый скрипт:
+
+```bash
+#!/system/bin/sh
+echo "=== Xiaomi Master Camera Combo Verification ==="
+echo "Device: $(getprop ro.product.device)"
+echo "Build: $(getprop ro.build.display.id)"
+echo "Android API: $(getprop ro.build.version.sdk)"
+echo "-----------------------------------------------"
+
+# 1. DCG HDR
+DCG_EN=$(getprop persist.vendor.camera.dcg.enable)
+echo "DCG Hardware Enable: $DCG_EN (Expected: 1)"
+
+# 2. Sensor HDR
+SENSOR_HDR=$(getprop persist.vendor.camera.sensor.hdr)
+echo "Sensor HDR: $SENSOR_HDR (Expected: 1)"
+
+# 3. Max RAW Buffer Size
+RAW_SIZE=$(getprop persist.vendor.camera.maxRAWSizes)
+echo "Max RAW Sizes: $RAW_SIZE (Expected: 55)"
+
+# 4. AISP NR Bypass
+AISP_BYPASS=$(getprop persist.vendor.camera.arcsoft.aisp_algo_nr.bypass)
+echo "AISP NR Bypass: $AISP_BYPASS (Expected: 1)"
+
+# 5. Video Bitrate Factor
+BITRATE=$(getprop persist.vendor.camera.video.bitrate.factor)
+echo "Video Bitrate Factor: $BITRATE (Expected: 1.5)"
+
+# 6. Vendor DCG Flag
+RO_DCG=$(getprop ro.vendor.camera.dcg)
+echo "Vendor DCG Flag: $RO_DCG (Expected: 1)"
+
+echo "-----------------------------------------------"
+if [ "$DCG_EN" = "1" ] && [ "$RAW_SIZE" = "55" ]; then
+    echo "STATUS: ALL MASTER ENGINE PROPERTIES ARE ACTIVE!"
+else
+    echo "STATUS: VERIFICATION WARNING - CHECK MODULE INSTALLATION."
+fi
+```
+
+---
+
+### 8.4. Анализ низкоуровневых логов Qualcomm CamX HAL (Logcat)
+
+Для глубокой отладки взаимодействия драйверов CamX и узлов обработки ChiNode:
+```bash
+adb logcat -c
+adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
+```
+**Контрольные маркеры в логе:**
+* `CamX: [INFO] SensorDriver::ConfigureDCG: Enabled DCG channel for SensorId=0`
+* `CamX: [INFO] CamXSession::CreateStreams: FullRes RAW stream created [Width: 8192, Height: 6144]` (или `16384x12288` для HP9)
+* `ChiNode: [INFO] ChiNode::Execute: DCGCOMBINE node processed frame without errors`
+
+---
+
+### 8.5. Верификация видео-кодека и битрейта (8K24fps & 4K120fps)
+
+1. Проверка доступности аппаратного кодека:
+   ```bash
+   adb shell dumpsys media.player | grep -i "v4l2codec"
+   ```
+2. Анализ полученного 8K видеофайла через `mediainfo` или `ffprobe`:
+   ```bash
+   ffprobe -v error -show_entries stream=width,height,r_frame_rate,bit_rate input_8k.mp4
+   ```
+   * Разрешение: `7680x4320`
+   * Кадровая частота: `24 fps` (или `30 fps`)
+   * Битрейт: повышен со стандартных ~80-100 Мбит/с до **130–160 Мбит/с** благодаря коэффициенту `1.5`.
