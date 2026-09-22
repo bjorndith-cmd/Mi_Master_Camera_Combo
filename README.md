@@ -38,6 +38,7 @@
    - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#46-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
 5. [Инструкция по установке](#5-инструкция-по-установке-ru)
 6. [Инструкция по тестированию и проверке работы модуля](#6-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
+   - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#66-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
 7. [Часто задаваемые вопросы (FAQ)](#7-часто-задаваемые-вопросы-faq-ru)
 
 ---
@@ -233,6 +234,67 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 
 ---
 
+#### 6.6. Настройка и проверка 50Мп / 200Мп в Google Камере (AGC 8.x / 9.x, LMC, Shamim) (RU)
+
+Модули **Xiaomi Master Camera Combo** разблокируют аппаратный вывод полного разрешения на уровне системы и драйвера Qualcomm CamX. Однако **Google Камера (AGC 9.6 / BigKaka, LMC 8.4, Shamim)** изначально создана для смартфонов Google Pixel и «из коробки» (без специального `.agc` конфига или ручной настройки) **НЕ будет снимать в 50Мп** даже при нажатии на плашку «50M / RES» в видоискателе.
+
+Ниже приведено подробное руководство по правильной настройке и тестированию режима полного разрешения.
+
+##### 1. Почему в GCam без настройки не работает 50Мп?
+* **Роль модуля Magisk**: Параметр `persist.vendor.camera.maxRAWSizes=55` открывает для Camera2 API аппаратный буфер RAW16 высокого разрешения (`8192x6144` и `16384x12288`), а `vendor.camera.aux.packagelist` даёт приложению доступ ко всем физическим объективам.
+* **Поведение GCam по умолчанию**: Приложение настроено на стандартный 12.5 Мп биннинг (4-в-1). Если включить режим «50M» без изменения конфигурации сессии и типа спуска, то:
+  - Снимок сохранится в стандартном разрешении `4096 x 3072` (12.5 Мп);
+  - Либо зависнет индикатор запекания HDR+ в шторке;
+  - Либо приложение аварийно завершится из-за несоответствия потоков (`SessionConfiguration`).
+
+##### 2. Главное правило съёмки в 50Мп: Режим затвора (ZSL vs HDR+ Enhanced) ⚠️
+* **В режиме моментального спуска (ZSL / Zero Shutter Lag / обычный HDR+) съёмка в 50Мп НЕВОЗМОЖНА!**  
+  *Причина:* В режиме ZSL камера непрерывно прокачивает через оперативную память кольцевой буфер из 15–25 несжатых RAW-кадров со скоростью 30 fps. Для 50Мп такой буфер требует более 2.5 ГБ RAM в секунду — процессор Qualcomm ISP не успевает его обрабатывать и принудительно сбрасывает поток в 12.5 Мп биннинг.
+* **Решение:**  
+  В видоискателе AGC откройте верхнюю шторку быстрых настроек и **переключите затвор в режим «HDR+ Enhanced» («HDR+ Расширенный»)** (значок `HDR+` в рамке/с плюсом) или одиночный RAW. Только в этом режиме камера при нажатии на спуск делает точечный захват 1–3 кадров высокого разрешения.
+
+##### 3. Пошаговая ручная настройка AGC 9.6 / 9.x (если нет готового конфига)
+1. Нажмите на значок **шестерёнки** вверху видоискателя ➔ **More Settings (Дополнительные настройки)**.
+2. Перейдите в раздел **Camera Lens (Объективы)** ➔ выберите нужный объектив (например, **Main Lens**).
+3. **High Resolution / 50MP:** переведите тумблер в положение **ВКЛ (ON)**.
+4. **RAW Format (Формат RAW):** выберите **RAW16** *(процессоры Snapdragon 8 Gen 2 / Gen 3 / Elite отдают 50Мп поток строго в RAW16)*.
+5. **Session Configuration (Конфигурация сессии / OpMode):** выберите значение `0xF000` или `0x0` (либо режим `High Resolution`).
+6. **HDR+ Frames (Количество кадров):** для 50Мп установите **от 1 до 3 кадров** (если оставить 15–20 кадров, телефон зависнет из-за нехватки RAM при склейке).
+7. **Уровни Black Level / White Level:**
+   - **Sony IMX989, IMX858, LYT-900 (Xiaomi 13 Ultra, 15 Ultra):** Black Level = `64`, White Level = `1023`.
+   - **OmniVision OVX10500U (Xiaomi 17 Ultra):** Black Level = `64`, White Level = `1023` (или `4095`).
+   - **Samsung HP9 200MP, JN5 (Xiaomi 15 Ultra, 17 Ultra):** Black Level = `64`, White Level = `1023`.
+8. Повторите настройку для остальных объективов (Tele 3.2x, Tele 5x, Ultra-Wide).
+
+##### 4. Проверка на Xiaomi 13 Ultra (`ishtar`)
+1. Откройте AGC. Убедитесь, что в видоискателе видны все 4 переключателя камер: **`0.5x`**, **`1.0x`**, **`3.2x`**, **`5.0x`** (все 4 модуля — честные сенсоры Sony Quad Bayer).
+2. Нажмите на плашку **50M / RES** (она станет активной) и переключитесь в **HDR+ Enhanced**.
+3. Сделайте снимок на 1.0x (Sony IMX989).
+4. Откройте фото в стандартной Галерее Xiaomi или Google Фото ➔ нажмите «Сведения о фото»:
+   - Обычный биннинг: `4096 x 3072` (12.5 Мп, размер 3–6 МБ).
+   - **Полноразмерный режим 50Мп:** **`8192 x 6144`** (50.3 Мп, размер файла **от 18 до 45 МБ**)!
+5. Повторите проверку на `0.5x`, `3.2x` и `5.0x` — все 4 объектива выдадут **`8192 x 6144`**!
+
+> **💡 Подсказка для 13 Ultra:** Вы можете скачать готовые авторские `.agc` конфиги (от *John Galt*, *Vova*, *KaKaru*) из Telegram-сообществ по Xiaomi 13 Ultra, положить файл в папку `/Download/AGC.9.6/configs/` и загрузить двойным тапом по чёрному полю рядом с кнопкой затвора — 50Мп настроится автоматически!
+
+##### 5. Проверка на Xiaomi 17 Ultra (`nezha`)
+* **Основной сенсор 1" OVX10500U (1.0x):** формирует снимки с разрешением **`8192 x 6144`** (50 Мп).
+* **Перископ Samsung HP9 200MP (5.0x):** в режиме High Resolution формирует снимки с разрешением до **`16384 x 12288`** (~200 Мп, размер файла от 40 до 90 МБ). Для 200Мп рекомендуется выставить ровно **1 или 2 кадра** в настройках HDR+ Frames.
+
+##### 6. Белый список пакетов GCam в модуле
+В системный белый список `vendor.camera.aux.packagelist` нашего модуля включены абсолютно все официальные сборки и клоны:
+* `com.google.android.GoogleCamera` (стандартный Google Pixel)
+* `com.agc.cam` (официальный AGC клон)
+* `com.agc.gcam96` (AGC 9.6)
+* `com.samsung.android.scan3d` (популярный вариант AGC для обхода вендорных блокировок)
+* `com.samsung.android.ruler` (AGC Ruler)
+* `com.ss.android.ugc.aweme` (AGC Aweme)
+* `com.android.mgc` (BSG GCam)
+* `com.shamim.cam` (Shamim GCam)
+* `org.codeaurora.snapcam` (Snapdragon SnapCam)
+
+---
+
 ### 7. Часто задаваемые вопросы (FAQ) (RU)
 
 <details>
@@ -279,6 +341,7 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
    - [Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#46-crash-prevention-on-xiaomi-17-ultra-simplerom-st-eu-elite-en)
 5. [Installation Guide](#5-installation-guide-en)
 6. [Verification & Testing Guide (All Devices & Versions)](#6-verification--testing-guide-all-devices--versions-en)
+   - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#66-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
 7. [Frequently Asked Questions (FAQ)](#7-frequently-asked-questions-faq-en)
 
 ---
@@ -471,6 +534,67 @@ Via USB debugging on PC:
 adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 ```
 During viewfinder startup, Qualcomm CamX will log `EnableHDRDCGMode: success`, confirming real-time dual-gain channel operation.
+
+---
+
+#### 6.6. Google Camera (AGC 8.x / 9.x, LMC, Shamim) 50MP / 200MP Configuration & Testing Guide (EN)
+
+The **Xiaomi Master Camera Combo** module removes all vendor restrictions at the kernel and Qualcomm CamX HAL level. However, **Google Camera ports (such as BigKaka AGC 9.6, LMC 8.4, and Shamim)** are originally designed for Google Pixel devices. Without an appropriate `.agc` config profile or proper manual stream configuration, **GCam will NOT capture in 50MP** out of the box, even if you tap the «50M / RES» button in the viewfinder.
+
+Below is the definitive engineering guide to configure and verify high-resolution modes in AGC.
+
+##### 1. Why GCam Doesn't Shoot 50MP Out of the Box Without Configuration
+* **Module's System Role**: The property `persist.vendor.camera.maxRAWSizes=55` exposes the physical RAW16 full-resolution buffer (`8192x6144` and `16384x12288`) to the Android Camera2 API, while `vendor.camera.aux.packagelist` grants physical sensor access.
+* **GCam's Default Behavior**: GCam boots with default Google Pixel profiles tuned for 12.5MP binned output (4-in-1 Quad Bayer). If you activate the «50M» toggle without configuring the session streams and shutter mode:
+  - The photo will still be saved in standard `4096 x 3072` (12.5MP);
+  - Or the HDR+ processing progress bar in the notification shade will spin indefinitely;
+  - Or the app will crash due to unsupported stream configurations.
+
+##### 2. The Golden Rule of 50MP GCam Capture: Shutter Mode (ZSL vs HDR+ Enhanced) ⚠️
+* **50MP capture is IMPOSSIBLE in standard Zero Shutter Lag (ZSL / Instant HDR+) mode!**  
+  *Technical Reason:* ZSL maintains a continuous 30 fps circular memory ring buffer of 15–25 uncompressed RAW frames in RAM. For 50MP streams, this consumes over 2.5 GB of RAM per second — Qualcomm's ISP remosaic pipeline cannot process this throughput and drops the stream back to 12.5MP binning.
+* **The Solution:**  
+  In the AGC viewfinder, pull down the quick settings menu and **switch the shutter mode to «HDR+ Enhanced»** (the `HDR+` icon with a plus sign or border) or single-frame RAW. In HDR+ Enhanced mode, the camera opens the high-resolution stream only upon shutter release, capturing a controlled burst of 1–3 frames.
+
+##### 3. Step-by-Step Manual AGC 9.6 / 9.x Configuration (No Config File Required)
+1. Tap the **gear icon** at the top of the viewfinder ➔ **More Settings**.
+2. Navigate to **Camera Lens** ➔ select the target lens (e.g., **Main Lens**).
+3. **High Resolution / 50MP:** toggle **ON**.
+4. **RAW Format:** select **RAW16** *(Snapdragon 8 Gen 2 / Gen 3 / Elite ISP delivers 50MP streams exclusively in RAW16)*.
+5. **Session Configuration (OpMode):** select `0xF000` or `0x0` (or `High Resolution` mode).
+6. **HDR+ Frames:** set to **1 to 3 frames** (do not leave at 15–20 frames, or the device will run out of memory during remosaicing).
+7. **Black Level / White Level Calibration:**
+   - **Sony IMX989, IMX858, LYT-900 (Xiaomi 13 Ultra, 15 Ultra):** Black Level = `64`, White Level = `1023`.
+   - **OmniVision OVX10500U (Xiaomi 17 Ultra):** Black Level = `64`, White Level = `1023` (or `4095`).
+   - **Samsung HP9 200MP, JN5 (Xiaomi 15 Ultra, 17 Ultra):** Black Level = `64`, White Level = `1023`.
+8. Repeat for other focal lengths (Tele 3.2x, Tele 5x, Ultra-Wide).
+
+##### 4. Verification on Xiaomi 13 Ultra (`ishtar`)
+1. Launch AGC. Confirm that all 4 rear camera buttons are visible: **`0.5x`**, **`1.0x`**, **`3.2x`**, **`5.0x`** (all 4 lenses are genuine Sony 50MP Quad-Bayer sensors).
+2. Tap the **50M / RES** button (it will highlight) and switch to **HDR+ Enhanced**.
+3. Capture a shot on 1.0x (Sony IMX989).
+4. Open the image in Xiaomi Gallery or Google Photos ➔ check Image Details:
+   - Standard binned photo: `4096 x 3072` (12.5 MP, ~3–6 MB).
+   - **Full-Resolution 50MP photo:** **`8192 x 6144`** (50.3 MP, file size **18 to 45 MB**)!
+5. Switch to `0.5x`, `3.2x`, and `5.0x` — all 4 sensors output **`8192 x 6144`**!
+
+> **💡 Pro Tip for 13 Ultra:** You can download community `.agc` configs (such as *John Galt*, *Vova*, *KaKaru*) from Telegram communities, place the file in `/Download/AGC.9.6/configs/`, and load it by double-tapping the black area next to the shutter button — 50MP will be pre-configured across all 4 cameras.
+
+##### 5. Verification on Xiaomi 17 Ultra (`nezha`)
+* **Primary 1" OVX10500U Sensor (1.0x):** captures full **`8192 x 6144`** (50 MP).
+* **Periscope Samsung HP9 200MP (5.0x):** in High Resolution mode outputs up to **`16384 x 12288`** (~200 MP, file size 40–90 MB). Set HDR+ frames to **1 or 2 frames** for instantaneous processing.
+
+##### 6. Whitelisted GCam Packages
+The following package variants are explicitly included in `vendor.camera.aux.packagelist` and `persist.vendor.camera.privapp.list`:
+* `com.google.android.GoogleCamera` (standard Google Pixel)
+* `com.agc.cam` (official AGC clone)
+* `com.agc.gcam96` (AGC 9.6)
+* `com.samsung.android.scan3d` (popular AGC package bypassing vendor blocks)
+* `com.samsung.android.ruler` (AGC Ruler)
+* `com.ss.android.ugc.aweme` (AGC Aweme)
+* `com.android.mgc` (BSG GCam)
+* `com.shamim.cam` (Shamim GCam)
+* `org.codeaurora.snapcam` (Snapdragon SnapCam)
 
 ---
 
