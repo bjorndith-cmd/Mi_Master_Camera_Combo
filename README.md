@@ -22,6 +22,12 @@
   <img src="https://img.shields.io/badge/Root-Magisk%20%7C%20KernelSU%20%7C%20APatch-orange?style=for-the-badge" alt="Root">
   <img src="https://img.shields.io/badge/Android-15%20%26%2016-blue?style=for-the-badge" alt="Android">
   <img src="https://img.shields.io/badge/Leica-Camera-red?style=for-the-badge" alt="Leica">
+  <a href="https://t.me/Mi_Master_Camera_Combo"><img src="https://img.shields.io/badge/Telegram-Канал%20%7C%20Чат-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Channel"></a>
+</p>
+
+<p align="center">
+  📢 <b>Официальный Telegram-канал проекта (новости, обсуждения, пресеты):</b><br>
+  👉 <a href="https://t.me/Mi_Master_Camera_Combo"><b>https://t.me/Mi_Master_Camera_Combo</b></a>
 </p>
 
 ---
@@ -47,7 +53,7 @@
    - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#86-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
 9. [Скрипт автоматической диагностики (check_support.sh)](#9-скрипт-автоматической-диагностики-check_supportsh-ru)
 10. [Часто задаваемые вопросы (FAQ)](#10-часто-задаваемые-вопросы-faq-ru)
-11. [Обратная связь и шаблоны сообщений об ошибках (Issues)](#11-обратная-связь-и-шаблоны-сообщений-об-ошибках-issues-ru)
+11. [Сообщество, обратная связь и Telegram](#11-сообщество-обратная-связь-и-telegram-ru)
 
 ---
 
@@ -413,9 +419,20 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 ---
 
-### 11. Обратная связь и шаблоны сообщений об ошибках (Issues) (RU)
+### 11. Сообщество, обратная связь и Telegram (RU)
 
-Если вы столкнулись с проблемой или хотите предложить новую функцию/конфиг, воспользуйтесь официальными формами в разделе [Issues](../../issues/new/choose):
+<p align="center">
+  <a href="https://t.me/Mi_Master_Camera_Combo">
+    <img src="./assets/LOGO.jpg" alt="Telegram Community Channel" width="100%" style="max-width: 550px; border-radius: 12px;">
+  </a>
+</p>
+
+#### 📢 Официальный Telegram-канал проекта
+Присоединяйтесь к нашему Telegram-сообществу для оперативного получения свежих тестовых сборок, обсуждения настроек камеры, публикации снимков и обмена авторскими пресетами `.agc`:  
+👉 **[t.me/Mi_Master_Camera_Combo](https://t.me/Mi_Master_Camera_Combo)** *(Новости, обновления, пресеты и живой чат)*
+
+#### 📋 Шаблоны сообщений об ошибках на GitHub (Issues)
+Если вы столкнулись с проблемой или хотите предложить новую функцию/конфиг, воспользуйтесь официальными интерактивными формами в разделе [Issues](../../issues/new/choose):
 
 * 🐛 **[Отчёт об ошибке (Bug Report)](../../issues/new?template=bug_report.yml)** — структурированная форма для репорта о вылетах, чёрном экране или сбоях. Обязательно прикрепите сгенерированный отчёт `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt`.
 * ⚙️ **[Отзыв о конфигурациях GCam (Config Feedback)](../../issues/new?template=config_feedback.yml)** — делитесь своими `.agc` / `.xml` пресетами, калибровками цветовых матриц Leica и профилями шума для сенсоров Sony, OmniVision и Samsung.
@@ -445,7 +462,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#86-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
 9. [Automated Diagnostic Tool (check_support.sh)](#9-automated-diagnostic-tool-check_supportsh-en)
 10. [Frequently Asked Questions (FAQ)](#10-frequently-asked-questions-faq-en)
-11. [Feedback & Issue Reporting Templates](#11-feedback--issue-reporting-templates-en)
+11. [Community, Feedback & Telegram Channel](#11-community-feedback--telegram-channel-en)
 
 ---
 
@@ -811,8 +828,19 @@ Yes, all cameras shoot in full 50MP / 200MP resolution in AGC, LMC, Shamim, and 
 
 ---
 
-### 11. Feedback & Issue Reporting Templates (EN)
+### 11. Community, Feedback & Telegram Channel (EN)
 
+<p align="center">
+  <a href="https://t.me/Mi_Master_Camera_Combo">
+    <img src="./assets/LOGO.jpg" alt="Telegram Community Channel" width="100%" style="max-width: 550px; border-radius: 12px;">
+  </a>
+</p>
+
+#### 📢 Official Telegram Channel & Discussion Group
+Join our active Telegram channel and group for real-time discussion, instant updates, beta releases, and preset sharing:  
+👉 **[t.me/Mi_Master_Camera_Combo](https://t.me/Mi_Master_Camera_Combo)** *(News, updates, configs, and live community chat)*
+
+#### 📋 GitHub Issue Reporting Templates
 If you encounter an issue or wish to propose an enhancement, use our official interactive GitHub Issue forms in [Issues](../../issues/new/choose):
 
 * 🐛 **[Bug Report](../../issues/new?template=bug_report.yml)** — structured bug report form for camera crashes, black screens, or viewfinder freezes. Please specify device model, ROM, and attach the `Mi_Camera_Diagnostic_Report.txt` diagnostic file.
