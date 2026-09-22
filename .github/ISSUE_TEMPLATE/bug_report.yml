@@ -1,0 +1,96 @@
+name: 🐛 Bug Report / Сообщение об ошибке
+description: Create a report to help us improve the module / Сообщить о баге или сбое
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо за обратную связь! Пожалуйста, заполните форму максимально подробно, чтобы мы могли быстро локализовать и устранить проблему.
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Smartphone Model / Модель смартфона
+      description: Выберите точную модель вашего устройства
+      options:
+        - Xiaomi 13 Ultra (ishtar)
+        - Xiaomi 15 (dada)
+        - Xiaomi 15 Pro (haotian)
+        - Xiaomi 15 Ultra (xuanyuan)
+        - Xiaomi 17 Ultra (nezha)
+        - Other Xiaomi Flagship
+    validations:
+      required: true
+
+  - type: input
+    id: rom_version
+    attributes:
+      label: Firmware & OS / Прошивка и версия ОС
+      description: "Например: HyperOS 1.0.14.0 (A14), HyperOS 3.0.309.0 SimpleRom ST, Xiaomi.eu 2.0.15, Stock China/Global"
+      placeholder: "e.g. SimpleRom 3.0.309.0 ST (Android 16)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: root_manager
+    attributes:
+      label: Root Manager / Менеджер Root
+      options:
+        - Magisk (v26+)
+        - Magisk (v27+)
+        - Magisk Alpha / Canary
+        - KernelSU
+        - APatch
+    validations:
+      required: true
+
+  - type: dropdown
+    id: module_version
+    attributes:
+      label: Installed Module / Установленный модуль
+      options:
+        - X17U_Master_Imaging_MOD_v1.0_Slim
+        - Mi15U_X17U_Master_Camera_Combo_v5.1
+        - Mi_Master_Camera_Combo_Universal_MultiDevice
+        - Mi13U_Master_Imaging_MOD_HOS1_A14
+        - Mi13U_Master_Camera_Combo_v5.1
+        - Mi13U_Master_Imaging_MOD_v1.0_Slim
+        - Mi15_Master_Camera_Combo_v5.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: camera_app
+    attributes:
+      label: Camera Application / Приложение камеры
+      options:
+        - Stock Leica Camera (Встроенная камера Leica)
+        - AGC 9.6 (BigKaka)
+        - AGC 9.2
+        - AGC 8.8 / 8.4
+        - LMC 8.4
+        - Shamim GCam
+        - BSG GCam (MGC)
+        - OpenCamera
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description / Описание проблемы
+      description: Что именно пошло не так? (вылет при запуске, зависание видоискателя, черный экран, не работает 50Мп и т.д.)
+      placeholder: "Подробно опишите воспроизведение проблемы..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostic_log
+    attributes:
+      label: Diagnostic Script Output / Вывод скрипта check_support.sh или Logcat
+      description: "Вставьте вывод скрипта `sh /sdcard/check_support.sh` или логи `adb logcat -s CamX MiCameraApp`"
+      placeholder: "Вставьте сюда отчёт из /sdcard/Download/Mi_Camera_Diagnostic_Report.txt..."
+      render: shell
+    validations:
+      required: false

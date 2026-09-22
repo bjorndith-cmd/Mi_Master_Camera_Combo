@@ -1,0 +1,18 @@
+name: 💡 Feature Request / Предложение
+description: Suggest an idea or new hardware feature for the suite
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: Feature Description / Описание идеи
+      description: Какую функцию, библиотеку или настройку вы предлагаете добавить?
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use Case / Сценарий использования
+      description: Почему это улучшит качество съёмки или стабильность?
+    validations:
+      required: false

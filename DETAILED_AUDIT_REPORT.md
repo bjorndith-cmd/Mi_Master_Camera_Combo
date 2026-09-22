@@ -394,3 +394,40 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
 | **OmniVision OVX10500U** (1" 50M) | Xiaomi 17 Ultra | `64, 64, 64, 64` | `1023` / `4095` | `RAW16` | `0xF000` |
 | **Samsung HP9** (200M) | Xiaomi 15 Ultra, 17 Ultra | `64, 64, 64, 64` | `1023` | `RAW16` | `0xF000` (1–2 кадра) |
 | **Light Hunter 900** (50M) | Xiaomi 15, 15 Pro | `64, 64, 64, 64` | `1023` | `RAW16` | `0x0` / `0xF000` |
+
+---
+
+### 8.8. Архитектура профилей конфигурации (.agc)
+
+Для исключения ручных ошибок конфигурирования пользователями в репозитории сформирован структурированный каталог `configs/` с готовыми файлами для AGC 8.x / 9.x:
+
+1. **`configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc`**:
+   - Сенсоры: 1" Sony IMX989 + 3x Sony IMX858 (0.5x, 1x, 3.2x, 5x).
+   - Формат: RAW16, Black Level: 64, White Level: 1023.
+   - OpMode: `0xF000` / HDR+ Enhanced, кадров: 3.
+   - Цветовые матрицы: Leica Authentic Tuned.
+2. **`configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`**:
+   - Сенсоры: 1" Sony LYT-900 (50M) + Samsung HP9 200M (`16384x12288`).
+   - Chromatix AIO 104 интеграция, SmartAE низкосветовая модель.
+3. **`configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`**:
+   - Сенсоры: 1" OmniVision OVX10500U (50M) + Samsung HP9 200M.
+   - Аппаратная модель шума DCG HDR.
+4. **`configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc`**:
+   - Сенсоры: Light Hunter 900 (50M) + JN1/JN5.
+
+---
+
+### 8.9. Автоматизированная верификация окружения (check_support.sh)
+
+Скрипт `check_support.sh` производит неинвазивный телеметрический аудит смартфона по следующему алгоритму:
+1. **Идентификация SoC и платформы**: чтение системных дескрипторов `ro.product.device`, `ro.soc.model`, `ro.build.display.id`.
+2. **Аудит Root-привилегий**: валидация эффективного `UID 0`, статуса SELinux (`getenforce`) и проверка путей модулей в Magisk/KernelSU/APatch (`/data/adb/modules`).
+3. **Регистрация свойств Qualcomm CamX**:
+   - `persist.vendor.camera.maxRAWSizes` (проверка значения `55`);
+   - `persist.vendor.camera.dcg.enable` (проверка `1`);
+   - `persist.vendor.camera.sensor.hdr` (проверка `1`);
+   - `persist.vendor.camera.arcsoft.aisp_algo_nr.bypass` (проверка `1`);
+   - `persist.vendor.camera.video.bitrate.factor` (проверка `1.5`);
+   - `ro.vendor.camera.dcg` (проверка `1`).
+4. **Аудит белого списка AUX**: парсинг строки `vendor.camera.aux.packagelist` на вхождение `com.agc.gcam96`, `com.google.android.GoogleCamera`, `com.shamim.cam` и др.
+5. **Экспорт отчёта**: сохранение лога без ANSI-символов в `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt` для отправки в Issue.

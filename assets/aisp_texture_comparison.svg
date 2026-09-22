@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="badGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="goodGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="850" height="320" rx="16" fill="url(#bgGrad2)"/>
+
+  <!-- Title -->
+  <text x="425" y="38" fill="#f8fafc" font-size="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    VIDEO NOISE REDUCTION: ArcSoft AISP Smear vs George MOD Bypass
+  </text>
+  <text x="425" y="62" fill="#94a3b8" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    Texture retention in 4K120fps &amp; 8K video capture
+  </text>
+
+  <!-- Left Panel: Stock ArcSoft AISP -->
+  <g transform="translate(30, 85)">
+    <rect width="380" height="205" rx="12" fill="url(#badGrad2)" stroke="#f59e0b" stroke-width="1.5"/>
+    <rect x="15" y="15" width="130" height="24" rx="6" fill="#f59e0b"/>
+    <text x="80" y="31" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">STOCK ARCSOFT AISP</text>
+
+    <!-- Visual icon representing blurry smear -->
+    <path d="M140,80 Q190,55 240,80 T340,80" fill="none" stroke="#f59e0b" stroke-width="8" opacity="0.3" stroke-linecap="round"/>
+    <path d="M150,95 Q200,70 250,95 T330,95" fill="none" stroke="#f59e0b" stroke-width="12" opacity="0.25" stroke-linecap="round"/>
+    <path d="M160,110 Q210,85 260,110 T320,110" fill="none" stroke="#f59e0b" stroke-width="16" opacity="0.2" stroke-linecap="round"/>
+
+    <text x="190" y="145" fill="#fcd34d" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">⚠️ «Масляная» акварель / Wax Texture</text>
+    <text x="190" y="168" fill="#cbd5e1" font-size="11.5" text-anchor="middle" font-family="sans-serif">Агрессивный пространственный шумодав</text>
+    <text x="190" y="186" fill="#94a3b8" font-size="10.5" text-anchor="middle" font-family="sans-serif">Размывает фактуру кожи, травы, волос и ткани</text>
+  </g>
+
+  <!-- Right Panel: George MOD AISP Bypass -->
+  <g transform="translate(440, 85)">
+    <rect width="380" height="205" rx="12" fill="url(#goodGrad2)" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect x="15" y="15" width="130" height="24" rx="6" fill="#3b82f6"/>
+    <text x="80" y="31" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">GEORGE MOD BYPASS</text>
+
+    <!-- Visual icon representing sharp microtexture -->
+    <g stroke="#60a5fa" stroke-width="2" opacity="0.9">
+      <line x1="160" y1="75" x2="160" y2="105"/>
+      <line x1="175" y1="70" x2="175" y2="110"/>
+      <line x1="190" y1="65" x2="190" y2="115"/>
+      <line x1="205" y1="72" x2="205" y2="108"/>
+      <line x1="220" y1="68" x2="220" y2="112"/>
+      <line x1="235" y1="75" x2="235" y2="105"/>
+    </g>
+
+    <text x="190" y="145" fill="#93c5fd" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">✅ Честный микро-контраст / Microtexture</text>
+    <text x="190" y="168" fill="#cbd5e1" font-size="11.5" text-anchor="middle" font-family="sans-serif">Обход aisp_algo_nr.bypass=1 + v4l2codec</text>
+    <text x="190" y="186" fill="#94a3b8" font-size="10.5" text-anchor="middle" font-family="sans-serif">Естественная резкость кинокамеры, 8K и 4K120</text>
+  </g>
+</svg>

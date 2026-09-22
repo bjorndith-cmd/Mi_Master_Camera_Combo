@@ -1,0 +1,73 @@
+{
+  "config_name": "Mi15_borndead_LightHunter_50M",
+  "author": "borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)",
+  "device": "Xiaomi 15 & 15 Pro (dada / haotian)",
+  "version": "v1.0-50M-LightHunter",
+  "camera_model": "Xiaomi 15 / 15 Pro Leica Setup",
+  "general": {
+    "hdr_type": "hdr_plus_enhanced",
+    "raw_format": "RAW16",
+    "high_res_enabled": true,
+    "shutter_speed_mode": "auto",
+    "iso_mode": "auto",
+    "exposure_compensation": "0",
+    "dng_output": true,
+    "focus_mode": "continuous"
+  },
+  "lenses": [
+    {
+      "id": 0,
+      "name": "Main 1.0x (Light Hunter 900 23mm)",
+      "sensor": "OmniVision Light Hunter 900 50MP",
+      "camera_id": 0,
+      "high_res": true,
+      "output_resolution": "8192x6144",
+      "op_mode": "0xF000",
+      "raw_format": "RAW16",
+      "hdr_frames": 3,
+      "black_level": [64.0, 64.0, 64.0, 64.0],
+      "white_level": 1023,
+      "cct_matrix": "light_hunter_tuned",
+      "noise_model": "lh900_noise",
+      "noise_reduction_strength": 0.45,
+      "sharpness_strength": 1.15,
+      "dcg_enabled": true
+    },
+    {
+      "id": 1,
+      "name": "Ultra-Wide 0.6x (Samsung JN1)",
+      "sensor": "Samsung S5KJN1 50MP",
+      "camera_id": 1,
+      "high_res": true,
+      "output_resolution": "8192x6144",
+      "op_mode": "0xF000",
+      "raw_format": "RAW16",
+      "hdr_frames": 3,
+      "black_level": [64.0, 64.0, 64.0, 64.0],
+      "white_level": 1023,
+      "cct_matrix": "jn1_tuned",
+      "noise_model": "jn1_noise",
+      "noise_reduction_strength": 0.50,
+      "sharpness_strength": 1.10,
+      "dcg_enabled": true
+    },
+    {
+      "id": 2,
+      "name": "Telephoto 3.2x (Samsung JN5 / IMX858 5x Pro)",
+      "sensor": "Samsung JN5 / Sony IMX858 50MP",
+      "camera_id": 2,
+      "high_res": true,
+      "output_resolution": "8192x6144",
+      "op_mode": "0xF000",
+      "raw_format": "RAW16",
+      "hdr_frames": 3,
+      "black_level": [64.0, 64.0, 64.0, 64.0],
+      "white_level": 1023,
+      "cct_matrix": "tele_tuned",
+      "noise_model": "tele_noise",
+      "noise_reduction_strength": 0.45,
+      "sharpness_strength": 1.20,
+      "dcg_enabled": true
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="850" height="320" rx="16" fill="url(#bgGrad3)"/>
+
+  <!-- Title -->
+  <text x="425" y="38" fill="#f8fafc" font-size="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="bold" text-anchor="middle">
+    RESOLUTION &amp; RESOLVING POWER: 12.5MP vs 50MP vs 200MP
+  </text>
+  <text x="425" y="62" fill="#94a3b8" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" text-anchor="middle">
+    100% Crop spatial detail comparison across sensor modes
+  </text>
+
+  <!-- 12.5MP Card -->
+  <g transform="translate(30, 85)">
+    <rect width="240" height="205" rx="12" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+    <rect x="15" y="15" width="85" height="22" rx="5" fill="#64748b"/>
+    <text x="57" y="30" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle" font-family="sans-serif">12.5MP (BINNED)</text>
+    
+    <text x="120" y="85" fill="#f8fafc" font-size="28" font-weight="bold" text-anchor="middle" font-family="monospace">4096×3072</text>
+    <text x="120" y="115" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Размер файла: ~3–6 МБ</text>
+    <text x="120" y="145" fill="#cbd5e1" font-size="11.5" text-anchor="middle" font-family="sans-serif">4-в-1 пиксельный биннинг</text>
+    <text x="120" y="170" fill="#94a3b8" font-size="10.5" text-anchor="middle" font-family="sans-serif">Мелкие надписи и номера</text>
+    <text x="120" y="188" fill="#f87171" font-size="10.5" text-anchor="middle" font-family="sans-serif">размываются при приближении</text>
+  </g>
+
+  <!-- 50MP Card -->
+  <g transform="translate(305, 85)">
+    <rect width="240" height="205" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect x="15" y="15" width="85" height="22" rx="5" fill="#3b82f6"/>
+    <text x="57" y="30" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle" font-family="sans-serif">50MP FULLRES</text>
+
+    <text x="120" y="85" fill="#60a5fa" font-size="28" font-weight="bold" text-anchor="middle" font-family="monospace">8192×6144</text>
+    <text x="120" y="115" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Размер файла: ~18–45 МБ</text>
+    <text x="120" y="145" fill="#93c5fd" font-size="11.5" font-weight="bold" text-anchor="middle" font-family="sans-serif">Полноразмерный RAW16 поток</text>
+    <text x="120" y="170" fill="#cbd5e1" font-size="10.5" text-anchor="middle" font-family="sans-serif">4-кратная детализация матрицы,</text>
+    <text x="120" y="188" fill="#34d399" font-size="10.5" text-anchor="middle" font-family="sans-serif">чёткая архитектура и листья</text>
+  </g>
+
+  <!-- 200MP Card -->
+  <g transform="translate(580, 85)">
+    <rect width="240" height="205" rx="12" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+    <rect x="15" y="15" width="105" height="22" rx="5" fill="#a855f7"/>
+    <text x="67" y="30" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle" font-family="sans-serif">200MP ULTRA RES</text>
+
+    <text x="120" y="85" fill="#c084fc" font-size="24" font-weight="bold" text-anchor="middle" font-family="monospace">16384×12288</text>
+    <text x="120" y="115" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif">Размер файла: ~40–90 МБ</text>
+    <text x="120" y="145" fill="#e9d5ff" font-size="11.5" font-weight="bold" text-anchor="middle" font-family="sans-serif">Samsung HP9 Перископ</text>
+    <text x="120" y="170" fill="#cbd5e1" font-size="10.5" text-anchor="middle" font-family="sans-serif">Экстремальная дальнобойность,</text>
+    <text x="120" y="188" fill="#a7f3d0" font-size="10.5" text-anchor="middle" font-family="sans-serif">номера авто с 200 метров</text>
+  </g>
+</svg>

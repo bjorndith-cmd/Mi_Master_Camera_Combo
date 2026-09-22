@@ -29,17 +29,21 @@
 1. [О проекте](#1-о-проекте-ru)
 2. [Поддерживаемые смартфоны и сенсоры](#2-поддерживаемые-смартфоны-и-сенсоры-ru)
 3. [Таблица модулей и ссылки на загрузку](#3-таблица-модулей-и-ссылки-на-загрузку-ru)
-4. [Ключевые возможности и технологии](#4-ключевые-возможности-и-технологии-ru)
-   - [Устранение зависания видоискателя в «Фото»](#41-устранение-зависания-видоискателя-в-фото-ru)
-   - [Аппаратный DCG (Dual Conversion Gain) / iDCG HDR](#42-аппаратный-dcg-dual-conversion-gain--idcg-hdr-ru)
-   - [Разблокировка 50Мп и 200Мп FullRes](#43-разблокировка-50мп-и-200мп-fullres-ru)
-   - [George Video MOD (8K со всех камер, 4K120, чистый AISP)](#44-george-video-mod-8k-со-всех-камер-4k120-чистый-aisp-ru)
-   - [Stock AIO 104 для Xiaomi 15 Ultra (LYT-900)](#45-stock-aio-104-для-xiaomi-15-ultra-lyt-900-ru)
-   - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#46-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
-5. [Инструкция по установке](#5-инструкция-по-установке-ru)
-6. [Инструкция по тестированию и проверке работы модуля](#6-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
-   - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#66-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
-7. [Часто задаваемые вопросы (FAQ)](#7-часто-задаваемые-вопросы-faq-ru)
+4. [Готовые пресеты конфигураций GCam (.agc)](#4-готовые-пресеты-конфигураций-gcam-agc-ru)
+5. [Ключевые возможности и технологии](#5-ключевые-возможности-и-технологии-ru)
+   - [Устранение зависания видоискателя в «Фото»](#51-устранение-зависания-видоискателя-в-фото-ru)
+   - [Аппаратный DCG (Dual Conversion Gain) / iDCG HDR](#52-аппаратный-dcg-dual-conversion-gain--idcg-hdr-ru)
+   - [Разблокировка 50Мп и 200Мп FullRes](#53-разблокировка-50мп-и-200мп-fullres-ru)
+   - [George Video MOD (8K со всех камер, 4K120, чистый AISP)](#54-george-video-mod-8k-со-всех-камер-4k120-чистый-aisp-ru)
+   - [Stock AIO 104 для Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-для-xiaomi-15-ultra-lyt-900-ru)
+   - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
+6. [Визуальные сравнения «До / После» (Visual Proof)](#6-визуальные-сравнения-до--после-visual-proof-ru)
+7. [Инструкция по установке](#7-инструкция-по-установке-ru)
+8. [Инструкция по тестированию и проверке работы модуля](#8-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
+   - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#86-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
+9. [Скрипт автоматической диагностики (check_support.sh)](#9-скрипт-автоматической-диагностики-check_supportsh-ru)
+10. [Часто задаваемые вопросы (FAQ)](#10-часто-задаваемые-вопросы-faq-ru)
+11. [Обратная связь и шаблоны сообщений об ошибках (Issues)](#11-обратная-связь-и-шаблоны-сообщений-об-ошибках-issues-ru)
 
 ---
 
@@ -79,38 +83,81 @@
 
 ---
 
-### 4. Ключевые возможности и технологии (RU)
+### 4. Готовые пресеты конфигураций GCam (.agc) (RU)
 
-#### 4.1. Устранение зависания видоискателя в «Фото» (RU)
+Для мгновенного раскрытия возможностей сенсоров и калибровок Chromatix в Google Камере (AGC 8.x / 9.x) подготовлены авторские профили конфигурации:
+
+| Смартфон | Целевые сенсоры | Файл пресета | Возможности пресета |
+|---|---|---|---|
+| **Xiaomi 13 Ultra** (`ishtar`) | Sony IMX989 + 3x IMX858 | **[`Mi13U_borndead_Universal_Leica_50MP.agc`](./configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc)** | 50Мп RAW16 на всех 4 линзах, Black Level 64, Leica Authentic матрица, HDR+ Enhanced |
+| **Xiaomi 15 Ultra** (`xuanyuan`) | Sony LYT-900 + Samsung HP9 | **[`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](./configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc)** | 50Мп на 1" LYT-900, **200Мп** на перископе HP9 (`16384x12288`), SmartAE ночная экспозиция |
+| **Xiaomi 17 Ultra** (`nezha`) | OVX10500U + Samsung HP9 | **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](./configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)** | 50Мп на 1" OVX10500U, **200Мп** на перископе HP9, DCG HDR шумовая модель |
+| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | Light Hunter 900 + JN1/JN5 | **[`Mi15_borndead_LightHunter_50M.agc`](./configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc)** | 50Мп на Light Hunter 900, кастомные цвета Leica, быстрый захват |
+
+📖 **Подробное руководство по импорту пресетов в AGC:** 👉 **[`configs/README.md`](./configs/README.md)**
+
+---
+
+### 5. Ключевые возможности и технологии (RU)
+
+#### 5.1. Устранение зависания видоискателя в «Фото» (RU)
 * **Причина бага в прошлых модах**: Внедрение тегов `support_super_resolution` принуждало сенсор 1.0" на зуме 1.0x ждать буфера цифрового супер-разрешения, из-за чего первый кадр застывал намертво.
 * **Исправление**: Скрипт очищает конфликтные теги. Режим «Фото» работает на стабильных 60 кадр/с с мгновенным откликом затвора, а максимальные 50Мп/200Мп включаются строго в режимах «50M Ultra HD» и «Ultra RAW».
 
-#### 4.2. Аппаратный DCG (Dual Conversion Gain) / iDCG HDR (RU)
+#### 5.2. Аппаратный DCG (Dual Conversion Gain) / iDCG HDR (RU)
 * В каждом пикселе матрицы работают два параллельных узла: **LCG** (защита от пересветов в ярких областях) и **HCG** (экстремальная светосила и чистота в тенях).
 * **Считывание с одного кадра**: движущиеся объекты не раздваиваются (Zero Motion Ghosting).
 
-#### 4.3. Разблокировка 50Мп и 200Мп FullRes (RU)
+#### 5.3. Разблокировка 50Мп и 200Мп FullRes (RU)
 * Параметр `persist.vendor.camera.maxRAWSizes=55` открывает полноразмерный RAW-поток.
 * Все сторонние моды GCam (AGC, LMC, Shamim, BSG) получают полный доступ к 50Мп/200Мп на всех объективах благодаря `vendor.camera.aux.packagelist`.
 * Пакет `com.android.camera` исключён из aux-списка, сохраняя штатную логическую многокамерность (SAT).
 
-#### 4.4. George Video MOD (8K со всех камер, 4K120, чистый AISP) (RU)
+#### 5.4. George Video MOD (8K со всех камер, 4K120, чистый AISP) (RU)
 * Запись видео **8K 24fps со всех задних сенсоров** и **4K 120fps**.
 * Твик `aisp.json` (`dump: 0`) и `persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1` отключают агрессивное размытие видео-шумодава ArcSoft, возвращая детализацию.
 * Интегрирован видео-кодек `libqcodec2_v4l2codec.so` для стабильной записи высокого битрейта.
 
-#### 4.5. Stock AIO 104 для Xiaomi 15 Ultra (LYT-900) (RU)
+#### 5.5. Stock AIO 104 для Xiaomi 15 Ultra (LYT-900) (RU)
 * Полные оригинальные калибровки Chromatix `com.qti.tuned.xuanyuan_*.bin` для сенсора **Sony LYT-900** (34.27 МБ) и 200Мп Samsung HP9.
 * Таблицы экспозиции SmartAE LN2 для ночной съемки.
 * Библиотека `libmialgo_snsc.so`.
 
-#### 4.6. Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (RU)
+#### 5.6. Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (RU)
 * **В чём была проблема**: в ранних сборках отсутствовала папка `devices/` (на 17U попадали файлы 15U) и лежали бинарники с отсутствующей зависимостью `libdlrmsc_android15.so`, а замена APK на кастоме SimpleRom вызывала краш.
 * **Решение**: Удалены битые библиотеки, разделены профили `devices/nezha` и `devices/xuanyuan`, добавлен авто-детектор кастомов (`IS_CUSTOM_ROM`), и создан специальный модуль **`X17U_Master_Imaging_MOD_v1.0_Slim`** (без APK, чистый оверлей).
 
 ---
 
-### 5. Инструкция по установке (RU)
+### 6. Визуальные сравнения «До / После» (Visual Proof) (RU)
+
+#### 6.1. Аппаратный DCG против программного мульти-кадрового HDR (Движение в кадре)
+<p align="center">
+  <img src="./assets/dcg_vs_hdr_comparison.svg" alt="DCG vs Staggered HDR Comparison" width="100%">
+</p>
+
+* **Обычный программный HDR**: Из-за склейки 3 кадров с разной выдержкой движущиеся объекты неизбежно двоятся (*Motion Ghosting*).
+* **Аппаратный DCG (наш мод)**: Одновременное считывание LCG (света) и HCG (тени) с **одного физического кадра экспозиции**. Движущийся объект абсолютно резок, контуры не двоятся.
+
+#### 6.2. Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass
+<p align="center">
+  <img src="./assets/aisp_texture_comparison.svg" alt="AISP Noise Reduction Bypass Comparison" width="100%">
+</p>
+
+* **Сток**: Алгоритм ArcSoft AISP агрессивно размывает мелкие текстуры, превращая траву, волосы и асфальт в «пластилин» и «масляную живопись».
+* **George MOD Bypass**: Параметр `aisp_algo_nr.bypass=1` отключает смазывание. Видео в 4K120fps и 8K сохраняет честный кинематографический микро-контраст и естественную резкость оптики Leica.
+
+#### 6.3. Разрешающая способность: 12.5Мп Биннинг против 50Мп и 200Мп FullRes (100% Crop)
+<p align="center">
+  <img src="./assets/resolution_comparison.svg" alt="Resolution Scale Comparison" width="100%">
+</p>
+
+* **12.5 Мп (Биннинг)**: Мелкие дорожные знаки, надписи на вывесках и лица людей на общем плане размыты.
+* **50 Мп / 200 Мп FullRes**: Честные `8192 x 6144` и `16384 x 12288` пикселей. 4-кратная оптико-цифровая детализация, позволяющая кадрировать снимок без потери резкости.
+
+---
+
+### 7. Инструкция по установке (RU)
 
 1. Скачайте необходимый zip-архив из папки [`releases/`](./releases/).
    * **Для Xiaomi 17 Ultra на SimpleRom ST**: выберите **`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`**.
@@ -122,11 +169,11 @@
 
 ---
 
-### 6. Инструкция по тестированию и проверке работы модуля (для всех версий) (RU)
+### 8. Инструкция по тестированию и проверке работы модуля (для всех версий) (RU)
 
 После установки любого модуля из линейки рекомендуется провести пошаговую диагностику, чтобы убедиться в корректной активации всех аппаратных алгоритмов и системных оверлеев.
 
-#### 6.1. Базовый чек-лист сразу после перезагрузки
+#### 8.1. Базовый чек-лист сразу после перезагрузки
 1. **Проверка Root-прав**: Откройте **Magisk**, **KernelSU** или **APatch**.
    - Убедитесь, что модуль активен (включён переключатель).
    - Убедитесь, что статус суперпользователя сохранён (на Android 14 исключён переход в Magisk Safe Mode благодаря чистым скриптам загрузки).
@@ -138,7 +185,7 @@
 
 ---
 
-#### 6.2. Проверка ключевых режимов по моделям смартфонов
+#### 8.2. Проверка ключевых режимов по моделям смартфонов
 
 ##### 📱 Xiaomi 17 Ultra (`nezha`)
 * **Проверка стабильности на SimpleRom ST / Custom ROM**:
@@ -181,7 +228,7 @@
 
 ---
 
-#### 6.3. Тестирование аппаратного DCG (Dual Conversion Gain) / iDCG HDR
+#### 8.3. Тестирование аппаратного DCG (Dual Conversion Gain) / iDCG HDR
 Главное преимущество аппаратного DCG перед обычным программным HDR — **считывание LCG (яркие участки) и HCG (тени) с одного единственного физического кадра**:
 1. Найдите высококонтрастную сцену: комната с ярким солнечным окном или ночная улица с яркой неоновой вывеской/фонарём.
 2. Поместите в кадр быстро движущийся объект (помашите рукой перед камерой или сфотографируйте проезжающий автомобиль).
@@ -193,7 +240,7 @@
 
 ---
 
-#### 6.4. Проверка системных свойств в Termux / ADB
+#### 8.4. Проверка системных свойств в Termux / ADB
 Вы можете за 10 секунд подтвердить активность всех модульных твиков через терминал (Termux с рутом на смартфоне или командная строка ADB на ПК):
 
 ```bash
@@ -225,7 +272,7 @@ getprop ro.vendor.camera.dcg
 # Ожидаемый вывод: 1
 ```
 
-#### 6.5. Проверка логов CamX HAL через ADB Logcat (для продвинутых пользователей)
+#### 8.5. Проверка логов CamX HAL через ADB Logcat (для продвинутых пользователей)
 Если подключить смартфон к ПК по USB и включить отладку по ADB:
 ```bash
 adb logcat -s CamX | grep -iE "dcg|hdr|stream"
@@ -234,7 +281,7 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 
 ---
 
-#### 6.6. Настройка и проверка 50Мп / 200Мп в Google Камере (AGC 8.x / 9.x, LMC, Shamim) (RU)
+#### 8.6. Настройка и проверка 50Мп / 200Мп в Google Камере (AGC 8.x / 9.x, LMC, Shamim) (RU)
 
 Модули **Xiaomi Master Camera Combo** разблокируют аппаратный вывод полного разрешения на уровне системы и драйвера Qualcomm CamX. Однако **Google Камера (AGC 9.6 / BigKaka, LMC 8.4, Shamim)** изначально создана для смартфонов Google Pixel и «из коробки» (без специального `.agc` конфига или ручной настройки) **НЕ будет снимать в 50Мп** даже при нажатии на плашку «50M / RES» в видоискателе.
 
@@ -295,7 +342,45 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 
 ---
 
-### 7. Часто задаваемые вопросы (FAQ) (RU)
+### 9. Скрипт автоматической диагностики (check_support.sh) (RU)
+
+Для быстрой и безошибочной проверки состояния устройства, прошивки, рут-окружения и активности всех ключевых системных параметров модуля разработан портативный скрипт диагностики **`check_support.sh`**.
+
+#### Возможности скрипта:
+* **Сведения об устройстве**: модель (`ishtar`, `dada`, `haotian`, `xuanyuan`, `nezha`), платформа SoC и версия HyperOS/Android.
+* **Проверка Root-окружения**: права Superuser (UID 0), статус SELinux (Enforcing/Permissive) и поиск активного модуля в каталогах Magisk, KernelSU и APatch (`/data/adb/modules`).
+* **Параметры Qualcomm CamX**:
+  - Аппаратный буфер 50M/200M RAW: `persist.vendor.camera.maxRAWSizes = 55`
+  - Аппаратный DCG HDR: `persist.vendor.camera.dcg.enable = 1`
+  - Сенсорный HDR: `persist.vendor.camera.sensor.hdr = 1`
+  - Обход видео-шумодава: `persist.vendor.camera.arcsoft.aisp_algo_nr.bypass = 1`
+  - Множитель битрейта: `persist.vendor.camera.video.bitrate.factor = 1.5`
+  - Вендорный флаг DCG: `ro.vendor.camera.dcg = 1`
+* **Белый список AUX**: проверка `vendor.camera.aux.packagelist` на наличие пакетов GCam / AGC / LMC / Shamim.
+* **Автоматическое сохранение отчёта**:  
+  📁 `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt` (можно легко прикрепить к баг-репорту на GitHub).
+
+#### Способы запуска:
+
+**Вариант 1: Запуск на смартфоне через Termux (с правами Root)**
+```bash
+# Быстрый запуск одной командой напрямую из репозитория:
+curl -sSL https://raw.githubusercontent.com/bjorndith-cmd/Mi_Master_Camera_Combo/main/check_support.sh | su -c sh
+
+# Либо запуск локального файла (если скачан в Download):
+su
+sh /sdcard/Download/check_support.sh
+```
+
+**Вариант 2: Запуск с компьютера через ADB**
+```bash
+adb push check_support.sh /data/local/tmp/
+adb shell "su -c sh /data/local/tmp/check_support.sh"
+```
+
+---
+
+### 10. Часто задаваемые вопросы (FAQ) (RU)
 
 <details>
 <summary><b>Что делать на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14), если пропал рут или черный экран?</b></summary>
@@ -323,6 +408,16 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 </details>
 
 ---
+
+### 11. Обратная связь и шаблоны сообщений об ошибках (Issues) (RU)
+
+Если вы столкнулись с проблемой или хотите предложить новую функцию/конфиг, воспользуйтесь официальными формами в разделе [Issues](../../issues/new/choose):
+
+* 🐛 **[Отчёт об ошибке (Bug Report)](../../issues/new?template=bug_report.yml)** — структурированная форма для репорта о вылетах, чёрном экране или сбоях. Обязательно прикрепите сгенерированный отчёт `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt`.
+* ⚙️ **[Отзыв о конфигурациях GCam (Config Feedback)](../../issues/new?template=config_feedback.yml)** — делитесь своими `.agc` / `.xml` пресетами, калибровками цветовых матриц Leica и профилями шума для сенсоров Sony, OmniVision и Samsung.
+* 💡 **[Предложение новой функции (Feature Request)](../../issues/new?template=feature_request.yml)** — запрос поддержки новых ревизий прошивок, сенсоров или видеорежимов.
+
+---
 ---
 
 <a name="-english"></a>
@@ -332,17 +427,21 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 1. [About the Project](#1-about-the-project-en)
 2. [Supported Devices & Camera Hardware](#2-supported-devices--camera-hardware-en)
 3. [Module Releases & Download Links](#3-module-releases--download-links-en)
-4. [Core Features & Technologies](#4-core-features--technologies-en)
-   - [Photo Mode Viewfinder Freeze Fix](#41-photo-mode-viewfinder-freeze-fix-en)
-   - [Hardware DCG (Dual Conversion Gain) / iDCG HDR](#42-hardware-dcg-dual-conversion-gain--idcg-hdr-en)
-   - [50MP & 200MP Full Resolution RAW Unlock](#43-50mp--200mp-full-resolution-raw-unlock-en)
-   - [George Video MOD (8K All Sensors, 4K120fps, Clean AISP)](#44-george-video-mod-8k-all-sensors-4k120fps-clean-aisp-en)
-   - [Stock AIO 104 for Xiaomi 15 Ultra (LYT-900)](#45-stock-aio-104-for-xiaomi-15-ultra-lyt-900-en)
-   - [Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#46-crash-prevention-on-xiaomi-17-ultra-simplerom-st-eu-elite-en)
-5. [Installation Guide](#5-installation-guide-en)
-6. [Verification & Testing Guide (All Devices & Versions)](#6-verification--testing-guide-all-devices--versions-en)
-   - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#66-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
-7. [Frequently Asked Questions (FAQ)](#7-frequently-asked-questions-faq-en)
+4. [Ready-to-Use GCam Config Presets (.agc)](#4-ready-to-use-gcam-config-presets-agc-en)
+5. [Core Features & Technologies](#5-core-features--technologies-en)
+   - [Photo Mode Viewfinder Freeze Fix](#51-photo-mode-viewfinder-freeze-fix-en)
+   - [Hardware DCG (Dual Conversion Gain) / iDCG HDR](#52-hardware-dcg-dual-conversion-gain--idcg-hdr-en)
+   - [50MP & 200MP Full Resolution RAW Unlock](#53-50mp--200mp-full-resolution-raw-unlock-en)
+   - [George Video MOD (8K All Sensors, 4K120fps, Clean AISP)](#54-george-video-mod-8k-all-sensors-4k120fps-clean-aisp-en)
+   - [Stock AIO 104 for Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-for-xiaomi-15-ultra-lyt-900-en)
+   - [Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-crash-prevention-on-xiaomi-17-ultra-simplerom-st-eu-elite-en)
+6. [Visual Proof Gallery (Before vs After)](#6-visual-proof-gallery-before-vs-after-en)
+7. [Installation Guide](#7-installation-guide-en)
+8. [Verification & Testing Guide (All Devices & Versions)](#8-verification--testing-guide-all-devices--versions-en)
+   - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#86-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
+9. [Automated Diagnostic Tool (check_support.sh)](#9-automated-diagnostic-tool-check_supportsh-en)
+10. [Frequently Asked Questions (FAQ)](#10-frequently-asked-questions-faq-en)
+11. [Feedback & Issue Reporting Templates](#11-feedback--issue-reporting-templates-en)
 
 ---
 
@@ -382,38 +481,81 @@ All packages are hosted in the [`releases/`](./releases/) directory:
 
 ---
 
-### 4. Core Features & Technologies (EN)
+### 4. Ready-to-Use GCam Config Presets (.agc) (EN)
 
-#### 4.1. Photo Mode Viewfinder Freeze Fix (EN)
+To immediately unlock the full potential of your device's sensors, Chromatix calibrations, and RAW16 pipelines in Google Camera (AGC 8.x / 9.x), dedicated config presets are provided:
+
+| Device | Target Sensors | Config Preset File | Profile Highlights |
+|---|---|---|---|
+| **Xiaomi 13 Ultra** (`ishtar`) | Sony IMX989 + 3x IMX858 | **[`Mi13U_borndead_Universal_Leica_50MP.agc`](./configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc)** | 50MP RAW16 on all 4 rear lenses, Black Level 64, Leica Authentic color matrix, HDR+ Enhanced |
+| **Xiaomi 15 Ultra** (`xuanyuan`) | Sony LYT-900 + Samsung HP9 | **[`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](./configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc)** | 50MP on 1" LYT-900, **200MP** on HP9 periscope (`16384x12288`), SmartAE night exposure |
+| **Xiaomi 17 Ultra** (`nezha`) | OVX10500U + Samsung HP9 | **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](./configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)** | 50MP on 1" OVX10500U, **200MP** on HP9 periscope, DCG HDR sensor noise model |
+| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | Light Hunter 900 + JN1/JN5 | **[`Mi15_borndead_LightHunter_50M.agc`](./configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc)** | 50MP on Light Hunter 900, Leica custom tonemapping, fast shutter response |
+
+📖 **Step-by-step AGC Config Import Guide:** 👉 **[`configs/README.md`](./configs/README.md)**
+
+---
+
+### 5. Core Features & Technologies (EN)
+
+#### 5.1. Photo Mode Viewfinder Freeze Fix (EN)
 * **Root Cause**: Injecting `support_super_resolution` into `device_features` caused the 1-inch main sensor at 1.0x zoom to enter an unsupported `SuperResolutionProcessor` pipeline, locking the viewfinder on the very first frame.
 * **Resolution**: The installer cleanly purges conflicting tags. Photo mode (161) operates in fluid 60 fps with zero shutter lag, while 50MP/200MP modes remain active in Ultra HD (175) and Ultra RAW.
 
-#### 4.2. Hardware DCG (Dual Conversion Gain) / iDCG HDR (EN)
+#### 5.2. Hardware DCG (Dual Conversion Gain) / iDCG HDR (EN)
 * Each pixel on the sensor features two parallel readout stages: **LCG** (highlights protection) and **HCG** (ultra-high sensitivity & deep shadow clarity).
 * **Single-exposure readout**: Moving subjects remain crisp without motion ghosting or multi-frame artifacts.
 
-#### 4.3. 50MP & 200MP Full Resolution RAW Unlock (EN)
+#### 5.3. 50MP & 200MP Full Resolution RAW Unlock (EN)
 * Setting `persist.vendor.camera.maxRAWSizes=55` unlocks the full-resolution RAW buffer in Qualcomm CamX.
 * Third-party GCam mods (AGC, LMC, Shamim, BSG) gain full physical sensor access via `vendor.camera.aux.packagelist`.
 * `com.android.camera` is excluded from the aux list to preserve native Leica Spatial Alignment Telephoto (SAT) switching.
 
-#### 4.4. George Video MOD (8K All Sensors, 4K120fps, Clean AISP) (EN)
+#### 5.4. George Video MOD (8K All Sensors, 4K120fps, Clean AISP) (EN)
 * **8K 24fps video recording across all rear cameras** and **4K 120fps**.
 * `aisp.json` (`dump: 0`) and `persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1` bypass ArcSoft video noise reduction smearing.
 * Hardware video codec `libqcodec2_v4l2codec.so` included for smooth high-bitrate encoding.
 
-#### 4.5. Stock AIO 104 for Xiaomi 15 Ultra (LYT-900) (EN)
+#### 5.5. Stock AIO 104 for Xiaomi 15 Ultra (LYT-900) (EN)
 * Official Chromatix calibration binaries `com.qti.tuned.xuanyuan_*.bin` for **Sony LYT-900** (34.27 MB) and Samsung HP9 200MP periscope.
 * SmartAE LN2 low-light exposure tables.
 * Self-contained `libmialgo_snsc.so`.
 
-#### 4.6. Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (EN)
+#### 5.6. Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (EN)
 * **Root Cause of Past Crashes**: The earlier zip lacked the `devices/` directory (causing 15U files to be flashed onto 17U), contained naked libraries with an unresolved `libdlrmsc_android15.so` dependency, and overwrote the custom deodexed camera APK on SimpleRom ST.
 * **Resolution**: Purged broken libraries, isolated `devices/nezha` and `devices/xuanyuan` trees, added custom ROM detection (`IS_CUSTOM_ROM`), and introduced **`X17U_Master_Imaging_MOD_v1.0_Slim`** (pure overlay, zero APK conflict).
 
 ---
 
-### 5. Installation Guide (EN)
+### 6. Visual Proof Gallery (Before vs After) (EN)
+
+#### 6.1. Hardware DCG vs Conventional Multi-Frame Staggered HDR (Motion in Frame)
+<p align="center">
+  <img src="./assets/dcg_vs_hdr_comparison.svg" alt="DCG vs Staggered HDR Comparison" width="100%">
+</p>
+
+* **Conventional Software HDR**: Because it aligns and blends 3 distinct bracketed frames taken at different times, moving subjects inevitably suffer from severe double edges (*Motion Ghosting*).
+* **Hardware DCG (Our MOD)**: Simultaneous dual readout (LCG for highlights + HCG for deep shadows) from a **single physical sensor exposure**. Moving subjects retain needle-sharp, crisp outlines with zero ghosting.
+
+#### 6.2. Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass
+<p align="center">
+  <img src="./assets/aisp_texture_comparison.svg" alt="AISP Noise Reduction Bypass Comparison" width="100%">
+</p>
+
+* **Stock**: ArcSoft's AISP video noise reduction aggressively smears fine micro-textures, rendering grass, foliage, hair, and road asphalt into an artificial "oil-paint watercolor" look.
+* **George MOD Bypass**: Setting `aisp_algo_nr.bypass=1` completely neutralizes aggressive spatial smoothing. Video in 4K120fps and 8K retains authentic cinematic micro-contrast, organic grain, and the true optical clarity of Leica lenses.
+
+#### 6.3. Spatial Resolving Power: 12.5MP Binned vs 50MP & 200MP FullRes (100% Crop)
+<p align="center">
+  <img src="./assets/resolution_comparison.svg" alt="Resolution Scale Comparison" width="100%">
+</p>
+
+* **12.5 MP (4-in-1 Binned)**: Fine street signage, architectural textures, and distant faces are blurred into pixel clusters.
+* **50 MP / 200 MP FullRes**: True `8192 x 6144` and `16384 x 12288` pixels. Delivers up to 4x higher spatial resolution, allowing aggressive digital cropping without detail loss.
+
+---
+
+### 7. Installation Guide (EN)
 
 1. Download the required zip from the [`releases/`](./releases/) directory.
    * **For Xiaomi 17 Ultra on SimpleRom ST**: pick **`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`**.
@@ -425,11 +567,11 @@ All packages are hosted in the [`releases/`](./releases/) directory:
 
 ---
 
-### 6. Verification & Testing Guide (All Devices & Versions) (EN)
+### 8. Verification & Testing Guide (All Devices & Versions) (EN)
 
 After installing any module package from the suite, follow this step-by-step diagnostic guide to verify that all hardware pipelines, Chromatix tunings, and system overrides are operational.
 
-#### 6.1. Baseline Post-Reboot Verification
+#### 8.1. Baseline Post-Reboot Verification
 1. **Root Status Check**: Open **Magisk**, **KernelSU**, or **APatch**.
    - Verify the module is active with a green checkmark.
    - Confirm root access remains fully functional (Magisk Safe Mode is completely bypassed on Android 14 due to sanitized boot scripts).
@@ -441,7 +583,7 @@ After installing any module package from the suite, follow this step-by-step dia
 
 ---
 
-#### 6.2. Target Device Verification Steps
+#### 8.2. Target Device Verification Steps
 
 ##### 📱 Xiaomi 17 Ultra (`nezha`)
 * **SimpleRom ST / Custom ROM Stability**:
@@ -484,7 +626,7 @@ After installing any module package from the suite, follow this step-by-step dia
 
 ---
 
-#### 6.3. Testing Hardware DCG (Dual Conversion Gain) / iDCG HDR
+#### 8.3. Testing Hardware DCG (Dual Conversion Gain) / iDCG HDR
 The key advantage of hardware DCG over standard multi-frame HDR is **simultaneous LCG (highlights) and HCG (shadows) readout from a single exposure**:
 1. Frame a high dynamic range scene (e.g., an indoor room facing a bright sunny window, or a night street with bright neon signs/streetlights).
 2. Introduce rapid motion in the frame (wave your hand in front of the lens or photograph a passing car).
@@ -496,7 +638,7 @@ The key advantage of hardware DCG over standard multi-frame HDR is **simultaneou
 
 ---
 
-#### 6.4. Terminal / ADB Properties Verification
+#### 8.4. Terminal / ADB Properties Verification
 Quickly verify system properties using Termux (with root) or ADB on PC:
 
 ```bash
@@ -528,7 +670,7 @@ getprop ro.vendor.camera.dcg
 # Expected: 1
 ```
 
-#### 6.5. CamX HAL Logcat Verification (Advanced)
+#### 8.5. CamX HAL Logcat Verification (Advanced)
 Via USB debugging on PC:
 ```bash
 adb logcat -s CamX | grep -iE "dcg|hdr|stream"
@@ -537,7 +679,7 @@ During viewfinder startup, Qualcomm CamX will log `EnableHDRDCGMode: success`, c
 
 ---
 
-#### 6.6. Google Camera (AGC 8.x / 9.x, LMC, Shamim) 50MP / 200MP Configuration & Testing Guide (EN)
+#### 8.6. Google Camera (AGC 8.x / 9.x, LMC, Shamim) 50MP / 200MP Configuration & Testing Guide (EN)
 
 The **Xiaomi Master Camera Combo** module removes all vendor restrictions at the kernel and Qualcomm CamX HAL level. However, **Google Camera ports (such as BigKaka AGC 9.6, LMC 8.4, and Shamim)** are originally designed for Google Pixel devices. Without an appropriate `.agc` config profile or proper manual stream configuration, **GCam will NOT capture in 50MP** out of the box, even if you tap the «50M / RES» button in the viewfinder.
 
@@ -598,7 +740,45 @@ The following package variants are explicitly included in `vendor.camera.aux.pac
 
 ---
 
-### 7. Frequently Asked Questions (FAQ) (EN)
+### 9. Automated Diagnostic Tool (check_support.sh) (EN)
+
+To quickly and reliably verify your device, ROM environment, root access, and the live status of all Qualcomm CamX overrides, a portable shell diagnostic script **`check_support.sh`** is provided.
+
+#### Script Features:
+* **Device Identification**: hardware codename (`ishtar`, `dada`, `haotian`, `xuanyuan`, `nezha`), SoC platform, and HyperOS/Android release.
+* **Root Environment Check**: Superuser access (UID 0), SELinux status (Enforcing/Permissive), and detection of active module folders in Magisk, KernelSU, and APatch (`/data/adb/modules`).
+* **Qualcomm CamX Hardware Properties**:
+  - Full-resolution 50M/200M RAW buffer: `persist.vendor.camera.maxRAWSizes = 55`
+  - Hardware DCG HDR: `persist.vendor.camera.dcg.enable = 1`
+  - Sensor-level HDR: `persist.vendor.camera.sensor.hdr = 1`
+  - ArcSoft AISP video noise reduction bypass: `persist.vendor.camera.arcsoft.aisp_algo_nr.bypass = 1`
+  - Video bitrate multiplier: `persist.vendor.camera.video.bitrate.factor = 1.5`
+  - Vendor DCG support flag: `ro.vendor.camera.dcg = 1`
+* **AUX Whitelist Check**: verifies `vendor.camera.aux.packagelist` for GCam / AGC / LMC / Shamim packages.
+* **Automated Log Export**:  
+  📁 `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt` (ready to attach directly to GitHub bug reports).
+
+#### How to Run:
+
+**Option 1: Directly on Device via Termux (Root Required)**
+```bash
+# Run directly from repository in one step:
+curl -sSL https://raw.githubusercontent.com/bjorndith-cmd/Mi_Master_Camera_Combo/main/check_support.sh | su -c sh
+
+# Or run locally if downloaded to storage:
+su
+sh /sdcard/Download/check_support.sh
+```
+
+**Option 2: From PC via ADB**
+```bash
+adb push check_support.sh /data/local/tmp/
+adb shell "su -c sh /data/local/tmp/check_support.sh"
+```
+
+---
+
+### 10. Frequently Asked Questions (FAQ) (EN)
 
 <details>
 <summary><b>What should I do on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14) if root dropped or screen went black?</b></summary>
@@ -624,6 +804,16 @@ Yes, the viewfinder maintains a steady 60 fps without freezing, thanks to dynami
 
 Yes, all cameras shoot in full 50MP / 200MP resolution in AGC, LMC, Shamim, and BigKaka mods.
 </details>
+
+---
+
+### 11. Feedback & Issue Reporting Templates (EN)
+
+If you encounter an issue or wish to propose an enhancement, use our official interactive GitHub Issue forms in [Issues](../../issues/new/choose):
+
+* 🐛 **[Bug Report](../../issues/new?template=bug_report.yml)** — structured bug report form for camera crashes, black screens, or viewfinder freezes. Please specify device model, ROM, and attach the `Mi_Camera_Diagnostic_Report.txt` diagnostic file.
+* ⚙️ **[GCam Config & Preset Feedback](../../issues/new?template=config_feedback.yml)** — share your tuned `.agc` / `.xml` profiles, color matrix calibrations, or noise model adjustments for Sony, OmniVision, and Samsung sensors.
+* 💡 **[Feature Request](../../issues/new?template=feature_request.yml)** — propose new features, support for new ROMs or camera hardware revisions.
 
 ---
 

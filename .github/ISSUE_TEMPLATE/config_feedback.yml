@@ -1,0 +1,37 @@
+name: 🎛 GCam Config Preset Request or Feedback
+description: Suggest a new .agc preset, share your tuned config, or give feedback
+labels: ["config", "enhancement"]
+body:
+  - type: dropdown
+    id: device
+    attributes:
+      label: Smartphone Model / Модель смартфона
+      options:
+        - Xiaomi 13 Ultra (ishtar)
+        - Xiaomi 15 (dada)
+        - Xiaomi 15 Pro (haotian)
+        - Xiaomi 15 Ultra (xuanyuan)
+        - Xiaomi 17 Ultra (nezha)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: gcam_version
+    attributes:
+      label: GCam Mod Version
+      options:
+        - AGC 9.6 (BigKaka)
+        - AGC 9.2
+        - AGC 8.8
+        - LMC 8.4
+        - Shamim GCam
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Suggestion / Feedback details
+      description: Share your color science recommendations, noise model tweaks, or link to your config file.
+    validations:
+      required: true
