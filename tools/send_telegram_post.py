@@ -12,8 +12,21 @@ import os
 import sys
 import argparse
 import urllib.request
-import urllib.parse
+import urllib.error
 import json
+
+def normalize_chat_id(chat_id):
+    """Normalize chat_id from URL or plain string to Telegram @username format."""
+    if not chat_id:
+        return "@Mi_Master_Camera_Combo"
+    chat_id = chat_id.strip().strip("'\"")
+    if chat_id.startswith("https://t.me/"):
+        chat_id = "@" + chat_id.replace("https://t.me/", "").strip("/")
+    elif chat_id.startswith("t.me/"):
+        chat_id = "@" + chat_id.replace("t.me/", "").strip("/")
+    elif not chat_id.startswith("@") and not chat_id.startswith("-"):
+        chat_id = "@" + chat_id
+    return chat_id
 
 def send_telegram_photo(bot_token, chat_id, photo_path, caption):
     """Send photo with caption via Telegram Bot API using multipart/form-data."""
@@ -56,6 +69,16 @@ def send_telegram_photo(bot_token, chat_id, photo_path, caption):
             else:
                 print(f"[ERROR] Telegram API error: {res_data}")
                 return False
+    except urllib.error.HTTPError as e:
+        err_msg = e.read().decode("utf-8", errors="ignore")
+        print(f"[ERROR] Telegram HTTP {e.code}: {err_msg}")
+        if e.code == 403:
+            print("[HINT] 403 Forbidden: The Bot is NOT an Administrator of the channel or lacks 'Post messages' permission!")
+        elif e.code == 400:
+            print(f"[HINT] 400 Bad Request: Check chat_id format '{chat_id}' or HTML formatting.")
+        elif e.code == 401:
+            print("[HINT] 401 Unauthorized: TELEGRAM_BOT_TOKEN is incorrect or revoked.")
+        return False
     except Exception as e:
         print(f"[ERROR] Failed to send photo: {e}")
         return False
@@ -80,6 +103,16 @@ def send_telegram_message(bot_token, chat_id, text):
             else:
                 print(f"[ERROR] Telegram API error: {res_data}")
                 return False
+    except urllib.error.HTTPError as e:
+        err_msg = e.read().decode("utf-8", errors="ignore")
+        print(f"[ERROR] Telegram HTTP {e.code}: {err_msg}")
+        if e.code == 403:
+            print("[HINT] 403 Forbidden: The Bot is NOT an Administrator of the channel or lacks 'Post messages' permission!")
+        elif e.code == 400:
+            print(f"[HINT] 400 Bad Request: Check chat_id format '{chat_id}' or HTML formatting.")
+        elif e.code == 401:
+            print("[HINT] 401 Unauthorized: TELEGRAM_BOT_TOKEN is incorrect or revoked.")
+        return False
     except Exception as e:
         print(f"[ERROR] Failed to send message: {e}")
         return False
@@ -129,12 +162,18 @@ def main():
     parser.add_argument("--photo", default="assets/LOGO.jpg")
     args = parser.parse_args()
 
-    bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "@Mi_Master_Camera_Combo")
+    raw_token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    raw_chat = os.environ.get("TELEGRAM_CHAT_ID", "@Mi_Master_Camera_Combo")
+
+    bot_token = raw_token.strip().strip("'\"")
+    chat_id = normalize_chat_id(raw_chat)
 
     if not bot_token:
-        print("[ERROR] TELEGRAM_BOT_TOKEN environment variable is not set!")
+        print("[FATAL] TELEGRAM_BOT_TOKEN secret/environment variable is empty!")
+        print("Please add TELEGRAM_BOT_TOKEN in GitHub Settings -> Secrets -> Actions.")
         sys.exit(1)
+
+    print(f"[INFO] Target Telegram Chat ID: {chat_id}")
 
     # Determine photo path
     photo_path = args.photo
@@ -149,17 +188,30 @@ def main():
     else:
         content = args.text or "⚡ <b>Обновление Mi Master Camera Combo</b>"
 
-    # Telegram photo captions are limited to 1024 characters.
-    # If content exceeds 1000 chars, send photo with short title, then full message.
+    success = False
     if os.path.exists(photo_path):
+        print(f"[INFO] Photo found at {photo_path}, sending with photo...")
         if len(content) <= 1000:
-            send_telegram_photo(bot_token, chat_id, photo_path, caption=content)
+            success = send_telegram_photo(bot_token, chat_id, photo_path, caption=content)
         else:
-            short_caption = "📸 <b>Xiaomi Master Camera Combo</b> ⚡\n<i>Обновление проекта</i>"
-            send_telegram_photo(bot_token, chat_id, photo_path, caption=short_caption)
-            send_telegram_message(bot_token, chat_id, content)
+            short_caption = "📸 <b>Xiaomi Master Camera Combo</b> ⚡\n<i>Официальное обновление проекта</i>"
+            p_ok = send_telegram_photo(bot_token, chat_id, photo_path, caption=short_caption)
+            m_ok = send_telegram_message(bot_token, chat_id, content)
+            success = p_ok or m_ok
+
+        # If sending photo failed, attempt fallback to text-only
+        if not success:
+            print("[WARN] Photo send failed. Trying text-only fallback...")
+            success = send_telegram_message(bot_token, chat_id, content)
     else:
-        send_telegram_message(bot_token, chat_id, content)
+        print("[INFO] Photo not found, sending text-only message...")
+        success = send_telegram_message(bot_token, chat_id, content)
+
+    if not success:
+        print("[FATAL] Message delivery to Telegram failed. See error log above.")
+        sys.exit(1)
+    else:
+        print("[SUCCESS] All messages delivered successfully!")
 
 if __name__ == "__main__":
     main()
