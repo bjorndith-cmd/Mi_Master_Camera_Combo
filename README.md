@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/LOGO_G.jpg" alt="Mi Master Camera Combo Banner" width="100%">
+</p>
+
 # Xiaomi Master Camera Combo 📸⚡
 ### Universal Flagship Suite for Xiaomi 13 Ultra, 15, 15 Pro, 15 Ultra & 17 Ultra
 #### HyperOS 2.0 / HyperOS 3.0 • Android 15 / Android 16 (API 35/36)
