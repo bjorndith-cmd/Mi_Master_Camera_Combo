@@ -47,7 +47,11 @@
    - [George Video MOD (8K со всех камер, 4K120, чистый AISP)](#54-george-video-mod-8k-со-всех-камер-4k120-чистый-aisp-ru)
    - [Stock AIO 104 для Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-для-xiaomi-15-ultra-lyt-900-ru)
    - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
-6. [Визуальные сравнения «До / После» (Visual Proof)](#6-визуальные-сравнения-до--после-visual-proof-ru)
+6. [Визуальные сравнения «До / После» и галерея интерфейса (Visual Proof)](#6-визуальные-сравнения-до--после-visual-proof-ru)
+   - [Аппаратный DCG против программного мульти-кадрового HDR](#61-аппаратный-dcg-против-программного-мульти-кадрового-hdr-движение-в-кадре)
+   - [Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass](#62-шумоподавление-в-видео-сток-arcsoft-aisp-против-george-mod-bypass)
+   - [Разрешающая способность: 12.5Мп Биннинг против 50Мп/200Мп FullRes](#63-разрешающая-способность-125мп-биннинг-против-50мп-и-200мп-fullres-100-crop)
+   - [Реальные скриншоты интерфейса и подтверждение функций (UI Gallery)](#64-реальные-скриншоты-интерфейса-и-подтверждение-работы-всех-функций-ui-gallery)
 7. [Инструкция по установке](#7-инструкция-по-установке-ru)
 8. [Инструкция по тестированию и проверке работы модуля](#8-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
    - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#86-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
@@ -170,6 +174,20 @@
 
 * **12.5 Мп (Биннинг)**: Мелкие дорожные знаки, надписи на вывесках и лица людей на общем плане размыты.
 * **50 Мп / 200 Мп FullRes**: Честные `8192 x 6144` и `16384 x 12288` пикселей. 4-кратная оптико-цифровая детализация, позволяющая кадрировать снимок без потери резкости.
+
+#### 6.4. Реальные скриншоты интерфейса и подтверждение работы всех функций (UI Gallery)
+
+Живая демонстрация работы мода на устройстве пользователя со всеми активированными флагманскими возможностями:
+
+| 🎬 Режимы съемки и Leica Vibrant | 🎯 Режим 50 МП (Сетка зума) | ⚙️ Про-меню и Диафрагма F1.9 |
+|:---:|:---:|:---:|
+| <a href="./assets/screenshots/01_camera_modes_director_leica.jpg"><img src="./assets/screenshots/01_camera_modes_director_leica.jpg" width="230" alt="Camera Modes & Leica Vibrant"></a> | <a href="./assets/screenshots/02_50mp_ultra_hd_zoom_grid.jpg"><img src="./assets/screenshots/02_50mp_ultra_hd_zoom_grid.jpg" width="230" alt="50MP Ultra HD Zoom Grid"></a> | <a href="./assets/screenshots/03_photo_pro_aperture_leica_controls.jpg"><img src="./assets/screenshots/03_photo_pro_aperture_leica_controls.jpg" width="230" alt="Pro Controls & F1.9 Aperture"></a> |
+| **Режиссер, Киноэффекты, LEICA**<br>Разблокированы режимы «Режиссер», «Суперлуние», «Длинная выдержка» и профиль **Leica Vibrant** | **50 МП на всех фокусных**<br>Полноценный зум `0.5x : 1X : 2.6x : 5x : 10x` без вылетов и зависаний видоискателя | **Аппаратная диафрагма F1.9**<br>Прямое управление физической диафрагмой (F1.9), HDRA, стили Leica, AI, Tilt-shift |
+
+| 🎛️ Расширенные настройки ISP и Битрейты видео | 🎥 Запись Dolby Vision 4K 60fps |
+|:---:|:---:|
+| <a href="./assets/screenshots/04_advanced_isp_and_bitrate_settings.jpg"><img src="./assets/screenshots/04_advanced_isp_and_bitrate_settings.jpg" width="250" alt="Advanced ISP and Video Bitrate"></a> | <a href="./assets/screenshots/05_dolby_vision_4k60_pro_video.jpg"><img src="./assets/screenshots/05_dolby_vision_4k60_pro_video.jpg" width="250" alt="Dolby Vision 4K60 Video"></a> |
+| **Кастомный битрейт до 150 Mbps**<br>Аппаратная подстройка резкости, шумодава, кривых тонирования (sRGB) и экстремальный битрейт видео (**4K: 150Mbps**, 1080p: 50Mbps) | **Dolby Vision 4K · 60fps**<br>10-битный кинематографический HDR, аудиозум, отслеживание объекта, управление диафрагмой F1.9 и телесуфлер |
 
 ---
 
@@ -463,8 +481,11 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [50MP & 200MP Full Resolution RAW Unlock](#53-50mp--200mp-full-resolution-raw-unlock-en)
    - [George Video MOD (8K All Sensors, 4K120fps, Clean AISP)](#54-george-video-mod-8k-all-sensors-4k120fps-clean-aisp-en)
    - [Stock AIO 104 for Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-for-xiaomi-15-ultra-lyt-900-en)
-   - [Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-crash-prevention-on-xiaomi-17-ultra-simplerom-st-eu-elite-en)
-6. [Visual Proof Gallery (Before vs After)](#6-visual-proof-gallery-before-vs-after-en)
+6. [Visual Proof Gallery & UI Feature Showcase](#6-visual-proof-gallery-before-vs-after-en)
+   - [Hardware DCG vs Conventional Multi-Frame Staggered HDR](#61-hardware-dcg-vs-conventional-multi-frame-staggered-hdr-motion-in-frame)
+   - [Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass](#62-video-noise-reduction-stock-arcsoft-aisp-smear-vs-george-mod-bypass)
+   - [Spatial Resolving Power: 12.5MP Binned vs 50MP & 200MP FullRes](#63-spatial-resolving-power-125mp-binned-vs-50mp--200mp-fullres-100-crop)
+   - [Real-World Interface Screenshots & UI Feature Showcase](#64-real-world-interface-screenshots--ui-feature-showcase-en)
 7. [Installation Guide](#7-installation-guide-en)
 8. [Verification & Testing Guide (All Devices & Versions)](#8-verification--testing-guide-all-devices--versions-en)
    - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#86-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
@@ -587,6 +608,20 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
 
 * **12.5 MP (4-in-1 Binned)**: Fine street signage, architectural textures, and distant faces are blurred into pixel clusters.
 * **50 MP / 200 MP FullRes**: True `8192 x 6144` and `16384 x 12288` pixels. Delivers up to 4x higher spatial resolution, allowing aggressive digital cropping without detail loss.
+
+#### 6.4. Real-World Interface Screenshots & UI Feature Showcase (EN)
+
+Live demonstration of the mod running on user hardware with all flagship capabilities unlocked:
+
+| 🎬 Camera Modes & Leica Vibrant | 🎯 50MP Mode (Multi-Focal Zoom Grid) | ⚙️ Quick Pro Menu & F1.9 Variable Aperture |
+|:---:|:---:|:---:|
+| <a href="./assets/screenshots/01_camera_modes_director_leica.jpg"><img src="./assets/screenshots/01_camera_modes_director_leica.jpg" width="230" alt="Camera Modes & Leica Vibrant"></a> | <a href="./assets/screenshots/02_50mp_ultra_hd_zoom_grid.jpg"><img src="./assets/screenshots/02_50mp_ultra_hd_zoom_grid.jpg" width="230" alt="50MP Ultra HD Zoom Grid"></a> | <a href="./assets/screenshots/03_photo_pro_aperture_leica_controls.jpg"><img src="./assets/screenshots/03_photo_pro_aperture_leica_controls.jpg" width="230" alt="Pro Controls & F1.9 Aperture"></a> |
+| **Director Mode, Film Effects, LEICA**<br>Fully unlocked Director mode, Super Moon, Long Exposure, and active **Leica Vibrant** profile | **50MP on All Lenses**<br>Full optical and hybrid zoom grid `0.5x : 1X : 2.6x : 5x : 10x` without viewfinder freezes | **Physical F1.9 Aperture**<br>Hardware variable aperture switch (F1.9), HDRA, Leica color styles, AI, Tilt-shift |
+
+| 🎛️ Advanced ISP Tuning & Custom Video Bitrates | 🎥 Dolby Vision 4K 60fps Recording |
+|:---:|:---:|
+| <a href="./assets/screenshots/04_advanced_isp_and_bitrate_settings.jpg"><img src="./assets/screenshots/04_advanced_isp_and_bitrate_settings.jpg" width="250" alt="Advanced ISP and Video Bitrate"></a> | <a href="./assets/screenshots/05_dolby_vision_4k60_pro_video.jpg"><img src="./assets/screenshots/05_dolby_vision_4k60_pro_video.jpg" width="250" alt="Dolby Vision 4K60 Video"></a> |
+| **Pro Bitrates up to 150 Mbps**<br>Hardware ISP fine-tuning (sharpness, noise reduction, tone curves) + pro video bitrates (**4K: 150Mbps**, 1080p: 50Mbps) | **Dolby Vision 4K · 60fps**<br>10-bit cinematic HDR, audio zoom, motion tracking, F1.9 aperture, and teleprompter |
 
 ---
 

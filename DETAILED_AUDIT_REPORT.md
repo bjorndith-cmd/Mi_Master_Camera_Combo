@@ -514,3 +514,16 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
    - `persist.vendor.camera.maxRAWSizes=55` и сетка зума `0.5:1.0:3.0:5.0` обеспечивают честные 50Мп и 200Мп в режимах Ultra HD и Pro Ultra RAW, а также в портах GCam (AGC 9.x).
    - Аппаратный DCG HDR активирован через `persist.vendor.camera.dcg.enable=1`.
    - Запись видео 8K на всех тыльных объективах и 4K120fps со сниженным смазыванием шумодава ArcSoft (`aisp_algo_nr.bypass=1`).
+
+### 9.4. Фотографическая верификация разблокированных функций (Интерфейс)
+
+Ниже представлены фактические снимки экрана рабочего окружения со всеми успешно разблокированными возможностями:
+
+| Снимок интерфейса | Описание активированной функции |
+|---|---|
+| <img src="./assets/screenshots/01_camera_modes_director_leica.jpg" width="160" alt="Camera Modes"> | **Флагманские режимы и профиль Leica**: разблокированы режимы «Режиссер», «Суперлуние», «Длинная выдержка», «Быстрая съемка», «Киноэффекты», активен бейдж **LEICA VIBRANT** и **HDRA**. |
+| <img src="./assets/screenshots/02_50mp_ultra_hd_zoom_grid.jpg" width="160" alt="50MP Zoom Grid"> | **Сетка зума 50 МП Ultra HD**: полная мультифокальная линейка оптического и гибридного зумирования `0.5x : 1X : 2.6x : 5x : 10x` в полном разрешении без фризов. |
+| <img src="./assets/screenshots/03_photo_pro_aperture_leica_controls.jpg" width="160" alt="Pro Controls"> | **Физическая диафрагма и Pro-шторка**: прямое управление физической диафрагмой **F1.9**, переключение Leica-стилей, HDRA, Tilt-shift, AI-камера, вспомогательная камера, водяной знак Leica. |
+| <img src="./assets/screenshots/04_advanced_isp_and_bitrate_settings.jpg" width="160" alt="ISP and Bitrate"> | **Расширенные настройки ISP и Битрейт 150 Mbps**: аппаратная регулировка резкости, шумоподавления, sRGB-кривых и экстремальный битрейт видео **4K: 150Mbps**, 1080p: 50Mbps. |
+| <img src="./assets/screenshots/05_dolby_vision_4k60_pro_video.jpg" width="160" alt="Dolby Vision"> | **Dolby Vision 4K · 60fps**: 10-битный динамический диапазон Dolby Vision в 4K 60 кадр/с со стабилизацией, аудиозумом, слежением за объектом и телесуфлером. |
+
