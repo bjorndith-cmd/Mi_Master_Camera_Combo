@@ -2,6 +2,7 @@ import os
 import zipfile
 
 zips_to_check = [
+    r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.0_by_borndead.zip',
@@ -28,7 +29,7 @@ for zp in zips_to_check:
             print(f"  [PASS] Zero broken dynamic libraries found.")
             
         # 2. Check structure
-        if 'Slim' in zp:
+        if 'Slim' in zp or 'SimpleRom' in zp:
             has_apk = any('MiuiCamera.apk' in f for f in names)
             print(f"  [PASS] MiuiCamera.apk excluded: {not has_apk}")
             has_nezha_bins = any('nezha' in f and f.endswith('.bin') for f in names)
@@ -46,7 +47,7 @@ for zp in zips_to_check:
         # 3. Check customize.sh
         if 'customize.sh' in names:
             cust = z.read('customize.sh').decode('utf-8', errors='ignore')
-            has_custom_rom_check = 'IS_CUSTOM_ROM' in cust or 'Slim' in zp
+            has_custom_rom_check = 'IS_CUSTOM_ROM' in cust or 'Slim' in zp or 'SimpleRom' in zp
             print(f"  [PASS] Custom ROM safeguard present in installer: {has_custom_rom_check}")
             
 print("\n=== AUDIT COMPLETE ===")

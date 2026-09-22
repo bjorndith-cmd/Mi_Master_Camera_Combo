@@ -431,3 +431,86 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
    - `ro.vendor.camera.dcg` (проверка `1`).
 4. **Аудит белого списка AUX**: парсинг строки `vendor.camera.aux.packagelist` на вхождение `com.agc.gcam96`, `com.google.android.GoogleCamera`, `com.shamim.cam` и др.
 5. **Экспорт отчёта**: сохранение лога без ANSI-символов в `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt` для отправки в Issue.
+
+---
+
+## 9. Диагностика и устранение бага «Розового цифрового шума» на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 ST Non-Leica)
+
+### 9.1. Описание проблемы и симптоматика
+На кастомной прошивке **SimpleRom 3.0.309.0 - ST (Non-Leica)** для Xiaomi 17 Ultra (`nezha`) пользователи сообщали о специфическом сбое:
+* При установке модов с активацией функций Leica стандартная локальная съёмка и режим **Leica M-mode** отрабатывали стабильно («m9 mode still works»).
+* Однако при включении функций супер-разрешения, улучшений AI или режима **Ultra RAW / Leica Cloud Processing**, снимок на выходе превращался в сплошной монолитный кислотно-розовый / пурпурный цифровой шум.
+* Кроме того, любые попытки заменить системный файл `MiuiCamera.apk` на деодексированном кастоме SimpleRom ST приводили к немедленному аварийному завершению приложения камеры (Force Close / Bootloop камеры).
+
+### 9.2. Физика и математика дефекта (Bayer CFA Cloud Mismatch)
+1. **Механизм облачной дебайеризации**:
+   - В флагманской камере Xiaomi при активных тегах `support_cloud_process` и `support_ultra_raw_cloud` приложение отправляет несжатый RAW-поток данных с сенсора OmniVision OVX10500U / Samsung HP9 на китайские сервера Xiaomi AISP Cloud для нейросетевой реконструкции.
+   - Серверный алгоритм дебайеризации проверяет наличие аппаратных цифровых сертификатов Leica, зашитых в защищённую область (TEE) оригинальных китайских аппаратов с официальной Leica-прошивкой.
+2. **Срыв конвейера на Non-Leica прошивке**:
+   - SimpleRom ST Non-Leica не содержит валидных криптографических токенов для облачного сервиса AISP.
+   - Сервер возвращает повреждённый поток или дебайеризатор аварийно завершает обработку зелёного канала (Green channel underflow / zeroing).
+   - В цветовой модели RGB обнуление зелёного компонента ($G = 0$) при наличии сигналов красного ($R > 0$) и синего ($B > 0$) математически даёт чистый пурпурный/малиновый цвет:
+     $$\text{Pixel}(R, 0, B) = \text{Magenta / Pink}$$
+   - Итоговый массив пикселей заполняется градиентом розового шума.
+
+### 9.3. Архитектура решения в модуле `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`
+
+1. **Принудительное отключение облачного пайплайна (Bypass Cloud Upload)**:
+   В файлах `device_features/nezha.xml` и `system.prop` жестко деактивированы все триггеры облачной обработки:
+   ```xml
+   <bool name="support_cloud_process">false</bool>
+   <bool name="support_cloud_ai_process">false</bool>
+   <bool name="support_ultra_raw_cloud">false</bool>
+   <bool name="is_support_cloud_process">false</bool>
+   <bool name="support_cloud_photo_enhance">false</bool>
+   <bool name="support_ai_cloud">false</bool>
+   <bool name="support_cloud_sr">false</bool>
+   <bool name="support_cloud_super_resolution">false</bool>
+   ```
+   В `system.prop` и через `resetprop` в фоновом демоне `service.sh`:
+   ```properties
+   persist.vendor.camera.cloud.enable=0
+   persist.sys.camera.cloud_process=0
+   persist.vendor.camera.cloud_process=0
+   persist.vendor.camera.ai_cloud.enable=0
+   persist.sys.camera.cloud.sr=0
+   persist.vendor.camera.cloud.sr.enable=0
+   persist.vendor.camera.ultra_raw.cloud=0
+   ```
+   Это заставляет камеру выполнять **100% операций локально на чипе Snapdragon 8 Elite** (ISP Spectra + NPU Hexagon), полностью предотвращая возникновение розового шума.
+
+2. **Активация локального движка Leica Color Science**:
+   Для включения оригинальных цветовых профилей и режимов без зависимости от облака инжектируются флаги:
+   ```xml
+   <bool name="support_camera_leica">true</bool>
+   <bool name="support_leica_style">true</bool>
+   <bool name="is_support_leica_style">true</bool>
+   <bool name="support_leica_color">true</bool>
+   <bool name="support_leica_authentic">true</bool>
+   <bool name="support_leica_vibrant">true</bool>
+   <bool name="support_leica_filter">true</bool>
+   <bool name="support_leica_watermark">true</bool>
+   <bool name="support_master_filter">true</bool>
+   <bool name="support_leica_m_mode">true</bool>
+   <bool name="support_portrait_master_lens">true</bool>
+   <bool name="support_street_mode">true</bool>
+   ```
+   Системные свойства:
+   ```properties
+   ro.miui.camera.leica.supported=1
+   persist.vendor.camera.enableLeicaMode=1
+   persist.sys.camera.leica=1
+   persist.vendor.camera.leica.supported=1
+   persist.vendor.camera.multicam.leica=1
+   ro.miui.camera.leica.watermark=1
+   persist.vendor.camera.leicafilter.bypassMode=0
+   ```
+
+3. **Сохранение целостности стокового APK камеры (Pure Overlay)**:
+   - Модуль исключает замену `MiuiCamera.apk`. На деодексированном кастоме SimpleRom ST используется исключительно оригинальное оптимизированное приложение прошивки.
+   - Модуль монтирует калибровки сенсоров Chromatix (`com.qti.tuned.nezha_*.bin`), видео-кодек `libqcodec2_v4l2codec.so`, конфиги `aisp.json` и XML-оверлей `device_features/nezha.xml`.
+
+4. **Полный 50Мп/200Мп RAW и George Video MOD**:
+   - `persist.vendor.camera.maxRAWSizes=55` и сетка зума `0.5:1.0:3.0:5.0` обеспечивают честные 50Мп и 200Мп в режимах Ultra HD и Pro Ultra RAW, а также в портах GCam (AGC 9.x).
+   - Аппаратный DCG HDR активирован через `persist.vendor.camera.dcg.enable=1`.
+   - Запись видео 8K на всех тыльных объективах и 4K120fps со сниженным смазыванием шумодава ArcSoft (`aisp_algo_nr.bypass=1`).

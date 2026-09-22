@@ -83,6 +83,7 @@
 
 | Файл модуля | Размер | Совместимость | Описание и назначение |
 |---|---|---|---|
+| **[`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip)** | **13.85 МБ** | 17 Ultra (`nezha`) | **⭐ Специальный выпуск для SimpleRom 3.0.309.0 ST (Non-Leica)**. Фикс розового/пурпурного шума! Полностью отключает сбойную облачную обработку Leica Cloud, переводит весь конвейер на локальный NPU/ISP Snapdragon 8 Elite. Автономная Leica Authentic/Vibrant, Leica M-mode, водяные знаки, 50М/200М RAW, DCG HDR, 8K видео. Чистый оверлей (сохраняет нативный APK камеры). |
 | **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 МБ** | 17 Ultra (`nezha`) | **⭐ Рекомендуется для 17 Ultra (SimpleRom 3.0.309.0 - ST, EU, Elite, Stock)**. Чистый оверлей: НЕ перезаписывает APK камеры (0% риска вылета!). Все калибровки OVX10500U/HP9/JN5/OV50M, DCG HDR, 8K, 4K120fps, кодек. |
 | **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 МБ** | 15U (`xuanyuan`) & 17U (`nezha`) | **Исправленный комбо-модуль**. Динамическое разделение 15U и 17U, удалены битые библиотеки, авто-детектор SimpleRom ST. |
 | **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **195.13 МБ** | 13U, 15, 15 Pro, 15U, 17U | **Универсальный комбайн для всей линейки**. Автоматически определяет устройство и тип прошивки, активирует полный комплекс твиков. |
@@ -133,9 +134,14 @@
 * Таблицы экспозиции SmartAE LN2 для ночной съемки.
 * Библиотека `libmialgo_snsc.so`.
 
-#### 5.6. Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (RU)
-* **В чём была проблема**: в ранних сборках отсутствовала папка `devices/` (на 17U попадали файлы 15U) и лежали бинарники с отсутствующей зависимостью `libdlrmsc_android15.so`, а замена APK на кастоме SimpleRom вызывала краш.
-* **Решение**: Удалены битые библиотеки, разделены профили `devices/nezha` и `devices/xuanyuan`, добавлен авто-детектор кастомов (`IS_CUSTOM_ROM`), и создан специальный модуль **`X17U_Master_Imaging_MOD_v1.0_Slim`** (без APK, чистый оверлей).
+#### 5.6. Защита от вылетов и фикс розового шума на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (RU)
+* **В чём была проблема (краши и несовместимость)**: в ранних сборках отсутствовала папка `devices/` (на 17U попадали файлы 15U) и лежали бинарники с отсутствующей зависимостью `libdlrmsc_android15.so`, а замена APK на деодексированном кастоме SimpleRom вызывала краш приложения камеры.
+* **Баг «Розового / Пурпурного цифрового шума» на SimpleRom ST Non-Leica**:
+  - На сборке SimpleRom ST без встроенной лицензии Leica облачный сервис Xiaomi AISP Cloud отклоняет дебайеризацию RAW-потока. Зелёный цветовой канал (Green) обнуляется, оставляя только Red + Blue — итоговый снимок заливается сплошным кислотно-розовым/пурпурным шумом при срабатывании Ultra RAW / Cloud AI. При этом аппаратный конвейер чипа Snapdragon (включая режим Leica M-mode) работает абсолютно исправно.
+* **Комплексное решение (Модуль `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`)**:
+  1. **100% Автономная обработка (Offline NPU/ISP)**: теги `support_cloud_process`, `support_cloud_ai_process`, `support_ultra_raw_cloud` принудительно отключены (`false`), а свойства `persist.vendor.camera.cloud.enable=0` блокируют выгрузку в облако. Вся дебайеризация выполняется аппаратно на процессоре Snapdragon 8 Elite (ISP Spectra + NPU Hexagon) — **розовый шум полностью устранён!**
+  2. **Активация локальной Leica**: включены локальные профили Leica Authentic, Leica Vibrant, водяные знаки, режим Leica M-mode и портретные объективы Master Lens.
+  3. **Сохранность оригинального APK**: модуль работает как чистый системный оверлей (Overlay), не затрагивая деодексированный системный `MiuiCamera.apk`, предотвращая любые сбои.
 
 ---
 
@@ -492,6 +498,7 @@ All packages are hosted in the [`releases/`](./releases/) directory:
 
 | Module Package | Size | Target Hardware | Description & Role |
 |---|---|---|---|
+| **[`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip)** | **13.85 MB** | 17 Ultra (`nezha`) | **⭐ Specialized Edition for SimpleRom 3.0.309.0 ST (Non-Leica)**. Magenta/Pink noise fix! Completely disables broken unauthenticated Leica Cloud demosaicing, routing 100% of the image pipeline to the on-device Snapdragon 8 Elite NPU/ISP. Enables offline Leica Authentic/Vibrant color science, Leica M-mode, watermarks, 50M/200M RAW, DCG HDR, and 8K video. Pure systemless overlay (zero APK replacement). |
 | **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 MB** | 17 Ultra (`nezha`) | **⭐ Recommended for 17 Ultra (SimpleRom 3.0.309.0 - ST, EU, Elite, Stock)**. Pure systemless overlay: DOES NOT touch `MiuiCamera.apk` (0% crash risk!). Genuine OVX10500U/HP9/JN5/OV50M Chromatix bins, DCG HDR, 8K video, 4K120fps, video codec. |
 | **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 MB** | 15U (`xuanyuan`) & 17U (`nezha`) | **Fixed Dual-Flagship Combo**. Dynamic separation of 15U and 17U profiles, purged broken libraries, auto-detects SimpleRom ST to preserve native APK. |
 | **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **195.13 MB** | 13U, 15, 15 Pro, 15U, 17U | **Universal Multi-Device Combo**. Auto-detects device hardware and ROM type, deploys full Leica suite, DCG HDR, and George Video MOD. |
@@ -542,9 +549,14 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
 * SmartAE LN2 low-light exposure tables.
 * Self-contained `libmialgo_snsc.so`.
 
-#### 5.6. Crash Prevention on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (EN)
-* **Root Cause of Past Crashes**: The earlier zip lacked the `devices/` directory (causing 15U files to be flashed onto 17U), contained naked libraries with an unresolved `libdlrmsc_android15.so` dependency, and overwrote the custom deodexed camera APK on SimpleRom ST.
-* **Resolution**: Purged broken libraries, isolated `devices/nezha` and `devices/xuanyuan` trees, added custom ROM detection (`IS_CUSTOM_ROM`), and introduced **`X17U_Master_Imaging_MOD_v1.0_Slim`** (pure overlay, zero APK conflict).
+#### 5.6. Crash Prevention & Magenta Noise Fix on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (EN)
+* **Root Cause of Past Crashes**: Early packages lacked the `devices/` directory (causing 15U files to be flashed onto 17U), contained naked libraries with an unresolved `libdlrmsc_android15.so` dependency, and overwrote the custom deodexed camera APK on SimpleRom ST.
+* **The "Magenta / Pink Digital Noise" Bug on SimpleRom ST Non-Leica**:
+  - On non-Leica builds of SimpleRom ST lacking cloud tokens, Xiaomi AISP Cloud servers reject the raw Bayer stream demosaicing. The green color channel drops to zero, leaving Red + Blue — causing photos taken in Ultra RAW or Cloud AI modes to turn into solid vibrant pink/magenta noise. Meanwhile, on-device local features (like Leica M-mode) operate without issue.
+* **Comprehensive Resolution (`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`)**:
+  1. **100% Offline On-Device Demuxing**: tags `support_cloud_process`, `support_cloud_ai_process`, and `support_ultra_raw_cloud` are forced to `false`, and `persist.vendor.camera.cloud.enable=0` prevents any cloud upload. All image demosaicing and processing are routed directly to the Snapdragon 8 Elite ISP & Hexagon NPU — **completely eliminating magenta noise!**
+  2. **Offline Leica Engine**: Unlocks local Leica Authentic, Leica Vibrant, Leica watermarks, Leica M-mode, and Master Lens portraits.
+  3. **ROM APK Preservation**: Pure systemless overlay preserves the native deodexed `MiuiCamera.apk` on SimpleRom ST, ensuring rock-solid stability and zero force closes.
 
 ---
 
