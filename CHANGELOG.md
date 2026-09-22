@@ -2,6 +2,19 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
+## [v5.9-HOS1-A14-Fix] - 2026-09-22
+### Fixed
+- **Root Loss on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14)**:
+  - Discovered that executing magiskpolicy --live permissive for system domains during post-fs-data triggered Magisk Safe Mode on HyperOS 1.0 / A14, which completely disabled root and modules upon reboot.
+  - Sanitized post-fs-data.sh across all modules: completely removed dangerous live permissive calls. Root is now 100% stable across all Magisk, KernelSU, and APatch setups.
+- **Black Screen Viewfinder on HyperOS 1.0.14.0 (A14)**:
+  - Discovered that on Android 14 (API 34), the installer was preserving an experimental ported camera.qcom.so (27.3 MB) and attempting to mount HyperOS 3.0 MiuiCamera.apk, breaking CamX sensor stream binding and ART framework compatibility.
+  - Updated customize.sh: on Android 14 (API <= 34), native Camera HAL and native Leica Camera APK are preserved.
+- **Added Dedicated Module for Xiaomi 13 Ultra HyperOS 1.0 (A14)**:
+  - Introduced Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip (270 KB).
+  - Pure systemless overlay specifically calibrated for Xiaomi 13 Ultra running HyperOS 1.0 (Android 14 / HOS 1.0.14.0+).
+  - Unlocks Quad-50MP FullRes across all 4 rear sensors, DCG Hardware HDR, 8K 24fps on all lenses, 4K 120fps, Dolby Vision, and clean AISP with zero risk of root loss or black screen.
+
 ## [v5.8-Nezha-SimpleRom-Fix] - 2026-09-22
 ### Fixed
 - **Fatal Camera Crash on Xiaomi 17 Ultra (`nezha`) on SimpleRom 3.0.309.0 - ST**:

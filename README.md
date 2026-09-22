@@ -122,7 +122,7 @@
 ### 6. Часто задаваемые вопросы (FAQ) (RU)
 
 <details>
-<summary><b>Камера на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) теперь не вылетает?</b></summary>
+<summary><b>Что делать на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14), если пропал рут или черный экран?</b></summary>\nПроблема полностью решена! На Android 14 рут отпадал из-за агрессивных permissive-правил в <code>post-fs-data.sh</code>, вызывавших Safe Mode в Magisk, а чёрный экран возникал из-за подмены системного Camera HAL на порт от A16.  \nУстановите выделенный модуль <b>Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip</b> — он сохраняет родной системный HAL и APK, не трогает SELinux, активирует Quad-50MP на всех линзах, DCG HDR и 8K видео с нулевым риском сбоев!\n</details>\n\n<details>\n<summary><b>Камера на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) теперь не вылетает?</b></summary>
 Да, проблема решена на 100%! Для пользователей SimpleRom ST мы рекомендуем <b>X17U_Master_Imaging_MOD_v1.0_Slim</b>. Модуль не затрагивает модифицированный APK камеры, а накатывает только сенсорные калибровки, DCG HDR и видеомод.
 </details>
 
@@ -237,6 +237,12 @@ All packages are hosted in the [`releases/`](./releases/) directory:
 ---
 
 ### 6. Frequently Asked Questions (FAQ) (EN)
+
+<details>
+<summary><b>What should I do on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14) if root dropped or screen went black?</b></summary>
+This issue is 100% fixed! On Android 14, root dropped because permissive rules in <code>post-fs-data.sh</code> triggered Magisk Safe Mode, and the black screen was caused by overwriting the Camera HAL with an incompatible ported library.  
+Flash the dedicated <b>Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip</b> module — it preserves native Camera HAL and APK, cleans boot scripts, and enables Quad-50MP on all lenses, DCG HDR, and 8K video with zero crash or root loss risk!
+</details>
 
 <details>
 <summary><b>Does the camera crash on Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST)?</b></summary>
