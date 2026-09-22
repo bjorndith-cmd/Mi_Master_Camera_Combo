@@ -406,9 +406,11 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 </details>
 
 <details>
-<summary><b>Камера на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) теперь не вылетает?</b></summary>
+<summary><b>Камера на Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST) теперь не вылетает и нет ли розового шума?</b></summary>
 
-Да, проблема решена на 100%! Для пользователей SimpleRom ST мы рекомендуем **X17U_Master_Imaging_MOD_v1.0_Slim**. Модуль не затрагивает модифицированный APK камеры, а накатывает только сенсорные калибровки, DCG HDR и видеомод.
+Да, проблемы решены на 100%!
+* Если у вас стандартная прошивка или версия с Leica — используйте **`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`**.
+* Если у вас **SimpleRom 3.0.309.0 - ST (Non-Leica версия)** и снимки в Ultra RAW или при зуме заливало розовым/пурпурным шумом — устанавливайте специальный **`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`**. Он полностью отключает сбойную облачную дебайеризацию Leica Cloud, заставляет чип Snapdragon 8 Elite обрабатывать 100% кадра локально на ISP/NPU и активирует автономные стили Leica Authentic/Vibrant без замены системного APK.
 </details>
 
 <details>
@@ -821,9 +823,11 @@ Flash the dedicated **Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip** module
 </details>
 
 <details>
-<summary><b>Does the camera crash on Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST)?</b></summary>
+<summary><b>Does the camera crash or show pink/magenta digital noise on Xiaomi 17 Ultra (SimpleRom 3.0.309.0 - ST)?</b></summary>
 
-No, this issue is 100% resolved in **v5.8**! For SimpleRom ST users, we recommend **X17U_Master_Imaging_MOD_v1.0_Slim**. It does not overwrite the custom camera APK, only applying sensor calibrations, DCG HDR, and video tweaks.
+No, both issues are 100% resolved!
+* If you are on standard ROMs or Leica-enabled builds: flash **`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`**.
+* If you are on **SimpleRom 3.0.309.0 - ST (Non-Leica edition)** and experienced magenta/pink noise in Ultra RAW or zoom modes: flash the dedicated **`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`**. It bypasses broken cloud demosaicing, forces 100% on-device Snapdragon 8 Elite ISP/NPU processing, and unlocks offline Leica Authentic/Vibrant styles while leaving the custom camera APK intact.
 </details>
 
 <details>
