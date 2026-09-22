@@ -1,0 +1,58 @@
+name: Telegram Channel Notification
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      post_type:
+        description: 'Type of post to send'
+        required: true
+        default: 'announcement'
+        type: choice
+        options:
+          - announcement
+          - release
+          - custom
+      custom_title:
+        description: 'Custom Title (optional)'
+        required: false
+        default: ''
+        type: string
+      custom_text:
+        description: 'Custom message body (optional)'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Send Notification to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            python3 tools/send_telegram_post.py \
+              --type release \
+              --tag "${{ github.event.release.tag_name }}" \
+              --title "${{ github.event.release.name }}" \
+              --notes "${{ github.event.release.body }}" \
+              --photo "assets/LOGO.jpg"
+          else
+            python3 tools/send_telegram_post.py \
+              --type "${{ inputs.post_type }}" \
+              --title "${{ inputs.custom_title }}" \
+              --text "${{ inputs.custom_text }}" \
+              --photo "assets/LOGO.jpg"
+          fi
