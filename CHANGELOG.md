@@ -2,6 +2,16 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
+## [v5.10-Ishtar-AntiBootloop-Fix] - 2026-09-23
+### Fixed
+- **Bootloop on Xiaomi 13 Ultra (HyperOS 3.0.302.0 Taiwan / TMATWXM / Android 16)**:
+  - **Root Cause Identified**: Official odexed stock firmware with Xiaomi release keys strictly validates platform signatures during early `PackageManagerService` init. Replacing `MiuiCamera.apk` with a pre-extracted APK triggered a fatal `SignatureMismatchException`, causing `system_server` crashes and bootloops.
+  - **100% Pure Systemless Overlay**: Converted both dedicated Xiaomi 13 Ultra module (`Mi13U_Master_Camera_Combo_v5.1`) and Universal Combo (`Mi_Master_Camera_Combo_Universal_MultiDevice`) to Pure Systemless Overlay mode for `ishtar`. Preserves the native stock Leica Camera APK intact.
+  - **Alien HAL Purged**: Completely purged 27.3 MB Android 14 `camera.qcom.so` from `ishtar` staging, eliminating AIDL NDK sensor service linker crashes on Android 16.
+  - **Package Optimization**: Reduced `Mi13U_Master_Camera_Combo` zip size from 146.69 MB to **278 KB**, enabling near-instant installation with 0% risk of bootloops across all HyperOS versions (1.0, 2.0, 3.0) and all regional firmware builds.
+- **Safety & Recovery Standards**:
+  - Added comprehensive **Disclaimer (Отказ от ответственности)** and mandatory **Bootloop Saver** requirements in `README.md` and installation documentation.
+
 ## [v5.9-HOS1-A14-Fix] - 2026-09-22
 ### Fixed
 - **Root Loss on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14)**:

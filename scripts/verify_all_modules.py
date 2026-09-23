@@ -6,6 +6,8 @@ zips_to_check = [
     r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.0_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip'
 ]
 

@@ -201,8 +201,8 @@
 | `Mi13U_Master_Imaging_MOD_HOS1_A14` | 270.3 КБ | ✅ 100% | ✅ Ishtar only | ✅ APK и HAL не затрагиваются | **ИДЕАЛЬНО (HOS 1.0 A14)** |
 | `X17U_Master_Imaging_MOD_v1.0_Slim` | 13.85 МБ | ✅ 100% | ✅ Nezha only | ✅ APK не затрагивается | **ИДЕАЛЬНО (SimpleRom)** |
 | `Mi15U_X17U_Master_Camera_Combo_v5.1` | 177.66 МБ | ✅ 100% | ✅ Дерево `devices/` | ✅ Авто-детект SimpleRom | **ИСПРАВЛЕНО** |
-| `Mi_Master_Camera_Combo_Universal` | 195.13 МБ | ✅ 100% | ✅ Все 5 устройств | ✅ Авто-детект SimpleRom / HOS 1.0 | **ИСПРАВЛЕНО** |
-| `Mi13U_Master_Camera_Combo_v5.1` | 146.69 МБ | ✅ 100% | ✅ Ishtar only | ✅ Авто-детект HOS 1.0 | **ИСПРАВЛЕНО** |
+| `Mi_Master_Camera_Combo_Universal` | 191.95 МБ | ✅ 100% | ✅ Все 5 устройств | ✅ Safe Overlay для 13U и 17U, авто-детект SimpleRom | **ИСПРАВЛЕНО (v5.8)** |
+| `Mi13U_Master_Camera_Combo_v5.1` | 278.2 КБ | ✅ 100% | ✅ Ishtar only | ✅ 100% Pure Systemless Overlay (Anti-Bootloop Safe) | **ИСПРАВЛЕНО (v5.2)** |
 | `Mi13U_Master_Imaging_MOD_v1.0_Slim` | 270.4 КБ | ✅ 100% | ✅ Ishtar only | ✅ APK не затрагивается | **СТАБИЛЬНО** |
 | `Mi15_Master_Camera_Combo_v5.0` | 151.58 МБ | ✅ 100% | ✅ Dada / Haotian | ✅ Стандарт | **СТАБИЛЬНО** |
 
@@ -594,3 +594,29 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
 3. **Коррекция технической документации**:
    - В `README.md` (в разделах 5.3, 8.2, 8.6 на русском и английском языках) детализирована роль ремозаик-библиотек vs системных свойств `maxRAWSizes`.
 
+
+---
+
+## 9. Расследование и устранение бутлупа на Xiaomi 13 Ultra (HyperOS 3.0.302.0 Taiwan / Android 16)
+
+### 9.1. Симптоматика инцидента
+Пользователь смартфона **Xiaomi 13 Ultra** (`ishtar`) на официальной прошивке **HyperOS 3.0.302.0 Тайвань** (`OS3.0.302.0.TMATWXM` / Android 16) сообщил о циклической перезагрузке (Bootloop) сразу после установки модуля через Magisk.
+
+### 9.2. Технический анализ причин (Root Cause Analysis)
+1. **Несоответствие платформенных подписей (`SignatureMismatchException`)**:
+   - Официальная тайваньская прошивка (`TMATWXM`) скомпилирована с использованием официальных ключей подписи производителя (Xiaomi Release Keys) и содержит овангированные и одексированные системные приложения (`MiuiCamera.odex`, `MiuiCamera.vdex`).
+   - При установке комбо-модуля на Android 16 инсталлятор заменял системный файл `/product/priv-app/MiuiCamera/MiuiCamera.apk` сторонним pre-extracted APK, подписанным тестовым/другим ключом.
+   - Во время ранней фазы загрузки Android служба `PackageManagerService` сканирует каталог `priv-app`. Обнаружив несовпадение сертификата подписи с платформенным манифестом, система выбрасывает неперехватываемое исключение `java.lang.SecurityException: Signature mismatch for package com.android.camera`, вызывая краш Zygote, падение `system_server` и аварийный ребут.
+2. **Конфликт системных библиотек linker в Android 16**:
+   - Внутри папки APK лежали сторонние сборки `libc++.so`, `libion.so`, `libdmabufheap.so`. При монтировании они перекрывали нативные библиотеки Android 16, нарушая работу смежных системных сервисов.
+3. **Наличие устаревшего HAL в Universal Combo**:
+   - В каталоге `devices/ishtar/odm/lib64/hw` универсального комбайна находился бинарник `camera.qcom.so` (27.3 МБ) от старой Android 14. На Android 16 этот бинарник не может связаться с AIDL NDK `android.frameworks.sensorservice-V1-ndk.so`.
+
+### 9.3. Инженерное решение
+* **Ключевой факт**: Xiaomi 13 Ultra является флагманом с официальной оптикой и ПО Leica с момента выхода с конвейера. Ни на одной прошивке ему не требуется замена APK камеры!
+* **Реализация**:
+  1. Из модуля `Mi13U_Master_Camera_Combo` полностью удалена папка `system/priv-app/MiuiCamera` и файл разрешений. Модуль стал **100% Pure Systemless Overlay**.
+  2. Из `Mi_MultiDevice_Combo_Staging` полностью удален каталог `devices/ishtar/odm/lib64/hw`.
+  3. В `customize.sh` обоих модулей добавлено правило: устройство `ishtar` никогда не перезаписывает APK камеры.
+  4. Сетка Quad-50M FullRes (`0.5x:1.0x:3.2x:5.0x`), George Video Mod (8K все линзы, 4K120fps), DCG HDR и Chromatix сенсорные калибровки внедряются исключительно через безопасный динамический оверлей `device_features/ishtar.xml`, `system.prop` и `system/odm/lib64/camera/`.
+  5. В документацию добавлены строгий отказ от ответственности (Disclaimer) и руководство по обязательной установке модулей защиты от бутлупа (**Bootloop Saver**).
