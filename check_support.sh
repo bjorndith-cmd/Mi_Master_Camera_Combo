@@ -8,20 +8,21 @@
 # ==============================================================================
 
 # ANSI Color Codes
-GREEN='\033[1;32m'
-RED='\033[1;31m'
-YELLOW='\033[1;33m'
-BLUE='\033[1;34m'
-CYAN='\033[1;36m'
-NC='\033[0m' # No Color
+ESC="$(printf '\033')"
+GREEN="${ESC}[1;32m"
+RED="${ESC}[1;31m"
+YELLOW="${ESC}[1;33m"
+BLUE="${ESC}[1;34m"
+CYAN="${ESC}[1;36m"
+NC="${ESC}[0m" # No Color
 
 REPORT_FILE="/sdcard/Download/Mi_Camera_Diagnostic_Report.txt"
 mkdir -p /sdcard/Download 2>/dev/null
 
 log_both() {
     echo -e "$1"
-    # strip ANSI codes for text report
-    echo -e "$1" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" >> "$REPORT_FILE"
+    # strip ANSI codes for text report cleanly (compatible with Android Toybox/Busybox sed without \x1B)
+    echo -e "$1" | sed "s/${ESC}\[[0-9;]*[a-zA-Z]//g" >> "$REPORT_FILE"
 }
 
 # Reset report
@@ -81,21 +82,31 @@ log_both "  • SELinux Mode: $SELINUX"
 # Check Magisk / KSU / APatch module directory and conflicts
 MOD_FOUND="false"
 CONFLICT_MODS=""
-for mpath in /data/adb/modules /data/adb/ksu/modules /data/adb/ap/modules; do
+for mpath in /data/adb/modules /data/adb/ksu/modules /data/adb/ap/modules /data/adb/modules_update; do
     if [ -d "$mpath" ]; then
-        FOUND_NAMES=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | tr '\n' ' ')
-        if [ -n "$FOUND_NAMES" ]; then
-            log_both "  • Module State: ${GREEN}[PASS] Detected in $mpath: $FOUND_NAMES${NC}"
-            MOD_FOUND="true"
-            CAM_COUNT=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | wc -l)
-            if [ "$CAM_COUNT" -gt 1 ]; then
-                CONFLICT_MODS=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | tr '\n' ' ')
-            fi
+        for mod_dir in "$mpath"/*; do
+            [ -d "$mod_dir" ] || continue
+            MOD_ID=$(basename "$mod_dir")
+            case "$MOD_ID" in
+                *camera*|*master*|*combo*|*borndead*|*imaging*|*itzdfplayer*)
+                    MOD_FOUND="true"
+                    if [ -f "$mod_dir/disable" ]; then
+                        log_both "  • Module State: ${YELLOW}[DISABLED] Found in $mpath: $MOD_ID (Module is disabled in Root Manager!)${NC}"
+                    else
+                        log_both "  • Module State: ${GREEN}[PASS] Active in $mpath: $MOD_ID${NC}"
+                    fi
+                    ;;
+            esac
+        done
+        CAM_COUNT=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | wc -l)
+        if [ "$CAM_COUNT" -gt 1 ]; then
+            CONFLICT_MODS=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | tr '\n' ' ')
         fi
     fi
 done
 if [ "$MOD_FOUND" = "false" ]; then
-    log_both "  • Module State: ${YELLOW}[INFO] Module directory not detected or non-root inspection.${NC}"
+    log_both "  • Module State: ${YELLOW}[INFO] Модуль ещё не установлен или выключен в Magisk/KernelSU/APatch.${NC}"
+    log_both "    ${YELLOW}Установите ZIP-модуль в Root Manager и перезагрузите устройство.${NC}"
 fi
 
 if [ -n "$CONFLICT_MODS" ]; then
