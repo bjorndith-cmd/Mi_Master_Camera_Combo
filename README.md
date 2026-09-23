@@ -123,10 +123,18 @@
 * В каждом пикселе матрицы работают два параллельных узла: **LCG** (защита от пересветов в ярких областях) и **HCG** (экстремальная светосила и чистота в тенях).
 * **Считывание с одного кадра**: движущиеся объекты не раздваиваются (Zero Motion Ghosting).
 
-#### 5.3. Разблокировка 50Мп и 200Мп FullRes (RU)
-* Параметр `persist.vendor.camera.maxRAWSizes=55` открывает полноразмерный RAW-поток.
-* Все сторонние моды GCam (AGC, LMC, Shamim, BSG) получают полный доступ к 50Мп/200Мп на всех объективах благодаря `vendor.camera.aux.packagelist`.
-* Пакет `com.android.camera` исключён из aux-списка, сохраняя штатную логическую многокамерность (SAT).
+#### 5.3. Аппаратная архитектура FullRes 50Мп / 200Мп и Remosaic (RU)
+* **Принцип Quad-Bayer и необходимость Remosaic**:
+  - Матрицы флагманов (Sony LYT-900, IMX989, Samsung HP9, JN1, JN5, OV50H) скомпонованы по топологии 4-cell (Quad-Bayer), где пиксели одного цвета объединены кластерами 2×2.
+  - Для получения честного 50Мп/200Мп кадра (в RAW/DNG или JPEG) сенсорный поток обязан пройти этап **ремозаики (Remosaic)** — математической реконструкции кластеров 4-cell в стандартную матрицу Байера (RGGB).
+* **Почему одного `persist.vendor.camera.maxRAWSizes=55` недостаточно**:
+  - Параметр `maxRAWSizes` в подсистеме Qualcomm CamX лишь объявляет физические габариты буферов в `android.scaler.streamConfigurationMap` (чтобы Camera2 API и GCam видели доступность потоков высокого разрешения).
+  - Если в прошивке или модуле отсутствуют скомпилированные ноды графа ремозаики (`com.qti.node.remosaic.so`, калибровочные файлы `com.qti.tuned.*.bin`, библиотеки CamX), простое включение свойства **бесполезно** — оно отдаст неремозаичный «сырой» 4-cell поток (вызывающий сетку, цветовой шум и артефакты в сторонних RAW-конвертерах) либо приведёт к крашу сессии (`BAD_VALUE`).
+  - **Комплексный стек модуля**: интеграция бинарных библиотек ремозаики, адаптация калибровок Chromatix и проброс через `vendor.camera.aux.packagelist` обеспечивают честную дебайеризацию и честный 50Мп/200Мп вывод в модах GCam (AGC, LMC, Shamim) и Pro Ultra RAW.
+* **Изоляция стоковой камеры на базовом Xiaomi 15 (`dada`)**:
+  - На базовом Xiaomi 15 стоковый CamX HAL содержит ноды ремозаики только для основного сенсора (Light Hunter 900, 1.0x). Для ультраширокоугольного (JN1) и телеобъектива (JN5) топологии графов 50Мп в стоковом Chi-CDK отсутствуют.
+  - Попытка принудительно активировать зум-сетку `0.6:1.0:3.2` в `device_features` заставляет стоковую камеру (`com.android.camera`) запрашивать недопустимый поток 50Мп на JN1/JN5, что вызывает краш приложения стоковой камеры.
+  - **Решение в модуле**: профиль для Xiaomi 15 (`dada`) строго фиксирует зум-сетку Ultra HD на **`1.0`**, сохраняя полную аппаратную стабильность стокового приложения, а сторонние GCam-моды при этом могут обращаться к физическим сенсорам напрямую.
 
 #### 5.4. George Video MOD (8K со всех камер, 4K120, чистый AISP) (RU)
 * Запись видео **8K 24fps со всех задних сенсоров** и **4K 120fps**.
@@ -256,7 +264,7 @@
 
 ##### 📱 Xiaomi 15 / 15 Pro (`dada` / `haotian`)
 * **Сетка зума 50M Ultra HD**:
-  - На Xiaomi 15 доступны переключатели: **`0.6x : 1.0x : 3.2x`**.
+  - На Xiaomi 15 режим 50M Ultra HD зафиксирован на основном сенсоре: **`1.0x`** (аппаратная изоляция: предотвращает краш стоковой камеры из-за отсутствия ремозаик-графов для JN1/JN5 в стоковом CamX HAL).
   - На Xiaomi 15 Pro доступны переключатели: **`0.6x : 1.0x : 3.2x : 5.0x`**.
 * **Сенсор Light Hunter 900**: Проверьте контрастные дневные сцены — тени мягко подтягиваются без пересветов благодаря калибровкам DCG.
 
@@ -322,7 +330,7 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 Ниже приведено подробное руководство по правильной настройке и тестированию режима полного разрешения.
 
 ##### 1. Почему в GCam без настройки не работает 50Мп?
-* **Роль модуля Magisk**: Параметр `persist.vendor.camera.maxRAWSizes=55` открывает для Camera2 API аппаратный буфер RAW16 высокого разрешения (`8192x6144` и `16384x12288`), а `vendor.camera.aux.packagelist` даёт приложению доступ ко всем физическим объективам.
+* **Роль модуля Magisk**: Модуль монтирует нативные библиотеки и Chromatix-ноды ремозаики для дебайеризации 4-cell Quad-Bayer, параметр `persist.vendor.camera.maxRAWSizes=55` регистрирует в Camera2 API аппаратные буферы RAW16 (`8192x6144` и `16384x12288`), а `vendor.camera.aux.packagelist` даёт приложению доступ ко всем физическим объективам.
 * **Поведение GCam по умолчанию**: Приложение настроено на стандартный 12.5 Мп биннинг (4-в-1). Если включить режим «50M» без изменения конфигурации сессии и типа спуска, то:
   - Снимок сохранится в стандартном разрешении `4096 x 3072` (12.5 Мп);
   - Либо зависнет индикатор запекания HDR+ в шторке;
@@ -557,10 +565,18 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
 * Each pixel on the sensor features two parallel readout stages: **LCG** (highlights protection) and **HCG** (ultra-high sensitivity & deep shadow clarity).
 * **Single-exposure readout**: Moving subjects remain crisp without motion ghosting or multi-frame artifacts.
 
-#### 5.3. 50MP & 200MP Full Resolution RAW Unlock (EN)
-* Setting `persist.vendor.camera.maxRAWSizes=55` unlocks the full-resolution RAW buffer in Qualcomm CamX.
-* Third-party GCam mods (AGC, LMC, Shamim, BSG) gain full physical sensor access via `vendor.camera.aux.packagelist`.
-* `com.android.camera` is excluded from the aux list to preserve native Leica Spatial Alignment Telephoto (SAT) switching.
+#### 5.3. Hardware FullRes 50MP / 200MP Architecture & Remosaic (EN)
+* **Quad-Bayer CFA & Remosaic Prerequisite**:
+  - Modern flagship sensors (Sony LYT-900, IMX989, Samsung HP9, JN1, JN5, OV50H) feature a 4-cell (Quad-Bayer) color filter array grouped in 2×2 same-color pixel clusters.
+  - To produce true 50MP/200MP output (RAW/DNG or JPEG), sensor data must pass through an intensive algorithmic **Remosaic** stage — reconstructing 4-cell clusters into standard Bayer RGGB patterns.
+* **Why `persist.vendor.camera.maxRAWSizes=55` is Not a Silver Bullet**:
+  - In Qualcomm CamX, `maxRAWSizes` only tells the HAL to register full-dimension buffer streams in Android Camera2's `android.scaler.streamConfigurationMap`.
+  - Without compiled remosaic processing graph nodes (`com.qti.node.remosaic.so`, Chromatix binaries `com.qti.tuned.*.bin`, sensor-level libraries), this system property alone is **ineffective** — it either yields raw un-remosaiced 4-cell Bayer patterns (causing checkerboard artifacts and color shifts in external converters) or throws stream configuration exceptions (`BAD_VALUE`).
+  - **Module Pipeline Stack**: Integrating matching remosaic node binaries, Chromatix calibrations, and aux package forwarding (`vendor.camera.aux.packagelist`) delivers true high-resolution demosaicing across GCam ports (AGC, LMC, Shamim) and native Pro Ultra RAW.
+* **Stock Camera Isolation for Xiaomi 15 (`dada`)**:
+  - On the base Xiaomi 15, stock CamX HAL only defines 50MP remosaic topologies for the main sensor (Light Hunter 900, 1.0x). The ultra-wide (JN1) and telephoto (JN5) lack 50MP Chi-CDK graph nodes in stock firmware.
+  - Forcing a multi-focal zoom grid `0.6:1.0:3.2` triggers `com.android.camera` to request unsupported 50MP streams on JN1/JN5, causing the stock camera app to crash.
+  - **Module Resolution**: The profile for Xiaomi 15 (`dada`) strictly locks the Ultra HD zoom grid to **`1.0`**, keeping stock Leica camera 100% stable while allowing third-party GCams to query individual sensor nodes.
 
 #### 5.4. George Video MOD (8K All Sensors, 4K120fps, Clean AISP) (EN)
 * **8K 24fps video recording across all rear cameras** and **4K 120fps**.
@@ -690,7 +706,7 @@ After installing any module package from the suite, follow this step-by-step dia
 
 ##### 📱 Xiaomi 15 / 15 Pro (`dada` / `haotian`)
 * **50M Ultra HD Zoom Grid**:
-  - Xiaomi 15: **`0.6x : 1.0x : 3.2x`**.
+  - Xiaomi 15: **`1.0x`** (safely constrained to main sensor to prevent stock camera crash due to missing Chi-CDK remosaic graphs on JN1/JN5).
   - Xiaomi 15 Pro: **`0.6x : 1.0x : 3.2x : 5.0x`**.
 * **Light Hunter 900 DCG Dynamic Range**: Backlit daytime and night shots benefit from true hardware sensor HDR.
 
@@ -756,7 +772,7 @@ The **Xiaomi Master Camera Combo** module removes all vendor restrictions at the
 Below is the definitive engineering guide to configure and verify high-resolution modes in AGC.
 
 ##### 1. Why GCam Doesn't Shoot 50MP Out of the Box Without Configuration
-* **Module's System Role**: The property `persist.vendor.camera.maxRAWSizes=55` exposes the physical RAW16 full-resolution buffer (`8192x6144` and `16384x12288`) to the Android Camera2 API, while `vendor.camera.aux.packagelist` grants physical sensor access.
+* **Module's System Role**: The module mounts native remosaic libraries and Chromatix nodes to handle 4-cell Quad-Bayer demosaicing, while the property `persist.vendor.camera.maxRAWSizes=55` exposes the physical RAW16 full-resolution buffer (`8192x6144` and `16384x12288`) to the Android Camera2 API, and `vendor.camera.aux.packagelist` grants physical sensor access.
 * **GCam's Default Behavior**: GCam boots with default Google Pixel profiles tuned for 12.5MP binned output (4-in-1 Quad Bayer). If you activate the «50M» toggle without configuring the session streams and shutter mode:
   - The photo will still be saved in standard `4096 x 3072` (12.5MP);
   - Or the HDR+ processing progress bar in the notification shade will spin indefinitely;

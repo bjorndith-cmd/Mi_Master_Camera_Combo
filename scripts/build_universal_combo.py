@@ -87,3 +87,7 @@ with zipfile.ZipFile(out_zip, 'w', compression=zipfile.ZIP_DEFLATED, compresslev
             zf.write(full_p, rel_p)
 
 print('Packaged Universal:', out_zip, 'Size:', os.path.getsize(out_zip))
+
+repo_zip = r'C:\Users\ASTA\OneDrive\Документы\GitHub\Mi_Master_Camera_Combo\releases\Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip'
+shutil.copy2(out_zip, repo_zip)
+print('Copied to repo releases:', repo_zip, 'Size:', os.path.getsize(repo_zip))
