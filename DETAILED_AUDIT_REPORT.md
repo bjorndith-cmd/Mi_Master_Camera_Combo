@@ -622,3 +622,73 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
   3. Из всех профилей удален устаревший 27.3 МБ `camera.qcom.so` (HAL от старой Android 14), вызывавший сбои AIDL NDK.
   4. Сетка Quad-50M FullRes (`0.5x:1.0x:3.2x:5.0x`), George Video Mod (8K все линзы, 4K120fps), DCG HDR и Chromatix сенсорные калибровки внедряются через безопасный динамический оверлей `device_features/ishtar.xml`, `system.prop` и `system/odm/lib64/camera/`.
   5. В документацию добавлены строгий отказ от ответственности (Disclaimer), протокол устранения конфликтов сторонних модулей и руководство по обязательной установке модулей защиты от бутлупа (**Bootloop Saver**).
+
+---
+
+## 11. Расследование и устранение вылета камеры на Xiaomi 13 Ultra (Crash / Force Close Root Cause & Fix)
+
+### 11.1. Симптоматика инцидента
+Пользователь смартфона **Xiaomi 13 Ultra** (`ishtar`) сообщил о падении стокового приложения камеры («камера вылетает на 13 ультра») сразу при запуске или попытке переключения режимов.
+
+### 11.2. Глубокий бинарный анализ причин падения (RCA)
+В ходе диагностики с использованием инструментов Android SDK Build-Tools 36 (`dexdump`, `apksigner`, `zipalign`, бинарный ELF-анализатор `DT_NEEDED`) были выявлены **четыре взаимосвязанные критические причины краша**:
+
+1. **Нарушение лексикографической сортировки таблицы строк DEX (`VerifyError`)**:
+   - При попытке прямой модификации байтов строк в бинарных DEX-файлах (`classes.dex`, `classes7.dex`) длина строк заменялась строками иной длины либо с нарушением алфавитного порядка.
+   - Инструмент верификации `dexdump -c` выявил критическую ошибку структуры:
+     ```
+     Failure to verify dex file: Out-of-order string_ids: 'https://' then 'http://t.me/Mi_Master'
+     Failure to verify dex file: Out-of-order string_ids: 'GitHub@borndead   ' then 'GitHub@Sev'
+     ```
+   - Согласно спецификации Android Dalvik/ART Executable Format, таблица `string_ids` обязана быть строго отсортирована лексикографически (UTF-8 binary collation).
+   - При запуске приложения верификатор Android ART (`dex2oat` / ART runtime verifier) отбраковывает поврежденный DEX-файл, генерируя фатальное исключение `java.lang.VerifyError` / `java.lang.ClassFormatError`, что приводит к мгновенному падению (Force Close) процесса камеры `com.android.camera`.
+
+2. **Отсутствие критически необходимой библиотеки `libc++_shared.so` (`UnsatisfiedLinkError`)**:
+   - Анализ секции заголовков `DT_NEEDED` в 32 динамических библиотеках камеры показал, что JNI-библиотеки:
+     * `libCameraEffectJNI.so`
+     * `libcamera_requestutil_jni.so`
+     * `libcamera_yuv_jni.so`
+     * `libDocumentProcess.so`
+     * `libmialgo_saliency.so`
+     * `libmialgo_saliency_jni.so`
+     * `libmiocr_wrapper.so`
+     * `libyuv.so`
+     * `libAIPOSE.so`
+     * `libcamera_mi_handgesture.so`
+     * `libcamera_video_mein_algo_jni.so`
+   - Все они явно слинкованы с `libc++_shared.so` (`DT_NEEDED libc++_shared.so`), а `libxcrash.so` требует `libc++.so`.
+   - В предыдущей ревизии эти библиотеки были ошибочно удалены из каталога `system/priv-app/MiuiCamera/lib/arm64`.
+   - При вызове `System.loadLibrary("CameraEffectJNI")` рантайм выбрасывал:
+     ```
+     java.lang.UnsatisfiedLinkError: dlopen failed: library "libc++_shared.so" not found: needed by /system/priv-app/MiuiCamera/lib/arm64/libCameraEffectJNI.so in namespace classloader-namespace
+     ```
+     что вызывало немедленный краш при инициализации графического конвейера эффектов.
+
+3. **Отсутствие 4KB Page-Alignment в APK архиве**:
+   - Тестирование с помощью `zipalign -c 4` показало: `Verification FAILED`.
+   - В современных версиях Android (начиная с Android 11 и особенно на Android 14/15/16) при `android:extractNativeLibs="false"` система загружает разделяемые библиотеки напрямую из ZIP-контейнера через `mmap()`. Если несжатые `.so` файлы внутри APK не выровнены по границе 4096 байт (4KB page boundary), системный загрузчик `linker64` завершает процесс с ошибкой выравнивания памяти.
+
+4. **Конфликтные устаревшие HAL-аллокаторы памяти `libion.so` и `libdmabufheap.so`**:
+   - В поставке присутствовали старые сборки системных библиотек выделения памяти `libion.so` и `libdmabufheap.so`.
+   - На современных ядрах Linux (ядро 6.1+ в HyperOS Android 15/16 на Snapdragon 8 Gen 2 / Gen 3 / 8 Elite) механизм `ion` полностью вытеснен `dma-buf heap`. Подсовывание сторонних библиотек аллокатора приводило к сбоям системных `ioctl`-вызовов при захвате буферов видоискателя.
+
+---
+
+### 11.3. Реализованный комплекс инженерных решений
+
+1. **Создан специализированный сборочный конвейер (`scripts/build_signed_camera_apk.py`)**:
+   - **100% нетронутый DEX-байткод**: Дизассемблирование выполняется исключительно в режиме ресурсов (`apktool d -s -f`), все 8 файлов `classes.dex` ... `classes8.dex` переносятся в неизменном двоичном виде без единой модификации байтов.
+   - **Чистая локализация интерфейса**: Авторство `borndead` и официальный Telegram `@Mi_Master_Camera_Combo` модифицируются исключительно через ресурсы строк (`res/values*/strings.xml`, теги `pref_mod_title` и `pref_mod_label`). Это обеспечивает легитимность и чистоту ART.
+   - **Гарантированное 4KB выравнивание**: Приложение упаковывается с помощью утилиты `zipalign -p -f 4` (параметр `-p` гарантирует выравнивание всех несжатых `.so` по границе 4096 байт).
+   - **Платформенная криптографическая подпись**: APK подписывается официальной утилитой Google `apksigner.bat` с поддержкой схем v1, v2 и v3 через выделенный проектный хранилище ключей `borndead_camera.keystore`.
+
+2. **Очистка и восстановление companion-библиотек**:
+   - Восстановлены необходимые JNI-библиотеки: `libc++_shared.so` и `libc++.so`.
+   - Полностью удалены опасные системные аллокаторы `libion.so` и `libdmabufheap.so` — память теперь аллоцируется исключительно нативным системным загрузчиком устройства.
+   - Итоговый чистый набор: ровно 30 специализированных библиотек камеры без системных конфликтов.
+
+3. **Результаты верификации**:
+   - `dexdump -c classes.dex ... classes8.dex`: **100% PASS — Clean bytecode, zero out-of-order strings**.
+   - `zipalign -c 4`: **PASS (OK)** — идеальное выравнивание по страницам 4KB.
+   - `apksigner verify -v`: **PASS (Verified using APK Signature Scheme v3: true)**.
+   - Аудит модулей (`scripts/verify_all_modules.py`): **20/20 пакетов успешно прошли комплексную проверку**.

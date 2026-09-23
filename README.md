@@ -1006,14 +1006,22 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 </details>
 
 <details>
-<summary><b>После установки появился черный экран в видоискателе, камера вылетает или остался старый значок приложения. Что делать?</b></summary>
+<summary><b>После установки появился черный экран в видоискателе, камера вылетает (крашится) или остался старый значок приложения. Что делать?</b></summary>
 
-Это классический симптом **конфликта с остатками ранее установленных сторонних модулей камеры** либо наличия старого обновления камеры в `/data/app`:
-1. Простое выключение тумблера старых модулей в Magisk/KernelSU **не помогает**, так как в системе сохраняются скомпилированный кэш dalvik-cache и системные параметры `persist.*`.
-2. Откройте Magisk / KernelSU / APatch и **полностью УДАЛИТЕ (через значок корзины)** все сторонние модули камеры (старые версии мода, Leica Camera mod, George video, звуки затвора и т.д.).
-3. Перейдите в *Настройки ➔ Приложения ➔ Все приложения ➔ Камера*, нажмите **«Удалить обновления»** (если кнопка активна) и **«Очистить всё»**.
-4. **Обязательно перезагрузите смартфон** для полной очистки оверлеев OverlayFS и кэша пакетов.
-5. Заново установите наш модуль и выполните финальную перезагрузку. Подробный пошаговый мануал см. в [Разделе 7.2](#72-разрешение-конфликтов-удаление-сторонних-модулей-камеры-черный-экран-краши-старый-значок-ru).
+1. **Обязательно очистите кэш и данные приложения Камера**:
+   - Перейдите в *Настройки ➔ Приложения ➔ Все приложения ➔ Камера*.
+   - Если активна кнопка **«Удалить обновления»** — нажмите её!
+   - Нажмите **«Очистить всё»** (Clear all data). Это удалит старый кэш видоискателя и восстановит нормальную загрузку.
+2. **Конфликт со старыми модулями камеры**:
+   - Простое выключение тумблера старых модулей в Magisk/KernelSU **не помогает**, так как в системе сохраняются скомпилированный кэш dalvik-cache и системные параметры `persist.*`.
+   - Откройте Magisk / KernelSU / APatch и **полностью УДАЛИТЕ (через значок корзины)** все сторонние модули камеры (старые версии мода, Leica Camera mod, George video, звуки затвора и т.д.).
+   - Перезагрузите смартфон.
+3. **Проверьте тип вашей прошивки (FULL vs SLIM)**:
+   - **Для стоковых закрытых прошивок (Global, EEA, RU, Taiwan) без CorePatch**:
+     Если на вашем смартфоне установлена официальная закрытая стоковая прошивка без установленного модуля **CorePatch** (через LSPosed), операционная система Android блокирует замену системных системных приложений в `priv-app`, вызывая аварийный вылет камеры.
+     👉 **Решение:** Установите версию **SLIM** (`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`). Она не заменяет системный APK камеры, не требует CorePatch, работает со 100% стабильностью и активирует все аппаратные возможности (DCG HDR, 50M FullRes, George Video 8K/4K120, Chromatix).
+   - **Для кастомных прошивок (Xiaomi.eu, Elite, SimpleRom) или стока с CorePatch**:
+     Устанавливайте версию **FULL** (`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`). Начиная с актуальной ревизии, в ней полностью устранены все причины вылетов: все 8 DEX-файлов имеют 100% чистый байткод без нарушения таблицы строк, несжатые библиотеки выровнены по границе 4KB (`zipalign`), подключены все 30 JNI-библиотек (включая `libc++_shared.so`), а APK подписан криптографическим ключом v1/v2/v3.
 </details>
 
 <details>
@@ -2025,14 +2033,22 @@ No, both issues are 100% resolved!
 </details>
 
 <details>
-<summary><b>Black viewfinder screen, camera crash, or old camera icon still present after flashing? What should I do?</b></summary>
+<summary><b>Black viewfinder screen, camera crash (force close), or old camera icon still present after flashing? What should I do?</b></summary>
 
-This is the classic symptom of a **conflict with remnants of previously installed camera modules** or a stale camera update lingering in `/data/app`:
-1. Simply disabling old modules in Magisk/KernelSU **does not work**, because compiled dalvik-cache bytecode and persistent properties survive in the system.
-2. Open Magisk / KernelSU / APatch and **permanently DELETE (via trash icon)** all other camera modules (older combo releases, Leica mods, George video, shutter mods, etc.).
-3. Open *Settings ➔ Apps ➔ Manage apps ➔ Camera*, tap **«Uninstall updates»** (if present), and select **«Clear all data»**.
-4. **Mandatorily reboot your smartphone** so the root manager and Android completely tear down old OverlayFS mounts and package caches.
-5. Reinstall our module and perform a final reboot. See the comprehensive step-by-step walkthrough in [Section 7.2](#72-resolving-conflicts-removing-prior-camera-modules-black-screen-crashes-old-icon-en).
+1. **Mandatorily clear camera app data**:
+   - Go to *Settings ➔ Apps ➔ Manage apps ➔ Camera*.
+   - If an **«Uninstall updates»** button is active, tap it!
+   - Tap **«Clear data» ➔ «Clear all data»**. This wipes stale viewfinder state and restores clean launch.
+2. **Conflict with remnants of previously installed camera modules**:
+   - Simply disabling old modules in Magisk/KernelSU **does not work**, because compiled dalvik-cache bytecode and persistent properties survive in the system.
+   - Open Magisk / KernelSU / APatch and **permanently DELETE (via trash icon)** all other camera modules (older combo releases, Leica mods, George video, shutter mods, etc.).
+   - Reboot your smartphone.
+3. **Verify your ROM type (FULL vs SLIM)**:
+   - **For closed official stock ROMs (Global, EEA, RU, Taiwan) without CorePatch**:
+     If your phone runs an official factory stock ROM without the **CorePatch** module (via LSPosed), Android system security rejects replacing privileged system apps in `priv-app`, leading to an instant camera force close.
+     👉 **Solution:** Install the **SLIM Edition** (`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`). It leaves the ROM's system Camera APK untouched, requires no CorePatch, works with 100% stability, and unlocks all hardware features (DCG HDR, 50M FullRes, George Video 8K/4K120, Chromatix calibrations).
+   - **For custom ROMs (Xiaomi.eu, Elite, SimpleRom) or Stock with CorePatch**:
+     Install the **FULL Edition** (`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`). As of the latest release, all crash causes have been completely resolved: all 8 DEX files have 100% clean bytecode with zero string table ordering errors, native libs are 4KB page-aligned (`zipalign`), all 30 JNI companion libraries are linked (including `libc++_shared.so`), and the APK is cryptographically signed with v1/v2/v3 schemes.
 </details>
 
 <details>

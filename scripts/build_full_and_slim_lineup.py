@@ -23,11 +23,15 @@ os.makedirs(os.path.join(payload_staging, 'system', 'etc', 'permissions'), exist
 src_apk = os.path.join(multi_staging, 'system', 'priv-app', 'MiuiCamera', 'MiuiCamera.apk')
 shutil.copy2(src_apk, os.path.join(payload_staging, 'system', 'priv-app', 'MiuiCamera', 'MiuiCamera.apk'))
 
-# Copy companion libraries excluding system overriding libs (libc++, libion, libdmabufheap)
+# Copy all companion libraries (including libc++_shared required by CameraEffectJNI, yuv, requestutil)
+# Exclude low-level OS allocators (libion.so, libdmabufheap.so) which must come from device ROM HAL, and broken libs
+excluded_libs = {
+    'libdmabufheap.so', 'libion.so',
+    'libremosaiclib.so', 'libmialgo_ainr_ll.so', 'libmialgo_ellc.so', 'libdlrmsc_android15.so'
+}
 src_libs = os.path.join(multi_staging, 'system', 'priv-app', 'MiuiCamera', 'lib', 'arm64')
-bad_libs = {'libc++.so', 'libc++_shared.so', 'libion.so', 'libdmabufheap.so'}
 for lib_name in os.listdir(src_libs):
-    if lib_name not in bad_libs:
+    if lib_name not in excluded_libs:
         shutil.copy2(
             os.path.join(src_libs, lib_name),
             os.path.join(payload_staging, 'system', 'priv-app', 'MiuiCamera', 'lib', 'arm64', lib_name)

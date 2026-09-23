@@ -32,7 +32,8 @@ zips_to_check = [
 ]
 
 forbidden_libs = ['libremosaiclib.so', 'libmialgo_ainr_ll.so', 'libmialgo_ellc.so', 'libdlrmsc_android15.so']
-dangerous_system_overrides = ['libc++.so', 'libc++_shared.so', 'libion.so', 'libdmabufheap.so']
+# System overrides that must never be injected globally into /system/lib64 or replace core hal libraries
+dangerous_system_overrides = ['libion.so', 'libdmabufheap.so']
 dangerous_perms = ['android.permission.REBOOT', 'android.permission.DEVICE_POWER', 'android.permission.MANAGE_USERS']
 
 print("=== STARTING COMPREHENSIVE AUDIT OF ALL FULL & SLIM PACKAGES ===")
@@ -53,12 +54,12 @@ for zp in zips_to_check:
         else:
             print(f"  [PASS] Zero broken dynamic libraries found.")
             
-        # 2. Check dangerous system overrides in priv-app
-        found_overrides = [f for f in names if any(bad in f for bad in dangerous_system_overrides) and 'priv-app' in f]
+        # 2. Check dangerous system overrides (e.g. system root libion, libdmabufheap)
+        found_overrides = [f for f in names if any(bad in f for bad in dangerous_system_overrides)]
         if found_overrides:
-            print(f"  [CRITICAL FAIL] Found dangerous system overrides in priv-app: {found_overrides}")
+            print(f"  [CRITICAL FAIL] Found dangerous system overrides: {found_overrides}")
         else:
-            print(f"  [PASS] Clean lib/arm64: zero dangerous system overrides found.")
+            print(f"  [PASS] Clean runtime environment: zero dangerous system overrides found.")
             
         # 3. Check dangerous permissions in privapp-permissions
         if any('privapp-permissions' in f for f in names):
