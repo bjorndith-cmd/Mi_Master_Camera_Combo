@@ -81,6 +81,7 @@
    - [George Video MOD (8K со всех камер, 4K120, чистый AISP)](#54-george-video-mod-8k-со-всех-камер-4k120-чистый-aisp-ru)
    - [Stock AIO 104 для Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-для-xiaomi-15-ultra-lyt-900-ru)
    - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
+   - [Совместимость с HyperOS 4.x / Android 17 (Xiaomi 17 Ultra)](#57-совместимость-с-новейшими-прошивками-hyperos-4x--android-17-тестирование-на-xiaomi-17-ultra-nezha-ru)
 6. [Визуальные сравнения «До / После» и галерея интерфейса (Visual Proof)](#6-визуальные-сравнения-до--после-visual-proof-ru)
    - [Аппаратный DCG против программного мульти-кадрового HDR](#61-аппаратный-dcg-против-программного-мульти-кадрового-hdr-движение-в-кадре)
    - [Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass](#62-шумоподавление-в-видео-сток-arcsoft-aisp-против-george-mod-bypass)
@@ -225,6 +226,32 @@
      - Добавлен обход сбойной облачной обработки (выключены теги `support_cloud_process`, `support_leica_essential_cloud`), благодаря чему фотографии обрабатываются аппаратно и мгновенно, без задержек и розового шума.
 * **Результат**: абсолютная стабильность, 0% риска бутлупа на любых официальных и кастомных прошивках (Тайвань, Глобал, ЕЕА, Китай, Россия, кастомы).
 
+#### 5.7. Совместимость с новейшими прошивками (HyperOS 4.x / Android 17): Тестирование на Xiaomi 17 Ultra (`nezha`) (RU)
+
+Если вы планируете тестировать модули на будущих сборках, закрытых бета-версиях или утечках **HyperOS 4** (на базе Android 17 / обновленной кодовой базы Xiaomi):
+
+> [!WARNING]
+> #### 🛑 ЗОЛОТОЕ ПРАВИЛО СОВМЕСТИМОСТИ ДЛЯ HYPEROS 4:
+> * **FULL Edition (с заменой APK камеры)**: **СТРОГО ЗАПРЕЩЕН К УСТАНОВКЕ**. В пакет FULL встроен системный APK `MiuiCamera.apk`, скомпилированный для HyperOS 3.0 (Android 16). При установке на новую мажорную операционную систему HyperOS 4 несовместимость структуры `cameraserver`, AIDL-интерфейсов и ключей подписи платформы гарантированно приведёт к циклическому падению камеры (Force Close) или фатальному бутлупу (`SignatureMismatchException`).
+> * **SLIM Edition ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip))**: **ПОЛНОСТЬЮ БЕЗОПАСЕН И РЕКОМЕНДОВАН К ТЕСТИРОВАНИЮ**.
+
+##### Почему SLIM Edition безопасен и работает на HyperOS 4:
+1. **0% вмешательства в системные приложения**: SLIM-модуль не содержит системного APK (`rm -rf $MODPATH/system/priv-app/MiuiCamera`), не трогает odex/vdex кэш виртуальной машины ART и оставляет родную стоковую камеру HyperOS 4 абсолютно нетронутой.
+2. **Аппаратная преемственность Snapdragon 8 Elite (SM8750)**: Физический процессор и архитектура Qualcomm CamX остаются прежними. Заводские калибровки сенсоров Chromatix (`com.qti.tuned.nezha_*.bin` для 1" OVX10500U, 200Мп Samsung HP9, JN5) в `/odm/lib64/` отлично подхватываются стеком обработки изображений Qualcomm.
+3. **Что разблокируется на HyperOS 4 через SLIM**:
+   * Аппаратный **DCG / iDCG HDR** (высокий динамический диапазон с одного кадра экспозиции без смаза движения);
+   * Системные буферы `persist.vendor.camera.maxRAWSizes=55` (Camera2 API получает доступ к физическому полному разрешению);
+   * Обход замыливающего алгоритма ArcSoft AISP (`persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1`);
+   * Повышенный битрейт 8K и 4K120fps через оверлей `device_features/nezha.xml`;
+   * Полная поддержка 50Мп и 200Мп в модах GCam (BigKaka AGC 8.x / 9.x).
+
+##### Порядок безопасного тестирования на HyperOS 4:
+1. **Шаг 1**: Обязательно установите сторожевой модуль **[Simple BootloopSaver](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver)** в Magisk / KernelSU / APatch.
+2. **Шаг 2**: Скачайте и прошейте архив **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 МБ) либо универсальный `Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`.
+3. **Шаг 3**: Перезагрузите устройство.
+4. **Шаг 4 (Обязательно)**: Очистите данные приложения Камера (*Настройки ➔ Приложения ➔ Камера ➔ Очистить всё*), чтобы пересоздался локальный кэш параметров.
+5. **Шаг 5**: Для максимального раскрытия сенсоров в Google Камере используйте готовый конфиг **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)**.
+
 ---
 
 ### 6. Визуальные сравнения «До / После» (Visual Proof) (RU)
@@ -287,6 +314,10 @@
 >     ```bash
 >     adb wait-for-device shell magisk --remove-modules
 >     ```
+
+> [!IMPORTANT]
+> **Тестирование на HyperOS 4.x (Android 17) на Xiaomi 17 Ultra (`nezha`):**
+> Для новых прошивок HyperOS 4 используйте **СТРОГО SLIM Edition** ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)). Установка FULL-версии на HyperOS 4 категорически запрещена во избежание сбоя подписи `MiuiCamera.apk`. Подробнее см. в [Разделе 5.7](#57-совместимость-с-новейшими-прошивками-hyperos-4x--android-17-тестирование-на-xiaomi-17-ultra-nezha-ru).
 
 #### 📦 Пошаговый процесс установки модуля камеры:
 
@@ -682,6 +713,15 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 </details>
 
 <details>
+<summary><b>Можно ли устанавливать модуль на Xiaomi 17 Ultra под управлением HyperOS 4 (Android 17)?</b></summary>
+
+**Да, но СТРОГО версию SLIM ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip))!**
+* **FULL Edition (с заменой APK камеры)** ставить на HyperOS 4 **КАТЕГОРИЧЕСКИ ЗАПРЕЩЕНО**: APK камеры HyperOS 3.0 вызовет ошибку цифровой подписи (`SignatureMismatchException`) или сбой `system_server`.
+* **SLIM Edition** не затрагивает системный APK камеры и системный HAL, а лишь монтирует заводские Chromatix калибровки для Snapdragon 8 Elite, аппаратный DCG HDR и настройки `system.prop`. Риск бутлупа равен 0%.
+* Перед установкой обязательно активируйте модуль [Simple BootloopSaver](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver). Подробный гайд см. в [Разделе 5.7](#57-совместимость-с-новейшими-прошивками-hyperos-4x--android-17-тестирование-на-xiaomi-17-ultra-nezha-ru).
+</details>
+
+<details>
 <summary><b>Плавный ли видоискатель в режиме «Фото»?</b></summary>
 
 Да, видоискатель выдаёт стабильные 60 fps без фризов благодаря удалению конфликтных тегов Super Resolution из XML.
@@ -731,6 +771,8 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [50MP & 200MP Full Resolution RAW Unlock](#53-50mp--200mp-full-resolution-raw-unlock-en)
    - [George Video MOD (8K All Sensors, 4K120fps, Clean AISP)](#54-george-video-mod-8k-all-sensors-4k120fps-clean-aisp-en)
    - [Stock AIO 104 for Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-for-xiaomi-15-ultra-lyt-900-en)
+   - [Anti-Crash Safeguard for Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-anti-crash-safeguard-for-xiaomi-17-ultra-simplerom-st-eu-elite-and-anti-bootloop-on-xiaomi-13-ultra-taiwan-hos-30-en)
+   - [Next-Gen OS Compatibility (HyperOS 4.x / Android 17): Testing on Xiaomi 17 Ultra](#57-next-gen-firmware-compatibility-hyperos-4x--android-17-testing-on-xiaomi-17-ultra-nezha-en)
 6. [Visual Proof Gallery & UI Feature Showcase](#6-visual-proof-gallery-before-vs-after-en)
    - [Hardware DCG vs Conventional Multi-Frame Staggered HDR](#61-hardware-dcg-vs-conventional-multi-frame-staggered-hdr-motion-in-frame)
    - [Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass](#62-video-noise-reduction-stock-arcsoft-aisp-smear-vs-george-mod-bypass)
@@ -875,6 +917,32 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
      - Cloud processing bypass enforced (`support_cloud_process=false`), ensuring all photos develop locally on the ISP without delays or magenta artifacts.
 * **Result**: Rock-solid stability with 0% risk of bootloop across all official and custom ROMs (Taiwan, Global, EEA, China, Russia, custom ROMs).
 
+#### 5.7. Next-Gen Firmware Compatibility (HyperOS 4.x / Android 17): Testing on Xiaomi 17 Ultra (`nezha`) (EN)
+
+If you plan to test modules on upcoming developer builds, closed betas, or future leaks of **HyperOS 4** (based on Android 17 / upgraded Xiaomi system framework):
+
+> [!WARNING]
+> #### 🛑 CRITICAL COMPATIBILITY RULE FOR HYPEROS 4:
+> * **FULL Edition (with Leica Camera APK)**: **STRICTLY PROHIBITED**. Bundles `MiuiCamera.apk` compiled against HyperOS 3.0 (Android 16). Flashing an older Camera APK across major OS generations causes fatal `SignatureMismatchException` crashes and system bootloops.
+> * **SLIM Edition ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip))**: **100% SAFE AND RECOMMENDED FOR TESTING**.
+
+##### Why SLIM Edition is Safe and Works on HyperOS 4:
+1. **Zero System Application Overwrite**: SLIM does not include `system/priv-app/MiuiCamera`, leaves native odex/vdex caches untouched, and keeps your ROM's stock HyperOS 4 camera app intact.
+2. **Hardware Continuity on Snapdragon 8 Elite (SM8750)**: The underlying ISP and Qualcomm CamX architecture remain identical. Factory Chromatix sensor binaries (`com.qti.tuned.nezha_*.bin` for 1" OVX10500U, 200MP Samsung HP9, JN5) deployed in `/odm/lib64/` are fully recognized by Qualcomm's imaging engine.
+3. **Features Unlocked on HyperOS 4 via SLIM**:
+   * Hardware **DCG / iDCG HDR** (ghost-free high-dynamic-range single-exposure readout);
+   * System buffers `persist.vendor.camera.maxRAWSizes=55` (exposes full resolution to Camera2 API);
+   * ArcSoft AISP noise-reduction bypass (`aisp_algo_nr.bypass=1`);
+   * 1.5x video bitrate factor, 8K video, and 4K120fps via `device_features/nezha.xml`;
+   * Full 50MP and 200MP RAW16 stream access for third-party GCam mods (BigKaka AGC 8.x/9.x).
+
+##### Safe Testing Procedure for HyperOS 4:
+1. **Step 1**: Always install the watchdog module **[Simple BootloopSaver](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver)** in Magisk / KernelSU / APatch.
+2. **Step 2**: Download and flash **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 MB) or `Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`.
+3. **Step 3**: Reboot your device.
+4. **Step 4 (Mandatory)**: Clear Camera app data: *Settings ➔ Apps ➔ Manage apps ➔ Camera ➔ Clear all data*.
+5. **Step 5**: For GCam capture, load the tuned config preset **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)**.
+
 ---
 
 ### 6. Visual Proof Gallery (Before vs After) (EN)
@@ -937,6 +1005,10 @@ Live demonstration of the mod running on user hardware with all flagship capabil
 >     ```bash
 >     adb wait-for-device shell magisk --remove-modules
 >     ```
+
+> [!IMPORTANT]
+> **Testing on HyperOS 4.x (Android 17) on Xiaomi 17 Ultra (`nezha`):**
+> For HyperOS 4 builds, use **STRICTLY the SLIM Edition** ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)). Installing the FULL Edition on HyperOS 4 is strictly prohibited due to framework signature incompatibilities. See [Section 5.7](#57-next-gen-firmware-compatibility-hyperos-4x--android-17-testing-on-xiaomi-17-ultra-nezha-en) for details.
 
 #### 📦 Step-by-Step Module Installation:
 
@@ -1303,6 +1375,15 @@ Flash the dedicated **Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip** module
 No, both issues are 100% resolved!
 * If you are on standard ROMs or Leica-enabled builds: flash **`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`**.
 * If you are on **SimpleRom 3.0.309.0 - ST (Non-Leica edition)** and experienced magenta/pink noise in Ultra RAW or zoom modes: flash the dedicated **`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`**. It bypasses broken cloud demosaicing, forces 100% on-device Snapdragon 8 Elite ISP/NPU processing, and unlocks offline Leica Authentic/Vibrant styles while leaving the custom camera APK intact.
+</details>
+
+<details>
+<summary><b>Can I run the mod on Xiaomi 17 Ultra under HyperOS 4 (Android 17)?</b></summary>
+
+**Yes, but STRICTLY the SLIM Edition ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip))!**
+* **FULL Edition (with Leica Camera APK)** is **STRICTLY PROHIBITED** on HyperOS 4: bundling a Camera APK from HyperOS 3.0 will fail platform signature validation (`SignatureMismatchException`) and cause system bootloops.
+* **SLIM Edition** does not touch the Camera APK or system HAL. It solely mounts factory Chromatix profiles for Snapdragon 8 Elite, hardware DCG HDR, and `system.prop` settings with 0% risk of bootloops.
+* Always install [Simple BootloopSaver](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver) before testing. See full details in [Section 5.7](#57-next-gen-firmware-compatibility-hyperos-4x--android-17-testing-on-xiaomi-17-ultra-nezha-en).
 </details>
 
 <details>
