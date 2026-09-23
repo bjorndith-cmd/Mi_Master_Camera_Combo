@@ -325,9 +325,7 @@ EOF
     for out_name in $XML_NAMES; do
         cp -af "$TARGET_XML" "$MODPATH/system/etc/device_features/$out_name"
         mkdir -p "$MODPATH/system/product/etc/device_features"
-        mkdir -p "$MODPATH/product/etc/device_features"
         cp -af "$TARGET_XML" "$MODPATH/system/product/etc/device_features/$out_name"
-        cp -af "$TARGET_XML" "$MODPATH/product/etc/device_features/$out_name"
     done
 fi
 
@@ -368,32 +366,27 @@ copy_camera_assets() {
     touch "$target_dir/.replace"
 }
 
+# CRITICAL FIX: ALL target overlays in Magisk / KernelSU MUST reside strictly under $MODPATH/system/ !
+# Never create $MODPATH/product or $MODPATH/vendor at root level, as it causes KernelSU/APatch/Magisk OverlayFS
+# to mask the real system partitions, breaking MediaProvider and internal storage!
 if [ -n "$FOUND_PATH" ]; then
-    TARGET_MOD_PATH="$MODPATH$FOUND_PATH"
-    if [ "$FOUND_PATH" != "/system/priv-app/MiuiCamera/MiuiCamera.apk" ]; then
-        ui_print "  Targeting active camera overlay at: $FOUND_PATH"
-        copy_camera_assets "$TARGET_MOD_PATH"
-        case "$FOUND_PATH" in
-            /product/*)
-                copy_camera_assets "$MODPATH/system$FOUND_PATH"
-                ;;
-            /system/product/*)
-                STRIPPED=${FOUND_PATH#/system}
-                copy_camera_assets "$MODPATH$STRIPPED"
-                ;;
-        esac
-    else
-        set_perm_recursive "$MODPATH/system/priv-app/MiuiCamera" 0 0 0755 0644
-        mkdir -p "$MODPATH/system/priv-app/MiuiCamera/oat"
-        touch "$MODPATH/system/priv-app/MiuiCamera/oat/.replace"
-        touch "$MODPATH/system/priv-app/MiuiCamera/oat/.nomedia"
-        touch "$MODPATH/system/priv-app/MiuiCamera/.replace"
-    fi
+    case "$FOUND_PATH" in
+        /system/*)
+            TARGET_MOD_PATH="$MODPATH$FOUND_PATH"
+            ;;
+        *)
+            TARGET_MOD_PATH="$MODPATH/system$FOUND_PATH"
+            ;;
+    esac
+    ui_print "  Targeting active camera overlay at: $TARGET_MOD_PATH"
+    copy_camera_assets "$TARGET_MOD_PATH"
+    copy_camera_assets "$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"
 else
     set_perm_recursive "$MODPATH/system/priv-app/MiuiCamera" 0 0 0755 0644
     mkdir -p "$MODPATH/system/priv-app/MiuiCamera/oat"
     touch "$MODPATH/system/priv-app/MiuiCamera/oat/.replace"
     touch "$MODPATH/system/priv-app/MiuiCamera/oat/.nomedia"
+    copy_camera_assets "$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"
 fi
 
 # 4. Mirror to /vendor/odm for ROM compatibility
@@ -420,8 +413,13 @@ fi
 
 # 6. Permissions and SELinux
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644
-[ -d "$MODPATH/product" ] && set_perm_recursive "$MODPATH/product" 0 0 0755 0644
 [ -f "$MODPATH/system/etc/permissions/privapp-permissions-camera.xml" ] && set_perm "$MODPATH/system/etc/permissions/privapp-permissions-camera.xml" 0 0 0644
+
+# CRITICAL PARTITION INTEGRITY SAFEGUARD:
+# Never leave top-level partition folders ($MODPATH/product, $MODPATH/odm, $MODPATH/vendor) in $MODPATH.
+# In KernelSU/APatch/Magisk OverlayFS, top-level partition folders mask real partitions,
+# hiding MediaProvider and completely breaking internal storage /storage/emulated/0!
+rm -rf "$MODPATH/product" "$MODPATH/odm" "$MODPATH/vendor" "$MODPATH/system_ext" 2>/dev/null
 
 ui_print "*********************************************************"
 ui_print "- FULL Edition installed successfully!"
@@ -600,9 +598,7 @@ EOF
     for out_name in $XML_NAMES; do
         cp -af "$TARGET_XML" "$MODPATH/system/etc/device_features/$out_name"
         mkdir -p "$MODPATH/system/product/etc/device_features"
-        mkdir -p "$MODPATH/product/etc/device_features"
         cp -af "$TARGET_XML" "$MODPATH/system/product/etc/device_features/$out_name"
-        cp -af "$TARGET_XML" "$MODPATH/product/etc/device_features/$out_name"
     done
 fi
 
@@ -629,7 +625,9 @@ rm -rf /data/data/com.android.camera/code_cache/* >/dev/null 2>&1
 
 # 6. Permissions and SELinux
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644
-[ -d "$MODPATH/product" ] && set_perm_recursive "$MODPATH/product" 0 0 0755 0644
+
+# CRITICAL PARTITION INTEGRITY SAFEGUARD:
+rm -rf "$MODPATH/product" "$MODPATH/odm" "$MODPATH/vendor" "$MODPATH/system_ext" 2>/dev/null
 
 ui_print "*********************************************************"
 ui_print "- SLIM Edition installed successfully!"

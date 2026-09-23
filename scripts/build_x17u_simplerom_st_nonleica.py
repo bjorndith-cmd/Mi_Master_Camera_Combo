@@ -31,7 +31,6 @@ for lib in bad_libs:
 # 5. Create device_features fallback directory
 os.makedirs(os.path.join(staging, 'system', 'etc', 'device_features'), exist_ok=True)
 os.makedirs(os.path.join(staging, 'system', 'product', 'etc', 'device_features'), exist_ok=True)
-os.makedirs(os.path.join(staging, 'product', 'etc', 'device_features'), exist_ok=True)
 
 nezha_xml_content = """<?xml version="1.0" encoding="utf-8"?>
 <!-- FullRes 50MP/200MP & Offline Leica Features for Xiaomi 17 Ultra (nezha) -->
@@ -149,13 +148,9 @@ nezha_xml_content = """<?xml version="1.0" encoding="utf-8"?>
 xml_dirs = [
     os.path.join(staging, 'system', 'etc', 'device_features'),
     os.path.join(staging, 'system', 'product', 'etc', 'device_features'),
-    os.path.join(staging, 'product', 'etc', 'device_features'),
     os.path.join(staging, 'system', 'odm', 'etc', 'device_features'),
-    os.path.join(staging, 'odm', 'etc', 'device_features'),
     os.path.join(staging, 'system', 'vendor', 'etc', 'device_features'),
     os.path.join(staging, 'system', 'vendor', 'odm', 'etc', 'device_features'),
-    os.path.join(staging, 'vendor', 'etc', 'device_features'),
-    os.path.join(staging, 'vendor', 'odm', 'etc', 'device_features'),
 ]
 for d in xml_dirs:
     os.makedirs(d, exist_ok=True)
@@ -376,13 +371,9 @@ fi
 for p in \\
     "$MODPATH/system/etc/device_features" \\
     "$MODPATH/system/product/etc/device_features" \\
-    "$MODPATH/product/etc/device_features" \\
     "$MODPATH/system/odm/etc/device_features" \\
-    "$MODPATH/odm/etc/device_features" \\
     "$MODPATH/system/vendor/etc/device_features" \\
-    "$MODPATH/system/vendor/odm/etc/device_features" \\
-    "$MODPATH/vendor/etc/device_features" \\
-    "$MODPATH/vendor/odm/etc/device_features"; do
+    "$MODPATH/system/vendor/odm/etc/device_features"; do
     mkdir -p "$p"
     for name in nezha.xml xuanyuan.xml ishtar.xml haotian.xml dada.xml; do
         cp -af "$TARGET_XML" "$p/$name"
@@ -418,9 +409,7 @@ rm -rf /data/data/com.miui.gallery/cache/* >/dev/null 2>&1
 # 7. Set Permissions and SELinux contexts for Android 16
 ui_print "- Setting permissions and SELinux contexts..."
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644
-[ -d "$MODPATH/product" ] && set_perm_recursive "$MODPATH/product" 0 0 0755 0644
-[ -d "$MODPATH/odm" ] && set_perm_recursive "$MODPATH/odm" 0 0 0755 0644
-[ -d "$MODPATH/vendor" ] && set_perm_recursive "$MODPATH/vendor" 0 0 0755 0644
+rm -rf "$MODPATH/product" "$MODPATH/odm" "$MODPATH/vendor" "$MODPATH/system_ext" 2>/dev/null
 
 # Contexts for Chromatix sensor binaries
 for bin_file in "$MODPATH/system/odm/lib64/camera"/*.bin; do

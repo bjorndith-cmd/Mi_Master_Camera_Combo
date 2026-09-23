@@ -122,7 +122,6 @@ if [ -n "$REAL_XML" ]; then
     ui_print "  Found stock config: $REAL_XML"
     mkdir -p "$MODPATH/system/etc/device_features"
     mkdir -p "$MODPATH/system/product/etc/device_features"
-    mkdir -p "$MODPATH/product/etc/device_features"
     TARGET_XML="$MODPATH/system/etc/device_features/ishtar.xml"
     cp -af "$REAL_XML" "$TARGET_XML"
 
@@ -169,7 +168,6 @@ EOF
 
     # Mirror to product and system partitions
     cp -af "$TARGET_XML" "$MODPATH/system/product/etc/device_features/ishtar.xml"
-    cp -af "$TARGET_XML" "$MODPATH/product/etc/device_features/ishtar.xml"
     ui_print "  Patched ishtar.xml: Quad-50M (0.5x, 1x, 3.2x, 5x) + 8K/4K120 injected safely."
 else
     ui_print "  Notice: stock config not found on standard paths, skipping XML overlay."
@@ -202,7 +200,7 @@ rm -rf /data/data/com.android.camera/code_cache/* >/dev/null 2>&1
 # 7. Set Permissions and SELinux contexts for Android 14
 ui_print "- Setting permissions and SELinux contexts..."
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644
-[ -d "$MODPATH/product" ] && set_perm_recursive "$MODPATH/product" 0 0 0755 0644
+rm -rf "$MODPATH/product" "$MODPATH/odm" "$MODPATH/vendor" "$MODPATH/system_ext" 2>/dev/null
 
 for bin_file in "$MODPATH/system/odm/lib64/camera"/*.bin; do
     [ -f "$bin_file" ] || continue
@@ -229,7 +227,7 @@ fi
 
 [ -d "$MODPATH/system/etc/device_features" ] && chcon -R u:object_r:system_file:s0 "$MODPATH/system/etc/device_features" 2>/dev/null
 [ -d "$MODPATH/system/product/etc/device_features" ] && chcon -R u:object_r:system_file:s0 "$MODPATH/system/product/etc/device_features" 2>/dev/null
-[ -d "$MODPATH/product/etc/device_features" ] && chcon -R u:object_r:system_file:s0 "$MODPATH/product/etc/device_features" 2>/dev/null
+# Cleaned up root product
 [ -d "$MODPATH/system/odm/lib64" ] && chcon -R u:object_r:vendor_file:s0 "$MODPATH/system/odm/lib64" 2>/dev/null
 
 ui_print "*********************************************************"
