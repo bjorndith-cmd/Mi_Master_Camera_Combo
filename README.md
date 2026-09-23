@@ -207,27 +207,32 @@
   - В настройках камеры (шестерёнка) убедитесь, что пункт «Облачное улучшение / Ultra RAW Cloud» отключён.
 * **Статус верификации**: Подтверждено пользователем Steve на Xiaomi 17 Ultra SimpleRom ST (3.0.309.0) — розовый шум устранён, режим Leica M9 работает безупречно (*«I think this fixed cloud processing, no pink/purple»*).
 
-#### 5.7. Архитектура Pure Systemless Overlay и устранение бутлупа на Xiaomi 13 Ultra (HyperOS 3.0.302 Taiwan / Android 16) (RU)
-* **Причина инцидента (Bootloop на официальной прошивке Тайваня `TMATWXM`)**:
-  - На официальных стоковых прошивках HyperOS 3.0 (Android 16), таких как Тайвань `OS3.0.302.0.TMATWXM`, Глобал `TMAMIXM` и EEA `TMAEUXM`, системные приложения имеют строгую цифровую подпись ключами Xiaomi Release Keys и скомпилированы в структуру odex/vdex (`/product/priv-app/MiuiCamera/oat/arm64/MiuiCamera.odex`).
-  - Попытка подмены `MiuiCamera.apk` сторонним pre-extracted APK приводила к тому, что служба управления пакетами `PackageManagerService` на этапе ранней инициализации Android 16 выбрасывала фатальное исключение несоответствия подписи платформы (`SignatureMismatchException`), приводя к аварийному завершению `system_server` и циклическому ребуту (bootloop).
-  - Кроме того, встраивание чужих библиотек `libc++.so`, `libion.so`, `libdmabufheap.so` в каталог APK ломало динамическую линковку Android 16.
-* **Главный инженерный вывод**:
-  - **Xiaomi 13 Ultra (`ishtar`) С ЗАВОДА оснащён полноценной камерой Leica!** Ему абсолютно не требуется замена системного APK камеры!
-* **Комплексное архитектурное исправление (v5.2 / v5.8)**:
-  1. **100% Pure Systemless Overlay**:
-     - В модуле `Mi13U_Master_Camera_Combo_v5.1` (а также в универсальном `Mi_Master_Camera_Combo_Universal_MultiDevice`) системный APK камеры **НЕ ЗАТРАГИВАЕТСЯ ВООБЩЕ** (`rm -rf $MODPATH/system/priv-app/MiuiCamera`).
-     - Размер специализированного модуля для 13 Ultra уменьшился со 146 МБ до **278 КБ**, модуль устанавливается за 1 секунду.
-  2. **Удаление устаревших библиотек HAL**:
-     - Из профиля `ishtar` полностью удален 27-мегабайтный файл `camera.qcom.so` (HAL от старого Android 14), исключая любые конфликты с AIDL NDK подсистемы камер на Android 16.
-  3. **Все флагманские фичи работают через системный оверлей**:
+#### 5.7. Концепция двух линеек (FULL & SLIM) и устранение бутлупа на Xiaomi 13 Ultra (HyperOS 3.0.302 Taiwan / Android 16) (RU)
+* **Причина инцидента (Bootloop на официальной стоковой прошивке Тайваня `TMATWXM`)**:
+  - На официальных стоковых прошивках HyperOS 3.0 (Android 16), таких как Тайвань `OS3.0.302.0.TMATWXM`, Глобал `TMAMIXM` и EEA `TMAEUXM`, системные приложения имеют строгую цифровую подпись ключами Xiaomi Release Keys и скомпилированы в оптимизированную структуру odex/vdex (`/product/priv-app/MiuiCamera/oat/arm64/MiuiCamera.odex`).
+  - Попытка подмены `MiuiCamera.apk` сторонним pre-extracted APK без надлежащей изоляции приводила к тому, что служба управления пакетами `PackageManagerService` на этапе ранней инициализации Android 16 выбрасывала фатальное исключение несоответствия подписи платформы (`SignatureMismatchException`) или сбой контрольной суммы одекса, приводя к аварийному завершению `system_server` и циклическому ребуту (bootloop).
+  - Кроме того, встраивание чужих библиотек `libc++.so`, `libion.so`, `libdmabufheap.so` в каталог APK ломало динамическую линковку Android 16, а создание корневой папки `$MODPATH/product` вызывало маскирование системных разделов в OverlayFS.
+* **Архитектурная концепция: FULL с улучшенным APK vs. SLIM без APK**:
+  - **Зачем мы меняем стоковую камеру в FULL Edition?** Даже на устройствах с заводской оптикой и софтом Leica (Xiaomi 13 Ultra, 14 Ultra, 15 Pro, 15 Ultra, 17 Ultra) мы **заменяем стоковую камеру на нашу улучшенную модифицированную Leica Камеру**! В ней разблокированы новейшие возможности HyperOS 3.0: расширенная коллекция авторских водяных знаков Leica (Watermarks, кастомные рамки и логотипы), новейшие профили цветопередачи Leica Authentic / Vibrant, портретные стили Master Lens, разблокированное меню 50M/200M/8K прямо в интерфейсе видоискателя и локальная дебайеризация без облачных задержек.
+  - **Для чего создан SLIM Edition?** Для пользователей на закрытых официальных стоковых прошивках (Тайвань, Глобал, ЕЕА) без CorePatch/LSPosed, а также для тестовых сборок нового поколения (HyperOS 4). SLIM оставляет системный APK нетронутым (100% защита от бутлупов и проверок подписей), при этом через чистый системный оверлей активирует полный аппаратный потенциал: калибровки Chromatix, DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps и устранение розового шума.
+* **Комплексные инженерные решения**:
+  1. **FULL Edition (с улучшенным APK камеры Leica — ~146 МБ)**:
+     - Внедрена защита **`oat/.replace`**: создание маркеров `.replace` и `.nomedia` в подкаталоге `oat` скрывает стоковый odex/vdex прошивки от PMS, заставляя среду выполнения ART скомпилировать наш улучшенный APK начисто;
+     - Санитизирован **`privapp-permissions-camera.xml`**: полностью удалены опасные платформенные права (`REBOOT`, `DEVICE_POWER`, `MANAGE_USERS`), исключая фатальный сбой PMS при валидации привилегий;
+     - Очищены опасные системные библиотеки (`libc++.so`, `libion.so`, `libdmabufheap.so`), вызывавшие отказ динамического компоновщика;
+     - Удален устаревший 27-мегабайтный файл `camera.qcom.so` (HAL от старого Android 14);
+     - Устранено маскирование разделов: все оверлеи размещаются строго под `$MODPATH/system/`, предотвращая повреждение `/storage/emulated/0`;
+     - *Рекомендация:* На стоковых прошивках со строгой проверкой подписи платформы для работы FULL требуется модуль отключения проверки подписей (CorePatch / LSPosed), либо используйте SLIM Edition.
+  2. **SLIM Edition (чистый системный оверлей без APK камеры — 270 КБ)**:
+     - Системный APK камеры **НЕ ЗАТРАГИВАЕТСЯ ВООБЩЕ** (`rm -rf $MODPATH/system/priv-app/MiuiCamera`);
+     - 0% риска бутлупа, мгновенная установка, 100% совместимость с закрытыми стоковыми прошивками без CorePatch;
      - Сетка **Quad-50M FullRes** (`0.5x : 1.0x : 3.2x : 5.0x`) инжектируется в оверлей `device_features/ishtar.xml`;
      - Аппаратный **DCG HDR**, режимы **8K-видео со всех 4 сенсоров** и **4K120fps** активируются через XML и `system.prop`;
      - Официальные калибровочные бинарники Chromatix (`com.qti.sensormodule.ishtar_*.bin`) для IMX989, IMX858 и OV32C монтируются в `/system/odm/lib64/camera/`;
      - Добавлен обход сбойной облачной обработки (выключены теги `support_cloud_process`, `support_leica_essential_cloud`), благодаря чему фотографии обрабатываются аппаратно и мгновенно, без задержек и розового шума.
-* **Результат**: абсолютная стабильность, 0% риска бутлупа на любых официальных и кастомных прошивках (Тайвань, Глобал, ЕЕА, Китай, Россия, кастомы).
+* **Результат**: Абсолютная стабильность и полная свобода выбора: FULL для максимального раскрытия всех новых фич улучшенной Leica-камеры, либо SLIM для 100% спокойствия на стоковом приложении с аппаратным апгрейдом сенсоров!
 
-#### 5.7. Совместимость с новейшими прошивками (HyperOS 4.x / Android 17): Тестирование на Xiaomi 17 Ultra (`nezha`) (RU)
+#### 5.8. Совместимость с новейшими прошивками (HyperOS 4.x / Android 17): Тестирование на Xiaomi 17 Ultra (`nezha`) (RU)
 
 Если вы планируете тестировать модули на будущих сборках, закрытых бета-версиях или утечках **HyperOS 4** (на базе Android 17 / обновленной кодовой базы Xiaomi):
 
@@ -826,6 +831,17 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 Да, все объективы доступны в модах AGC, LMC, Shamim в полном разрешении 50Мп / 200Мп.
 </details>
 
+<details>
+<summary><b>В чем разница между FULL и SLIM версиями? Зачем заменять стоковую камеру в FULL, если на Xiaomi 13 Ultra уже есть Leica с завода?</b></summary>
+
+* **FULL Edition (с заменой стоковой камеры на нашу улучшенную)**:
+  - В FULL мы заменяем стоковую камеру на нашу **улучшенную модифицированную Leica Камеру**! В неё интегрирована новейшая база HyperOS 3.0 Leica, эксклюзивные водяные знаки (Leica Custom Watermarks, рамки, стили), улучшенные режимы Leica Authentic/Vibrant, Master Lens портретные профили, прямое переключение 50M/200M/8K в основном видоискателе и встроенная анти-бутлуп защита `oat/.replace`.
+  - *Для кого:* Для пользователей кастомных прошивок (Xiaomi.eu, Elite, SimpleRom) либо стоковых прошивок с установленным CorePatch (через LSPosed), желающих получить максимум эксклюзивных Leica-фич.
+* **SLIM Edition (чистый системный оверлей — без замены APK)**:
+  - Не затрагивает системный APK камеры вообще (`rm -rf $MODPATH/system/priv-app/MiuiCamera`), оставляя заводское приложение нетронутым.
+  - *Для кого:* Идеально для официальных региональных прошивок (Тайвань, Глобал, EEA) без CorePatch, где Android блокирует подмену системных APK, а также для тестовых сборок нового поколения (HyperOS 4). Вы получаете 100% гарантию от бутлупа и при этом разблокируете полный аппаратный потенциал матрицы (DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps, калибровки Chromatix).
+</details>
+
 ---
 
 ### 11. Сообщество, обратная связь и Telegram (RU)
@@ -991,27 +1007,32 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
   - In Camera Settings (gear icon), verify that «Cloud Enhance / Ultra RAW Cloud» is switched off.
 * **Verification Status**: Confirmed working by user Steve on Xiaomi 17 Ultra SimpleRom ST (3.0.309.0) — magenta noise eliminated, offline Leica M9 operating flawlessly (*«I think this fixed cloud processing, no pink/purple»*).
 
-#### 5.7. Pure Systemless Overlay Architecture & Xiaomi 13 Ultra Bootloop Elimination (Taiwan HyperOS 3.0 / A16) (EN)
-* **Incident Root Cause (Bootloop on Taiwan Official ROM `TMATWXM`)**:
-  - Official stock HyperOS 3.0 (Android 16) firmware builds (such as Taiwan `OS3.0.302.0.TMATWXM`, Global `TMAMIXM`, and EEA `TMAEUXM`) use strict Xiaomi Release Key platform signatures and an odexed structure (`/product/priv-app/MiuiCamera/oat/arm64/MiuiCamera.odex`).
-  - Attempting to overwrite `MiuiCamera.apk` with a pre-extracted APK caused Android 16's early `PackageManagerService` boot scan to throw a fatal `SignatureMismatchException`, crashing `system_server` into an infinite bootloop.
-  - Bundled companion libraries (`libc++.so`, `libion.so`, `libdmabufheap.so`) in the APK directory also disrupted Android 16 linker dependencies.
-* **Core Architectural Insight**:
-  - **Xiaomi 13 Ultra (`ishtar`) comes with genuine Leica Camera from the factory!** It does NOT require any system Camera APK replacement!
-* **Comprehensive Engineering Resolution (v5.2 / v5.8)**:
-  1. **100% Pure Systemless Overlay**:
-     - In `Mi13U_Master_Camera_Combo_v5.1` (and the universal `Mi_Master_Camera_Combo_Universal_MultiDevice`), the system camera APK is **NEVER REPLACED** (`rm -rf $MODPATH/system/priv-app/MiuiCamera`).
-     - The dedicated 13 Ultra package size was reduced from 146 MB to **278 KB**, installing in less than a second.
-  2. **Alien HAL Removal**:
-     - The 27.3 MB legacy Android 14 `camera.qcom.so` was completely purged from the `ishtar` profile, eliminating AIDL NDK cameraserver crashes on Android 16.
-  3. **All Flagship Features Injected Systemlessly**:
+#### 5.7. Dual-Tier Architectural Concept (FULL & SLIM) & Xiaomi 13 Ultra Bootloop Elimination (Taiwan HyperOS 3.0 / A16) (EN)
+* **Incident Root Cause (Bootloop on Stock Taiwan `TMATWXM`)**:
+  - Official stock HyperOS 3.0 (Android 16) firmware builds (such as Taiwan `OS3.0.302.0.TMATWXM`, Global `TMAMIXM`, and EEA `TMAEUXM`) enforce strict signature validation with Xiaomi Release Keys and utilize an optimized odex/vdex layout (`/product/priv-app/MiuiCamera/oat/arm64/MiuiCamera.odex`).
+  - Replacing `MiuiCamera.apk` with a pre-extracted APK without proper runtime isolation caused Android 16's early `PackageManagerService` boot scan to trigger a fatal `SignatureMismatchException` or ART odex checksum error, crashing `system_server` into an infinite bootloop.
+  - Furthermore, incompatible companion libraries (`libc++.so`, `libion.so`, `libdmabufheap.so`) broke Android 16 linker dependencies, and root-level `$MODPATH/product` injection masked core partitions in OverlayFS.
+* **Unified Architectural Concept: FULL with Upgraded APK vs. SLIM Without APK**:
+  - **Why replace the stock camera in FULL Edition?** Even on devices that ship with factory Leica optics and software (Xiaomi 13 Ultra, 14 Ultra, 15 Pro, 15 Ultra, 17 Ultra), we **replace the stock camera with our improved, modded Leica Camera APK**! Our upgraded camera unlocks the latest HyperOS 3.0 Leica framework: an expanded collection of exclusive Leica custom watermarks, frames, and branding, refined Leica Authentic / Vibrant color science, Master Lens portrait presets, full 50M/200M/8K mode toggles inside the main viewfinder interface, and zero-delay offline hardware ISP processing.
+  - **Why choose SLIM Edition?** Designed for users on locked official stock regional ROMs (Taiwan, Global, EEA) without CorePatch/LSPosed, as well as preview test builds (HyperOS 4). SLIM preserves your device's native camera APK untouched (100% immune to signature checks and odex bootloops), while unlocking the complete hardware potential through a pure systemless overlay: Chromatix sensor tunings, DCG HDR, 50M/200M Quad-Bayer Remosaic, George Video 8K/4K120, and pink noise cloud bypass.
+* **Comprehensive Engineering Solutions**:
+  1. **FULL Edition (with Upgraded Leica Camera APK — ~146 MB)**:
+     - Protected by **`oat/.replace`**: creating `.replace` and `.nomedia` markers in the `oat` directory hides stale stock odex/vdex files from PMS, forcing ART to cleanly recompile our upgraded APK;
+     - Sanitized **`privapp-permissions-camera.xml`**: completely removed dangerous platform permissions (`REBOOT`, `DEVICE_POWER`, `MANAGE_USERS`) that trigger PMS validation panics;
+     - Purged hazardous system library overrides (`libc++.so`, `libion.so`, `libdmabufheap.so`);
+     - Purged legacy 27.3 MB Android 14 `camera.qcom.so`;
+     - Eliminates partition masking: all overlay files reside strictly under `$MODPATH/system/`, safeguarding `/storage/emulated/0` mount integrity;
+     - *Recommendation:* On strict official stock ROMs with platform signature enforcement, CorePatch (via LSPosed) is required to run FULL, OR choose SLIM Edition.
+  2. **SLIM Edition (Pure Systemless Overlay - Zero APK Replacement — 270 KB)**:
+     - The system camera APK is **NEVER REPLACED** (`rm -rf $MODPATH/system/priv-app/MiuiCamera`);
+     - 0% bootloop risk, 1-second installation, fully compatible with locked stock and custom ROMs without CorePatch;
      - **Quad-50M FullRes** grid (`0.5x : 1.0x : 3.2x : 5.0x`) injected dynamically via `device_features/ishtar.xml`;
-     - Hardware **DCG HDR**, **8K video across all 4 rear sensors**, and **4K120fps** unlocked via XML and `system.prop`;
+     - Hardware **DCG HDR**, **8K video across all 4 rear sensors**, and **4K120fps** unlocked via XML & `system.prop`;
      - Genuine Chromatix sensor calibration binaries (`com.qti.sensormodule.ishtar_*.bin`) for IMX989, IMX858, and OV32C mounted to `/system/odm/lib64/camera/`;
-     - Cloud processing bypass enforced (`support_cloud_process=false`), ensuring all photos develop locally on the ISP without delays or magenta artifacts.
-* **Result**: Rock-solid stability with 0% risk of bootloop across all official and custom ROMs (Taiwan, Global, EEA, China, Russia, custom ROMs).
+     - Cloud processing bypassed (`support_cloud_process=false`), ensuring instant local hardware processing without delays or magenta artifacts.
+* **Outcome**: Complete freedom of choice: select FULL for the ultimate feature set of our upgraded Leica camera, or choose SLIM for 100% stock app peace of mind with full hardware unlocked!
 
-#### 5.7. Next-Gen Firmware Compatibility (HyperOS 4.x / Android 17): Testing on Xiaomi 17 Ultra (`nezha`) (EN)
+#### 5.8. Next-Gen Firmware Compatibility (HyperOS 4.x / Android 17): Testing on Xiaomi 17 Ultra (`nezha`) (EN)
 
 If you plan to test modules on upcoming developer builds, closed betas, or future leaks of **HyperOS 4** (based on Android 17 / upgraded Xiaomi system framework):
 
@@ -1608,6 +1629,17 @@ Yes, the viewfinder maintains a steady 60 fps without freezing, thanks to dynami
 <summary><b>Does 50MP work in GCam mods?</b></summary>
 
 Yes, all cameras shoot in full 50MP / 200MP resolution in AGC, LMC, Shamim, and BigKaka mods.
+</details>
+
+<details>
+<summary><b>What is the difference between FULL and SLIM editions? Why replace the stock camera in FULL if Xiaomi 13 Ultra already has Leica from the factory?</b></summary>
+
+* **FULL Edition (Replacing stock camera with our improved Leica Camera)**:
+  - In FULL Edition, we replace the stock camera with our **improved, modded Leica Camera**! It incorporates the latest HyperOS 3.0 Leica code base, an expanded collection of exclusive Leica custom watermarks, frames, and branding, enhanced Leica Authentic / Vibrant color rendering, Master Lens portrait presets, full 50M/200M/8K direct viewfinder toggles, and built-in `oat/.replace` anti-bootloop protection.
+  - *Best for:* Users on custom ROMs (Xiaomi.eu, Elite, SimpleRom) or stock ROMs with CorePatch (via LSPosed) enabled who want the ultimate suite of new Leica features.
+* **SLIM Edition (Pure Systemless Overlay - No Camera APK Replacement)**:
+  - Does not touch the system camera APK at all (`rm -rf $MODPATH/system/priv-app/MiuiCamera`), keeping the ROM's pre-installed app untouched.
+  - *Best for:* Ideal for closed official regional stock ROMs (Taiwan, Global, EEA) without CorePatch where Android strictly enforces platform signature validation, as well as preview test builds (HyperOS 4). You get 100% bootloop immunity while unlocking the full hardware potential of the sensors (DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps, Chromatix tunings).
 </details>
 
 ---

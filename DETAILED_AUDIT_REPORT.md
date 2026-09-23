@@ -612,11 +612,13 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
 3. **Наличие устаревшего HAL в Universal Combo**:
    - В каталоге `devices/ishtar/odm/lib64/hw` универсального комбайна находился бинарник `camera.qcom.so` (27.3 МБ) от старой Android 14. На Android 16 этот бинарник не может связаться с AIDL NDK `android.frameworks.sensorservice-V1-ndk.so`.
 
-### 9.3. Инженерное решение
-* **Ключевой факт**: Xiaomi 13 Ultra является флагманом с официальной оптикой и ПО Leica с момента выхода с конвейера. Ни на одной прошивке ему не требуется замена APK камеры!
-* **Реализация**:
-  1. Из модуля `Mi13U_Master_Camera_Combo` полностью удалена папка `system/priv-app/MiuiCamera` и файл разрешений. Модуль стал **100% Pure Systemless Overlay**.
-  2. Из `Mi_MultiDevice_Combo_Staging` полностью удален каталог `devices/ishtar/odm/lib64/hw`.
-  3. В `customize.sh` обоих модулей добавлено правило: устройство `ishtar` никогда не перезаписывает APK камеры.
-  4. Сетка Quad-50M FullRes (`0.5x:1.0x:3.2x:5.0x`), George Video Mod (8K все линзы, 4K120fps), DCG HDR и Chromatix сенсорные калибровки внедряются исключительно через безопасный динамический оверлей `device_features/ishtar.xml`, `system.prop` и `system/odm/lib64/camera/`.
-  5. В документацию добавлены строгий отказ от ответственности (Disclaimer) и руководство по обязательной установке модулей защиты от бутлупа (**Bootloop Saver**).
+### 9.3. Инженерное решение: Единая дуальная архитектура (FULL & SLIM)
+* **Архитектурный принцип**:
+  - **FULL Edition (с заменой стоковой камеры на нашу улучшенную)**: Даже на устройствах с заводской камерой Leica (Xiaomi 13 Ultra, 14 Ultra, 15 Pro, 15 Ultra, 17 Ultra) мы **заменяем стоковую камеру на нашу улучшенную модифицированную Leica Камеру**! В ней разблокированы новейшие возможности HyperOS 3.0: расширенный набор авторских водяных знаков Leica, улучшенные режимы Leica Authentic/Vibrant, Master Lens портретные профили, прямое переключение 50M/200M/8K в видоискателе и встроенная защита от бутлупа (`oat/.replace`, санитизация `privapp-permissions`, чистый `lib/arm64`). Рекомендуется для кастомных прошивок и стоков с CorePatch (LSPosed).
+  - **SLIM Edition (чистый системный оверлей — без APK камеры)**: Для закрытых официальных региональных стоковых прошивок (Тайвань, Глобал, EEA) без CorePatch, а также для тестовых сборок нового поколения (HyperOS 4). Не затрагивает системный APK камеры вообще (`rm -rf $MODPATH/system/priv-app/MiuiCamera`), обеспечивая 100% иммунитет к проверке подписей платформы (`SignatureMismatchException`), при этом активируя весь аппаратный потенциал матрицы (DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps, калибровки Chromatix).
+* **Техническая реализация**:
+  1. В модулях **FULL Edition** развернут комплекс анти-бутлуп защиты: маркер `oat/.replace`, удаление опасных системных библиотек (`libc++.so`, `libion.so`, `libdmabufheap.so`), удаление платформенных прав (`REBOOT`, `DEVICE_POWER`, `MANAGE_USERS`), строгая изоляция всех оверлеев в `$MODPATH/system/` (защита от маскирования разделов в OverlayFS).
+  2. В модулях **SLIM Edition** папка `system/priv-app/MiuiCamera` удалена целиком. Модуль представляет собой **100% Pure Systemless Overlay** размером ~270 КБ.
+  3. Из всех профилей удален устаревший 27.3 МБ `camera.qcom.so` (HAL от старой Android 14), вызывавший сбои AIDL NDK.
+  4. Сетка Quad-50M FullRes (`0.5x:1.0x:3.2x:5.0x`), George Video Mod (8K все линзы, 4K120fps), DCG HDR и Chromatix сенсорные калибровки внедряются через безопасный динамический оверлей `device_features/ishtar.xml`, `system.prop` и `system/odm/lib64/camera/`.
+  5. В документацию добавлены строгий отказ от ответственности (Disclaimer), протокол устранения конфликтов сторонних модулей и руководство по обязательной установке модулей защиты от бутлупа (**Bootloop Saver**).

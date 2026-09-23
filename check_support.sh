@@ -78,19 +78,38 @@ fi
 SELINUX=$(getenforce 2>/dev/null || echo "Unknown")
 log_both "  • SELinux Mode: $SELINUX"
 
-# Check Magisk / KSU / APatch module directory
+# Check Magisk / KSU / APatch module directory and conflicts
 MOD_FOUND="false"
+CONFLICT_MODS=""
 for mpath in /data/adb/modules /data/adb/ksu/modules /data/adb/ap/modules; do
     if [ -d "$mpath" ]; then
         FOUND_NAMES=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | tr '\n' ' ')
         if [ -n "$FOUND_NAMES" ]; then
             log_both "  • Module State: ${GREEN}[PASS] Detected in $mpath: $FOUND_NAMES${NC}"
             MOD_FOUND="true"
+            CAM_COUNT=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | wc -l)
+            if [ "$CAM_COUNT" -gt 1 ]; then
+                CONFLICT_MODS=$(ls "$mpath" 2>/dev/null | grep -iE "camera|master|combo|borndead|imaging" | tr '\n' ' ')
+            fi
         fi
     fi
 done
 if [ "$MOD_FOUND" = "false" ]; then
     log_both "  • Module State: ${YELLOW}[INFO] Module directory not detected or non-root inspection.${NC}"
+fi
+
+if [ -n "$CONFLICT_MODS" ]; then
+    log_both "  • ${RED}[WARNING] Multiple camera modules detected: $CONFLICT_MODS${NC}"
+    log_both "    ${RED}Conflicting modules cause black screen, crashes, or stale icon! Delete older modules and reboot.${NC}"
+fi
+
+# Check for stale user camera updates in /data/app
+if [ -d /data/app ]; then
+    STALE_APP=$(find /data/app -maxdepth 2 -name "*com.android.camera*" 2>/dev/null)
+    if [ -n "$STALE_APP" ]; then
+        log_both "  • ${YELLOW}[WARN] Stale Camera update detected in /data/app: $STALE_APP${NC}"
+        log_both "    ${YELLOW}Go to Settings -> Apps -> Camera -> 'Uninstall updates' & 'Clear all data'.${NC}"
+    fi
 fi
 
 # 3. Qualcomm CamX & System Properties Check
