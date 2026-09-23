@@ -420,7 +420,7 @@
 #### 🛡️ Профилактика: Как защитить себя от бутлупов раз и навсегда
 
 1. **Всегда устанавливайте Magisk Bootloop Saver (MBLS)**:  
-   👉 Репозиторий: [Magisk Bootloop Saver на GitHub](https://github.com/HuskyDG/magic_overlayfs) / [chiteroman MBLS](https://github.com/chiteroman/BootloopSaver).  
+   👉 Репозиторий: [Simple BootloopSaver (Alt-Repo)](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver) / [Magisk BootloopSaver](https://github.com/likeadragonmaid/Magisk_BootloopSaver).  
    Этот легковесный сторожевой модуль непрерывно следит за стадиями запуска Android Zygote. Если система перезагружается 2 раза подряд, MBLS автоматически деактивирует все модули без вашего участия!
 2. **Используйте SLIM Edition на кастомных прошивка**:  
    Если вы используете стороннюю или региональную прошивку (Taiwan, Global, Xiaomi.eu, SimpleRom ST) без отключения проверки подписей (CorePatch/LuckyPatcher), устанавливайте **SLIM-версию** модуля (*Pure Systemless Overlay*). Она не заменяет системный APK камеры, обладает 0% риска бутлупа и дает все преимущества 50M/200M FullRes, George Video 8K и DCG HDR!
@@ -708,11 +708,11 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 👉 **[t.me/Mi_Master_Camera_Combo](https://t.me/Mi_Master_Camera_Combo)** *(Новости, обновления, пресеты и живой чат)*
 
 #### 📋 Шаблоны сообщений об ошибках на GitHub (Issues)
-Если вы столкнулись с проблемой или хотите предложить новую функцию/конфиг, воспользуйтесь официальными интерактивными формами в разделе [Issues](../../issues/new/choose):
+Если вы столкнулись с проблемой или хотите предложить новую функцию/конфиг, воспользуйтесь официальными интерактивными формами в разделе [Issues](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new/choose):
 
-* 🐛 **[Отчёт об ошибке (Bug Report)](../../issues/new?template=bug_report.yml)** — структурированная форма для репорта о вылетах, чёрном экране или сбоях. Обязательно прикрепите сгенерированный отчёт `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt`.
-* ⚙️ **[Отзыв о конфигурациях GCam (Config Feedback)](../../issues/new?template=config_feedback.yml)** — делитесь своими `.agc` / `.xml` пресетами, калибровками цветовых матриц Leica и профилями шума для сенсоров Sony, OmniVision и Samsung.
-* 💡 **[Предложение новой функции (Feature Request)](../../issues/new?template=feature_request.yml)** — запрос поддержки новых ревизий прошивок, сенсоров или видеорежимов.
+* 🐛 **[Отчёт об ошибке (Bug Report)](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new?template=bug_report.yml)** — структурированная форма для репорта о вылетах, чёрном экране или сбоях. Обязательно прикрепите сгенерированный отчёт `/sdcard/Download/Mi_Camera_Diagnostic_Report.txt`.
+* ⚙️ **[Отзыв о конфигурациях GCam (Config Feedback)](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new?template=config_feedback.yml)** — делитесь своими `.agc` / `.xml` пресетами, калибровками цветовых матриц Leica и профилями шума для сенсоров Sony, OmniVision и Samsung.
+* 💡 **[Предложение новой функции (Feature Request)](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new?template=feature_request.yml)** — запрос поддержки новых ревизий прошивок, сенсоров или видеорежимов.
 
 ---
 ---
@@ -1070,7 +1070,7 @@ Follow one of the battle-tested recovery methods below based on your device conf
 #### 🛡️ Prevention: How to Stay Immune to Bootloops
 
 1. **Always Install Magisk Bootloop Saver (MBLS)**:  
-   👉 Repositories: [Magisk Bootloop Saver on GitHub](https://github.com/HuskyDG/magic_overlayfs) / [chiteroman MBLS](https://github.com/chiteroman/BootloopSaver).  
+   👉 Repositories: [Simple BootloopSaver (Alt-Repo)](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver) / [Magisk BootloopSaver](https://github.com/likeadragonmaid/Magisk_BootloopSaver).  
    This watchdog daemon monitors Zygote initialization. If a boot failure recurs twice, MBLS automatically disables all modules before Android enters a recovery panic!
 2. **Choose SLIM Edition on Custom/Regional ROMs**:  
    If you run custom or regional builds (Taiwan, Global, Xiaomi.eu, SimpleRom ST) without signature verification patches (CorePatch/LuckyPatcher), choose the **SLIM Edition** (*Pure Systemless Overlay*). It leaves the system camera APK completely untouched, eliminates 100% of signature conflicts, and provides full 50M/200M FullRes, George Video 8K, and DCG HDR!
@@ -1332,11 +1332,11 @@ Join our active Telegram channel and group for real-time discussion, instant upd
 👉 **[t.me/Mi_Master_Camera_Combo](https://t.me/Mi_Master_Camera_Combo)** *(News, updates, configs, and live community chat)*
 
 #### 📋 GitHub Issue Reporting Templates
-If you encounter an issue or wish to propose an enhancement, use our official interactive GitHub Issue forms in [Issues](../../issues/new/choose):
+If you encounter an issue or wish to propose an enhancement, use our official interactive GitHub Issue forms in [Issues](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new/choose):
 
-* 🐛 **[Bug Report](../../issues/new?template=bug_report.yml)** — structured bug report form for camera crashes, black screens, or viewfinder freezes. Please specify device model, ROM, and attach the `Mi_Camera_Diagnostic_Report.txt` diagnostic file.
-* ⚙️ **[GCam Config & Preset Feedback](../../issues/new?template=config_feedback.yml)** — share your tuned `.agc` / `.xml` profiles, color matrix calibrations, or noise model adjustments for Sony, OmniVision, and Samsung sensors.
-* 💡 **[Feature Request](../../issues/new?template=feature_request.yml)** — propose new features, support for new ROMs or camera hardware revisions.
+* 🐛 **[Bug Report](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new?template=bug_report.yml)** — structured bug report form for camera crashes, black screens, or viewfinder freezes. Please specify device model, ROM, and attach the `Mi_Camera_Diagnostic_Report.txt` diagnostic file.
+* ⚙️ **[GCam Config & Preset Feedback](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new?template=config_feedback.yml)** — share your tuned `.agc` / `.xml` profiles, color matrix calibrations, or noise model adjustments for Sony, OmniVision, and Samsung sensors.
+* 💡 **[Feature Request](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/issues/new?template=feature_request.yml)** — propose new features, support for new ROMs or camera hardware revisions.
 
 ---
 

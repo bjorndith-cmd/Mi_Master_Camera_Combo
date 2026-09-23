@@ -13,16 +13,18 @@
 
 ### Доступные пресеты:
 1. **Xiaomi 13 Ultra (`ishtar`):**
-   * [`Mi13U_borndead_Universal_Leica_50MP.agc`](./Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc) — 50Мп RAW16 на всех 4 камерах (Sony IMX989 + 3x IMX858), правильные уровни чёрного (64), HDR+ Enhanced.
-2. **Xiaomi 15 Ultra (`xuanyuan`):**
-   * [`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](./Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc) — 50Мп на 1" Sony LYT-900 и **200Мп** на перископе Samsung HP9 (`16384x12288`).
-3. **Xiaomi 17 Ultra (`nezha`):**
-   * [`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](./Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc) — 50Мп на 1" OmniVision OVX10500U и **200Мп** на Samsung HP9.
-4. **Xiaomi 15 / 15 Pro (`dada` / `haotian`):**
-   * [`Mi15_borndead_LightHunter_50M.agc`](./Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc) — 50Мп на сенсоре Light Hunter 900 и телеобъективах.
+   * [`Mi13U_borndead_Universal_Leica_50MP.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc) — 50Мп RAW16 на всех 4 камерах (Sony IMX989 + 3x IMX858), правильные уровни чёрного (64), HDR+ Enhanced.
+2. **Xiaomi 14 Ultra (`aurora`):**
+   * [`Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_14_Ultra_aurora/Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc) — 50Мп RAW16 на всех 4 камерах (1" Sony LYT-900 + 3x IMX858), переменная физическая диафрагма F1.63-F4.0, Black Level 64, Leica Authentic.
+3. **Xiaomi 15 Ultra (`xuanyuan`):**
+   * [`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc) — 50Мп на 1" Sony LYT-900 и **200Мп** на перископе Samsung HP9 (`16384x12288`).
+4. **Xiaomi 17 Ultra (`nezha`):**
+   * [`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc) — 50Мп на 1" OmniVision OVX10500U и **200Мп** на Samsung HP9.
+5. **Xiaomi 15 / 15 Pro (`dada` / `haotian`):**
+   * [`Mi15_borndead_LightHunter_50M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc) — 50Мп на сенсоре Light Hunter 900 и телеобъективах.
 
 ### Как применить пресет в AGC:
-1. Скачайте нужный `.agc` файл для вашей модели.
+1. Скачайте нужный `.agc` файл для вашей модели (прямое скачивание по ссылкам выше).
 2. Скопируйте его во внутреннюю память смартфона по пути:
    * Для AGC 9.x: `/Download/AGC.9.6/configs/` (или `/Download/AGC.9.2/configs/`)
    * Для AGC 8.x: `/AGC/configs/`
@@ -40,13 +42,15 @@ Pre-tuned configuration profiles engineered specifically to leverage full 50MP/2
 
 ### Available Profiles:
 1. **Xiaomi 13 Ultra (`ishtar`):**
-   * [`Mi13U_borndead_Universal_Leica_50MP.agc`](./Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc) — Quad-50MP RAW16 on all 4 Sony sensors (IMX989 + 3x IMX858).
-2. **Xiaomi 15 Ultra (`xuanyuan`):**
-   * [`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](./Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc) — 50MP on 1" Sony LYT-900 & **200MP** on Samsung HP9 periscope.
-3. **Xiaomi 17 Ultra (`nezha`):**
-   * [`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](./Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc) — 50MP on 1" OmniVision OVX10500U & **200MP** on Samsung HP9 periscope.
-4. **Xiaomi 15 / 15 Pro (`dada` / `haotian`):**
-   * [`Mi15_borndead_LightHunter_50M.agc`](./Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc) — 50MP on Light Hunter 900.
+   * [`Mi13U_borndead_Universal_Leica_50MP.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc) — Quad-50MP RAW16 on all 4 Sony sensors (IMX989 + 3x IMX858).
+2. **Xiaomi 14 Ultra (`aurora`):**
+   * [`Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_14_Ultra_aurora/Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc) — Quad-50MP RAW16 on all 4 lenses, variable aperture F1.63-F4.0, Black Level 64, Leica Authentic.
+3. **Xiaomi 15 Ultra (`xuanyuan`):**
+   * [`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc) — 50MP on 1" Sony LYT-900 & **200MP** on Samsung HP9 periscope.
+4. **Xiaomi 17 Ultra (`nezha`):**
+   * [`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc) — 50MP on 1" OmniVision OVX10500U & **200MP** on Samsung HP9 periscope.
+5. **Xiaomi 15 / 15 Pro (`dada` / `haotian`):**
+   * [`Mi15_borndead_LightHunter_50M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc) — 50MP on Light Hunter 900.
 
 ### Installation Steps:
 1. Download the `.agc` file matching your smartphone model.
