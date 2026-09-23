@@ -87,6 +87,7 @@
    - [Tier 1: Аппаратный ИИ вычислительной фотографии (Xiaomi AISP на NPU)](#61-tier-1-аппаратный-ии-вычислительной-фотографии-xiaomi-aisp-на-npu-snapdragon-ru)
    - [Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto)](#62-tier-2-генеративный-ии-постобработки-hyperai-studio--extraphoto-ru)
    - [Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD)](#63-tier-3-ai-ассистент-видоискателя-ai-director--vision-hud-ru)
+   - [Взаимная совместимость и Smart Multi-Module Sync](#64-взаимная-совместимость-модулей-ии-и-технология-smart-multi-module-synchronization-ru)
 7. [Визуальные сравнения «До / После» и галерея интерфейса (Visual Proof)](#7-визуальные-сравнения-до--после-visual-proof-ru)
    - [Аппаратный DCG против программного мульти-кадрового HDR](#71-аппаратный-dcg-против-программного-мульти-кадрового-hdr-движение-в-кадре)
    - [Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass](#72-шумоподавление-в-видео-сток-arcsoft-aisp-против-george-mod-bypass)
@@ -155,6 +156,7 @@
 | **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** | **3.10 КБ** | **Tier 1 (NPU)** | **Аппаратный нейросетевой движок Xiaomi AISP**. 100% оффлайн на NPU Hexagon. FusionLM, ToneLM, ColorLM, PortraitLM, CyberFocus 2.0, AINR, супер-зум 30x–100x. Чистый оверлей без облачных сбоев. |
 | **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** | **3.12 КБ** | **Tier 2 (Studio)** | **Генеративный студийный комплекс HyperAI**. Прямая интеграция с видоискателем и галереей: AI Ластик Pro (Eraser 2.0), AI Расширение кадра (Outpainting), AI Небо 3.0 с динамическим релайтингом, 3D студийный свет. |
 | **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** | **2.68 КБ** | **Tier 3 (Vision HUD)** | **Умный ассистент видоискателя AI Director**. Интеллектуальный HUD в реальном времени: динамические линии золотого сечения и третей Leica, высокоточный стабилизатор горизонта (±0.1°), советник по объективам и Pro-настройкам. |
+| 🌟 **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** | **4.11 КБ** | **All-In-One (Полный комбайн)** | **Все 3 уровня ИИ в одном модуле**. Содержит аппаратный AISP NPU (Tier 1), генеративную фотолабораторию HyperAI Studio (Tier 2) и ассистент видоискателя AI Director (Tier 3). 100% оффлайн, установка в один клик без конфликтов. |
 
 ### 4. Готовые пресеты конфигураций GCam (.agc) (RU)
 
@@ -342,6 +344,30 @@
 <p align="center">
   <img src="./assets/ai_director_viewfinder_hud.jpg" alt="AI Director Viewfinder HUD" width="100%" style="border-radius: 12px;">
 </p>
+
+---
+
+#### 6.4. Взаимная совместимость модулей ИИ и технология Smart Multi-Module Synchronization (RU)
+
+Часто возникает закономерный вопрос: **совместимы ли эти модули между собой и с базовыми модулями (FULL / SLIM)?**
+
+**Ответ: ДА, совместимы на 100%!**
+
+##### 1. Разделение системных уровней (Separation of Concerns)
+Каждый модуль сфокусирован на своем независимом системном слое:
+- **Tier 1 (AISP)** воздействует исключительно на драйверы чипсета Qualcomm CamX и сопроцессор NPU Hexagon (`ro.hardware.camera.aisp=1`, `persist.vendor.camera.aisp=1`). Он не затрагивает ни фоторедактор, ни интерфейс видоискателя.
+- **Tier 2 (HyperAI Studio)** подключает инструменты генеративного редактирования в фотолаборатории `com.miui.extraphoto` и системной галерее `com.miui.gallery`. Он не пересекается с драйверами камеры или видоискателем.
+- **Tier 3 (AI Director)** активирует оверлей композиционных сеток и гиро-горизонта в самом приложении камеры `com.android.camera`.
+
+##### 2. Интеллектуальная синхронизация конфигураций (Smart Multi-Module Sync)
+В классических модулях Magisk/KernelSU при установке нескольких дополнений, затрагивающих один и тот же файл `device_features/<device>.xml`, нижний модуль перекрывается верхним по правилам OverlayFS. 
+В модулях **Mi Master Camera Combo** реализована эксклюзивная технология **Smart Multi-Module Synchronization**:
+- При установке инсталлятор `customize.sh` сканирует `/data/adb/modules/` и извлекает текущую активную конфигурацию из уже установленных модулей камеры;
+- Инжектирует новые функции и перезаписывает не только локальный файл `$MODPATH`, но и **синхронизирует обновленный XML во все ранее установленные каталоги модулей нашей линейки**;
+- В итоге, независимо от того, в каком порядке Magisk или KernelSU монтирует оверлеи, Android получает **целостный файл со всеми активными функциями всех установленных модулей**!
+
+##### 3. Полный комбайн «Всё в одном» (All-In-One Edition)
+Если вы не хотите устанавливать три модуля по отдельности, используйте **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** (4.11 КБ). Он объединяет все возможности Tier 1, Tier 2 и Tier 3 в едином модуле с установкой в один клик.
 
 ---
 
@@ -869,6 +895,11 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 ### 11. Часто задаваемые вопросы (FAQ) (RU)
 
+**В: Совместимы ли модули ИИ (Tier 1, Tier 2, Tier 3) между собой и с базовыми модулями FULL/SLIM?**
+> **О: Да, на 100%!** Все три модуля ИИ работают на разных уровнях системы (чипсет NPU / фотостудия ExtraPhoto / видоискатель камеры). Благодаря встроенной технологии **Smart Multi-Module Synchronization** инсталлятор автоматически объединяет и синхронизирует конфигурационные файлы между всеми установленными модулями, исключая конфликты слоев OverlayFS. Вы можете установить любой один модуль, любые два, все три по отдельности, либо установить единый комбайн **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)**.
+
+
+
 <details>
 <summary><b>Что делать на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14), если пропал рут или черный экран?</b></summary>
 
@@ -982,6 +1013,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [Tier 1: On-Device Hardware NPU Computational Photography (Xiaomi AISP)](#61-tier-1-on-device-hardware-npu-computational-photography-xiaomi-aisp-en)
    - [Tier 2: Generative Post-Processing Studio (HyperAI & ExtraPhoto)](#62-tier-2-generative-post-processing-studio-hyperai--extraphoto-en)
    - [Tier 3: Real-Time Viewfinder Assistant (AI Director & Vision HUD)](#63-tier-3-real-time-viewfinder-assistant-ai-director--vision-hud-en)
+   - [Mutual Compatibility & Smart Multi-Module Sync](#64-mutual-compatibility--smart-multi-module-synchronization-technology-en)
 7. [Visual Proof Gallery & UI Feature Showcase](#7-visual-proof-gallery-before-vs-after-en)
    - [Hardware DCG vs Conventional Multi-Frame Staggered HDR](#71-hardware-dcg-vs-conventional-multi-frame-staggered-hdr-motion-in-frame)
    - [Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass](#72-video-noise-reduction-stock-arcsoft-aisp-smear-vs-george-mod-bypass)
@@ -1050,6 +1082,7 @@ Modules are organized into two distinct, production-ready tiers:
 | **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** | **3.10 KB** | **Tier 1 (NPU)** | **Xiaomi AISP Hardware Neural Engine**. 100% offline on Snapdragon Hexagon NPU. FusionLM, ToneLM, ColorLM, PortraitLM, CyberFocus 2.0, AINR, 30x–100x Super Resolution. Pure systemless overlay. |
 | **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** | **3.12 KB** | **Tier 2 (Studio)** | **HyperAI Generative Studio Suite**. Directly linked to Camera Preview & Gallery: AI Eraser Pro (Magic Elimination 2.0), AI Image Expansion (Outpainting), AI Sky 3.0 Dynamic Relighting, and Studio Portrait Light. |
 | **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** | **2.68 KB** | **Tier 3 (Vision HUD)** | **Real-Time Viewfinder Assistant AI Director**. Intelligent live HUD: Leica golden ratio & rule-of-thirds composition guidelines, high-precision horizon leveling indicator (±0.1°), AI lens advisor, and Smart Pro mode coach. |
+| 🌟 **[Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** | **4.11 KB** | **All-In-One (Complete Suite)** | **All 3 AI Tiers combined in a single module**. Includes AISP Hardware NPU (Tier 1), HyperAI Studio Generative Suite (Tier 2), and AI Director Viewfinder HUD (Tier 3). 100% offline, single-click install with zero layer conflicts. |
 
 ### 4. Ready-to-Use GCam Config Presets (.agc) (EN)
 
@@ -1237,6 +1270,30 @@ Module: **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.gith
 <p align="center">
   <img src="./assets/ai_director_viewfinder_hud.jpg" alt="AI Director Viewfinder HUD" width="100%" style="border-radius: 12px;">
 </p>
+
+---
+
+#### 6.4. Mutual Compatibility & Smart Multi-Module Synchronization Technology (EN)
+
+A common and critical question: **are these AI modules compatible with each other and with the base FULL / SLIM modules?**
+
+**Answer: YES, 100% compatible!**
+
+##### 1. Clean Separation of System Concerns
+Each module is engineered to operate on a distinct system tier:
+- **Tier 1 (AISP Engine)** targets low-level Qualcomm CamX drivers and the Hexagon NPU coprocessor (`ro.hardware.camera.aisp=1`, `persist.vendor.camera.aisp=1`). It does not modify gallery packages or viewfinder layouts.
+- **Tier 2 (HyperAI Studio)** activates on-device generative algorithms inside `com.miui.extraphoto` and `com.miui.gallery`. It operates downstream from capture and does not touch camera HALs.
+- **Tier 3 (AI Director)** injects composition guides, Fibonacci grids, and gyro horizon HUD inside `com.android.camera`.
+
+##### 2. Smart Multi-Module Synchronization
+Under standard Magisk/KernelSU behavior, if multiple modules provide `device_features/<device>.xml`, OverlayFS masks the lower layer with the top layer.
+To eliminate this risk, all **Mi Master Camera Combo** modules feature **Smart Multi-Module Synchronization**:
+- During installation, `customize.sh` inspects `/data/adb/modules/` to discover XML modifications from previously installed camera packages;
+- It merges all feature tags and synchronizes the unified XML across **all installed camera module directories**;
+- As a result, regardless of Magisk / KernelSU mount sequence, the operating system always loads a unified, complete feature tree with 0% feature loss!
+
+##### 3. Complete All-In-One Edition
+For instant deployment without juggling individual archives, install **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** (4.11 KB). It combines Tier 1, Tier 2, and Tier 3 into a single, high-efficiency package.
 
 ---
 
@@ -1763,6 +1820,11 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 ---
 
 ### 11. Frequently Asked Questions (FAQ) (EN)
+
+**Q: Are the AI modules (Tier 1, Tier 2, Tier 3) compatible with each other and with the base FULL/SLIM modules?**
+> **A: Yes, 100% compatible!** All three AI modules operate on separated system layers (NPU hardware / ExtraPhoto studio / Viewfinder HUD). With our built-in **Smart Multi-Module Synchronization** technology, the installer automatically detects and unifies configuration files across all active camera modules in `/data/adb/modules/`, eliminating OverlayFS masking issues. You can install any single module, any pair, all three individually, or simply flash the unified **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)**.
+
+
 
 <details>
 <summary><b>What should I do on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14) if root dropped or screen went black?</b></summary>
