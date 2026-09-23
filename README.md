@@ -159,6 +159,7 @@
 * **Как спасти текущий снимок прямо сейчас**:
   - В окне с розовым снимком нажмите кнопку **«More options» («Еще») -> «Revert to original» («Вернуть оригинал»)**. Смартфон сохраняет чистый аппаратный снимок Snapdragon ISP, сделанный ДО отправки в облако.
   - В настройках камеры (шестерёнка) убедитесь, что пункт «Облачное улучшение / Ultra RAW Cloud» отключён.
+* **Статус верификации**: Подтверждено пользователем Steve на Xiaomi 17 Ultra SimpleRom ST (3.0.309.0) — розовый шум устранён, режим Leica M9 работает безупречно (*«I think this fixed cloud processing, no pink/purple»*).
 
 ---
 
@@ -606,6 +607,7 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
 * **How to Rescue Current Photo Immediately**:
   - In the pink photo result screen, tap **«More options» -> «Revert to original»**. The device keeps the pristine hardware shot captured by the Snapdragon ISP before cloud alteration.
   - In Camera Settings (gear icon), verify that «Cloud Enhance / Ultra RAW Cloud» is switched off.
+* **Verification Status**: Confirmed working by user Steve on Xiaomi 17 Ultra SimpleRom ST (3.0.309.0) — magenta noise eliminated, offline Leica M9 operating flawlessly (*«I think this fixed cloud processing, no pink/purple»*).
 
 ---
 
