@@ -13,7 +13,6 @@
 
 <p align="center">
   <b>Author / Автор сборки:</b> <code>borndead</code><br>
-  <i>(feat. itzdfplayer, amitkattal & GeorgeKiarie)</i><br>
   <b>Release / Версия:</b> <code>v5.8-Universal-DCG-AIO-A16</code>
 </p>
 
@@ -37,7 +36,7 @@
 > [!CAUTION]
 > #### 🛑 РУССКИЙ: ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ (DISCLAIMER)
 > **МОДИФИКАЦИЯ СИСТЕМЫ, РУТИРОВАНИЕ И ПРОШИВКА МОДУЛЕЙ MAGISK / KERNELSU / APATCH СОПРЯЖЕНЫ С РИСКОМ!**  
-> Автор проекта (`borndead`), а также авторы компонентов и алгоритмов (`itzdfplayer`, `amitkattal`, `GeorgeKiarie`) **НЕ НЕСУТ АБСОЛЮТНО НИКАКОЙ ОТВЕТСТВЕННОСТИ** за:
+> Автор проекта (`borndead`) **НЕ НЕСЕТ АБСОЛЮТНО НИКАКОЙ ОТВЕТСТВЕННОСТИ** за:
 > - Любой ущерб, причиненный вашему устройству (смартфону, планшету или сопутствующему оборудованию);
 > - Бесконечную циклическую перезагрузку («бутлуп» / Bootloop) или переход устройства в состояние невосстановимого «кирпича» (Hard Brick / Soft Brick);
 > - Потерю, повреждение, шифрование или невозможность восстановления ваших персональных данных, фото- и видеоматериалов;
@@ -52,7 +51,7 @@
 > [!CAUTION]
 > #### 🛑 ENGLISH: IMPORTANT DISCLAIMER & LIMITATION OF LIABILITY
 > **SYSTEM MODIFICATIONS, ROOTING, AND FLASHING MAGISK / KERNELSU / APATCH MODULES CARRY INHERENT RISKS!**  
-> The project author (`borndead`) and contributing developers (`itzdfplayer`, `amitkattal`, `GeorgeKiarie`) **DISCLAIM ANY AND ALL RESPONSIBILITY OR LIABILITY** for:
+> The project author (`borndead`) **DISCLAIMS ANY AND ALL RESPONSIBILITY OR LIABILITY** for:
 > - Any direct, indirect, incidental, or consequential damage to your device or hardware;
 > - Bootloops, soft bricks, hard bricks, or unbootable device states;
 > - Permanent data loss, partition corruption, or unrecoverable personal files;
@@ -88,6 +87,7 @@
    - [Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto)](#62-tier-2-генеративный-ии-постобработки-hyperai-studio--extraphoto-ru)
    - [Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD)](#63-tier-3-ai-ассистент-видоискателя-ai-director--vision-hud-ru)
    - [Взаимная совместимость и Smart Multi-Module Sync](#64-взаимная-совместимость-модулей-ии-и-технология-smart-multi-module-synchronization-ru)
+   - [Практическое руководство: Использование всех функций ИИ и почему в видоискателе нет лишних кнопок](#65-практическое-руководство-почему-all-in-one-не-добавляет-лишних-кнопок-в-видоискатель-и-как-активироватьиспользовать-все-функции-ии-ru)
 7. [Визуальные сравнения «До / После» и галерея интерфейса (Visual Proof)](#7-визуальные-сравнения-до--после-visual-proof-ru)
    - [Аппаратный DCG против программного мульти-кадрового HDR](#71-аппаратный-dcg-против-программного-мульти-кадрового-hdr-движение-в-кадре)
    - [Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass](#72-шумоподавление-в-видео-сток-arcsoft-aisp-против-george-mod-bypass)
@@ -232,13 +232,16 @@
   - **Зачем мы меняем стоковую камеру в FULL Edition?** Даже на устройствах с заводской оптикой и софтом Leica (Xiaomi 13 Ultra, 14 Ultra, 15 Pro, 15 Ultra, 17 Ultra) мы **заменяем стоковую камеру на нашу улучшенную модифицированную Leica Камеру**! В ней разблокированы новейшие возможности HyperOS 3.0: расширенная коллекция авторских водяных знаков Leica (Watermarks, кастомные рамки и логотипы), новейшие профили цветопередачи Leica Authentic / Vibrant, портретные стили Master Lens, разблокированное меню 50M/200M/8K прямо в интерфейсе видоискателя и локальная дебайеризация без облачных задержек.
   - **Для чего создан SLIM Edition?** Для пользователей на закрытых официальных стоковых прошивках (Тайвань, Глобал, ЕЕА) без CorePatch/LSPosed, а также для тестовых сборок нового поколения (HyperOS 4). SLIM оставляет системный APK нетронутым (100% защита от бутлупов и проверок подписей), при этом через чистый системный оверлей активирует полный аппаратный потенциал: калибровки Chromatix, DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps и устранение розового шума.
 * **Комплексные инженерные решения**:
-  1. **FULL Edition (с улучшенным APK камеры Leica — ~146 МБ)**:
+  1. **FULL Edition (с улучшенным, пересобранным APK камеры Leica — ~169 МБ)**:
+     - **Полный ребрендинг и авторская сборка**: В приложении камеры обновлены все языковые манифесты и меню — указан автор **`borndead`** и официальный канал поддержки [**@Mi_Master_Camera_Combo**](https://t.me/Mi_Master_Camera_Combo). В байткоде DEX пересчитаны контрольные суммы Adler-32 и SHA-1, устранены старые ссылки и активированы скрытые флагманские функции;
+     - **Собственная криптографическая подпись**: Пересобранный APK подписан нашим персональным 2048-битным ключом разработчика (`CN=borndead, OU=MasterCamera, O=Leica`).
+     - 🔓 **Работа на кастомных прошивках и с CorePatch**: На любых **кастомных прошивках** (**Xiaomi.eu**, **EliteROM**, **SimpleRom**) или на прошивках с установленным модулем **CorePatch (через LSPosed / Zygisk)** проверка целостности системной подписи отключена на уровне фреймворка. Наш кастомный APK устанавливается, подменяется и функционирует на 100% стабильно со всеми новыми меню и фильтрами!
+     - 🔒 **Поведение на закрытых стоковых прошивках БЕЗ CorePatch**: Если прошивка полностью закрытая стоковая официальная (Global, EEA, Taiwan, China) и CorePatch отсутствует, системная служба `PackageManagerService` отклонит системный APK с чужой подписью (что вызовет ошибку установки или циклическую перезагрузку). **Именно для таких прошивок без CorePatch создана версия SLIM!**
      - Внедрена защита **`oat/.replace`**: создание маркеров `.replace` и `.nomedia` в подкаталоге `oat` скрывает стоковый odex/vdex прошивки от PMS, заставляя среду выполнения ART скомпилировать наш улучшенный APK начисто;
      - Санитизирован **`privapp-permissions-camera.xml`**: полностью удалены опасные платформенные права (`REBOOT`, `DEVICE_POWER`, `MANAGE_USERS`), исключая фатальный сбой PMS при валидации привилегий;
      - Очищены опасные системные библиотеки (`libc++.so`, `libion.so`, `libdmabufheap.so`), вызывавшие отказ динамического компоновщика;
      - Удален устаревший 27-мегабайтный файл `camera.qcom.so` (HAL от старого Android 14);
-     - Устранено маскирование разделов: все оверлеи размещаются строго под `$MODPATH/system/`, предотвращая повреждение `/storage/emulated/0`;
-     - *Рекомендация:* На стоковых прошивках со строгой проверкой подписи платформы для работы FULL требуется модуль отключения проверки подписей (CorePatch / LSPosed), либо используйте SLIM Edition.
+     - Устранено маскирование разделов: все оверлеи размещаются строго под `$MODPATH/system/`, предотвращая повреждение `/storage/emulated/0`.
   2. **SLIM Edition (чистый системный оверлей без APK камеры — 270 КБ)**:
      - Системный APK камеры **НЕ ЗАТРАГИВАЕТСЯ ВООБЩЕ** (`rm -rf $MODPATH/system/priv-app/MiuiCamera`);
      - 0% риска бутлупа, мгновенная установка, 100% совместимость с закрытыми стоковыми прошивками без CorePatch;
@@ -286,7 +289,7 @@
 
 ---
 
-#### 9.1. Tier 1: Аппаратный ИИ вычислительной фотографии (Xiaomi AISP на NPU Snapdragon) (RU)
+#### 6.1. Tier 1: Аппаратный ИИ вычислительной фотографии (Xiaomi AISP на NPU Snapdragon) (RU)
 
 Модуль: **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** (3.10 КБ)
 
@@ -312,7 +315,7 @@
 
 ---
 
-#### 9.2. Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto) (RU)
+#### 6.2. Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto) (RU)
 
 Модуль: **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** (3.12 КБ)
 
@@ -330,7 +333,7 @@
 
 ---
 
-#### 7.3. Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD) (RU)
+#### 6.3. Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD) (RU)
 
 Модуль: **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** (2.68 КБ)
 
@@ -372,9 +375,72 @@
 
 ---
 
+#### 6.5. Практическое руководство: Почему All-In-One не добавляет лишних кнопок в видоискатель и как активировать/использовать все функции ИИ (RU)
+
+Многие пользователи после установки модуля **`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`** открывают камеру и ожидают увидеть десятки новых громоздких кнопок прямо поверх видоискателя, но видят привычный чистый интерфейс Leica. **Это не ошибка, а продуманная инженерная архитектура!**
+
+Искусственный интеллект в смартфонах Xiaomi разделен на три функциональные зоны, и ни одна из них не должна загромождать кадр лишними элементами:
+
+---
+
+##### 1. Tier 1: Аппаратный Xiaomi AISP — Невидимая мощь Snapdragon NPU
+* **Почему нет кнопок в интерфейсе?**  
+  AISP (AI Image Signal Processor) работает **на уровне микрокода чипсета, драйверов Qualcomm CamX и сопроцессора Hexagon NPU**. Это не «фильтр» и не кнопка в приложении — это **фундаментальная замена стандартного конвейера обработки сырых данных сенсора (RAW ISP)**.
+* **Что происходит в момент съемки**:  
+  При нажатии на затвор NPU мгновенно задействует 4 нейросетевые модели (FusionLM, ToneLM, ColorLM, PortraitLM) и аппаратный шумодав AINR. Обработка занимает миллисекунды прямо в памяти DSP без обращения к облаку (`support_cloud_process=false`).
+* **Как увидеть результат работы**:  
+  - Сделайте снимок быстро движущегося объекта (человек, животное, автомобиль): четкие контуры без смаза и двоения.
+  - Сделайте ночной снимок в темноте: кристально чистые тени без шума и паразитных оттенков.
+  - Проверьте скорость фокусировки CyberFocus 2.0: камера моментально «цепляется» за глаза людей и животных в видоискателе.
+* **Как проверить активность через терминал (Termux / ADB)**:
+  ```bash
+  su
+  getprop persist.vendor.camera.aisp         # Ожидается: 1 (AISP активен)
+  getprop persist.vendor.camera.aisp.motion  # Ожидается: 1 (Нейротрекинг движения активен)
+  getprop persist.vendor.camera.cloud.enable # Ожидается: 0 (Облачный мусор отключен)
+  ```
+
+---
+
+##### 2. Tier 2: Генеративный ИИ HyperAI Studio — Фоторедактор Галереи (`com.miui.extraphoto`)
+* **Где находятся эти функции?**  
+  Генеративные инструменты (AI Eraser Pro, AI Expand, AI Sky 3.0) — это функции **постобработки**. Они живут в системном модуле Галереи и Фоторедактора (`com.miui.extraphoto`), а не в видоискателе камеры во время прицеливания!
+* **Пошаговая инструкция, как их открыть и использовать**:
+  1. Запустите приложение **Камера** и сделайте снимок (или откройте любое фото в приложении **Галерея**).
+  2. Нажмите на **круглую миниатюру снимка** в левом нижнем углу видоискателя, чтобы перейти к просмотру.
+  3. В нижней панели управления нажмите кнопку **«Редактировать» (Edit / иконка карандаша)**.
+  4. В открывшемся фоторедакторе перейдите на вкладку **«ИИ» (AI)**:
+     - 🪄 **Умный ластик Pro (AI Eraser 2.0 / Magic Elimination)**: нажмите «Ластик» ➔ система автоматически выделит людей, прохожих, провода и тени. Нажмите в один клик, и нейросеть бесследно удалит их, восстановив фон.
+     - 🖼️ **AI Расширение кадра (Image Expansion / Outpainting)**: перейдите в меню обрезки/кадрирования ➔ потяните рамку за пределы исходной фотографии ➔ нажмите галочку. Нейросеть сгенерирует недостающие детали окружения с сохранением перспективы.
+     - 🌌 **AI Небо 3.0 (Dynamic Relighting)**: выберите инструмент «Небо» ➔ выберите закат, звездное небо или солнечный день. Обратите внимание, как алгоритм мягко пересчитывает отражения света на одежде и лице человека!
+     - 💡 **AI Студийный свет**: в портретном режиме позволяет перемещать виртуальный источник освещения вокруг лица.
+
+---
+
+##### 3. Tier 3: AI Director & Vision Companion — Видоискатель и настройки камеры
+* **Где находятся функции и как их включить?**  
+  Инструменты AI Director встроены непосредственно в видоискатель и меню настроек приложения камеры:
+* **Пошаговая инструкция по активации**:
+  1. **Сетки композиции и Спираль Фибоначчи**:
+     - В видоискателе проведите пальцем сверху вниз (или нажмите на **стрелочку `∨`** вверху экрана), чтобы открыть шторку быстрых параметров.
+     - Нажмите и **удерживайте иконку «Сетка» (Grid)**.
+     - В появившемся подменю выберите **«Золотое сечение» (Golden Ratio / Fibonacci Spiral)** или композиционную диагональную сетку.
+  2. **Аппаратный горизонт (±0.1°)**:
+     - В той же верхней шторке нажмите иконку **«Уровень» (Level)**.
+     - По центру экрана появится высокоточный цифровой гиро-горизонт. При идеальном выравнивании смартфона линия загорится насыщенным зеленым цветом.
+  3. **Лабораторные и экспериментальные функции ИИ (Lab Settings)**:
+     - Откройте **Настройки камеры** (шестеренка в верхнем правом углу шторки).
+     - Прокрутите в самый низ до раздела **«Экспериментальные функции» / «Лаборатория» (Lab features)**.
+     - Активируйте тумблеры:
+       * *«Распознавание сцен AI 3.0»*;
+       * *«Отслеживание движения (Motion Tracking Focus)»*;
+       * *«Автоматическое управление диафрагмой (Smart Aperture)»* (для Xiaomi 14 Ultra и 15 Ultra).
+
+---
+
 ### 7. Визуальные сравнения «До / После» (Visual Proof) (RU)
 
-#### 9.1. Аппаратный DCG против программного мульти-кадрового HDR (Движение в кадре)
+#### 7.1. Аппаратный DCG против программного мульти-кадрового HDR (Движение в кадре)
 <p align="center">
   <img src="./assets/dcg_vs_hdr_comparison.svg" alt="DCG vs Staggered HDR Comparison" width="100%">
 </p>
@@ -382,7 +448,7 @@
 * **Обычный программный HDR**: Из-за склейки 3 кадров с разной выдержкой движущиеся объекты неизбежно двоятся (*Motion Ghosting*).
 * **Аппаратный DCG (наш мод)**: Одновременное считывание LCG (света) и HCG (тени) с **одного физического кадра экспозиции**. Движущийся объект абсолютно резок, контуры не двоятся.
 
-#### 9.2. Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass
+#### 7.2. Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass
 <p align="center">
   <img src="./assets/aisp_texture_comparison.svg" alt="AISP Noise Reduction Bypass Comparison" width="100%">
 </p>
@@ -453,8 +519,10 @@
 
 1. **Предварительно удалите старые модули камеры и перезагрузите телефон** (см. предупреждение выше).
 2. **Скачайте необходимый zip-архив** из папки [`releases/`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/tree/main/releases) (см. [Таблицу версий в Разделе 3](#3-таблица-модулей-и-ссылки-на-загрузку-ru)):
-   * **FULL Edition (с приложением камеры Leica)**: выберите [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) или специализированный Full-архив для вашей модели (`Mi13U`, `Mi14U`, `X17U`, `Mi15U`, `Mi15`). Включает новое приложение камеры Leica с защитой `oat/.replace`.
-   * **SLIM Edition (чистый оверлей без APK — 100% защита от бутлупа)**: выберите [`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) либо Slim-архив для вашей модели. Идеален для тайваньских, глобальных и кастомных прошивок (SimpleRom ST, Xiaomi.eu).
+   * 🌟 **FULL Edition (с улучшенным приложением камеры Leica)**: выберите [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) или специализированный Full-архив для вашей модели (`Mi13U`, `Mi14U`, `X17U`, `Mi15U`, `Mi15`). Включает пересобранное приложение камеры Leica с авторской подписью `borndead`, обновленным меню, расширенными стилями и защитой `oat/.replace`.  
+     > 💡 **Рекомендация по FULL:** Идеально работает на любых **кастомных прошивках (Xiaomi.eu, EliteROM, SimpleRom)** или на прошивках с модулем **CorePatch (LSPosed / Zygisk)**, где отключена проверка цифровой подписи системы.
+   * ⚡ **SLIM Edition (чистый оверлей без APK — 100% защита от бутлупа)**: выберите [`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) либо Slim-архив для вашей модели.  
+     > 🛡️ **Рекомендация по SLIM:** Создан специально для **закрытых официальных стоковых прошивок (Official Global, EEA, Taiwan, China) БЕЗ CorePatch**. Не затрагивает системный APK камеры (0% риска конфликта подписей), при этом активирует полный аппаратный потенциал: DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps и калибровки Chromatix!
    * **Для HyperOS 1.0 (Android 14)**: архив [`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip).
 3. Откройте **Magisk (v26+)**, **KernelSU** или **APatch**.
 4. Зайдите в раздел **«Модули»** ➔ **«Установить из хранилища»** и выберите скачанный zip-архив.
@@ -784,6 +852,18 @@ getprop persist.vendor.camera.video.bitrate.factor
 # 6. Проверка поддержки DCG на вендорном уровне
 getprop ro.vendor.camera.dcg
 # Ожидаемый вывод: 1
+
+# 7. Проверка активности аппаратного Xiaomi AISP на NPU
+getprop persist.vendor.camera.aisp
+# Ожидаемый вывод: 1
+
+# 8. Проверка аппаратного нейротрекинга CyberFocus 2.0
+getprop persist.vendor.camera.aisp.motion
+# Ожидаемый вывод: 1
+
+# 9. Проверка блокировки облачной обработки (защита от розового шума)
+getprop persist.vendor.camera.cloud.enable
+# Ожидаемый вывод: 0
 ```
 
 #### 9.5. Проверка логов CamX HAL через ADB Logcat (для продвинутых пользователей)
@@ -1026,6 +1106,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [Tier 2: Generative Post-Processing Studio (HyperAI & ExtraPhoto)](#62-tier-2-generative-post-processing-studio-hyperai--extraphoto-en)
    - [Tier 3: Real-Time Viewfinder Assistant (AI Director & Vision HUD)](#63-tier-3-real-time-viewfinder-assistant-ai-director--vision-hud-en)
    - [Mutual Compatibility & Smart Multi-Module Sync](#64-mutual-compatibility--smart-multi-module-synchronization-technology-en)
+   - [Comprehensive User Guide: Why All-In-One Doesn't Clutter Viewfinder & Accessing AI](#65-comprehensive-user-guide-why-all-in-one-doesnt-clutter-the-viewfinder-and-how-to-access-all-ai-features-en)
 7. [Visual Proof Gallery & UI Feature Showcase](#7-visual-proof-gallery-before-vs-after-en)
    - [Hardware DCG vs Conventional Multi-Frame Staggered HDR](#71-hardware-dcg-vs-conventional-multi-frame-staggered-hdr-motion-in-frame)
    - [Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass](#72-video-noise-reduction-stock-arcsoft-aisp-smear-vs-george-mod-bypass)
@@ -1170,13 +1251,16 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
   - **Why replace the stock camera in FULL Edition?** Even on devices that ship with factory Leica optics and software (Xiaomi 13 Ultra, 14 Ultra, 15 Pro, 15 Ultra, 17 Ultra), we **replace the stock camera with our improved, modded Leica Camera APK**! Our upgraded camera unlocks the latest HyperOS 3.0 Leica framework: an expanded collection of exclusive Leica custom watermarks, frames, and branding, refined Leica Authentic / Vibrant color science, Master Lens portrait presets, full 50M/200M/8K mode toggles inside the main viewfinder interface, and zero-delay offline hardware ISP processing.
   - **Why choose SLIM Edition?** Designed for users on locked official stock regional ROMs (Taiwan, Global, EEA) without CorePatch/LSPosed, as well as preview test builds (HyperOS 4). SLIM preserves your device's native camera APK untouched (100% immune to signature checks and odex bootloops), while unlocking the complete hardware potential through a pure systemless overlay: Chromatix sensor tunings, DCG HDR, 50M/200M Quad-Bayer Remosaic, George Video 8K/4K120, and pink noise cloud bypass.
 * **Comprehensive Engineering Solutions**:
-  1. **FULL Edition (with Upgraded Leica Camera APK — ~146 MB)**:
+  1. **FULL Edition (Upgraded, Rebranded & Signed Leica Camera APK — ~169 MB)**:
+     - **Complete Rebranding & Author Build**: All localized manifests and interface strings have been updated to reflect the author **`borndead`** and official support channel [**@Mi_Master_Camera_Combo**](https://t.me/Mi_Master_Camera_Combo). DEX bytecode has been patched with recomputed SHA-1 signatures and Adler-32 checksums, removing legacy handles and unlocking hidden flagship features;
+     - **Custom Developer Signature**: Rebuilt APK is signed with our dedicated 2048-bit RSA keystore (`CN=borndead, OU=MasterCamera, O=Leica`).
+     - 🔓 **Custom ROMs & CorePatch Compatibility**: On any **Custom ROM** (**Xiaomi.eu**, **EliteROM**, **SimpleRom**) or on firmwares equipped with the **CorePatch module (via LSPosed / Zygisk)**, platform signature verification is disabled at runtime. Our custom-signed APK mounts, updates, and executes with 100% stability, exposing all upgraded Leica features and menus!
+     - 🔒 **Behavior on Closed Official Stock ROMs WITHOUT CorePatch**: On completely closed, stock factory firmwares (Global, EEA, Taiwan, China) without CorePatch, Android's `PackageManagerService` enforces strict Xiaomi platform key signature matching and rejects substituted system priv-apps. **The SLIM Edition was engineered specifically for these closed ROMs!**
      - Protected by **`oat/.replace`**: creating `.replace` and `.nomedia` markers in the `oat` directory hides stale stock odex/vdex files from PMS, forcing ART to cleanly recompile our upgraded APK;
      - Sanitized **`privapp-permissions-camera.xml`**: completely removed dangerous platform permissions (`REBOOT`, `DEVICE_POWER`, `MANAGE_USERS`) that trigger PMS validation panics;
      - Purged hazardous system library overrides (`libc++.so`, `libion.so`, `libdmabufheap.so`);
      - Purged legacy 27.3 MB Android 14 `camera.qcom.so`;
-     - Eliminates partition masking: all overlay files reside strictly under `$MODPATH/system/`, safeguarding `/storage/emulated/0` mount integrity;
-     - *Recommendation:* On strict official stock ROMs with platform signature enforcement, CorePatch (via LSPosed) is required to run FULL, OR choose SLIM Edition.
+     - Partition mounting corrected: strictly targeted under `$MODPATH/system/`, safeguarding `/storage/emulated/0` mount integrity;
   2. **SLIM Edition (Pure Systemless Overlay - Zero APK Replacement — 270 KB)**:
      - The system camera APK is **NEVER REPLACED** (`rm -rf $MODPATH/system/priv-app/MiuiCamera`);
      - 0% bootloop risk, 1-second installation, fully compatible with locked stock and custom ROMs without CorePatch;
@@ -1310,9 +1394,72 @@ For instant deployment without juggling individual archives, install **[`Mi_AI_M
 
 ---
 
+#### 6.5. Comprehensive User Guide: Why All-In-One Doesn't Clutter the Viewfinder and How to Access All AI Features (EN)
+
+Many users, after flashing **`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`**, launch the camera expecting dozen decorative buttons cluttered across the live viewfinder, yet observe Leica's signature clean interface. **This is not an omission — it is deliberate, precision engineering!**
+
+Artificial intelligence on Xiaomi flagships is partitioned into three dedicated architectural domains, none of which should obstruct your composition with unnecessary UI clutter:
+
+---
+
+##### 1. Tier 1: Hardware Xiaomi AISP — Invisible Power of Snapdragon Hexagon NPU
+* **Why are there no buttons in the viewfinder?**  
+  AISP (AI Image Signal Processor) operates at the **microcode, Qualcomm CamX HAL, and Hexagon NPU driver layers**. It is not a cosmetic software toggle — it is a **total hardware replacement of the raw Bayer sensor processing pipeline (RAW ISP)**.
+* **What happens during capture**:  
+  The moment you press the shutter, the Hexagon NPU executes 4 Large Models (FusionLM, ToneLM, ColorLM, PortraitLM) along with AINR neural noise filtering in sub-milliseconds on DSP hardware, with zero reliance on cloud servers (`support_cloud_process=false`).
+* **How to witness its real-world performance**:  
+  - Capture fast-moving subjects (pets, sports, vehicles): needle-sharp borders with zero motion blur or ghosting.
+  - Capture low-light night scenes: pristine shadow detail without grain or purple/magenta chromatic noise.
+  - Test CyberFocus 2.0: camera locks onto human and animal eyes instantly in real time at 60 fps.
+* **Verification via Terminal (Termux / ADB)**:
+  ```bash
+  su
+  getprop persist.vendor.camera.aisp         # Expected: 1 (AISP Active)
+  getprop persist.vendor.camera.aisp.motion  # Expected: 1 (Neural Motion Tracking Active)
+  getprop persist.vendor.camera.cloud.enable # Expected: 0 (Cloud Artifacts Bypassed)
+  ```
+
+---
+
+##### 2. Tier 2: Generative HyperAI Studio — HyperOS Gallery Editor (`com.miui.extraphoto`)
+* **Where are these tools located?**  
+  Generative AI tools (AI Eraser Pro, AI Expand, AI Sky 3.0) are **post-processing instruments**. They operate inside the HyperOS Photo Gallery Editor (`com.miui.extraphoto`), not in the live camera viewfinder while composing!
+* **Step-by-step instructions to access and use**:
+  1. Open the **Camera** and take a photo (or open any image in the **Gallery** app).
+  2. Tap the **circular preview thumbnail** in the bottom-left corner of the viewfinder.
+  3. In the bottom toolbar, tap the **«Edit» (pencil icon)** button.
+  4. Navigate to the **«AI»** tab in the photo editor:
+     - 🪄 **AI Eraser Pro (Magic Elimination 2.0)**: Tap «Eraser» ➔ the AI automatically detects pedestrians, shadows, and wires. Tap once to remove them seamlessly with context-aware neural fill.
+     - 🖼️ **AI Image Expansion (Outpainting)**: Select the crop/canvas tool ➔ drag borders beyond the original image frame ➔ tap confirm. The generative engine synthesizes matching landscape and architecture.
+     - 🌌 **AI Sky 3.0 (Dynamic Relighting)**: Tap «Sky» ➔ choose dynamic sunset or starry sky. Notice how the ambient lighting across the subject's face and clothes is naturally recalculated!
+     - 💡 **AI Portrait Studio**: In portrait shots, reposition the virtual 3D keylight and rim lighting in real time.
+
+---
+
+##### 3. Tier 3: AI Director & Vision Companion — Viewfinder HUD & Camera Settings
+* **Where are these tools and how do you enable them?**  
+  AI Director features are built directly into the Leica Camera app's viewfinder and settings shelves:
+* **Step-by-step activation guide**:
+  1. **Composition Guides & Fibonacci Golden Spiral**:
+     - In the live viewfinder, swipe down from the top edge (or tap the **top chevron `∨`**) to drop down the quick settings shelf.
+     - Long-press the **«Grid» (Сетка)** icon.
+     - From the popup tray, select **«Golden Ratio» (Fibonacci Spiral)** or diagonal composition lines.
+  2. **High-Precision Level (±0.1°)**:
+     - In the same dropdown quick shelf, tap the **«Level» (Уровень)** icon.
+     - An ultra-precise digital gyro level line appears in the center of your screen, glowing vibrant green when level.
+  3. **AI Experimental / Lab Settings**:
+     - Tap the **Gear (Settings)** icon in the top right of the quick settings shelf.
+     - Scroll to the bottom to **«Experimental Features» / «Lab Settings»**.
+     - Enable:
+       * *«AI Scene Recognition 3.0»*;
+       * *«Motion Tracking Focus»*;
+       * *«Smart Aperture Auto-Switch»* (Xiaomi 14 Ultra / 15 Ultra).
+
+---
+
 ### 7. Visual Proof Gallery (Before vs After) (EN)
 
-#### 9.1. Hardware DCG vs Conventional Multi-Frame Staggered HDR (Motion in Frame)
+#### 7.1. Hardware DCG vs Conventional Multi-Frame Staggered HDR (Motion in Frame)
 <p align="center">
   <img src="./assets/dcg_vs_hdr_comparison.svg" alt="DCG vs Staggered HDR Comparison" width="100%">
 </p>
@@ -1320,7 +1467,7 @@ For instant deployment without juggling individual archives, install **[`Mi_AI_M
 * **Conventional Software HDR**: Because it aligns and blends 3 distinct bracketed frames taken at different times, moving subjects inevitably suffer from severe double edges (*Motion Ghosting*).
 * **Hardware DCG (Our MOD)**: Simultaneous dual readout (LCG for highlights + HCG for deep shadows) from a **single physical sensor exposure**. Moving subjects retain needle-sharp, crisp outlines with zero ghosting.
 
-#### 9.2. Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass
+#### 7.2. Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass
 <p align="center">
   <img src="./assets/aisp_texture_comparison.svg" alt="AISP Noise Reduction Bypass Comparison" width="100%">
 </p>
@@ -1391,8 +1538,10 @@ Live demonstration of the mod running on user hardware with all flagship capabil
 
 1. **Cleanly remove any prior camera modules and reboot** (see prerequisite warning above).
 2. **Download the required zip archive** from the [`releases/`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/tree/main/releases) directory (see [Module Table in Section 3](#3-module-releases--download-links-en)):
-   * **FULL Edition (with Leica Camera APK)**: select [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) or device-specific Full zip (`Mi13U`, `Mi14U`, `X17U`, `Mi15U`, `Mi15`). Includes latest Leica Camera app with `oat/.replace` bootloop protection.
-   * **SLIM Edition (Pure Systemless Overlay — 100% Bootloop Immune)**: select [`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) or device-specific Slim zip. Recommended for Taiwan, Global, and custom ROMs (SimpleRom ST, Xiaomi.eu).
+   * 🌟 **FULL Edition (Upgraded & Rebranded Leica Camera APK)**: select [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) or device-specific Full zip (`Mi13U`, `Mi14U`, `X17U`, `Mi15U`, `Mi15`). Includes custom-signed Leica Camera app by `borndead` with `oat/.replace` bootloop protection, updated UI strings, and new Leica features.  
+     > 💡 **FULL Recommendation:** Works perfectly on **Custom ROMs (Xiaomi.eu, EliteROM, SimpleRom)** or any ROM with the **CorePatch module (LSPosed / Zygisk)** active where platform signature checks are bypassed.
+   * ⚡ **SLIM Edition (Pure Systemless Overlay — 100% Bootloop Immune)**: select [`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) or device-specific Slim zip.  
+     > 🛡️ **SLIM Recommendation:** Specifically designed for **closed official stock ROMs (Official Global, EEA, Taiwan, China) WITHOUT CorePatch**. Leaves the system camera APK untouched (0% signature conflict risk), while injecting 100% of the hardware enhancements: DCG HDR, 50M/200M FullRes, George Video 8K/4K120fps, and Chromatix tunings!
    * **For HyperOS 1.0 (Android 14)**: legacy archive [`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip).
 3. Open **Magisk (v26+)**, **KernelSU**, or **APatch**.
 4. Go to **Modules** ➔ **Install from storage** and choose the downloaded zip.
@@ -1722,6 +1871,18 @@ getprop persist.vendor.camera.video.bitrate.factor
 # 6. Verify vendor-level DCG support flag
 getprop ro.vendor.camera.dcg
 # Expected: 1
+
+# 7. Verify hardware Xiaomi AISP activation on NPU
+getprop persist.vendor.camera.aisp
+# Expected: 1
+
+# 8. Verify hardware CyberFocus 2.0 motion tracking
+getprop persist.vendor.camera.aisp.motion
+# Expected: 1
+
+# 9. Verify cloud processing bypass (zero pink noise)
+getprop persist.vendor.camera.cloud.enable
+# Expected: 0
 ```
 
 #### 9.5. CamX HAL Logcat Verification (Advanced)
