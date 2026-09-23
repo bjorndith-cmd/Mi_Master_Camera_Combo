@@ -147,7 +147,7 @@ name=Xiaomi Master Camera Combo (Universal FULL Edition)
 version=v5.8-Universal-FULL-A16
 versionCode=20260926
 author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
-description=Universal Full Flagship Camera Suite for Xiaomi 13U, 15, 15 Pro, 15U & 17U on HyperOS 2/3 (Android 15/16). Full Leica Camera APK (HyperOS 3.0) + oat/.replace fix + Quad-50M/200M FullRes + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K video on all lenses + 4K120fps + offline processing.
+description=Universal Full Flagship Camera Suite for Xiaomi 13U, 14U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3 (Android 14/15/16). Full Leica Camera APK + oat/.replace protection + Quad-50M/200M FullRes + Variable Aperture + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K video on all lenses + 4K120fps + offline processing.
 """)
 
 # Module prop for Universal SLIM
@@ -157,7 +157,7 @@ name=Xiaomi Master Camera Combo (Universal SLIM Edition)
 version=v5.8-Universal-SLIM-A16
 versionCode=20260926
 author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
-description=Universal Pure Systemless Overlay for Xiaomi 13U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50M/200M FullRes + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K all lenses + 4K120fps + Chromatix hardware sensor bins.
+description=Universal Pure Systemless Overlay for Xiaomi 13U, 14U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50M/200M FullRes + Variable Aperture + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K all lenses + 4K120fps + Chromatix hardware sensor bins.
 """)
 
 # customize.sh for Universal FULL (Includes APK copy with oat/.replace)
@@ -185,6 +185,12 @@ case "$DEVICE" in
         DEV_PROFILE="ishtar"
         ZOOM_GRID="0.5:1.0:3.2:5.0"
         XML_NAMES="ishtar.xml"
+        ;;
+    aurora)
+        DEVICE_NAME="Xiaomi 14 Ultra"
+        DEV_PROFILE="aurora"
+        ZOOM_GRID="0.5:1.0:3.2:5.0"
+        XML_NAMES="aurora.xml ishtar.xml"
         ;;
     dada)
         DEVICE_NAME="Xiaomi 15"
@@ -252,6 +258,7 @@ if [ -n "$REAL_XML" ]; then
         support_ultra_pixel_zoom_ratio support_super_resolution_zoom \\
         is_support_ultra_hd is_support_pixel_model support_super_resolution \\
         support_ultra_pixel support_50mp support_ultra_raw support_manual_ultra_raw \\
+        support_camera_manual_aperture support_variable_aperture support_stepless_aperture \\
         support_8k_video support_8k_24fps support_8k_all_rear_sensors \\
         support_4k_120fps support_dolby_vision support_4k_60fps_dolby_vision \\
         support_log_video support_director_mode support_cinematic_mode \\
@@ -288,6 +295,11 @@ if [ -n "$REAL_XML" ]; then
     <string name="support_ultra_hd_zoom">$ZOOM_GRID</string>
     <bool name="support_ultra_raw">true</bool>
     <bool name="support_manual_ultra_raw">true</bool>
+
+    <!-- Variable Physical Aperture (F1.63 - F4.0) -->
+    <bool name="support_camera_manual_aperture">true</bool>
+    <bool name="support_variable_aperture">true</bool>
+    <bool name="support_stepless_aperture">true</bool>
 
     <!-- Professional Video Capabilities -->
     <bool name="support_8k_video">true</bool>
@@ -449,6 +461,12 @@ case "$DEVICE" in
         ZOOM_GRID="0.5:1.0:3.2:5.0"
         XML_NAMES="ishtar.xml"
         ;;
+    aurora)
+        DEVICE_NAME="Xiaomi 14 Ultra"
+        DEV_PROFILE="aurora"
+        ZOOM_GRID="0.5:1.0:3.2:5.0"
+        XML_NAMES="aurora.xml ishtar.xml"
+        ;;
     dada)
         DEVICE_NAME="Xiaomi 15"
         DEV_PROFILE="dada"
@@ -515,6 +533,7 @@ if [ -n "$REAL_XML" ]; then
         support_ultra_pixel_zoom_ratio support_super_resolution_zoom \\
         is_support_ultra_hd is_support_pixel_model support_super_resolution \\
         support_ultra_pixel support_50mp support_ultra_raw support_manual_ultra_raw \\
+        support_camera_manual_aperture support_variable_aperture support_stepless_aperture \\
         support_8k_video support_8k_24fps support_8k_all_rear_sensors \\
         support_4k_120fps support_dolby_vision support_4k_60fps_dolby_vision \\
         support_log_video support_director_mode support_cinematic_mode \\
@@ -551,6 +570,11 @@ if [ -n "$REAL_XML" ]; then
     <string name="support_ultra_hd_zoom">$ZOOM_GRID</string>
     <bool name="support_ultra_raw">true</bool>
     <bool name="support_manual_ultra_raw">true</bool>
+
+    <!-- Variable Physical Aperture (F1.63 - F4.0) -->
+    <bool name="support_camera_manual_aperture">true</bool>
+    <bool name="support_variable_aperture">true</bool>
+    <bool name="support_stepless_aperture">true</bool>
 
     <!-- Professional Video Capabilities -->
     <bool name="support_8k_video">true</bool>
@@ -880,5 +904,64 @@ shutil.copy2(mi15_full_zip, os.path.join(repo_releases, os.path.basename(legacy_
 
 mi15_slim_zip = os.path.join(root_antigravity, 'Mi15_Master_Imaging_MOD_Slim_by_borndead.zip')
 create_zip(mi15_slim_stg, mi15_slim_zip)
+
+# -------------------------------------------------------------
+# 7. BUILD DEDICATED FULL & SLIM FOR XIAOMI 14 ULTRA (aurora)
+# -------------------------------------------------------------
+mi14u_full_stg = os.path.join(root_antigravity, 'Mi14U_Full_Staging')
+mi14u_slim_stg = os.path.join(root_antigravity, 'Mi14U_Slim_Staging')
+
+for stg in [mi14u_full_stg, mi14u_slim_stg]:
+    if os.path.exists(stg):
+        shutil.rmtree(stg)
+    os.makedirs(stg, exist_ok=True)
+    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
+    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
+        f.write(common_post_fs_data)
+    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
+        f.write("#!/system/bin/sh\n")
+    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
+        f.write(common_system_prop)
+    # Copy aurora assets (aisp.json)
+    if os.path.exists(os.path.join(multi_staging, 'devices', 'aurora', 'odm')):
+        shutil.copytree(os.path.join(multi_staging, 'devices', 'aurora', 'odm'), os.path.join(stg, 'system', 'odm'))
+
+# Add clean camera payload to 14U FULL
+shutil.copytree(os.path.join(payload_staging, 'system', 'priv-app'), os.path.join(mi14u_full_stg, 'system', 'priv-app'))
+shutil.copytree(os.path.join(payload_staging, 'system', 'etc', 'permissions'), os.path.join(mi14u_full_stg, 'system', 'etc', 'permissions'))
+
+# Module prop for 14U FULL
+with open(os.path.join(mi14u_full_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
+    f.write("""id=mi14u_master_camera_combo_full
+name=Xiaomi 14 Ultra Master Camera Combo (FULL Edition)
+version=v5.2-Full-Aurora
+versionCode=20260926
+author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+description=Dedicated FULL Leica Camera Suite for Xiaomi 14 Ultra (aurora) on HyperOS 1/2/3. Full Leica Camera APK + oat/.replace protection + Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + Stepless Variable Aperture (F1.63-F4.0) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Offline Processing Bypass.
+""")
+
+# Module prop for 14U SLIM
+with open(os.path.join(mi14u_slim_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
+    f.write("""id=mi14u_master_imaging_mod_slim
+name=Xiaomi 14 Ultra Master Camera Combo (SLIM Edition)
+version=v1.1-Slim-Aurora
+versionCode=20260926
+author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+description=Dedicated Pure Systemless Overlay for Xiaomi 14 Ultra (aurora) on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + Stepless Variable Aperture (F1.63-F4.0) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + AISP Noise Reduction Bypass.
+""")
+
+mi14u_full_cust = uni_full_cust.replace("Xiaomi Master Camera Combo (FULL Edition)", "Xiaomi 14 Ultra Master Camera Combo (FULL Edition)")
+with open(os.path.join(mi14u_full_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
+    f.write(mi14u_full_cust)
+
+mi14u_slim_cust = uni_slim_cust.replace("Xiaomi Master Camera Combo (SLIM Edition)", "Xiaomi 14 Ultra Master Camera Combo (SLIM Edition)")
+with open(os.path.join(mi14u_slim_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
+    f.write(mi14u_slim_cust)
+
+mi14u_full_zip = os.path.join(root_antigravity, 'Mi14U_Master_Camera_Combo_Full_by_borndead.zip')
+create_zip(mi14u_full_stg, mi14u_full_zip)
+
+mi14u_slim_zip = os.path.join(root_antigravity, 'Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip')
+create_zip(mi14u_slim_stg, mi14u_slim_zip)
 
 print("\n=== ALL FULL & SLIM MODULES SUCCESSFULLY BUILT AND PACKAGED! ===")

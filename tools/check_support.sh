@@ -52,6 +52,8 @@ log_both "  • SoC Platform: $SOC_NAME"
 case "$DEV_NAME" in
     ishtar)
         log_both "  • Target:       ${GREEN}Xiaomi 13 Ultra (Confirmed)${NC}" ;;
+    aurora)
+        log_both "  • Target:       ${GREEN}Xiaomi 14 Ultra (Confirmed)${NC}" ;;
     dada)
         log_both "  • Target:       ${GREEN}Xiaomi 15 (Confirmed)${NC}" ;;
     haotian)

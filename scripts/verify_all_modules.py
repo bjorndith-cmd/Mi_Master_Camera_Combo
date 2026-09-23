@@ -18,6 +18,9 @@ zips_to_check = [
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_Master_Camera_Combo_Full_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip',
+    # Xiaomi 14 Ultra
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi14U_Master_Camera_Combo_Full_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip',
     # Xiaomi 15 / 15 Pro
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Camera_Combo_Full_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Imaging_MOD_Slim_by_borndead.zip'

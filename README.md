@@ -3,8 +3,8 @@
 </p>
 
 # Xiaomi Master Camera Combo 📸⚡
-### Universal Flagship Suite for Xiaomi 13 Ultra, 15, 15 Pro, 15 Ultra & 17 Ultra
-#### HyperOS 2.0 / HyperOS 3.0 • Android 15 / Android 16 (API 35/36)
+### Universal Flagship Suite for Xiaomi 13 Ultra, 14 Ultra, 15, 15 Pro, 15 Ultra & 17 Ultra
+#### HyperOS 1.0 / HyperOS 2.0 / HyperOS 3.0 • Android 14 / Android 15 / Android 16 (API 34/35/36)
 
 <p align="center">
   <a href="#-русский"><b>🇷🇺 Перейти к русскому описанию</b></a> • 
@@ -100,7 +100,7 @@
 
 **Xiaomi Master Camera Combo** — это флагманский системный модуль для **Magisk (v26+)**, **KernelSU** и **APatch**, снимающий все аппаратные и программные ограничения стоковой камеры Leica на смартфонах Xiaomi под управлением **HyperOS 2.0 и HyperOS 3.0** (Android 15 и Android 16).
 
-Модуль оснащён **интеллектуальным инсталлятором**: при установке скрипт `customize.sh` на лету определяет модель вашего смартфона (`ishtar`, `dada`, `haotian`, `xuanyuan` или `nezha`), тип прошивки (Stock, SimpleRom, Xiaomi.eu, EliteROM), активирует соответствующие Chromatix-калибровки сенсоров, настраивает сетку зума 50M/200M и монтирует только проверенные компоненты.
+Модуль оснащён **интеллектуальным инсталлятором**: при установке скрипт `customize.sh` на лету определяет модель вашего смартфона (`ishtar`, `aurora`, `dada`, `haotian`, `xuanyuan` или `nezha`), тип прошивки (Stock, SimpleRom, Xiaomi.eu, EliteROM), активирует соответствующие Chromatix-калибровки сенсоров, настраивает сетку зума 50M/200M и монтирует только проверенные компоненты.
 
 ---
 
@@ -109,6 +109,7 @@
 | Модель | Кодовое имя | Процессор | Основные сенсоры | Сетка зума 50M/200M |
 |---|---|---|---|---|
 | **Xiaomi 13 Ultra** | `ishtar` | Snapdragon 8 Gen 2 | 1" Sony IMX989 + 3x IMX858 + OV32C | **0.5x : 1.0x : 3.2x : 5.0x** |
+| **Xiaomi 14 Ultra** | `aurora` | Snapdragon 8 Gen 3 | 1" Sony LYT-900 (F1.63-F4.0) + 3x IMX858 + OV32B | **0.5x : 1.0x : 3.2x : 5.0x** |
 | **Xiaomi 15** | `dada` | Snapdragon 8 Elite | Light Hunter 900 + JN1 + JN5 + OV32B | **0.6x : 1.0x : 3.2x** |
 | **Xiaomi 15 Pro** | `haotian` | Snapdragon 8 Elite | Light Hunter 900 + JN1 + IMX858 (5x) | **0.6x : 1.0x : 3.2x : 5.0x** |
 | **Xiaomi 15 Ultra** | `xuanyuan` | Snapdragon 8 Elite | 1" Sony LYT-900 + Samsung HP9 200M + IMX858 + JN5 | **0.5x : 1.0x : 3.0x : 5.0x** |
@@ -122,7 +123,7 @@
 * 🌟 **FULL Edition (с приложением камеры)**: Включает полнофункциональное приложение камеры Leica из HyperOS 3.0 со всеми интерфейсными возможностями, новыми водяными знаками, новыми фильтрами и режимами Leica. Оснащен защитой `oat/.replace` (предотвращает краш ART на проверке odex), очищен от опасных платформенных разрешений (`REBOOT`, `DEVICE_POWER`) и конфликтующих системных библиотек.
 * ⚡ **SLIM Edition (без приложения камеры / Pure Systemless Overlay)**: Чистый системный оверлей. Не затрагивает системный APK камеры. Идеален для максимальной безопасности (0% риска конфликтов подписей), для официальных закрытых прошивок без CorePatch, а также для кастомных прошивок (SimpleRom ST, Xiaomi.eu), где камера уже модифицирована авторами ROM. Разблокирует 50М/200М FullRes, George Video MOD 8K/4K120, DCG Hardware HDR, Chromatix калибровки и фикс розового шума.
 
-#### 🌐 Универсальные комбайны для всей линейки (13U, 15, 15 Pro, 15U, 17U)
+#### 🌐 Универсальные комбайны для всей линейки (13U, 14U, 15, 15 Pro, 15U, 17U)
 | Модуль | Размер | Тип | Описание |
 |---|---|---|---|
 | **[`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip)** | **182.52 МБ** | **FULL** | **Универсальный полный комбайн**. Включает приложение камеры Leica HyperOS 3.0, авто-определение любого устройства линейки, калибровки Chromatix, 50M/200M FullRes, George Video 8K/4K120fps, DCG HDR и защиту `oat/.replace`. |
@@ -133,6 +134,7 @@
 | Модель | Версия FULL (с APK камеры) | Версия SLIM (чистый оверлей без APK) | Особенности профиля |
 |---|---|---|---|
 | **Xiaomi 13 Ultra** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_Full_by_borndead.zip)** (146.15 МБ) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (270.2 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), George Video 8K/4K120, DCG HDR, калибровки IMX989/IMX858, оффлайн-обработка *(для HOS 1.0 A14 доступен архив [HOS1_A14](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip))*. |
+| **Xiaomi 14 Ultra** (`aurora`) | **[`Mi14U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi14U_Master_Camera_Combo_Full_by_borndead.zip)** (145.89 МБ) | **[`Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.03 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), бесступенчатая переменная диафрагма F1.63–F4.0, 1" Sony LYT-900, George Video 8K/4K120, DCG Hardware HDR, обход облачной обработки. |
 | **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/X17U_Master_Camera_Combo_Full_by_borndead.zip)** (159.74 МБ) | **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 МБ) | Кастомные калибровки OVX10500U/HP9/JN5, DCG HDR, 8K все линзы, 4K120fps, кодек `libqcodec2` *(для SimpleRom ST без Leica доступен [SimpleRom_ST](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
 | **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip)** (163.27 МБ) | **[`Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip)** (17.38 МБ) | Официальные калибровки Stock AIO 104 для 1" Sony LYT-900 и 200Мп Samsung HP9, нативный A16 HAL, ночной режим SmartAE LN2. |
 | **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (151.04 МБ) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.15 МБ) | Калибровки Light Hunter 900, 50Мп FullRes на 1.0x (на 15) и на всех линзах (на 15 Pro), DCG HDR. |
@@ -146,6 +148,7 @@
 | Смартфон | Целевые сенсоры | Файл пресета | Возможности пресета |
 |---|---|---|---|
 | **Xiaomi 13 Ultra** (`ishtar`) | Sony IMX989 + 3x IMX858 | **[`Mi13U_borndead_Universal_Leica_50MP.agc`](./configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc)** | 50Мп RAW16 на всех 4 линзах, Black Level 64, Leica Authentic матрица, HDR+ Enhanced |
+| **Xiaomi 14 Ultra** (`aurora`) | 1" Sony LYT-900 + 3x IMX858 | **[`Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc`](./configs/Xiaomi_14_Ultra_aurora/Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc)** | 50Мп RAW16 на всех 4 линзах, переменная диафрагма F1.63-F4.0, Black Level 64, Leica Authentic, DCG HDR |
 | **Xiaomi 15 Ultra** (`xuanyuan`) | Sony LYT-900 + Samsung HP9 | **[`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](./configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc)** | 50Мп на 1" LYT-900, **200Мп** на перископе HP9 (`16384x12288`), SmartAE ночная экспозиция |
 | **Xiaomi 17 Ultra** (`nezha`) | OVX10500U + Samsung HP9 | **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](./configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)** | 50Мп на 1" OVX10500U, **200Мп** на перископе HP9, DCG HDR шумовая модель |
 | **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | Light Hunter 900 + JN1/JN5 | **[`Mi15_borndead_LightHunter_50M.agc`](./configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc)** | 50Мп на Light Hunter 900, кастомные цвета Leica, быстрый захват |
@@ -288,7 +291,7 @@
 #### 📦 Пошаговый процесс установки модуля камеры:
 
 1. **Скачайте необходимый zip-архив** из папки [`releases/`](./releases/) (см. [Таблицу версий в Разделе 3](#3-таблица-модулей-и-ссылки-на-загрузку-ru)):
-   * **FULL Edition (с приложением камеры Leica)**: выберите [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) или специализированный Full-архив для вашей модели (`Mi13U`, `X17U`, `Mi15U`, `Mi15`). Включает новое приложение камеры Leica с защитой `oat/.replace`.
+   * **FULL Edition (с приложением камеры Leica)**: выберите [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) или специализированный Full-архив для вашей модели (`Mi13U`, `Mi14U`, `X17U`, `Mi15U`, `Mi15`). Включает новое приложение камеры Leica с защитой `oat/.replace`.
    * **SLIM Edition (чистый оверлей без APK — 100% защита от бутлупа)**: выберите [`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) либо Slim-архив для вашей модели. Идеален для тайваньских, глобальных и кастомных прошивок (SimpleRom ST, Xiaomi.eu).
    * **Для HyperOS 1.0 (Android 14)**: архив [`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip).
 2. Откройте **Magisk (v26+)**, **KernelSU** или **APatch**.
@@ -461,6 +464,32 @@
 * **Ночной режим SmartAE LN2**:
   - Сделайте ночной кадр в слабом освещении: экспозиция сбалансирована, фонари не превращаются в белые пятна, тени не зашумлены.
 * **Видео 8K со всех линз**: Запись 8K 24fps доступна на 0.5x, 1x, 3x, 5x.
+
+##### 📱 Xiaomi 14 Ultra (`aurora`)
+* **Сетка Quad-50M (Mode 175)**:
+  - В режиме «50M» проверьте все 4 фокусных расстояния: **`0.5x : 1.0x : 3.2x : 5.0x`**.
+  - Все 4 сенсора (1" Sony LYT-900 + 3x Sony IMX858) выводят честные **`8192 x 6144`** (50 Мп).
+* **Бесступенчатая физическая диафрагма (F1.63 – F4.0)**:
+  - В режиме «Профи» или «Видео» переключите диафрагму между значениями F1.63, F2.0, F2.8, F4.0 — лепестки физической диафрагмы на основном модуле плавно реагируют в реальном времени.
+* **1-дюймовый сенсор Sony LYT-900 и аппаратный DCG HDR**:
+  - Аппаратное объединение LCG/HCG на сенсоре LYT-900 обеспечивает расширенный динамический диапазон с одного кадра, исключая размытие движущихся объектов и пересветы.
+* **Видео 8K со всех линз и 4K 120fps**:
+  - Запись 8K 24/30fps доступна на всех объективах (0.5x, 1x, 3.2x, 5x) без ограничения по времени; режим 4K 120fps обеспечивает идеальную плавность слоу-мо.
+* **Google Камера (GCam)**:
+  - Пресет `Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc` в AGC 9.6 открывает переключение всех 4 камер с поддержкой 50Мп RAW16 и ручного шага диафрагмы.
+
+##### 📱 Xiaomi 14 Ultra (`aurora`)
+* **Quad-50M Zoom Grid (Mode 175)**:
+  - In «50M» mode, verify all 4 focal lengths: **`0.5x : 1.0x : 3.2x : 5.0x`**.
+  - All 4 cameras (1" Sony LYT-900 + 3x Sony IMX858) output full **`8192 x 6144`** (50 MP).
+* **Stepless Variable Physical Aperture (F1.63 – F4.0)**:
+  - In Pro mode or Video mode, switch aperture between F1.63, F2.0, F2.8, F4.0 — physical aperture iris blades on the main LYT-900 module actuate smoothly in real time.
+* **1-inch Sony LYT-900 Sensor & Hardware DCG HDR**:
+  - Direct hardware LCG/HCG readout on the LYT-900 sensor prevents motion ghosting on fast subjects while preventing clipping in highlights.
+* **8K Video All Lenses & 4K 120fps**:
+  - Full 8K 24/30fps video recording is available across all 4 rear sensors without artificial limits; 4K 120fps provides butter-smooth high-framerate action recording.
+* **Google Camera (GCam)**:
+  - Profile `Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc` in AGC 9.6 enables seamless switching across all 4 cameras with 50MP RAW16 and manual aperture control.
 
 ##### 📱 Xiaomi 13 Ultra (`ishtar`)
 * **Проверка на HyperOS 1.0 (Android 14)**:
@@ -721,7 +750,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 **Xiaomi Master Camera Combo** is the ultimate flagship system module for **Magisk (v26+)**, **KernelSU**, and **APatch**. It eliminates all known hardware and software limitations in the stock Leica Camera app on Xiaomi flagships running **HyperOS 2.0 and HyperOS 3.0** (Android 15 and Android 16).
 
-The module includes an **intelligent dynamic installer**: during flashing, `customize.sh` detects the target device (`ishtar`, `dada`, `haotian`, `xuanyuan`, or `nezha`), verifies the ROM environment (Stock, SimpleRom, Xiaomi.eu, EliteROM), applies matched Chromatix sensor profiles, configures the 50M/200M zoom grid, and mounts only verified libraries.
+The module includes an **intelligent dynamic installer**: during flashing, `customize.sh` detects the target device (`ishtar`, `aurora`, `dada`, `haotian`, `xuanyuan`, or `nezha`), verifies the ROM environment (Stock, SimpleRom, Xiaomi.eu, EliteROM), applies matched Chromatix sensor profiles, configures the 50M/200M zoom grid, and mounts only verified libraries.
 
 ---
 
@@ -730,6 +759,7 @@ The module includes an **intelligent dynamic installer**: during flashing, `cust
 | Device | Code Name | SoC | Primary Sensors | 50M/200M Zoom Grid |
 |---|---|---|---|---|
 | **Xiaomi 13 Ultra** | `ishtar` | Snapdragon 8 Gen 2 | 1" Sony IMX989 + 3x IMX858 + OV32C | **0.5x : 1.0x : 3.2x : 5.0x** |
+| **Xiaomi 14 Ultra** | `aurora` | Snapdragon 8 Gen 3 | 1" Sony LYT-900 (F1.63-F4.0) + 3x IMX858 + OV32B | **0.5x : 1.0x : 3.2x : 5.0x** |
 | **Xiaomi 15** | `dada` | Snapdragon 8 Elite | Light Hunter 900 + JN1 + JN5 + OV32B | **0.6x : 1.0x : 3.2x** |
 | **Xiaomi 15 Pro** | `haotian` | Snapdragon 8 Elite | Light Hunter 900 + JN1 + IMX858 (5x) | **0.6x : 1.0x : 3.2x : 5.0x** |
 | **Xiaomi 15 Ultra** | `xuanyuan` | Snapdragon 8 Elite | 1" Sony LYT-900 + Samsung HP9 200M + IMX858 + JN5 | **0.5x : 1.0x : 3.0x : 5.0x** |
@@ -743,7 +773,7 @@ Modules are organized into two distinct, production-ready tiers:
 * 🌟 **FULL Edition (with Leica Camera App)**: Includes the complete, updated Leica Camera app from HyperOS 3.0 with all UI features, new Leica watermarks, Leica Authentic/Vibrant styles, and shooting modes. Features `oat/.replace` protection (prevents ART OdexFile checksum mismatch), purged dangerous platform permissions (`REBOOT`, `DEVICE_POWER`), and clean companion libraries.
 * ⚡ **SLIM Edition (Pure Systemless Overlay - No Camera APK)**: Systemless overlay that preserves your existing Camera APK untouched. Designed for maximum safety (0% risk of signature conflicts), ideal for locked stock ROMs without CorePatch, as well as custom ROMs (SimpleRom ST, Xiaomi.eu) where the camera is pre-patched by ROM developers. Unlocks 50M/200M FullRes, George Video MOD 8K/4K120, DCG Hardware HDR, Chromatix hardware tunings, and offline processing.
 
-#### 🌐 Universal Multi-Device Packages (13U, 15, 15 Pro, 15U, 17U)
+#### 🌐 Universal Multi-Device Packages (13U, 14U, 15, 15 Pro, 15U, 17U)
 | Module Package | Size | Tier | Description |
 |---|---|---|---|
 | **[`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip)** | **182.52 MB** | **FULL** | **Universal Full Flagship Suite**. Includes HyperOS 3.0 Leica Camera APK, dynamic multi-device hardware detection, Chromatix tunings for all 5 phones, 50M/200M FullRes, George 8K/4K120, DCG HDR, and `oat/.replace` protection. |
@@ -754,6 +784,7 @@ Modules are organized into two distinct, production-ready tiers:
 | Target Hardware | FULL Edition (with Leica Camera App) | SLIM Edition (Pure Overlay - No APK) | Highlights |
 |---|---|---|---|
 | **Xiaomi 13 Ultra** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_Full_by_borndead.zip)** (146.15 MB) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (270.2 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), George Video 8K/4K120, DCG HDR, IMX989/IMX858 tunings, offline processing *(for HOS 1.0 A14 see [HOS1_A14](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip))*. |
+| **Xiaomi 14 Ultra** (`aurora`) | **[`Mi14U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi14U_Master_Camera_Combo_Full_by_borndead.zip)** (145.89 MB) | **[`Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.03 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), stepless variable physical aperture F1.63-F4.0, 1" Sony LYT-900, George Video 8K/4K120, DCG Hardware HDR, offline processing bypass. |
 | **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/X17U_Master_Camera_Combo_Full_by_borndead.zip)** (159.74 MB) | **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 MB) | Dedicated OVX10500U/HP9/JN5 Chromatix tunings, DCG HDR, 8K all lenses, 4K120fps, `libqcodec2` *(for SimpleRom ST without Leica see [SimpleRom_ST](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
 | **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip)** (163.27 MB) | **[`Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip)** (17.38 MB) | Official Stock AIO 104 Chromatix tunings for 1" Sony LYT-900 & 200MP Samsung HP9, native A16 HAL, SmartAE LN2 night mode. |
 | **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (151.04 MB) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.15 MB) | Light Hunter 900 tunings, 50MP FullRes on 1.0x (for 15) and all rear lenses (for 15 Pro), DCG HDR. |
@@ -767,6 +798,7 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
 | Device | Target Sensors | Config Preset File | Profile Highlights |
 |---|---|---|---|
 | **Xiaomi 13 Ultra** (`ishtar`) | Sony IMX989 + 3x IMX858 | **[`Mi13U_borndead_Universal_Leica_50MP.agc`](./configs/Xiaomi_13_Ultra_ishtar/Mi13U_borndead_Universal_Leica_50MP.agc)** | 50MP RAW16 on all 4 rear lenses, Black Level 64, Leica Authentic color matrix, HDR+ Enhanced |
+| **Xiaomi 14 Ultra** (`aurora`) | 1" Sony LYT-900 + 3x IMX858 | **[`Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc`](./configs/Xiaomi_14_Ultra_aurora/Mi14U_borndead_Universal_Leica_LYT900_Quad50M.agc)** | 50MP RAW16 on all 4 lenses, variable physical aperture F1.63-F4.0, Black Level 64, Leica Authentic, DCG HDR |
 | **Xiaomi 15 Ultra** (`xuanyuan`) | Sony LYT-900 + Samsung HP9 | **[`Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc`](./configs/Xiaomi_15_Ultra_xuanyuan/Mi15U_borndead_StockAIO_LYT900_HP9_50M_200M.agc)** | 50MP on 1" LYT-900, **200MP** on HP9 periscope (`16384x12288`), SmartAE night exposure |
 | **Xiaomi 17 Ultra** (`nezha`) | OVX10500U + Samsung HP9 | **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](./configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)** | 50MP on 1" OVX10500U, **200MP** on HP9 periscope, DCG HDR sensor noise model |
 | **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | Light Hunter 900 + JN1/JN5 | **[`Mi15_borndead_LightHunter_50M.agc`](./configs/Xiaomi_15_15Pro_dada_haotian/Mi15_borndead_LightHunter_50M.agc)** | 50MP on Light Hunter 900, Leica custom tonemapping, fast shutter response |
@@ -909,7 +941,7 @@ Live demonstration of the mod running on user hardware with all flagship capabil
 #### 📦 Step-by-Step Module Installation:
 
 1. **Download the required zip archive** from the [`releases/`](./releases/) directory (see [Module Table in Section 3](#3-module-releases--download-links-en)):
-   * **FULL Edition (with Leica Camera APK)**: select [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) or device-specific Full zip (`Mi13U`, `X17U`, `Mi15U`, `Mi15`). Includes latest Leica Camera app with `oat/.replace` bootloop protection.
+   * **FULL Edition (with Leica Camera APK)**: select [`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) or device-specific Full zip (`Mi13U`, `Mi14U`, `X17U`, `Mi15U`, `Mi15`). Includes latest Leica Camera app with `oat/.replace` bootloop protection.
    * **SLIM Edition (Pure Systemless Overlay — 100% Bootloop Immune)**: select [`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) or device-specific Slim zip. Recommended for Taiwan, Global, and custom ROMs (SimpleRom ST, Xiaomi.eu).
    * **For HyperOS 1.0 (Android 14)**: legacy archive [`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip).
 2. Open **Magisk (v26+)**, **KernelSU**, or **APatch**.
