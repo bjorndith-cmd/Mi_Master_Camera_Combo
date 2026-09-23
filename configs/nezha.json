@@ -1,0 +1,23 @@
+[
+  {
+    "deviceCodename": "nezha"
+  },
+  {
+    "supportZslShutter": true
+  },
+  {
+    "isSupportMacroMode": true
+  },
+  {
+    "performSingleCaptureForHdrPlusMfnr": true
+  },
+  {
+    "f4": true
+  },
+  {
+    "current_hdr": "normal"
+  },
+  {
+    "description": "Xiaomi 17 Ultra Next-Gen Flagship Leica Tuning Profile"
+  }
+]

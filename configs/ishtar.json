@@ -1,0 +1,23 @@
+[
+  {
+    "deviceCodename": "ishtar"
+  },
+  {
+    "supportZslShutter": true
+  },
+  {
+    "isSupportMacroMode": true
+  },
+  {
+    "performSingleCaptureForHdrPlusMfnr": true
+  },
+  {
+    "f4": true
+  },
+  {
+    "current_hdr": "normal"
+  },
+  {
+    "description": "Xiaomi 13 Ultra Quad-Camera Leica Tuning Profile"
+  }
+]

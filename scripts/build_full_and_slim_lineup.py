@@ -5,7 +5,9 @@ import zipfile
 print("=== Building Dual-Tier (FULL & SLIM) Module Lineup for All Devices ===")
 
 root_antigravity = r'C:\Users\ASTA\OneDrive\Antigravity'
-repo_releases = r'C:\Users\ASTA\OneDrive\Документы\GitHub\Mi_Master_Camera_Combo\releases'
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+repo_releases = os.path.join(repo_root, 'releases')
+configs_src = os.path.join(repo_root, 'configs')
 os.makedirs(repo_releases, exist_ok=True)
 
 multi_staging = os.path.join(root_antigravity, 'Mi_MultiDevice_Combo_Staging')
@@ -105,8 +107,40 @@ persist.vendor.camera.cloud.enable=0
 persist.sys.camera.leica_essential.cloud=0
 """
 
+common_service_sh = """#!/system/bin/sh
+# service.sh - Xiaomi Master Camera Combo Late-boot Service
+# Author: borndead
+MODDIR=${0%/*}
+
+# Auto-deploy pre-tuned camera configs to /sdcard/Download/XiaomiCamera/
+for i in $(seq 1 30); do
+    [ -d "/sdcard/Download" ] && break
+    sleep 1
+done
+
+if [ -d "/sdcard/Download" ]; then
+    mkdir -p "/sdcard/Download/XiaomiCamera"
+    if [ -d "$MODDIR/configs" ]; then
+        cp -n "$MODDIR/configs/"*.json "/sdcard/Download/XiaomiCamera/" 2>/dev/null
+    fi
+fi
+"""
+
 def create_zip(staging_dir, zip_path):
     print(f"Creating: {os.path.basename(zip_path)}...")
+    # 1. Ensure configs/ directory exists in staging
+    if os.path.exists(configs_src):
+        dest_cfg = os.path.join(staging_dir, 'configs')
+        os.makedirs(dest_cfg, exist_ok=True)
+        for cfg in os.listdir(configs_src):
+            if cfg.endswith('.json'):
+                shutil.copy2(os.path.join(configs_src, cfg), os.path.join(dest_cfg, cfg))
+
+    # 2. Ensure service.sh has auto-deployment logic
+    service_path = os.path.join(staging_dir, 'service.sh')
+    with open(service_path, 'w', encoding='utf-8', newline='\n') as f:
+        f.write(common_service_sh)
+
     with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
         for root, dirs, files in os.walk(staging_dir):
             for file in files:
@@ -415,6 +449,14 @@ if [ -d /data/app ]; then
     rm -rf /data/app/*com.android.camera* >/dev/null 2>&1
 fi
 
+# Deploy pre-configured camera profiles
+ui_print "- Deploying pre-configured camera profiles..."
+mkdir -p "/data/media/0/Download/XiaomiCamera" 2>/dev/null
+if [ -d "$MODPATH/configs" ]; then
+    cp -n "$MODPATH/configs/"*.json "/data/media/0/Download/XiaomiCamera/" 2>/dev/null
+    [ ! -f "/data/media/0/Download/XiaomiCamera/general_config.json" ] && echo "[{\"deviceCodename\": \"$DEV_PROFILE\"}]" > "/data/media/0/Download/XiaomiCamera/general_config.json"
+fi
+
 # 6. Permissions and SELinux
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644
 [ -f "$MODPATH/system/etc/permissions/privapp-permissions-camera.xml" ] && set_perm "$MODPATH/system/etc/permissions/privapp-permissions-camera.xml" 0 0 0644
@@ -626,6 +668,14 @@ ui_print "- Clearing camera app cache..."
 pm clear com.android.camera >/dev/null 2>&1
 rm -rf /data/data/com.android.camera/cache/* >/dev/null 2>&1
 rm -rf /data/data/com.android.camera/code_cache/* >/dev/null 2>&1
+
+# Deploy pre-configured camera profiles
+ui_print "- Deploying pre-configured camera profiles..."
+mkdir -p "/data/media/0/Download/XiaomiCamera" 2>/dev/null
+if [ -d "$MODPATH/configs" ]; then
+    cp -n "$MODPATH/configs/"*.json "/data/media/0/Download/XiaomiCamera/" 2>/dev/null
+    [ ! -f "/data/media/0/Download/XiaomiCamera/general_config.json" ] && echo "[{\"deviceCodename\": \"$DEV_PROFILE\"}]" > "/data/media/0/Download/XiaomiCamera/general_config.json"
+fi
 
 # 6. Permissions and SELinux
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644

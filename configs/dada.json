@@ -1,0 +1,23 @@
+[
+  {
+    "deviceCodename": "dada"
+  },
+  {
+    "supportZslShutter": true
+  },
+  {
+    "isSupportMacroMode": true
+  },
+  {
+    "performSingleCaptureForHdrPlusMfnr": true
+  },
+  {
+    "f4": true
+  },
+  {
+    "current_hdr": "normal"
+  },
+  {
+    "description": "Xiaomi 15 Light Hunter 900 Leica Tuning Profile"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "deviceCodename": "xuanyuan"
+  },
+  {
+    "supportZslShutter": true
+  },
+  {
+    "isSupportMacroMode": true
+  },
+  {
+    "performSingleCaptureForHdrPlusMfnr": true
+  },
+  {
+    "f4": true
+  },
+  {
+    "current_hdr": "normal"
+  },
+  {
+    "description": "Xiaomi 15 Ultra 200MP Periscope Quad-Camera Leica Tuning Profile"
+  }
+]

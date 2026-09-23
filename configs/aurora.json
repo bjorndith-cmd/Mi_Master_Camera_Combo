@@ -1,0 +1,23 @@
+[
+  {
+    "deviceCodename": "aurora"
+  },
+  {
+    "supportZslShutter": true
+  },
+  {
+    "isSupportMacroMode": true
+  },
+  {
+    "performSingleCaptureForHdrPlusMfnr": true
+  },
+  {
+    "f4": true
+  },
+  {
+    "current_hdr": "normal"
+  },
+  {
+    "description": "Xiaomi 14 Ultra LYT-900 Quad-Camera Leica Tuning Profile"
+  }
+]

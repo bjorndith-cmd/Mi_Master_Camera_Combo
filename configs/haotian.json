@@ -1,0 +1,23 @@
+[
+  {
+    "deviceCodename": "haotian"
+  },
+  {
+    "supportZslShutter": true
+  },
+  {
+    "isSupportMacroMode": true
+  },
+  {
+    "performSingleCaptureForHdrPlusMfnr": true
+  },
+  {
+    "f4": true
+  },
+  {
+    "current_hdr": "normal"
+  },
+  {
+    "description": "Xiaomi 15 Pro Triple-Camera Leica Tuning Profile"
+  }
+]
