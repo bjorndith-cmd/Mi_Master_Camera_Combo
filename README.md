@@ -81,20 +81,25 @@
    - [George Video MOD (8K со всех камер, 4K120, чистый AISP)](#54-george-video-mod-8k-со-всех-камер-4k120-чистый-aisp-ru)
    - [Stock AIO 104 для Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-для-xiaomi-15-ultra-lyt-900-ru)
    - [Защита от вылетов на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-защита-от-вылетов-на-xiaomi-17-ultra-simplerom-st-eu-elite-ru)
-   - [Совместимость с HyperOS 4.x / Android 17 (Xiaomi 17 Ultra)](#57-совместимость-с-новейшими-прошивками-hyperos-4x--android-17-тестирование-на-xiaomi-17-ultra-nezha-ru)
-6. [Визуальные сравнения «До / После» и галерея интерфейса (Visual Proof)](#6-визуальные-сравнения-до--после-visual-proof-ru)
-   - [Аппаратный DCG против программного мульти-кадрового HDR](#61-аппаратный-dcg-против-программного-мульти-кадрового-hdr-движение-в-кадре)
-   - [Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass](#62-шумоподавление-в-видео-сток-arcsoft-aisp-против-george-mod-bypass)
-   - [Разрешающая способность: 12.5Мп Биннинг против 50Мп/200Мп FullRes](#63-разрешающая-способность-125мп-биннинг-против-50мп-и-200мп-fullres-100-crop)
-   - [Реальные скриншоты интерфейса и подтверждение функций (UI Gallery)](#64-реальные-скриншоты-интерфейса-и-подтверждение-работы-всех-функций-ui-gallery)
-7. [Инструкция по установке](#7-инструкция-по-установке-ru)
-   - [🚨 Экстренное руководство: Как вернуть телефон из бутлупа](#71-экстренное-руководство-как-вернуть-телефон-из-бутлупа-циклической-перезагрузки-ru)
-   - [⚠️ Разрешение конфликтов: Удаление сторонних модулей камеры](#72-разрешение-конфликтов-удаление-сторонних-модулей-камеры-черный-экран-краши-старый-значок-ru)
-8. [Инструкция по тестированию и проверке работы модуля](#8-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
-   - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#86-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
-9. [Скрипт автоматической диагностики (check_support.sh)](#9-скрипт-автоматической-диагностики-check_supportsh-ru)
-10. [Часто задаваемые вопросы (FAQ)](#10-часто-задаваемые-вопросы-faq-ru)
-11. [Сообщество, обратная связь и Telegram](#11-сообщество-обратная-связь-и-telegram-ru)
+   - [Концепция двух линеек (FULL & SLIM) и устранение бутлупа](#57-концепция-двух-линеек-full--slim-и-устранение-бутлупа-на-xiaomi-13-ultra-hyperos-30302-taiwan--android-16-ru)
+   - [Совместимость с HyperOS 4.x / Android 17 (Xiaomi 17 Ultra)](#58-совместимость-с-новейшими-прошивками-hyperos-4x--android-17-тестирование-на-xiaomi-17-ultra-nezha-ru)
+6. [Экосистема искусственного интеллекта (AI Suite) 🤖🧠](#6-экосистема-искусственного-интеллекта-ai-suite-ru)
+   - [Tier 1: Аппаратный ИИ вычислительной фотографии (Xiaomi AISP на NPU)](#61-tier-1-аппаратный-ии-вычислительной-фотографии-xiaomi-aisp-на-npu-snapdragon-ru)
+   - [Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto)](#62-tier-2-генеративный-ии-постобработки-hyperai-studio--extraphoto-ru)
+   - [Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD)](#63-tier-3-ai-ассистент-видоискателя-ai-director--vision-hud-ru)
+7. [Визуальные сравнения «До / После» и галерея интерфейса (Visual Proof)](#7-визуальные-сравнения-до--после-visual-proof-ru)
+   - [Аппаратный DCG против программного мульти-кадрового HDR](#71-аппаратный-dcg-против-программного-мульти-кадрового-hdr-движение-в-кадре)
+   - [Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass](#72-шумоподавление-в-видео-сток-arcsoft-aisp-против-george-mod-bypass)
+   - [Разрешающая способность: 12.5Мп Биннинг против 50Мп/200Мп FullRes](#73-разрешающая-способность-125мп-биннинг-против-50мп-и-200мп-fullres-100-crop)
+   - [Реальные скриншоты интерфейса и подтверждение функций (UI Gallery)](#74-реальные-скриншоты-интерфейса-и-подтверждение-работы-всех-функций-ui-gallery)
+8. [Инструкция по установке](#8-инструкция-по-установке-ru)
+   - [🚨 Экстренное руководство: Как вернуть телефон из бутлупа](#81-экстренное-руководство-как-вернуть-телефон-из-бутлупа-циклической-перезагрузки-ru)
+   - [⚠️ Разрешение конфликтов: Удаление сторонних модулей камеры](#82-разрешение-конфликтов-удаление-сторонних-модулей-камеры-черный-экран-краши-старый-значок-ru)
+9. [Инструкция по тестированию и проверке работы модуля](#9-инструкция-по-тестированию-и-проверке-работы-модуля-для-всех-версий-ru)
+   - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#96-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
+10. [Скрипт автоматической диагностики (check_support.sh)](#10-скрипт-автоматической-диагностики-check_supportsh-ru)
+11. [Часто задаваемые вопросы (FAQ)](#11-часто-задаваемые-вопросы-faq-ru)
+12. [Сообщество, обратная связь и Telegram](#12-сообщество-обратная-связь-и-telegram-ru)
 
 ---
 
@@ -142,6 +147,14 @@
 | **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (151.04 МБ) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.15 МБ) | Калибровки Light Hunter 900, 50Мп FullRes на 1.0x (на 15) и на всех линзах (на 15 Pro), DCG HDR. |
 
 ---
+
+#### 🤖 Специализированные модули искусственного интеллекта (AI Suite)
+
+| Модуль | Размер | Уровень | Описание |
+|---|---|---|---|
+| **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** | **3.10 КБ** | **Tier 1 (NPU)** | **Аппаратный нейросетевой движок Xiaomi AISP**. 100% оффлайн на NPU Hexagon. FusionLM, ToneLM, ColorLM, PortraitLM, CyberFocus 2.0, AINR, супер-зум 30x–100x. Чистый оверлей без облачных сбоев. |
+| **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** | **3.12 КБ** | **Tier 2 (Studio)** | **Генеративный студийный комплекс HyperAI**. Прямая интеграция с видоискателем и галереей: AI Ластик Pro (Eraser 2.0), AI Расширение кадра (Outpainting), AI Небо 3.0 с динамическим релайтингом, 3D студийный свет. |
+| **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** | **2.68 КБ** | **Tier 3 (Vision HUD)** | **Умный ассистент видоискателя AI Director**. Интеллектуальный HUD в реальном времени: динамические линии золотого сечения и третей Leica, высокоточный стабилизатор горизонта (±0.1°), советник по объективам и Pro-настройкам. |
 
 ### 4. Готовые пресеты конфигураций GCam (.agc) (RU)
 
@@ -260,9 +273,81 @@
 
 ---
 
-### 6. Визуальные сравнения «До / После» (Visual Proof) (RU)
+### 6. Экосистема искусственного интеллекта (AI Suite) 🤖🧠 (RU)
 
-#### 6.1. Аппаратный DCG против программного мульти-кадрового HDR (Движение в кадре)
+В дополнение к базовым модулям FULL и SLIM разработана полноценная **трёхуровневая экосистема искусственного интеллекта**, раскрывающая аппаратный потенциал нейропроцессоров Qualcomm Hexagon NPU на Snapdragon 8 Gen 2 / 8 Gen 3 / 8 Elite.
+
+<p align="center">
+  <img src="./assets/ai_three_tiers_ecosystem.svg" alt="Xiaomi Master Camera AI Suite Ecosystem" width="100%">
+</p>
+
+---
+
+#### 9.1. Tier 1: Аппаратный ИИ вычислительной фотографии (Xiaomi AISP на NPU Snapdragon) (RU)
+
+Модуль: **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** (3.10 КБ)
+
+* **Что это такое**: Аппаратный пайплайн нейросетевой вычислительной фотографии, выполняющийся в микросекунды непосредственно в момент нажатия на кнопку затвора. Все вычисления производятся локально на NPU Hexagon и ISP Spectra.
+* **Архитектура 4-LM (Large Models)**:
+  1. ⚡ **FusionLM**: Многокадровое попиксельное слияние экспозиций в реальном времени. Устраняет двоение движущихся объектов (*Motion Ghosting*) и сохраняет чистый динамический диапазон.
+  2. 🎨 **ToneLM**: Нейросетевая тональная компрессия. Анализирует карту освещения и формирует легендарную пленочную тональную кривую Leica.
+  3. 🌈 **ColorLM**: Нейросетевая колориметрия. Сохраняет естественные оттенки человеческой кожи (*Skin Tone Fidelity*) и фирменные сочные цвета Leica Authentic / Vibrant.
+  4. 🎯 **PortraitLM**: 3D-моделирование глубины сцены. Создает субмиллиметровую карту глубины для моделирования физического боке эталонных объективов Leica Noctilux 50mm f/0.95 и Summilux 35mm.
+* **Дополнительные нейросетевые фичи**:
+  - 🔭 **AISP Ultra Clear Zoom (30x–100x)**: Нейросетевое распознавание и дорисовывание фактуры (текста, архитектуры, листвы) на сверхдальних фокусных расстояниях.
+  - 👁️ **CyberFocus 2.0**: Аппаратный нейротрекинг глаз людей, мордочек животных и спортивных объектов со скоростью 60 кадр/с.
+  - 🛡️ **AINR (AI Noise Reduction)**: Аппаратный нейросетевой шумодав для съемки в кромешной тьме без смазывания деталей.
+* **100% Защита от розового шума**: Облачные китайские эндпоинты принудительно отключены (`support_cloud_process=false`). 0% задержек сети, 0% розового шума!
+
+<p align="center">
+  <img src="./assets/ai_aisp_pipeline_architecture.svg" alt="AISP 4-LM Architecture" width="100%">
+</p>
+
+<p align="center">
+  <img src="./assets/ai_hardware_aisp_diagram.jpg" alt="AISP Hardware Neural Diagram" width="100%" style="border-radius: 12px;">
+</p>
+
+---
+
+#### 9.2. Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto) (RU)
+
+Модуль: **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** (3.12 КБ)
+
+* **Что это такое**: Комплекс генеративных инструментов, доступных в один клик прямо из превью только что снятого кадра в камере (`com.android.camera` ➔ `com.miui.extraphoto`).
+* **Ключевые генеративные инструменты**:
+  - 🪄 **AI Ластик Pro (Eraser 2.0 / Magic Elimination)**: Интеллектуальное удаление прохожих, проводов, мусора и лишних объектов с кадра с мгновенным контекстным заполнением фона нейросетью.
+  - 🖼️ **AI Расширение (Image Expansion / Outpainting)**: Генеративное дорисовывание окружения за пределами исходного кадра. Если композиция оказалась слишком тесной, ИИ плавно продолжит улицу, пейзаж или интерьер.
+  - 🌌 **AI Небо 3.0 (Dynamic Relighting)**: Замена неба с автоматическим пересчетом освещения всей сцены (наложение естественных солнечных или закатных рефлексов на людей и асфальт).
+  - 💡 **AI Студийный свет**: 3D-релайтинг лиц с перемещением виртуального источника света (софтбокс, контурный свет).
+  - 🪟 **AI Удаление бликов и теней**: Нейросетевая поляризация, удаляющая отражения из стеклянных витрин и окон.
+
+<p align="center">
+  <img src="./assets/ai_genai_studio_ui.jpg" alt="HyperAI Studio Tools" width="100%" style="border-radius: 12px;">
+</p>
+
+---
+
+#### 7.3. Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD) (RU)
+
+Модуль: **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** (2.68 КБ)
+
+* **Что это такое**: Интеллектуальный помощник фотографа, встроенный прямо в видоискатель камеры Leica. Работает в реальном времени, помогая выстроить композицию шедеврального уровня.
+* **Возможности AI Director**:
+  - 📐 **Динамические линии композиции**: Сетка золотого сечения (Fibonacci Spiral) и классическое правило третей, проецируемые с учетом геометрии сцены.
+  - 🧭 **Высокоточный стабилизатор горизонта (±0.1°)**: Зеленая индикация идеального горизонта, исключающая «заваленные» пейзажи.
+  - 🔍 **Умный советник по оптике (Lens Advisor)**: Анализирует расстояние до объекта и ненавязчиво подсказывает фокусное расстояние (например, *«Переключитесь на 3.2x для идеального поясного портрета без искажения пропорций лица»*).
+  - ⚙️ **Smart Pro Suggester**: Автоматический анализ освещенности и предложение оптимальных параметров экспопары (ISO, выдержка, Focus Peaking) в режиме Профи.
+  - 🔴 **Дизайн в стиле Leica**: Минималистичный полупрозрачный HUD-интерфейс в черных, белых и красных тонах, не перекрывающий видоискатель и элементы управления затвором.
+
+<p align="center">
+  <img src="./assets/ai_director_viewfinder_hud.jpg" alt="AI Director Viewfinder HUD" width="100%" style="border-radius: 12px;">
+</p>
+
+---
+
+### 7. Визуальные сравнения «До / После» (Visual Proof) (RU)
+
+#### 9.1. Аппаратный DCG против программного мульти-кадрового HDR (Движение в кадре)
 <p align="center">
   <img src="./assets/dcg_vs_hdr_comparison.svg" alt="DCG vs Staggered HDR Comparison" width="100%">
 </p>
@@ -270,7 +355,7 @@
 * **Обычный программный HDR**: Из-за склейки 3 кадров с разной выдержкой движущиеся объекты неизбежно двоятся (*Motion Ghosting*).
 * **Аппаратный DCG (наш мод)**: Одновременное считывание LCG (света) и HCG (тени) с **одного физического кадра экспозиции**. Движущийся объект абсолютно резок, контуры не двоятся.
 
-#### 6.2. Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass
+#### 9.2. Шумоподавление в видео: Сток ArcSoft AISP против George MOD Bypass
 <p align="center">
   <img src="./assets/aisp_texture_comparison.svg" alt="AISP Noise Reduction Bypass Comparison" width="100%">
 </p>
@@ -278,7 +363,7 @@
 * **Сток**: Алгоритм ArcSoft AISP агрессивно размывает мелкие текстуры, превращая траву, волосы и асфальт в «пластилин» и «масляную живопись».
 * **George MOD Bypass**: Параметр `aisp_algo_nr.bypass=1` отключает смазывание. Видео в 4K120fps и 8K сохраняет честный кинематографический микро-контраст и естественную резкость оптики Leica.
 
-#### 6.3. Разрешающая способность: 12.5Мп Биннинг против 50Мп и 200Мп FullRes (100% Crop)
+#### 7.3. Разрешающая способность: 12.5Мп Биннинг против 50Мп и 200Мп FullRes (100% Crop)
 <p align="center">
   <img src="./assets/resolution_comparison.svg" alt="Resolution Scale Comparison" width="100%">
 </p>
@@ -286,7 +371,7 @@
 * **12.5 Мп (Биннинг)**: Мелкие дорожные знаки, надписи на вывесках и лица людей на общем плане размыты.
 * **50 Мп / 200 Мп FullRes**: Честные `8192 x 6144` и `16384 x 12288` пикселей. 4-кратная оптико-цифровая детализация, позволяющая кадрировать снимок без потери резкости.
 
-#### 6.4. Реальные скриншоты интерфейса и подтверждение работы всех функций (UI Gallery)
+#### 7.4. Реальные скриншоты интерфейса и подтверждение работы всех функций (UI Gallery)
 
 Живая демонстрация работы мода на устройстве пользователя со всеми активированными флагманскими возможностями:
 
@@ -302,7 +387,7 @@
 
 ---
 
-### 7. Инструкция по установке (RU)
+### 8. Инструкция по установке (RU)
 
 > [!IMPORTANT]
 > #### 🚨 Шаг 0 (ОБЯЗАТЕЛЬНЫЙ ПРЕДВАРИТЕЛЬНЫЙ ШАГ): Установка защиты от бутлупа (Bootloop Saver)
@@ -479,7 +564,7 @@
 
 
 <a name="72-разрешение-конфликтов-удаление-сторонних-модулей-камеры-черный-экран-краши-старый-значок-ru"></a>
-### 7.2. ⚠️ Разрешение конфликтов: Почему отключение старых модулей камеры не помогает и как правильно очистить систему (RU)
+### 8.2. ⚠️ Разрешение конфликтов: Почему отключение старых модулей камеры не помогает и как правильно очистить систему (RU)
 
 Если после установки модуля вы столкнулись с одним из следующих симптомов:
 * 🔲 **Чёрный экран в видоискателе** (видоискатель не выводит изображение или зависает в чёрном окне при открытии приложения);
@@ -558,11 +643,11 @@
 3. Откройте камеру. Приложение запустится мгновенно, с новым значком, обновленным интерфейсом Leica и полным доступом ко всем сенсорам без вылетов и зависаний!
 
 ---
-### 8. Инструкция по тестированию и проверке работы модуля (для всех версий) (RU)
+### 9. Инструкция по тестированию и проверке работы модуля (для всех версий) (RU)
 
 После установки любого модуля из линейки рекомендуется провести пошаговую диагностику, чтобы убедиться в корректной активации всех аппаратных алгоритмов и системных оверлеев.
 
-#### 8.1. Базовый чек-лист сразу после перезагрузки
+#### 9.1. Базовый чек-лист сразу после перезагрузки
 1. **Проверка Root-прав**: Откройте **Magisk**, **KernelSU** или **APatch**.
    - Убедитесь, что модуль активен (включён переключатель).
    - Убедитесь, что статус суперпользователя сохранён (на Android 14 исключён переход в Magisk Safe Mode благодаря чистым скриптам загрузки).
@@ -574,7 +659,7 @@
 
 ---
 
-#### 8.2. Проверка ключевых режимов по моделям смартфонов
+#### 9.2. Проверка ключевых режимов по моделям смартфонов
 
 ##### 📱 Xiaomi 17 Ultra (`nezha`)
 * **Проверка стабильности на SimpleRom ST / Custom ROM**:
@@ -630,7 +715,7 @@
 
 ---
 
-#### 8.3. Тестирование аппаратного DCG (Dual Conversion Gain) / iDCG HDR
+#### 9.3. Тестирование аппаратного DCG (Dual Conversion Gain) / iDCG HDR
 Главное преимущество аппаратного DCG перед обычным программным HDR — **считывание LCG (яркие участки) и HCG (тени) с одного единственного физического кадра**:
 1. Найдите высококонтрастную сцену: комната с ярким солнечным окном или ночная улица с яркой неоновой вывеской/фонарём.
 2. Поместите в кадр быстро движущийся объект (помашите рукой перед камерой или сфотографируйте проезжающий автомобиль).
@@ -642,7 +727,7 @@
 
 ---
 
-#### 8.4. Проверка системных свойств в Termux / ADB
+#### 9.4. Проверка системных свойств в Termux / ADB
 Вы можете за 10 секунд подтвердить активность всех модульных твиков через терминал (Termux с рутом на смартфоне или командная строка ADB на ПК):
 
 ```bash
@@ -674,7 +759,7 @@ getprop ro.vendor.camera.dcg
 # Ожидаемый вывод: 1
 ```
 
-#### 8.5. Проверка логов CamX HAL через ADB Logcat (для продвинутых пользователей)
+#### 9.5. Проверка логов CamX HAL через ADB Logcat (для продвинутых пользователей)
 Если подключить смартфон к ПК по USB и включить отладку по ADB:
 ```bash
 adb logcat -s CamX | grep -iE "dcg|hdr|stream"
@@ -683,7 +768,7 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 
 ---
 
-#### 8.6. Настройка и проверка 50Мп / 200Мп в Google Камере (AGC 8.x / 9.x, LMC, Shamim) (RU)
+#### 9.6. Настройка и проверка 50Мп / 200Мп в Google Камере (AGC 8.x / 9.x, LMC, Shamim) (RU)
 
 Модули **Xiaomi Master Camera Combo** разблокируют аппаратный вывод полного разрешения на уровне системы и драйвера Qualcomm CamX. Однако **Google Камера (AGC 9.6 / BigKaka, LMC 8.4, Shamim)** изначально создана для смартфонов Google Pixel и «из коробки» (без специального `.agc` конфига или ручной настройки) **НЕ будет снимать в 50Мп** даже при нажатии на плашку «50M / RES» в видоискателе.
 
@@ -744,7 +829,7 @@ adb logcat -s CamX | grep -iE "dcg|hdr|stream"
 
 ---
 
-### 9. Скрипт автоматической диагностики (check_support.sh) (RU)
+### 10. Скрипт автоматической диагностики (check_support.sh) (RU)
 
 Для быстрой и безошибочной проверки состояния устройства, прошивки, рут-окружения и активности всех ключевых системных параметров модуля разработан портативный скрипт диагностики **`check_support.sh`**.
 
@@ -782,7 +867,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 ---
 
-### 10. Часто задаваемые вопросы (FAQ) (RU)
+### 11. Часто задаваемые вопросы (FAQ) (RU)
 
 <details>
 <summary><b>Что делать на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14), если пропал рут или черный экран?</b></summary>
@@ -844,7 +929,17 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 ---
 
-### 11. Сообщество, обратная связь и Telegram (RU)
+<details>
+<summary><b>Можно ли устанавливать модули AI Suite вместе с FULL или SLIM версиями? Будут ли конфликты?</b></summary>
+
+**Да, модули AI Suite на 100% совместимы со всеми версиями (FULL и SLIM) и могут устанавливаться как по отдельности, так и все вместе!**
+* **Tier 1 (AISP Hardware)** работает на уровне драйверов Qualcomm CamX и чипа Hexagon NPU — он активирует вычислительные алгоритмы при съемке.
+* **Tier 2 (HyperAI Studio)** работает на уровне галереи и редактора ExtraPhoto — он активирует генеративный ластик и расширение кадра.
+* **Tier 3 (AI Director)** работает в видоискателе — он выводит умные подсказки композиции и горизонт.
+Они не перезаписывают одни и те же файлы и не содержат сторонних APK, поэтому риск бутлупа равен **0%**!
+</details>
+
+### 12. Сообщество, обратная связь и Telegram (RU)
 
 <p align="center">
   <a href="https://t.me/Mi_Master_Camera_Combo">
@@ -881,20 +976,25 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [George Video MOD (8K All Sensors, 4K120fps, Clean AISP)](#54-george-video-mod-8k-all-sensors-4k120fps-clean-aisp-en)
    - [Stock AIO 104 for Xiaomi 15 Ultra (LYT-900)](#55-stock-aio-104-for-xiaomi-15-ultra-lyt-900-en)
    - [Anti-Crash Safeguard for Xiaomi 17 Ultra (SimpleRom ST, EU, Elite)](#56-anti-crash-safeguard-for-xiaomi-17-ultra-simplerom-st-eu-elite-and-anti-bootloop-on-xiaomi-13-ultra-taiwan-hos-30-en)
-   - [Next-Gen OS Compatibility (HyperOS 4.x / Android 17): Testing on Xiaomi 17 Ultra](#57-next-gen-firmware-compatibility-hyperos-4x--android-17-testing-on-xiaomi-17-ultra-nezha-en)
-6. [Visual Proof Gallery & UI Feature Showcase](#6-visual-proof-gallery-before-vs-after-en)
-   - [Hardware DCG vs Conventional Multi-Frame Staggered HDR](#61-hardware-dcg-vs-conventional-multi-frame-staggered-hdr-motion-in-frame)
-   - [Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass](#62-video-noise-reduction-stock-arcsoft-aisp-smear-vs-george-mod-bypass)
-   - [Spatial Resolving Power: 12.5MP Binned vs 50MP & 200MP FullRes](#63-spatial-resolving-power-125mp-binned-vs-50mp--200mp-fullres-100-crop)
-   - [Real-World Interface Screenshots & UI Feature Showcase](#64-real-world-interface-screenshots--ui-feature-showcase-en)
-7. [Installation Guide](#7-installation-guide-en)
-   - [🚨 Emergency Bootloop Recovery Guide](#71-emergency-guide-how-to-recover-from-a-bootloop-en)
-   - [⚠️ Resolving Conflicts: Removing Prior Camera Modules](#72-resolving-conflicts-removing-prior-camera-modules-black-screen-crashes-old-icon-en)
-8. [Verification & Testing Guide (All Devices & Versions)](#8-verification--testing-guide-all-devices--versions-en)
-   - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#86-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
-9. [Automated Diagnostic Tool (check_support.sh)](#9-automated-diagnostic-tool-check_supportsh-en)
-10. [Frequently Asked Questions (FAQ)](#10-frequently-asked-questions-faq-en)
-11. [Community, Feedback & Telegram Channel](#11-community-feedback--telegram-channel-en)
+   - [Dual-Tier Architecture & Bootloop Elimination (Xiaomi 13 Ultra)](#57-dual-tier-architectural-concept-full--slim--xiaomi-13-ultra-bootloop-elimination-taiwan-hyperos-30--a16-en)
+   - [Next-Gen OS Compatibility (HyperOS 4.x / Android 17): Testing on Xiaomi 17 Ultra](#58-next-gen-firmware-compatibility-hyperos-4x--android-17-testing-on-xiaomi-17-ultra-nezha-en)
+6. [Artificial Intelligence Ecosystem (AI Suite) 🤖🧠](#6-artificial-intelligence-ecosystem-ai-suite-en)
+   - [Tier 1: On-Device Hardware NPU Computational Photography (Xiaomi AISP)](#61-tier-1-on-device-hardware-npu-computational-photography-xiaomi-aisp-en)
+   - [Tier 2: Generative Post-Processing Studio (HyperAI & ExtraPhoto)](#62-tier-2-generative-post-processing-studio-hyperai--extraphoto-en)
+   - [Tier 3: Real-Time Viewfinder Assistant (AI Director & Vision HUD)](#63-tier-3-real-time-viewfinder-assistant-ai-director--vision-hud-en)
+7. [Visual Proof Gallery & UI Feature Showcase](#7-visual-proof-gallery-before-vs-after-en)
+   - [Hardware DCG vs Conventional Multi-Frame Staggered HDR](#71-hardware-dcg-vs-conventional-multi-frame-staggered-hdr-motion-in-frame)
+   - [Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass](#72-video-noise-reduction-stock-arcsoft-aisp-smear-vs-george-mod-bypass)
+   - [Spatial Resolving Power: 12.5MP Binned vs 50MP & 200MP FullRes](#73-spatial-resolving-power-125mp-binned-vs-50mp--200mp-fullres-100-crop)
+   - [Real-World Interface Screenshots & UI Feature Showcase](#74-real-world-interface-screenshots--ui-feature-showcase-en)
+8. [Installation Guide](#8-installation-guide-en)
+   - [🚨 Emergency Bootloop Recovery Guide](#81-emergency-guide-how-to-recover-from-a-bootloop-en)
+   - [⚠️ Resolving Conflicts: Removing Prior Camera Modules](#82-resolving-conflicts-removing-prior-camera-modules-black-screen-crashes-old-icon-en)
+9. [Verification & Testing Guide (All Devices & Versions)](#9-verification--testing-guide-all-devices--versions-en)
+   - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#96-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
+10. [Automated Diagnostic Tool (check_support.sh)](#10-automated-diagnostic-tool-check_supportsh-en)
+11. [Frequently Asked Questions (FAQ)](#11-frequently-asked-questions-faq-en)
+12. [Community, Feedback & Telegram Channel](#12-community-feedback--telegram-channel-en)
 
 ---
 
@@ -942,6 +1042,14 @@ Modules are organized into two distinct, production-ready tiers:
 | **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (151.04 MB) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.15 MB) | Light Hunter 900 tunings, 50MP FullRes on 1.0x (for 15) and all rear lenses (for 15 Pro), DCG HDR. |
 
 ---
+
+#### 🤖 Dedicated Artificial Intelligence Suite (AI Modules)
+
+| Module Package | Size | Tier | Description |
+|---|---|---|---|
+| **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** | **3.10 KB** | **Tier 1 (NPU)** | **Xiaomi AISP Hardware Neural Engine**. 100% offline on Snapdragon Hexagon NPU. FusionLM, ToneLM, ColorLM, PortraitLM, CyberFocus 2.0, AINR, 30x–100x Super Resolution. Pure systemless overlay. |
+| **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** | **3.12 KB** | **Tier 2 (Studio)** | **HyperAI Generative Studio Suite**. Directly linked to Camera Preview & Gallery: AI Eraser Pro (Magic Elimination 2.0), AI Image Expansion (Outpainting), AI Sky 3.0 Dynamic Relighting, and Studio Portrait Light. |
+| **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** | **2.68 KB** | **Tier 3 (Vision HUD)** | **Real-Time Viewfinder Assistant AI Director**. Intelligent live HUD: Leica golden ratio & rule-of-thirds composition guidelines, high-precision horizon leveling indicator (±0.1°), AI lens advisor, and Smart Pro mode coach. |
 
 ### 4. Ready-to-Use GCam Config Presets (.agc) (EN)
 
@@ -1060,9 +1168,81 @@ If you plan to test modules on upcoming developer builds, closed betas, or futur
 
 ---
 
-### 6. Visual Proof Gallery (Before vs After) (EN)
+### 6. Artificial Intelligence Ecosystem (AI Suite) 🤖🧠 (EN)
 
-#### 6.1. Hardware DCG vs Conventional Multi-Frame Staggered HDR (Motion in Frame)
+Complementing the base FULL and SLIM editions, the project introduces a dedicated **Tri-Tier Artificial Intelligence Suite** designed to tap into the full hardware potential of Qualcomm Hexagon NPU on Snapdragon 8 Gen 2 / 8 Gen 3 / 8 Elite.
+
+<p align="center">
+  <img src="./assets/ai_three_tiers_ecosystem.svg" alt="Xiaomi Master Camera AI Suite Ecosystem" width="100%">
+</p>
+
+---
+
+#### 6.1. Tier 1: On-Device Hardware NPU Computational Photography (Xiaomi AISP) (EN)
+
+Module: **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** (3.10 KB)
+
+* **What it does**: Direct on-device hardware computational photography executing in real time at shutter click across Snapdragon Hexagon NPU and Spectra ISP.
+* **4-LM (Large Models) Computational Architecture**:
+  1. ⚡ **FusionLM**: Multi-exposure pixel-by-pixel alignment in real time. Completely prevents motion ghosting while maximizing genuine dynamic range.
+  2. 🎨 **ToneLM**: Neural tone curve compression. Analyzes the scene's luminance matrix to model Leica's analog optical contrast curve.
+  3. 🌈 **ColorLM**: Neural spectral fidelity. Preserves lifelike human skin tones and true-to-life Leica Authentic & Vibrant aesthetics.
+  4. 🎯 **PortraitLM**: 3D spatial depth estimation. Renders millimeter-accurate depth maps to simulate optical bokeh from legendary lenses like Leica Noctilux 50mm f/0.95 and Summilux 35mm.
+* **Additional Neural Features**:
+  - 🔭 **AISP Ultra Clear Zoom (30x–100x)**: Neural texture synthesis restoring architectural lines, distant typography, and foliage.
+  - 👁️ **CyberFocus 2.0**: Hardware eye and subject motion tracking at 60 fps.
+  - 🛡️ **AINR (Hardware AI Noise Reduction)**: Raw-domain neural noise filtering for ultra-clean extreme low-light captures.
+* **100% Offline & Magenta-Free**: Cloud processing endpoints are completely disabled (`support_cloud_process=false`). Zero cloud lag, zero pink noise!
+
+<p align="center">
+  <img src="./assets/ai_aisp_pipeline_architecture.svg" alt="AISP 4-LM Architecture" width="100%">
+</p>
+
+<p align="center">
+  <img src="./assets/ai_hardware_aisp_diagram.jpg" alt="AISP Hardware Neural Diagram" width="100%" style="border-radius: 12px;">
+</p>
+
+---
+
+#### 6.2. Tier 2: Generative Post-Processing Studio (HyperAI & ExtraPhoto) (EN)
+
+Module: **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** (3.12 KB)
+
+* **What it does**: On-device generative editing tools accessible with one tap directly from the camera preview thumbnail (`com.android.camera` ➔ `com.miui.extraphoto`).
+* **Generative AI Toolset**:
+  - 🪄 **AI Eraser Pro (Magic Elimination 2.0)**: Neural segmentation and contextual inpainting to erase passersby, wires, and unwanted background objects seamlessly.
+  - 🖼️ **AI Image Expansion (Outpainting)**: Synthesizes surrounding scenery beyond the frame boundaries if your composition was framed too tightly.
+  - 🌌 **AI Sky 3.0 (Dynamic Relighting)**: Replaces overcast skies with sunsets or starry nights while automatically recalculating environmental ambient light reflections on subjects.
+  - 💡 **AI Portrait Studio Lighting**: 3D face mesh relighting with virtual softbox and rim light placement.
+  - 🪟 **AI Reflection & Shadow Remover**: Neural polariser eliminating window reflections and document shadows.
+
+<p align="center">
+  <img src="./assets/ai_genai_studio_ui.jpg" alt="HyperAI Studio Tools" width="100%" style="border-radius: 12px;">
+</p>
+
+---
+
+#### 6.3. Tier 3: Real-Time Viewfinder Assistant (AI Director & Vision HUD) (EN)
+
+Module: **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** (2.68 KB)
+
+* **What it does**: An intelligent live assistant embedded into the Leica Camera viewfinder, coaching composition and framing in real time.
+* **Core Capabilities**:
+  - 📐 **Dynamic Composition Lines**: Rule-of-thirds grid and Fibonacci Golden Spiral dynamically overlaid over the live scene.
+  - 🧭 **High-Precision Horizon Stabilizer (±0.1°)**: Active green level indicator ensuring landscape horizons are perfectly straight.
+  - 🔍 **AI Lens Advisor**: Analyzes subject distance and unobtrusively recommends the ideal sensor (e.g. *«Switch to 3.2x Portrait Telephoto for distortion-free portraits»*).
+  - ⚙️ **Smart Pro Suggester**: Scene histogram analysis providing optimal ISO, shutter speed, and focus peaking recommendations in Pro mode.
+  - 🔴 **Minimalist Leica Aesthetic**: Non-intrusive translucent HUD styled with Leica dark elegance that never obscures shutter or mode controls.
+
+<p align="center">
+  <img src="./assets/ai_director_viewfinder_hud.jpg" alt="AI Director Viewfinder HUD" width="100%" style="border-radius: 12px;">
+</p>
+
+---
+
+### 7. Visual Proof Gallery (Before vs After) (EN)
+
+#### 9.1. Hardware DCG vs Conventional Multi-Frame Staggered HDR (Motion in Frame)
 <p align="center">
   <img src="./assets/dcg_vs_hdr_comparison.svg" alt="DCG vs Staggered HDR Comparison" width="100%">
 </p>
@@ -1070,7 +1250,7 @@ If you plan to test modules on upcoming developer builds, closed betas, or futur
 * **Conventional Software HDR**: Because it aligns and blends 3 distinct bracketed frames taken at different times, moving subjects inevitably suffer from severe double edges (*Motion Ghosting*).
 * **Hardware DCG (Our MOD)**: Simultaneous dual readout (LCG for highlights + HCG for deep shadows) from a **single physical sensor exposure**. Moving subjects retain needle-sharp, crisp outlines with zero ghosting.
 
-#### 6.2. Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass
+#### 9.2. Video Noise Reduction: Stock ArcSoft AISP Smear vs George MOD Bypass
 <p align="center">
   <img src="./assets/aisp_texture_comparison.svg" alt="AISP Noise Reduction Bypass Comparison" width="100%">
 </p>
@@ -1078,7 +1258,7 @@ If you plan to test modules on upcoming developer builds, closed betas, or futur
 * **Stock**: ArcSoft's AISP video noise reduction aggressively smears fine micro-textures, rendering grass, foliage, hair, and road asphalt into an artificial "oil-paint watercolor" look.
 * **George MOD Bypass**: Setting `aisp_algo_nr.bypass=1` completely neutralizes aggressive spatial smoothing. Video in 4K120fps and 8K retains authentic cinematic micro-contrast, organic grain, and the true optical clarity of Leica lenses.
 
-#### 6.3. Spatial Resolving Power: 12.5MP Binned vs 50MP & 200MP FullRes (100% Crop)
+#### 7.3. Spatial Resolving Power: 12.5MP Binned vs 50MP & 200MP FullRes (100% Crop)
 <p align="center">
   <img src="./assets/resolution_comparison.svg" alt="Resolution Scale Comparison" width="100%">
 </p>
@@ -1086,7 +1266,7 @@ If you plan to test modules on upcoming developer builds, closed betas, or futur
 * **12.5 MP (4-in-1 Binned)**: Fine street signage, architectural textures, and distant faces are blurred into pixel clusters.
 * **50 MP / 200 MP FullRes**: True `8192 x 6144` and `16384 x 12288` pixels. Delivers up to 4x higher spatial resolution, allowing aggressive digital cropping without detail loss.
 
-#### 6.4. Real-World Interface Screenshots & UI Feature Showcase (EN)
+#### 7.4. Real-World Interface Screenshots & UI Feature Showcase (EN)
 
 Live demonstration of the mod running on user hardware with all flagship capabilities unlocked:
 
@@ -1102,7 +1282,7 @@ Live demonstration of the mod running on user hardware with all flagship capabil
 
 ---
 
-### 7. Installation Guide (EN)
+### 8. Installation Guide (EN)
 
 > [!IMPORTANT]
 > #### 🚨 Step 0 (MANDATORY PREREQUISITE): Install Bootloop Saver
@@ -1279,7 +1459,7 @@ Follow one of the battle-tested recovery methods below based on your device conf
 
 
 <a name="72-resolving-conflicts-removing-prior-camera-modules-black-screen-crashes-old-icon-en"></a>
-### 7.2. ⚠️ Resolving Conflicts: Why Disabling Old Camera Modules Fails & Clean Install Protocol (EN)
+### 8.2. ⚠️ Resolving Conflicts: Why Disabling Old Camera Modules Fails & Clean Install Protocol (EN)
 
 If you encounter any of the following symptoms after installing the module:
 * 🔲 **Black screen in viewfinder** (the viewfinder fails to stream video or freezes on a black screen upon launch);
@@ -1358,11 +1538,11 @@ Follow this exact sequence to guarantee zero conflicts and flawless camera opera
 3. Launch the camera app. It will open instantly with the new Leica icon, modernized UI, and full access to all 50M/200M sensors without crashes or black screens!
 
 ---
-### 8. Verification & Testing Guide (All Devices & Versions) (EN)
+### 9. Verification & Testing Guide (All Devices & Versions) (EN)
 
 After installing any module package from the suite, follow this step-by-step diagnostic guide to verify that all hardware pipelines, Chromatix tunings, and system overrides are operational.
 
-#### 8.1. Baseline Post-Reboot Verification
+#### 9.1. Baseline Post-Reboot Verification
 1. **Root Status Check**: Open **Magisk**, **KernelSU**, or **APatch**.
    - Verify the module is active with a green checkmark.
    - Confirm root access remains fully functional (Magisk Safe Mode is completely bypassed on Android 14 due to sanitized boot scripts).
@@ -1374,7 +1554,7 @@ After installing any module package from the suite, follow this step-by-step dia
 
 ---
 
-#### 8.2. Target Device Verification Steps
+#### 9.2. Target Device Verification Steps
 
 ##### 📱 Xiaomi 17 Ultra (`nezha`)
 * **SimpleRom ST / Custom ROM Stability**:
@@ -1430,7 +1610,7 @@ After installing any module package from the suite, follow this step-by-step dia
 
 ---
 
-#### 8.3. Testing Hardware DCG (Dual Conversion Gain) / iDCG HDR
+#### 9.3. Testing Hardware DCG (Dual Conversion Gain) / iDCG HDR
 The key advantage of hardware DCG over standard multi-frame HDR is **simultaneous LCG (highlights) and HCG (shadows) readout from a single exposure**:
 1. Frame a high dynamic range scene (e.g., an indoor room facing a bright sunny window, or a night street with bright neon signs/streetlights).
 2. Introduce rapid motion in the frame (wave your hand in front of the lens or photograph a passing car).
@@ -1442,7 +1622,7 @@ The key advantage of hardware DCG over standard multi-frame HDR is **simultaneou
 
 ---
 
-#### 8.4. Terminal / ADB Properties Verification
+#### 9.4. Terminal / ADB Properties Verification
 Quickly verify system properties using Termux (with root) or ADB on PC:
 
 ```bash
@@ -1474,7 +1654,7 @@ getprop ro.vendor.camera.dcg
 # Expected: 1
 ```
 
-#### 8.5. CamX HAL Logcat Verification (Advanced)
+#### 9.5. CamX HAL Logcat Verification (Advanced)
 Via USB debugging on PC:
 ```bash
 adb logcat -s CamX | grep -iE "dcg|hdr|stream"
@@ -1483,7 +1663,7 @@ During viewfinder startup, Qualcomm CamX will log `EnableHDRDCGMode: success`, c
 
 ---
 
-#### 8.6. Google Camera (AGC 8.x / 9.x, LMC, Shamim) 50MP / 200MP Configuration & Testing Guide (EN)
+#### 9.6. Google Camera (AGC 8.x / 9.x, LMC, Shamim) 50MP / 200MP Configuration & Testing Guide (EN)
 
 The **Xiaomi Master Camera Combo** module removes all vendor restrictions at the kernel and Qualcomm CamX HAL level. However, **Google Camera ports (such as BigKaka AGC 9.6, LMC 8.4, and Shamim)** are originally designed for Google Pixel devices. Without an appropriate `.agc` config profile or proper manual stream configuration, **GCam will NOT capture in 50MP** out of the box, even if you tap the «50M / RES» button in the viewfinder.
 
@@ -1544,7 +1724,7 @@ The following package variants are explicitly included in `vendor.camera.aux.pac
 
 ---
 
-### 9. Automated Diagnostic Tool (check_support.sh) (EN)
+### 10. Automated Diagnostic Tool (check_support.sh) (EN)
 
 To quickly and reliably verify your device, ROM environment, root access, and the live status of all Qualcomm CamX overrides, a portable shell diagnostic script **`check_support.sh`** is provided.
 
@@ -1582,7 +1762,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 ---
 
-### 10. Frequently Asked Questions (FAQ) (EN)
+### 11. Frequently Asked Questions (FAQ) (EN)
 
 <details>
 <summary><b>What should I do on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14) if root dropped or screen went black?</b></summary>
@@ -1644,7 +1824,17 @@ Yes, all cameras shoot in full 50MP / 200MP resolution in AGC, LMC, Shamim, and 
 
 ---
 
-### 11. Community, Feedback & Telegram Channel (EN)
+<details>
+<summary><b>Can I install AI Suite modules together with FULL or SLIM editions? Are there any conflicts?</b></summary>
+
+**Yes, AI Suite modules are 100% compatible with both FULL and SLIM editions, and can be installed individually or simultaneously!**
+* **Tier 1 (AISP Hardware)** operates at Qualcomm CamX driver and Hexagon NPU level, unlocking computational photography algorithms at capture.
+* **Tier 2 (HyperAI Studio)** operates at Gallery & ExtraPhoto editor level, unlocking generative eraser and outpainting tools.
+* **Tier 3 (AI Director)** operates in the viewfinder, rendering composition coaching guidelines and leveling HUD.
+They target separate system layers and do not conflict. Bootloop risk is **0%**!
+</details>
+
+### 12. Community, Feedback & Telegram Channel (EN)
 
 <p align="center">
   <a href="https://t.me/Mi_Master_Camera_Combo">

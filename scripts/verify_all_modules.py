@@ -23,7 +23,11 @@ zips_to_check = [
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip',
     # Xiaomi 15 / 15 Pro
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Camera_Combo_Full_by_borndead.zip',
-    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Imaging_MOD_Slim_by_borndead.zip'
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Imaging_MOD_Slim_by_borndead.zip',
+    # AI Camera Suite (Tier 1, Tier 2, Tier 3)
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_AI_Director_Vision_Companion_by_borndead.zip'
 ]
 
 forbidden_libs = ['libremosaiclib.so', 'libmialgo_ainr_ll.so', 'libmialgo_ellc.so', 'libdlrmsc_android15.so']

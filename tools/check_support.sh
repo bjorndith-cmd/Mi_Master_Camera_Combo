@@ -192,7 +192,44 @@ else
     log_both "  • Chromatix Binaries:   ${YELLOW}[INFO] Default system partition profiles active.${NC}"
 fi
 
-# 6. Overall Verdict
+# 6. AI Neural Engine & Smart Features
+log_both "\n${BLUE}[6. Проверка нейросетевых функций ИИ / AI Neural Engine Status]${NC}"
+AISP_EN=$(getprop persist.vendor.camera.aisp)
+if [ "$AISP_EN" = "1" ]; then
+    log_both "  • Xiaomi AISP Hardware: ${GREEN}[PASS] persist.vendor.camera.aisp = 1 (Active on NPU)${NC}"
+else
+    log_both "  • Xiaomi AISP Hardware: ${YELLOW}[INFO] aisp = '$AISP_EN' (Stock or default)${NC}"
+fi
+
+AINR_EN=$(getprop persist.vendor.camera.sensor.ainr)
+if [ "$AINR_EN" = "1" ]; then
+    log_both "  • AI Noise Reduction:   ${GREEN}[PASS] persist.vendor.camera.sensor.ainr = 1 (Hexagon DSP)${NC}"
+else
+    log_both "  • AI Noise Reduction:   ${YELLOW}[INFO] sensor.ainr = '$AINR_EN'${NC}"
+fi
+
+CYBER_EN=$(getprop persist.vendor.camera.cyberfocus.enable)
+if [ "$CYBER_EN" = "1" ]; then
+    log_both "  • CyberFocus 2.0 AI:    ${GREEN}[PASS] cyberfocus.enable = 1 (Real-time tracking)${NC}"
+else
+    log_both "  • CyberFocus 2.0 AI:    ${YELLOW}[INFO] cyberfocus.enable = '$CYBER_EN'${NC}"
+fi
+
+AI_EDITOR_EN=$(getprop persist.sys.miui.gallery.ai_editor)
+if [ "$AI_EDITOR_EN" = "1" ]; then
+    log_both "  • HyperAI GenAI Studio: ${GREEN}[PASS] gallery.ai_editor = 1 (Eraser Pro & Expansion active)${NC}"
+else
+    log_both "  • HyperAI GenAI Studio: ${YELLOW}[INFO] gallery.ai_editor = '$AI_EDITOR_EN'${NC}"
+fi
+
+AI_DIR_EN=$(getprop persist.vendor.camera.ai.director)
+if [ "$AI_DIR_EN" = "1" ]; then
+    log_both "  • AI Director HUD:      ${GREEN}[PASS] camera.ai.director = 1 (Viewfinder coach active)${NC}"
+else
+    log_both "  • AI Director HUD:      ${YELLOW}[INFO] camera.ai.director = '$AI_DIR_EN'${NC}"
+fi
+
+# 7. Overall Verdict
 log_both "\n${CYAN}======================================================${NC}"
 if [ "$MAX_RAW" = "55" ] && [ "$DCG_EN" = "1" ] && [ -n "$AUX_LIST" ]; then
     log_both "${GREEN}  🎉 ВЕРДИКТ: ВСЕ СИСТЕМНЫЕ ТВЫКИ АКТИВНЫ И РАБОТАЮТ!${NC}"

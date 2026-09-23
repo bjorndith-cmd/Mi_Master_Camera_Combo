@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d14"/>
+      <stop offset="100%" stop-color="#141923"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f293d"/>
+      <stop offset="100%" stop-color="#131b2a"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d1f3d"/>
+      <stop offset="100%" stop-color="#1c1328"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1d352d"/>
+      <stop offset="100%" stop-color="#11221c"/>
+    </linearGradient>
+    <linearGradient id="glowRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e02424"/>
+      <stop offset="100%" stop-color="#ff5e5e"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="520" rx="16" fill="url(#bg)"/>
+  <rect width="998" height="518" x="1" y="1" rx="15" fill="none" stroke="#252f42" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <circle cx="50" cy="48" r="14" fill="#e02424"/>
+  <text x="50" y="53" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="12" font-weight="900" fill="#fff" text-anchor="middle">Leica</text>
+  <text x="76" y="54" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Xiaomi Master Camera AI Suite</text>
+  <text x="440" y="54" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="14" font-weight="400" fill="#8899ac">| Экосистема Искусственного Интеллекта (3 Уровня)</text>
+
+  <!-- TIER 1 CARD -->
+  <g transform="translate(30, 85)" filter="url(#shadow)">
+    <rect width="295" height="395" rx="12" fill="url(#card1)" stroke="#3875d7" stroke-width="1.5"/>
+    <rect width="295" height="34" rx="12" fill="#1b2a47"/>
+    <text x="147" y="23" font-family="-apple-system,sans-serif" font-size="13" font-weight="800" fill="#60a5fa" text-anchor="middle">TIER 1 • АППАРАТНЫЙ ИИ (NPU)</text>
+    
+    <text x="20" y="65" font-family="-apple-system,sans-serif" font-size="17" font-weight="700" fill="#ffffff">Xiaomi AISP Engine</text>
+    <text x="20" y="85" font-family="-apple-system,sans-serif" font-size="12" font-weight="400" fill="#93c5fd">On-Device Hexagon NPU &amp; ISP</text>
+
+    <!-- Features -->
+    <rect x="15" y="105" width="265" height="42" rx="6" fill="#141e33"/>
+    <text x="25" y="123" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#93c5fd">⚡ FusionLM &amp; ToneLM</text>
+    <text x="25" y="138" font-family="-apple-system,sans-serif" font-size="10" fill="#8ba2be">Склейка экспозиции без двоения, Leica кривые</text>
+
+    <rect x="15" y="155" width="265" height="42" rx="6" fill="#141e33"/>
+    <text x="25" y="173" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#93c5fd">🎯 PortraitLM &amp; 3D Bokeh</text>
+    <text x="25" y="188" font-family="-apple-system,sans-serif" font-size="10" fill="#8ba2be">Карта глубины NPU, Noctilux 50 f/0.95</text>
+
+    <rect x="15" y="205" width="265" height="42" rx="6" fill="#141e33"/>
+    <text x="25" y="223" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#93c5fd">🔭 AISP Ultra Zoom 30x–100x</text>
+    <text x="25" y="238" font-family="-apple-system,sans-serif" font-size="10" fill="#8ba2be">Генеративное достраивание текстур</text>
+
+    <rect x="15" y="255" width="265" height="42" rx="6" fill="#141e33"/>
+    <text x="25" y="273" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#93c5fd">👁️ CyberFocus 2.0 &amp; AINR</text>
+    <text x="25" y="288" font-family="-apple-system,sans-serif" font-size="10" fill="#8ba2be">Нейротрекинг глаз 60fps, чистые тени</text>
+
+    <rect x="15" y="310" width="265" height="65" rx="8" fill="#182c22" stroke="#22c55e" stroke-width="1"/>
+    <text x="25" y="330" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#4ade80">🛡️ 100% OFFLINE (NO CLOUD)</text>
+    <text x="25" y="347" font-family="-apple-system,sans-serif" font-size="10" fill="#a7f3d0">Отключены сервера КНР. Розовый шум</text>
+    <text x="25" y="362" font-family="-apple-system,sans-serif" font-size="10" fill="#a7f3d0">полностью устранён. Чистый оверлей.</text>
+  </g>
+
+  <!-- TIER 2 CARD -->
+  <g transform="translate(352, 85)" filter="url(#shadow)">
+    <rect width="295" height="395" rx="12" fill="url(#card2)" stroke="#a855f7" stroke-width="1.5"/>
+    <rect width="295" height="34" rx="12" fill="#33184a"/>
+    <text x="147" y="23" font-family="-apple-system,sans-serif" font-size="13" font-weight="800" fill="#c084fc" text-anchor="middle">TIER 2 • ГЕНЕРАТИВНЫЙ СТУДИЙНЫЙ ИИ</text>
+    
+    <text x="20" y="65" font-family="-apple-system,sans-serif" font-size="17" font-weight="700" fill="#ffffff">HyperAI Studio Suite</text>
+    <text x="20" y="85" font-family="-apple-system,sans-serif" font-size="12" font-weight="400" fill="#d8b4fe">Camera Preview &amp; Gallery Editor</text>
+
+    <!-- Features -->
+    <rect x="15" y="105" width="265" height="42" rx="6" fill="#201133"/>
+    <text x="25" y="123" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#d8b4fe">🪄 AI Ластик Pro (Eraser 2.0)</text>
+    <text x="25" y="138" font-family="-apple-system,sans-serif" font-size="10" fill="#bfa5d8">Удаление людей, проводов, умный инпеинтинг</text>
+
+    <rect x="15" y="155" width="265" height="42" rx="6" fill="#201133"/>
+    <text x="25" y="173" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#d8b4fe">🖼️ AI Расширение (Outpainting)</text>
+    <text x="25" y="188" font-family="-apple-system,sans-serif" font-size="10" fill="#bfa5d8">Генеративное дорисовывание границ кадра</text>
+
+    <rect x="15" y="205" width="265" height="42" rx="6" fill="#201133"/>
+    <text x="25" y="223" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#d8b4fe">🌌 AI Небо 3.0 (Dynamic Relight)</text>
+    <text x="25" y="238" font-family="-apple-system,sans-serif" font-size="10" fill="#bfa5d8">Замена неба с перерасчетом глобального света</text>
+
+    <rect x="15" y="255" width="265" height="42" rx="6" fill="#201133"/>
+    <text x="25" y="273" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#d8b4fe">💡 Студийный свет &amp; Блики</text>
+    <text x="25" y="288" font-family="-apple-system,sans-serif" font-size="10" fill="#bfa5d8">3D портретный софтбокс, устранение бликов</text>
+
+    <rect x="15" y="310" width="265" height="65" rx="8" fill="#261238" stroke="#a855f7" stroke-width="1"/>
+    <text x="25" y="330" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#e9d5ff">✨ ИНТЕГРАЦИЯ В 1 КЛИК</text>
+    <text x="25" y="347" font-family="-apple-system,sans-serif" font-size="10" fill="#c084fc">Доступно сразу в превью камеры после</text>
+    <text x="25" y="362" font-family="-apple-system,sans-serif" font-size="10" fill="#c084fc">съемки кадра. Быстрый NPU-рендеринг.</text>
+  </g>
+
+  <!-- TIER 3 CARD -->
+  <g transform="translate(675, 85)" filter="url(#shadow)">
+    <rect width="295" height="395" rx="12" fill="url(#card3)" stroke="#10b981" stroke-width="1.5"/>
+    <rect width="295" height="34" rx="12" fill="#0f3325"/>
+    <text x="147" y="23" font-family="-apple-system,sans-serif" font-size="13" font-weight="800" fill="#6ee7b7" text-anchor="middle">TIER 3 • AI КОМПАНЬОН ВИДОИСКАТЕЛЯ</text>
+    
+    <text x="20" y="65" font-family="-apple-system,sans-serif" font-size="17" font-weight="700" fill="#ffffff">AI Director &amp; Vision HUD</text>
+    <text x="20" y="85" font-family="-apple-system,sans-serif" font-size="12" font-weight="400" fill="#a7f3d0">Real-Time Viewfinder Assistant</text>
+
+    <!-- Features -->
+    <rect x="15" y="105" width="265" height="42" rx="6" fill="#0c1f17"/>
+    <text x="25" y="123" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#6ee7b7">📐 Золотое сечение &amp; Трети</text>
+    <text x="25" y="138" font-family="-apple-system,sans-serif" font-size="10" fill="#85c0a3">Динамические линии композиции Leica</text>
+
+    <rect x="15" y="155" width="265" height="42" rx="6" fill="#0c1f17"/>
+    <text x="25" y="173" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#6ee7b7">🧭 Точный горизонт (±0.1°)</text>
+    <text x="25" y="188" font-family="-apple-system,sans-serif" font-size="10" fill="#85c0a3">Зеленый индикатор ровного горизонта</text>
+
+    <rect x="15" y="205" width="265" height="42" rx="6" fill="#0c1f17"/>
+    <text x="25" y="223" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#6ee7b7">🔍 Советник по объективам</text>
+    <text x="25" y="238" font-family="-apple-system,sans-serif" font-size="10" fill="#85c0a3">Подсказка лучшего сенсора (1.0x vs 3.2x)</text>
+
+    <rect x="15" y="255" width="265" height="42" rx="6" fill="#0c1f17"/>
+    <text x="25" y="273" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#6ee7b7">⚙️ Smart Pro Preset Suggester</text>
+    <text x="25" y="288" font-family="-apple-system,sans-serif" font-size="10" fill="#85c0a3">Анализ сцены и готовые ISO / Shutter</text>
+
+    <rect x="15" y="310" width="265" height="65" rx="8" fill="#0b241b" stroke="#10b981" stroke-width="1"/>
+    <text x="25" y="330" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#a7f3d0">🔴 ЛАКОНИЧНЫЙ LEICA HUD</text>
+    <text x="25" y="347" font-family="-apple-system,sans-serif" font-size="10" fill="#6ee7b7">Стильный полупрозрачный оверлей,</text>
+    <text x="25" y="362" font-family="-apple-system,sans-serif" font-size="10" fill="#6ee7b7">не перекрывающий видоискатель и затвор.</text>
+  </g>
+</svg>
