@@ -15,23 +15,32 @@ apktool_jar = r'C:\WINDOWS\apktool.jar'
 
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 keystore_path = os.path.join(repo_root, 'tools', 'borndead_camera.keystore')
-src_apk = r'C:\Users\ASTA\OneDrive\Документы\Antigravity\workspace\active_module\system\priv-app\MiuiCamera\MiuiCamera.apk'
+clean_source_zip = r'C:\Users\ASTA\OneDrive\Antigravity\miui_camera_hyperos3-vFinal.zip'
 work_dir = r'C:\Users\ASTA\AppData\Local\Temp\camera_rebrand_clean'
+src_apk = os.path.join(work_dir, 'pristine_MiuiCamera.apk')
 
 if os.path.exists(work_dir):
     shutil.rmtree(work_dir)
 os.makedirs(work_dir, exist_ok=True)
 
+# Extract 100% pristine APK from miui_camera_hyperos3-vFinal.zip
+print(f"\n[0/6] Extracting pristine APK from {os.path.basename(clean_source_zip)}...")
+with zipfile.ZipFile(clean_source_zip, 'r') as z:
+    with open(src_apk, 'wb') as f:
+        f.write(z.read('system/priv-app/MiuiCamera/MiuiCamera.apk'))
+print(f"Extracted clean pristine APK: {os.path.getsize(src_apk):,} bytes")
+
 # 1. Decompile resources with apktool
 print("\n[1/6] Decompiling resources with apktool (leaving raw DEX untouched)...")
-cmd_decode = ['java', '-jar', apktool_jar, 'd', '-s', '-f', '-o', work_dir, src_apk]
+decode_dir = os.path.join(work_dir, 'decoded')
+cmd_decode = ['java', '-jar', apktool_jar, 'd', '-s', '-f', '-o', decode_dir, src_apk]
 subprocess.run(cmd_decode, check=True)
 print("Decoded successfully!")
 
 # 2. Modify XML string resources in all languages
 print("\n[2/6] Updating strings.xml resources across all languages...")
 strings_modified = 0
-for str_file in glob.glob(os.path.join(work_dir, 'res', 'values*', 'strings.xml')):
+for str_file in glob.glob(os.path.join(decode_dir, 'res', 'values*', 'strings.xml')):
     with open(str_file, 'r', encoding='utf-8', errors='ignore') as fp:
         c = fp.read()
     orig = c
@@ -58,7 +67,7 @@ print(f"Updated {strings_modified} strings.xml files with borndead author and @M
 # 3. Rebuild APK with apktool
 print("\n[3/6] Rebuilding APK with apktool...")
 unaligned_apk = os.path.join(work_dir, 'unaligned.apk')
-cmd_build = ['java', '-jar', apktool_jar, 'b', '-f', '-o', unaligned_apk, work_dir]
+cmd_build = ['java', '-jar', apktool_jar, 'b', '-f', '-o', unaligned_apk, decode_dir]
 subprocess.run(cmd_build, check=True)
 print(f"Rebuilt unaligned APK: {os.path.getsize(unaligned_apk):,} bytes")
 
@@ -109,10 +118,11 @@ with zipfile.ZipFile(signed_apk, 'r') as z:
             with open(out_dex, 'wb') as f:
                 f.write(z.read(name))
             res_d = subprocess.run([dexdump_exe, '-c', out_dex], capture_output=True, text=True)
-            if 'Out-of-order' in res_d.stderr:
-                print(f"[FAIL] {name}: Out-of-order strings detected!")
+            if res_d.returncode != 0 or 'Failure to verify' in res_d.stderr or 'Out-of-order' in res_d.stderr:
+                print(f"[FAIL] {name}: Verification failed:\n{res_d.stderr}")
+                raise RuntimeError(f"DEX verification failed for {name}")
             else:
-                print(f"[PASS] {name}: 100% clean, zero out-of-order strings!")
+                print(f"[PASS] {name}: 100% clean, verified with dexdump (returncode 0)!")
 
 # 7. Deploy to staging directories
 print("\n=== Deploying Clean Signed MiuiCamera.apk and Restoring All Companion Libs ===")
