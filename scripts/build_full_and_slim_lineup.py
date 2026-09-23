@@ -146,7 +146,7 @@ with open(os.path.join(uni_full_staging, 'module.prop'), 'w', encoding='utf-8', 
 name=Xiaomi Master Camera Combo (Universal FULL Edition)
 version=v5.8-Universal-FULL-A16
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Universal Full Flagship Camera Suite for Xiaomi 13U, 14U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3 (Android 14/15/16). Full Leica Camera APK + oat/.replace protection + Quad-50M/200M FullRes + Variable Aperture + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K video on all lenses + 4K120fps + offline processing.
 """)
 
@@ -156,7 +156,7 @@ with open(os.path.join(uni_slim_staging, 'module.prop'), 'w', encoding='utf-8', 
 name=Xiaomi Master Camera Combo (Universal SLIM Edition)
 version=v5.8-Universal-SLIM-A16
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Universal Pure Systemless Overlay for Xiaomi 13U, 14U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50M/200M FullRes + Variable Aperture + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K all lenses + 4K120fps + Chromatix hardware sensor bins.
 """)
 
@@ -690,7 +690,7 @@ with open(os.path.join(ishtar_full_stg, 'module.prop'), 'w', encoding='utf-8', n
 name=Xiaomi 13 Ultra Master Camera Combo (FULL Edition)
 version=v5.2-Full-AntiBootloop
 versionCode=20260926
-author=borndead (feat. amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated FULL Leica Camera Suite for Xiaomi 13 Ultra (ishtar) on HyperOS 2/3 (Android 15/16). Full Leica Camera App + oat/.replace protection + Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Chromatix IMX989/IMX858 hardware calibration bins.
 """)
 
@@ -699,7 +699,7 @@ with open(os.path.join(ishtar_slim_stg, 'module.prop'), 'w', encoding='utf-8', n
 name=Xiaomi 13 Ultra Master Camera Combo (SLIM Edition)
 version=v5.2-Slim-AntiBootloop
 versionCode=20260926
-author=borndead (feat. amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay for Xiaomi 13 Ultra (ishtar) on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops on official Taiwan/Global ROMs!). Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Chromatix IMX989/IMX858.
 """)
 
@@ -758,7 +758,7 @@ with open(os.path.join(x17u_full_stg, 'module.prop'), 'w', encoding='utf-8', new
 name=Xiaomi 17 Ultra Master Camera Combo (FULL Edition)
 version=v5.2-Full-Nezha
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated FULL Leica Camera Suite for Xiaomi 17 Ultra (nezha) on HyperOS 3.0. Full Leica Camera APK + oat/.replace protection + genuine OVX10500U/HP9/JN5 Chromatix bins + DCG Hardware HDR + 8K video on all lenses + 4K120fps + Qualcomm libqcodec2_v4l2codec.so.
 """)
 
@@ -767,7 +767,7 @@ with open(os.path.join(x17u_slim_stg, 'module.prop'), 'w', encoding='utf-8', new
 name=Xiaomi 17 Ultra Master Camera Combo (SLIM Edition)
 version=v1.1-Slim-Nezha
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay for Xiaomi 17 Ultra (nezha) on HyperOS 3.0. Zero Camera APK replacement (100% immune to crashes on SimpleRom ST, EU, Elite!). OVX10500U/HP9/JN5 Chromatix bins + DCG Hardware HDR + 8K video all lenses + 4K120fps + Qualcomm libqcodec2_v4l2codec.so.
 """)
 
@@ -817,7 +817,7 @@ with open(os.path.join(x15u_full_stg, 'module.prop'), 'w', encoding='utf-8', new
 name=Xiaomi 15 Ultra Master Camera Combo (FULL Edition)
 version=v5.2-Full-Xuanyuan
 versionCode=20260926
-author=borndead (feat. amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated FULL Leica Camera Suite for Xiaomi 15 Ultra (xuanyuan) on HyperOS 2/3. Full Leica Camera APK + oat/.replace protection + Stock AIO 104 LYT-900 / HP9 200M tunings + native A16 Camera HAL + DCG Hardware HDR + 8K video on all lenses + 4K120fps.
 """)
 
@@ -826,7 +826,7 @@ with open(os.path.join(x15u_slim_stg, 'module.prop'), 'w', encoding='utf-8', new
 name=Xiaomi 15 Ultra Master Camera Combo (SLIM Edition)
 version=v1.1-Slim-Xuanyuan
 versionCode=20260926
-author=borndead (feat. amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay for Xiaomi 15 Ultra (xuanyuan) on HyperOS 2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Stock AIO 104 LYT-900 / HP9 200M Chromatix tunings + native A16 HAL + DCG Hardware HDR + 8K video all lenses + 4K120fps.
 """)
 
@@ -872,7 +872,7 @@ with open(os.path.join(mi15_full_stg, 'module.prop'), 'w', encoding='utf-8', new
 name=Xiaomi 15 / 15 Pro Master Camera Combo (FULL Edition)
 version=v5.2-Full-Dada
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated FULL Leica Camera Suite for Xiaomi 15 & 15 Pro (dada/haotian) on HyperOS 2/3. Full Leica Camera APK + oat/.replace protection + Light Hunter 900 tuning + 50MP FullRes + DCG Hardware HDR + George 8K Video + 4K120fps.
 """)
 
@@ -881,7 +881,7 @@ with open(os.path.join(mi15_slim_stg, 'module.prop'), 'w', encoding='utf-8', new
 name=Xiaomi 15 / 15 Pro Master Camera Combo (SLIM Edition)
 version=v1.1-Slim-Dada
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay for Xiaomi 15 & 15 Pro (dada/haotian) on HyperOS 2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Light Hunter 900 tuning + 50MP FullRes + DCG Hardware HDR + George 8K Video + 4K120fps.
 """)
 
@@ -934,7 +934,7 @@ with open(os.path.join(mi14u_full_stg, 'module.prop'), 'w', encoding='utf-8', ne
 name=Xiaomi 14 Ultra Master Camera Combo (FULL Edition)
 version=v5.2-Full-Aurora
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated FULL Leica Camera Suite for Xiaomi 14 Ultra (aurora) on HyperOS 1/2/3. Full Leica Camera APK + oat/.replace protection + Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + Stepless Variable Aperture (F1.63-F4.0) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Offline Processing Bypass.
 """)
 
@@ -944,7 +944,7 @@ with open(os.path.join(mi14u_slim_stg, 'module.prop'), 'w', encoding='utf-8', ne
 name=Xiaomi 14 Ultra Master Camera Combo (SLIM Edition)
 version=v1.1-Slim-Aurora
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay for Xiaomi 14 Ultra (aurora) on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + Stepless Variable Aperture (F1.63-F4.0) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + AISP Noise Reduction Bypass.
 """)
 

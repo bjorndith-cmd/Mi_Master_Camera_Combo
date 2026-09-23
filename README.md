@@ -101,6 +101,7 @@
 10. [Скрипт автоматической диагностики (check_support.sh)](#10-скрипт-автоматической-диагностики-check_supportsh-ru)
 11. [Часто задаваемые вопросы (FAQ)](#11-часто-задаваемые-вопросы-faq-ru)
 12. [Сообщество, обратная связь и Telegram](#12-сообщество-обратная-связь-и-telegram-ru)
+13. [Благодарности (Credits)](#13-благодарности-credits-ru)
 
 ---
 
@@ -992,6 +993,17 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 ---
 ---
 
+### 13. 🤝 Благодарности (Credits) (RU)
+
+Выражаем искреннюю благодарность разработчикам и исследователям сообщества, чей труд, экспертиза и открытые наработки внесли ключевой вклад в создание и совершенствование комбайна:
+
+* 🌟 **ItzDFPlayer** — за фундаментальные исследования структуры системных оверлеев камеры, реверс-инжиниринг XML-манифестов `device_features` и модификаций приложений камеры MIUI / HyperOS.
+* 🌟 **HolyBear** — за разработку и оптимизацию продвинутых профилей обработки изображений, устранение артефактов и глубокий анализ библиотек постобработки.
+* 🌟 **amitkattal** — за выдающийся вклад в разблокировку полного разрешения 50Мп / 200Мп Ultra RAW, реверс-инжиниринг драйверов Qualcomm CamX и тонкую настройку калибровок сенсоров.
+* 🌟 **GeorgeKiarie** — за создание легендарного алгоритмического мода **George Video MOD** (разблокировка записи видео в разрешении 8K со всех оптических модулей, 4K120fps и байпас агрессивного шумоподавления ArcSoft).
+
+---
+
 <a name="-english"></a>
 # 🇬🇧 ENGLISH SECTION
 
@@ -1027,6 +1039,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 10. [Automated Diagnostic Tool (check_support.sh)](#10-automated-diagnostic-tool-check_supportsh-en)
 11. [Frequently Asked Questions (FAQ)](#11-frequently-asked-questions-faq-en)
 12. [Community, Feedback & Telegram Channel](#12-community-feedback--telegram-channel-en)
+13. [Credits & Acknowledgements](#13-credits--acknowledgements-en)
 
 ---
 
@@ -1920,3 +1933,15 @@ If you encounter an issue or wish to propose an enhancement, use our official in
 ## 📄 Technical Audit Report / Технический отчёт
 For in-depth register dumps, dynamic linker analysis, and hardware profiles:  
 👉 **[DETAILED_AUDIT_REPORT.md](./DETAILED_AUDIT_REPORT.md)**
+
+### 13. 🤝 Credits & Acknowledgements (EN)
+
+We express our heartfelt appreciation and gratitude to the outstanding community developers and researchers whose dedication, expertise, and open research made this project possible:
+
+* 🌟 **ItzDFPlayer** — for foundational architectural research into camera systemless overlays, `device_features` manifest structuring, and MIUI / HyperOS camera package modifications.
+* 🌟 **HolyBear** — for pioneering custom image processing profiles, artifact mitigation algorithms, and in-depth analysis of processing pipelines.
+* 🌟 **amitkattal** — for groundbreaking work on unlocking 50MP / 200MP full-resolution Ultra RAW capture, Qualcomm CamX driver reverse engineering, and sensor tuning.
+* 🌟 **GeorgeKiarie** — for the legendary **George Video MOD** algorithms (unlocking 8K recording across all camera lenses, 4K120fps high-frame-rate capture, and bypassing ArcSoft video noise reduction smearing).
+
+---
+

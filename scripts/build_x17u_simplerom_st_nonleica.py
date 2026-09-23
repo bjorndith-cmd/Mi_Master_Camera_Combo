@@ -163,7 +163,7 @@ module_prop = """id=x17u_master_imaging_simplerom_st_nonleica
 name=Xiaomi 17 Ultra Master Imaging MOD (SimpleRom ST Non-Leica Edition)
 version=v1.1-SimpleRom-ST-Offline-A16
 versionCode=20260927
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Specialized Offline Master Imaging MOD for Xiaomi 17 Ultra (nezha) on SimpleRom 3.0.309.0 ST (Non-Leica edition) / HyperOS 3.0 (Android 16). Prevents pink/magenta noise by disabling cloud/Leica Essential upload across ODM/Vendor/System partitions & forcing 100% on-device Spectra ISP/Hexagon NPU demosaicing. Enables offline Leica Authentic/Vibrant color science, Leica M9/M-mode, Leica watermarks, Master Lens portraits, OVX10500U/HP9/JN5 Chromatix tuning, DCG Hardware HDR, 8K video on all rear lenses, 4K120fps, and full 50M/200M RAW. Pure Systemless Overlay (ROM camera APK intact, 0 crash risk).
 """
 
@@ -172,7 +172,7 @@ system_prop = """# =============================================================
 # Xiaomi 17 Ultra Master Imaging MOD (SimpleRom ST Non-Leica Edition)
 # Hardware: Xiaomi 17 Ultra (nezha) - Snapdragon 8 Elite
 # Optimized for SimpleRom 3.0.309.0 ST (Non-Leica) & HyperOS 3.0 / Android 16
-# by borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+# by borndead 
 # ==============================================================================
 
 # 1. Force 100% Offline Local Processing (Disable Broken Cloud / Leica Essential Upload)
@@ -231,7 +231,7 @@ customize_sh = """##############################################################
 # Xiaomi 17 Ultra Master Imaging MOD (SimpleRom ST Non-Leica Edition)
 # Target Device: Xiaomi 17 Ultra (nezha)
 # Firmware: SimpleRom 3.0.309.0 ST (Non-Leica) & HyperOS 3.0 (Android 16)
-# by borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+# by borndead 
 #
 ##########################################################################################
 

@@ -22,7 +22,7 @@ module_prop = """id=x17u_master_imaging_mod_slim
 name=Xiaomi 17 Ultra Master Imaging MOD (Slim Overlay)
 version=v1.0-Slim-DCG-A16
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Pure Systemless Overlay MOD for Xiaomi 17 Ultra (nezha) on HyperOS 3.0 / Android 16 (SimpleRom ST, Xiaomi.eu, Elite, Stock). Keeps ROM camera intact (zero APK conflict!). OVX10500U/HP9/JN5/OV50M Chromatix tuned bins + Dual Conversion Gain (DCG) Hardware HDR + 8K video all sensors + 4K120fps + AISP NR bypass + high-res RAW.
 """
 
@@ -66,7 +66,7 @@ customize_sh = """##############################################################
 # Xiaomi 17 Ultra Master Imaging MOD (Slim Pure Overlay Edition)
 # Hardware: Xiaomi 17 Ultra (nezha)
 # Compatible with HyperOS 3.0 / Android 16 (SimpleRom ST, Xiaomi.eu, EliteROM, Stock)
-# by borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+# by borndead 
 #
 ##########################################################################################
 

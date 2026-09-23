@@ -44,7 +44,7 @@ module_prop = """id=mi15u_x17u_master_camera_combo
 name=Xiaomi 15 Ultra / 17 Ultra Master Camera Combo
 version=v5.1-DualFlagship-DCG-A16
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Master Camera Combo for Xiaomi 15 Ultra (xuanyuan) & Xiaomi 17 Ultra (nezha) on HyperOS 2/3 (Android 15/16). Full Leica Camera App + Quad 50MP/200MP FullRes + Stock AIO LYT-900/OVX10500U tuning + DCG Hardware HDR + 8K Video all lenses + 4K120fps + AISP NR bypass.
 """
 
@@ -88,7 +88,7 @@ customize_sh = """##############################################################
 # Xiaomi 15 Ultra / 17 Ultra Master Camera Combo Installer
 # Supports: Xiaomi 15 Ultra (xuanyuan) & Xiaomi 17 Ultra (nezha)
 # Compatible with HyperOS 2.0 / 3.0 (Android 15 / 16 - API 35/36)
-# by borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+# by borndead 
 #
 ##########################################################################################
 

@@ -63,7 +63,7 @@ t1_prop = """id=mi_ai_master_imaging_aisp_hardware
 name=Xiaomi Master Camera AI - AISP Neural Engine (Hardware On-Device)
 version=v1.0-AISP-Offline
 versionCode=100
-author=borndead (feat. Qualcomm CamX & Xiaomi AISP Team)
+author=borndead
 description=Unlocks Xiaomi AISP 4-LM hardware computational photography (FusionLM, ToneLM, ColorLM, PortraitLM), CyberFocus 2.0 AI tracking, AINR hardware noise reduction, and AI Super Resolution (30x-100x) running strictly offline on Snapdragon Hexagon NPU.
 """
 with open(os.path.join(t1_dir, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
@@ -601,7 +601,7 @@ t4_prop = """id=mi_ai_master_camera_suite_allinone
 name=Xiaomi Master Camera AI - Complete Suite (All-In-One: AISP + GenAI + Director)
 version=v1.0-AI-AllInOne
 versionCode=100
-author=borndead (feat. Qualcomm CamX & Xiaomi AISP Team)
+author=borndead
 description=Complete Tri-Tier AI Suite in a single package: Tier 1 (AISP 4-LM Hardware NPU Engine), Tier 2 (HyperAI GenAI Studio & ExtraPhoto), and Tier 3 (AI Director Vision Companion Viewfinder HUD). 100% offline, zero conflicts.
 """
 with open(os.path.join(t4_dir, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:

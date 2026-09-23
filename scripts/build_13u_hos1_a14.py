@@ -28,7 +28,7 @@ module_prop = """id=mi13u_master_imaging_mod_hos1_a14
 name=Xiaomi 13 Ultra Master Imaging MOD (HyperOS 1.0 A14 Edition)
 version=v1.0-HOS1-A14-DCG
 versionCode=20260926
-author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay MOD for Xiaomi 13 Ultra (ishtar) on HyperOS 1.0 / Android 14 (HOS 1.0.14.0+). Keeps ROM camera intact (zero APK conflict!). Preserves native A14 HAL (prevents black screen!). NO root-dropping scripts. Quad-50MP FullRes + Dual Conversion Gain (DCG) Hardware HDR + 8K Video all lenses + 4K120fps + AISP NR bypass.
 """
 
@@ -72,7 +72,7 @@ customize_sh = """##############################################################
 # Xiaomi 13 Ultra Master Imaging MOD (HyperOS 1.0 / Android 14 Edition)
 # Hardware: Xiaomi 13 Ultra (ishtar)
 # Compatible with HyperOS 1.0 (HOS 1.0.14.0+, Android 14 - API 34)
-# by borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+# by borndead 
 #
 ##########################################################################################
 

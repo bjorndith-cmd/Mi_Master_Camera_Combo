@@ -1,7 +1,7 @@
 #!/system/bin/sh
 # ==============================================================================
 # Xiaomi Master Camera Combo - Automated Diagnostic & Compatibility Tool
-# Author: borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
+# Author: borndead
 # Usage:
 #   In Termux: su -c "sh /sdcard/check_support.sh"
 #   Via ADB:   adb shell "su -c sh /sdcard/check_support.sh"
@@ -31,7 +31,7 @@ echo "----------------------------------------------------" >> "$REPORT_FILE"
 
 log_both "${CYAN}======================================================${NC}"
 log_both "${CYAN}  📸 Xiaomi Master Camera Combo - Hardware Diagnostics ${NC}"
-log_both "${CYAN}  Author: borndead (feat. itzdfplayer, amitkattal)     ${NC}"
+log_both "${CYAN}  Author: borndead                                     ${NC}"
 log_both "${CYAN}======================================================${NC}"
 
 # 1. Device Information

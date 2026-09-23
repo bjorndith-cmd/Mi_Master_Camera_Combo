@@ -77,7 +77,7 @@ ishtar_prop_content = """id=mi13u_master_camera_combo
 name=Xiaomi 13 Ultra Master Camera Combo (Pure Systemless Overlay)
 version=v5.2-PureOverlay-AntiBootloop
 versionCode=20260926
-author=borndead (feat. amitkattal & GeorgeKiarie)
+author=borndead
 description=Dedicated Pure Systemless Overlay for Xiaomi 13 Ultra (ishtar) on HyperOS 1/2/3 (Android 14/15/16). Preserves stock Leica Camera APK (eliminates signature mismatch bootloops on official Taiwan/Global/EEA/China ROMs). Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + DCG Hardware HDR + George 8K Video on all lenses + 4K120fps + Chromatix IMX989/IMX858 hardware calibration bins.
 """
 with open(ishtar_prop_path, 'w', encoding='utf-8', newline='\n') as f:
@@ -90,7 +90,7 @@ ishtar_cust_content = """#######################################################
 # Magisk / KernelSU / APatch module installer for Xiaomi 13 Ultra (ishtar)
 # Master Camera Combo: Pure Systemless Overlay (100% Anti-Bootloop Safe)
 # Fully compatible with HyperOS 1.0, 2.0 & 3.0 (Android 14, 15 & 16 — API 34/35/36)
-# by borndead (feat. amitkattal & GeorgeKiarie)
+# by borndead 
 #
 ##########################################################################################
 
