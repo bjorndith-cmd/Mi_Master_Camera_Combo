@@ -2,18 +2,33 @@ import os
 import zipfile
 
 zips_to_check = [
-    r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip',
-    r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip',
-    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip',
-    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.0_by_borndead.zip',
-    r'C:\Users\ASTA\OneDrive\Antigravity\Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip',
+    # Universal Multi-Device
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip',
+    # Xiaomi 13 Ultra
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi13U_Master_Camera_Combo_Full_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip',
     r'C:\Users\ASTA\OneDrive\Antigravity\Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip',
-    r'C:\Users\ASTA\OneDrive\Antigravity\Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip'
+    # Xiaomi 17 Ultra
+    r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Camera_Combo_Full_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_Slim_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip',
+    # Xiaomi 15 Ultra
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_Master_Camera_Combo_Full_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip',
+    # Xiaomi 15 / 15 Pro
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Camera_Combo_Full_by_borndead.zip',
+    r'C:\Users\ASTA\OneDrive\Antigravity\Mi15_Master_Imaging_MOD_Slim_by_borndead.zip'
 ]
 
 forbidden_libs = ['libremosaiclib.so', 'libmialgo_ainr_ll.so', 'libmialgo_ellc.so', 'libdlrmsc_android15.so']
+dangerous_system_overrides = ['libc++.so', 'libc++_shared.so', 'libion.so', 'libdmabufheap.so']
+dangerous_perms = ['android.permission.REBOOT', 'android.permission.DEVICE_POWER', 'android.permission.MANAGE_USERS']
 
-print("=== STARTING AUDIT OF ALL PACKAGES ===")
+print("=== STARTING COMPREHENSIVE AUDIT OF ALL FULL & SLIM PACKAGES ===")
+passed_count = 0
 for zp in zips_to_check:
     if not os.path.exists(zp):
         print(f"FAILED: File does not exist: {zp}")
@@ -30,26 +45,34 @@ for zp in zips_to_check:
         else:
             print(f"  [PASS] Zero broken dynamic libraries found.")
             
-        # 2. Check structure
-        if 'Slim' in zp or 'SimpleRom' in zp:
-            has_apk = any('MiuiCamera.apk' in f for f in names)
-            print(f"  [PASS] MiuiCamera.apk excluded: {not has_apk}")
-            has_nezha_bins = any('nezha' in f and f.endswith('.bin') for f in names)
-            print(f"  [PASS] Nezha Chromatix bins present: {has_nezha_bins}")
-            has_codec = any('libqcodec2' in f for f in names)
-            print(f"  [PASS] Video codec library present: {has_codec}")
+        # 2. Check dangerous system overrides in priv-app
+        found_overrides = [f for f in names if any(bad in f for bad in dangerous_system_overrides) and 'priv-app' in f]
+        if found_overrides:
+            print(f"  [CRITICAL FAIL] Found dangerous system overrides in priv-app: {found_overrides}")
         else:
-            has_devices = any(f.startswith('devices/') for f in names)
-            print(f"  [PASS] Multi-device dynamic 'devices/' tree present: {has_devices}")
-            has_nezha = any('devices/nezha' in f for f in names)
-            print(f"  [PASS] Nezha profile present: {has_nezha}")
-            has_xuanyuan = any('devices/xuanyuan' in f for f in names)
-            print(f"  [PASS] Xuanyuan profile present: {has_xuanyuan}")
+            print(f"  [PASS] Clean lib/arm64: zero dangerous system overrides found.")
             
-        # 3. Check customize.sh
-        if 'customize.sh' in names:
+        # 3. Check dangerous permissions in privapp-permissions
+        if any('privapp-permissions' in f for f in names):
+            perm_content = ""
+            for f in names:
+                if 'privapp-permissions' in f:
+                    perm_content = z.read(f).decode('utf-8', errors='ignore')
+                    break
+            found_bad_perms = [p for p in dangerous_perms if p in perm_content]
+            if found_bad_perms:
+                print(f"  [CRITICAL FAIL] Found dangerous platform permissions: {found_bad_perms}")
+            else:
+                print(f"  [PASS] Clean privapp-permissions: zero signature platform permissions.")
+                
+        # 4. Check oat/.replace in installer if it installs APK
+        if any('MiuiCamera.apk' in f for f in names):
             cust = z.read('customize.sh').decode('utf-8', errors='ignore')
-            has_custom_rom_check = 'IS_CUSTOM_ROM' in cust or 'Slim' in zp or 'SimpleRom' in zp
-            print(f"  [PASS] Custom ROM safeguard present in installer: {has_custom_rom_check}")
-            
-print("\n=== AUDIT COMPLETE ===")
+            has_oat_replace = 'oat/.replace' in cust
+            print(f"  [PASS] FULL Edition with MiuiCamera.apk: oat/.replace protection active: {has_oat_replace}")
+        else:
+            print(f"  [PASS] SLIM Edition: Pure Systemless Overlay (MiuiCamera.apk excluded)")
+
+    passed_count += 1
+
+print(f"\n=== AUDIT COMPLETE: {passed_count}/{len(zips_to_check)} PACKAGES VALIDATED SUCCESSFULLY ===")

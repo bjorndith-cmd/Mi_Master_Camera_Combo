@@ -117,18 +117,24 @@
 
 ### 3. Таблица модулей и ссылки на загрузку (RU)
 
-Все файлы размещены в папке [`releases/`](./releases/):
+Модули разделены на две чёткие категории:
+* 🌟 **FULL Edition (с приложением камеры)**: Включает полнофункциональное приложение камеры Leica из HyperOS 3.0 со всеми интерфейсными возможностями, новыми водяными знаками, новыми фильтрами и режимами Leica. Оснащен защитой `oat/.replace` (предотвращает краш ART на проверке odex), очищен от опасных платформенных разрешений (`REBOOT`, `DEVICE_POWER`) и конфликтующих системных библиотек.
+* ⚡ **SLIM Edition (без приложения камеры / Pure Systemless Overlay)**: Чистый системный оверлей. Не затрагивает системный APK камеры. Идеален для максимальной безопасности (0% риска конфликтов подписей), для официальных закрытых прошивок без CorePatch, а также для кастомных прошивок (SimpleRom ST, Xiaomi.eu), где камера уже модифицирована авторами ROM. Разблокирует 50М/200М FullRes, George Video MOD 8K/4K120, DCG Hardware HDR, Chromatix калибровки и фикс розового шума.
 
-| Файл модуля | Размер | Совместимость | Описание и назначение |
+#### 🌐 Универсальные комбайны для всей линейки (13U, 15, 15 Pro, 15U, 17U)
+| Модуль | Размер | Тип | Описание |
 |---|---|---|---|
-| **[`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip)** | **13.85 МБ** | 17 Ultra (`nezha`) | **⭐ Специальный выпуск для SimpleRom 3.0.309.0 ST (Non-Leica)**. Фикс розового/пурпурного шума! Полностью отключает сбойную облачную обработку Leica Cloud, переводит весь конвейер на локальный NPU/ISP Snapdragon 8 Elite. Автономная Leica Authentic/Vibrant, Leica M-mode, водяные знаки, 50М/200М RAW, DCG HDR, 8K видео. Чистый оверлей (сохраняет нативный APK камеры). |
-| **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 МБ** | 17 Ultra (`nezha`) | **⭐ Рекомендуется для 17 Ultra (SimpleRom 3.0.309.0 - ST, EU, Elite, Stock)**. Чистый оверлей: НЕ перезаписывает APK камеры (0% риска вылета!). Все калибровки OVX10500U/HP9/JN5/OV50M, DCG HDR, 8K, 4K120fps, кодек. |
-| **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 МБ** | 15U (`xuanyuan`) & 17U (`nezha`) | **Исправленный комбо-модуль**. Динамическое разделение 15U и 17U, удалены битые библиотеки, авто-детектор SimpleRom ST. |
-| **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **191.95 МБ** | 13U, 15, 15 Pro, 15U, 17U | **Универсальный комбайн для всей линейки (v5.8)**. 100% защита от бутлупов: чистый оверлей для 13 Ultra и 17 Ultra, исключены конфликтующие старые HAL, полная поддержка официальных прошивок HyperOS 3.0 (включая Тайвань `OS3.0.302.0.TMATWXM`). |
-| **[`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip)** | **270.3 КБ** | 13 Ultra (`ishtar`) | **⭐ Рекомендуется для HyperOS 1.0 (Android 14)**. Чистый оверлей, сохраняет нативный HAL и APK, 100% безопасен для рута (SELinux не трогает), Quad-50M, DCG HDR, 8K. |
-| **[`Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **278.2 КБ** | 13 Ultra (`ishtar`) | **⭐ Рекомендуется для 13 Ultra на HyperOS 1/2/3 (A14/A15/A16)**. Исправлен бутлуп! Архитектура **100% Pure Systemless Overlay**: оригинальный APK камеры Leica сохраняется, 0% риска `SignatureMismatchException` на Тайване/Глобале. Quad-50M (`0.5x:1.0x:3.2x:5.0x`), George Video 8K/4K120, DCG HDR, Chromatix IMX989/IMX858. |
-| **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 КБ** | 13 Ultra (`ishtar`) | Облегчённый оверлей для 13 Ultra на HyperOS 2/3 (без приложения камеры). |
-| **[`Mi15_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_v5.0_by_borndead.zip)** | **151.58 МБ** | 15 (`dada`) & 15 Pro (`haotian`) | Выделенный комбайн для Xiaomi 15 и 15 Pro. |
+| **[`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip)** | **182.52 МБ** | **FULL** | **Универсальный полный комбайн**. Включает приложение камеры Leica HyperOS 3.0, авто-определение любого устройства линейки, калибровки Chromatix, 50M/200M FullRes, George Video 8K/4K120fps, DCG HDR и защиту `oat/.replace`. |
+| **[`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip)** | **36.63 МБ** | **SLIM** | **Универсальный чистый оверлей (без APK)**. 100% безопасность на любых прошивках. Включает калибровки под все 5 моделей, 50M/200M, 8K видео и DCG HDR. |
+
+#### 📱 Специализированные модули по моделям
+
+| Модель | Версия FULL (с APK камеры) | Версия SLIM (чистый оверлей без APK) | Особенности профиля |
+|---|---|---|---|
+| **Xiaomi 13 Ultra** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_Full_by_borndead.zip)** (146.15 МБ) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (270.2 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), George Video 8K/4K120, DCG HDR, калибровки IMX989/IMX858, оффлайн-обработка *(для HOS 1.0 A14 доступен архив [HOS1_A14](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip))*. |
+| **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/X17U_Master_Camera_Combo_Full_by_borndead.zip)** (159.74 МБ) | **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 МБ) | Кастомные калибровки OVX10500U/HP9/JN5, DCG HDR, 8K все линзы, 4K120fps, кодек `libqcodec2` *(для SimpleRom ST без Leica доступен [SimpleRom_ST](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
+| **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip)** (163.27 МБ) | **[`Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip)** (17.38 МБ) | Официальные калибровки Stock AIO 104 для 1" Sony LYT-900 и 200Мп Samsung HP9, нативный A16 HAL, ночной режим SmartAE LN2. |
+| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (151.04 МБ) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.15 МБ) | Калибровки Light Hunter 900, 50Мп FullRes на 1.0x (на 15) и на всех линзах (на 15 Pro), DCG HDR. |
 
 ---
 
@@ -608,18 +614,24 @@ The module includes an **intelligent dynamic installer**: during flashing, `cust
 
 ### 3. Module Releases & Download Links (EN)
 
-All packages are hosted in the [`releases/`](./releases/) directory:
+Modules are organized into two distinct, production-ready tiers:
+* 🌟 **FULL Edition (with Leica Camera App)**: Includes the complete, updated Leica Camera app from HyperOS 3.0 with all UI features, new Leica watermarks, Leica Authentic/Vibrant styles, and shooting modes. Features `oat/.replace` protection (prevents ART OdexFile checksum mismatch), purged dangerous platform permissions (`REBOOT`, `DEVICE_POWER`), and clean companion libraries.
+* ⚡ **SLIM Edition (Pure Systemless Overlay - No Camera APK)**: Systemless overlay that preserves your existing Camera APK untouched. Designed for maximum safety (0% risk of signature conflicts), ideal for locked stock ROMs without CorePatch, as well as custom ROMs (SimpleRom ST, Xiaomi.eu) where the camera is pre-patched by ROM developers. Unlocks 50M/200M FullRes, George Video MOD 8K/4K120, DCG Hardware HDR, Chromatix hardware tunings, and offline processing.
 
-| Module Package | Size | Target Hardware | Description & Role |
+#### 🌐 Universal Multi-Device Packages (13U, 15, 15 Pro, 15U, 17U)
+| Module Package | Size | Tier | Description |
 |---|---|---|---|
-| **[`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip)** | **13.85 MB** | 17 Ultra (`nezha`) | **⭐ Specialized Edition for SimpleRom 3.0.309.0 ST (Non-Leica)**. Magenta/Pink noise fix! Completely disables broken unauthenticated Leica Cloud demosaicing, routing 100% of the image pipeline to the on-device Snapdragon 8 Elite NPU/ISP. Enables offline Leica Authentic/Vibrant color science, Leica M-mode, watermarks, 50M/200M RAW, DCG HDR, and 8K video. Pure systemless overlay (zero APK replacement). |
-| **[`X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **13.85 MB** | 17 Ultra (`nezha`) | **⭐ Recommended for 17 Ultra (SimpleRom 3.0.309.0 - ST, EU, Elite, Stock)**. Pure systemless overlay: DOES NOT touch `MiuiCamera.apk` (0% crash risk!). Genuine OVX10500U/HP9/JN5/OV50M Chromatix bins, DCG HDR, 8K video, 4K120fps, video codec. |
-| **[`Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi15U_X17U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **177.66 MB** | 15U (`xuanyuan`) & 17U (`nezha`) | **Fixed Dual-Flagship Combo**. Dynamic separation of 15U and 17U profiles, purged broken libraries, auto-detects SimpleRom ST to preserve native APK. |
-| **[`Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip)** | **191.95 MB** | 13U, 15, 15 Pro, 15U, 17U | **Universal Multi-Device Combo (v5.8)**. 100% anti-bootloop protection: pure systemless overlay for 13 Ultra and 17 Ultra, eliminated alien HAL conflicts, fully compatible with official HyperOS 3.0 ROMs (including Taiwan `OS3.0.302.0.TMATWXM`). |
-| **[`Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip)** | **270.3 KB** | 13 Ultra (`ishtar`) | **⭐ Recommended for HyperOS 1.0 (Android 14)**. Pure overlay, preserves native HAL and APK, 100% root safe (clean SELinux), Quad-50M, DCG HDR, 8K. |
-| **[`Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip)** | **278.2 KB** | 13 Ultra (`ishtar`) | **⭐ Recommended for 13 Ultra on HyperOS 1/2/3 (A14/A15/A16)**. Bootloop resolved! **100% Pure Systemless Overlay**: preserves native Leica Camera APK, 0% risk of `SignatureMismatchException` on Taiwan/Global ROMs. Quad-50M (`0.5x:1.0x:3.2x:5.0x`), George Video 8K/4K120, DCG HDR, Chromatix IMX989/IMX858. |
-| **[`Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip)** | **270.4 KB** | 13 Ultra (`ishtar`) | Lightweight pure overlay for 13 Ultra on HyperOS 2/3 (without APK replacement). |
-| **[`Mi15_Master_Camera_Combo_v5.0_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_v5.0_by_borndead.zip)** | **151.58 MB** | 15 (`dada`) & 15 Pro (`haotian`) | Dedicated combo for Xiaomi 15 and 15 Pro. |
+| **[`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip)** | **182.52 MB** | **FULL** | **Universal Full Flagship Suite**. Includes HyperOS 3.0 Leica Camera APK, dynamic multi-device hardware detection, Chromatix tunings for all 5 phones, 50M/200M FullRes, George 8K/4K120, DCG HDR, and `oat/.replace` protection. |
+| **[`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](./releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip)** | **36.63 MB** | **SLIM** | **Universal Pure Systemless Overlay (No APK)**. 100% safe on any ROM. Injects Chromatix sensor profiles for all 5 devices, 50M/200M, 8K video, and DCG HDR without touching the Camera APK. |
+
+#### 📱 Dedicated Per-Device Packages
+
+| Target Hardware | FULL Edition (with Leica Camera App) | SLIM Edition (Pure Overlay - No APK) | Highlights |
+|---|---|---|---|
+| **Xiaomi 13 Ultra** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi13U_Master_Camera_Combo_Full_by_borndead.zip)** (146.15 MB) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (270.2 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), George Video 8K/4K120, DCG HDR, IMX989/IMX858 tunings, offline processing *(for HOS 1.0 A14 see [HOS1_A14](./releases/Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip))*. |
+| **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/X17U_Master_Camera_Combo_Full_by_borndead.zip)** (159.74 MB) | **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 MB) | Dedicated OVX10500U/HP9/JN5 Chromatix tunings, DCG HDR, 8K all lenses, 4K120fps, `libqcodec2` *(for SimpleRom ST without Leica see [SimpleRom_ST](./releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
+| **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip)** (163.27 MB) | **[`Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip)** (17.38 MB) | Official Stock AIO 104 Chromatix tunings for 1" Sony LYT-900 & 200MP Samsung HP9, native A16 HAL, SmartAE LN2 night mode. |
+| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](./releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (151.04 MB) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](./releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.15 MB) | Light Hunter 900 tunings, 50MP FullRes on 1.0x (for 15) and all rear lenses (for 15 Pro), DCG HDR. |
 
 ---
 
