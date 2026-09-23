@@ -148,12 +148,17 @@
 
 #### 5.6. Защита от вылетов и фикс розового шума на Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (RU)
 * **В чём была проблема (краши и несовместимость)**: в ранних сборках отсутствовала папка `devices/` (на 17U попадали файлы 15U) и лежали бинарники с отсутствующей зависимостью `libdlrmsc_android15.so`, а замена APK на деодексированном кастоме SimpleRom вызывала краш приложения камеры.
-* **Баг «Розового / Пурпурного цифрового шума» на SimpleRom ST Non-Leica**:
-  - На сборке SimpleRom ST без встроенной лицензии Leica облачный сервис Xiaomi AISP Cloud отклоняет дебайеризацию RAW-потока. Зелёный цветовой канал (Green) обнуляется, оставляя только Red + Blue — итоговый снимок заливается сплошным кислотно-розовым/пурпурным шумом при срабатывании Ultra RAW / Cloud AI. При этом аппаратный конвейер чипа Snapdragon (включая режим Leica M-mode) работает абсолютно исправно.
-* **Комплексное решение (Модуль `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`)**:
-  1. **100% Автономная обработка (Offline NPU/ISP)**: теги `support_cloud_process`, `support_cloud_ai_process`, `support_ultra_raw_cloud` принудительно отключены (`false`), а свойства `persist.vendor.camera.cloud.enable=0` блокируют выгрузку в облако. Вся дебайеризация выполняется аппаратно на процессоре Snapdragon 8 Elite (ISP Spectra + NPU Hexagon) — **розовый шум полностью устранён!**
-  2. **Активация локальной Leica**: включены локальные профили Leica Authentic, Leica Vibrant, водяные знаки, режим Leica M-mode и портретные объективы Master Lens.
+* **Баг «Розового / Пурпурного цифрового шума» при обработке «Leica Essential» / «LEICA M9»**:
+  - На сборке SimpleRom ST без встроенной лицензии Leica облачный сервис Xiaomi AISP Cloud / Leica Essential пытается выполнить удалённую дебайеризацию и стилизацию RAW-потока. Из-за отсутствия аутентифицированного ключа устройства зелёный цветовой канал (Green) обнуляется, оставляя только Red ($R \approx 230$) и Blue ($B \approx 220$) — итоговый снимок заливается сплошным кислотно-розовым/пурпурным шумом («Leica Essential processing complete»).
+  - **Почему облачный пайплайн мог срабатывать ранее**: в прошивке на Snapdragon 8 Elite системный `FeatureParser` опрашивает раздел `/odm/etc/device_features/nezha.xml` с наивысшим приоритетом, обходя оверлеи в `/system` и `/product`.
+* **Комплексное решение в модуле v1.1 (`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`)**:
+  1. **Тотальное перекрытие всех 9 разделов (ODM Priority Fix)**: файл `device_features/nezha.xml` теперь принудительно монтируется во все физические разделы (`/odm`, `/vendor/odm`, `/vendor`, `/product`, `/system`), гарантируя, что система физически не может прочитать стоковый файл с активным облаком.
+  2. **100% Автономная обработка (Offline NPU/ISP)**: теги `support_cloud_process`, `support_cloud_ai_process`, `support_ultra_raw_cloud`, `support_leica_essential_cloud`, `support_leica_cloud`, `support_aisp_cloud` принудительно отключены (`false`), а свойства `persist.vendor.camera.cloud.enable=0`, `persist.sys.camera.leica_essential.cloud=0` и блокировка `pm disable com.xiaomi.camera.cloud` полностью отсекают облако. Вся дебайеризация выполняется аппаратно на процессоре Snapdragon 8 Elite (ISP Spectra + NPU Hexagon) — **розовый шум полностью устранён!**
   3. **Сохранность оригинального APK**: модуль работает как чистый системный оверлей (Overlay), не затрагивая деодексированный системный `MiuiCamera.apk`, предотвращая любые сбои.
+  4. **Очистка повреждённых очередей**: инсталлятор автоматически очищает кэш `com.android.camera`, `com.miui.extraphoto` и `com.miui.gallery`, сбрасывая зависшие битые облачные задачи.
+* **Как спасти текущий снимок прямо сейчас**:
+  - В окне с розовым снимком нажмите кнопку **«More options» («Еще») -> «Revert to original» («Вернуть оригинал»)**. Смартфон сохраняет чистый аппаратный снимок Snapdragon ISP, сделанный ДО отправки в облако.
+  - В настройках камеры (шестерёнка) убедитесь, что пункт «Облачное улучшение / Ultra RAW Cloud» отключён.
 
 ---
 
@@ -590,12 +595,17 @@ To immediately unlock the full potential of your device's sensors, Chromatix cal
 
 #### 5.6. Crash Prevention & Magenta Noise Fix on Xiaomi 17 Ultra (SimpleRom ST, EU, Elite) (EN)
 * **Root Cause of Past Crashes**: Early packages lacked the `devices/` directory (causing 15U files to be flashed onto 17U), contained naked libraries with an unresolved `libdlrmsc_android15.so` dependency, and overwrote the custom deodexed camera APK on SimpleRom ST.
-* **The "Magenta / Pink Digital Noise" Bug on SimpleRom ST Non-Leica**:
-  - On non-Leica builds of SimpleRom ST lacking cloud tokens, Xiaomi AISP Cloud servers reject the raw Bayer stream demosaicing. The green color channel drops to zero, leaving Red + Blue — causing photos taken in Ultra RAW or Cloud AI modes to turn into solid vibrant pink/magenta noise. Meanwhile, on-device local features (like Leica M-mode) operate without issue.
-* **Comprehensive Resolution (`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`)**:
-  1. **100% Offline On-Device Demuxing**: tags `support_cloud_process`, `support_cloud_ai_process`, and `support_ultra_raw_cloud` are forced to `false`, and `persist.vendor.camera.cloud.enable=0` prevents any cloud upload. All image demosaicing and processing are routed directly to the Snapdragon 8 Elite ISP & Hexagon NPU — **completely eliminating magenta noise!**
-  2. **Offline Leica Engine**: Unlocks local Leica Authentic, Leica Vibrant, Leica watermarks, Leica M-mode, and Master Lens portraits.
+* **The "Magenta / Pink Digital Noise" Bug during «Leica Essential» / «LEICA M9» Processing**:
+  - On non-Leica builds of SimpleRom ST lacking OEM cloud tokens, the Xiaomi AISP Cloud / Leica Essential server attempts remote demosaicing and styling on the uncompressed RAW stream. Lacking valid device authentication keys, the green color channel drops to zero, leaving only Red ($R \approx 230$) and Blue ($B \approx 220$) — causing the resulting photo to become solid vibrant pink/magenta noise («Leica Essential processing complete»).
+  - **Why cloud processing could still trigger**: On Snapdragon 8 Elite hardware, the system `FeatureParser` queries `/odm/etc/device_features/nezha.xml` with highest priority, bypassing standard overlays in `/system` and `/product`.
+* **Comprehensive Resolution in v1.1 (`X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica`)**:
+  1. **Total 9-Partition Mirroring (ODM Priority Fix)**: `device_features/nezha.xml` is now force-mounted across all partition candidates (`/odm`, `/vendor/odm`, `/vendor`, `/product`, `/system`), preventing the framework from ever falling back to stock cloud-enabled configs.
+  2. **100% Offline On-Device Demuxing**: tags `support_cloud_process`, `support_cloud_ai_process`, `support_ultra_raw_cloud`, `support_leica_essential_cloud`, `support_leica_cloud`, and `support_aisp_cloud` are forced to `false`. Properties `persist.vendor.camera.cloud.enable=0`, `persist.sys.camera.leica_essential.cloud=0` and `pm disable com.xiaomi.camera.cloud` cut off remote endpoints entirely. All demosaicing runs strictly on the Snapdragon 8 Elite ISP & Hexagon NPU — **completely eliminating magenta noise!**
   3. **ROM APK Preservation**: Pure systemless overlay preserves the native deodexed `MiuiCamera.apk` on SimpleRom ST, ensuring rock-solid stability and zero force closes.
+  4. **Corrupted Queue Purge**: The installer automatically clears caches for `com.android.camera`, `com.miui.extraphoto`, and `com.miui.gallery`, wiping out any pending corrupted cloud tasks.
+* **How to Rescue Current Photo Immediately**:
+  - In the pink photo result screen, tap **«More options» -> «Revert to original»**. The device keeps the pristine hardware shot captured by the Snapdragon ISP before cloud alteration.
+  - In Camera Settings (gear icon), verify that «Cloud Enhance / Ultra RAW Cloud» is switched off.
 
 ---
 

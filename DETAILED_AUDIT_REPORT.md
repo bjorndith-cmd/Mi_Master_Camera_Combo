@@ -467,17 +467,31 @@ adb logcat -s CamX ChiNode | grep -iE "dcg|hdr|binning|stream|maxraw"
    <bool name="support_cloud_sr">false</bool>
    <bool name="support_cloud_super_resolution">false</bool>
    ```
-   В `system.prop` и через `resetprop` в фоновом демоне `service.sh`:
+   В `system.prop`, `post-fs-data.sh` и через `resetprop` в фоновом демоне `service.sh`:
    ```properties
    persist.vendor.camera.cloud.enable=0
+   persist.sys.camera.cloud.enable=0
    persist.sys.camera.cloud_process=0
    persist.vendor.camera.cloud_process=0
    persist.vendor.camera.ai_cloud.enable=0
    persist.sys.camera.cloud.sr=0
    persist.vendor.camera.cloud.sr.enable=0
    persist.vendor.camera.ultra_raw.cloud=0
+   persist.vendor.camera.aisp.cloud=0
+   persist.sys.camera.aisp.cloud=0
+   persist.vendor.camera.mialgo.cloud=0
+   persist.vendor.camera.leica_essential.cloud=0
+   persist.sys.camera.leica_essential.cloud=0
+   persist.sys.camera.leica.cloud=0
+   persist.vendor.camera.leica.cloud=0
+   ro.vendor.camera.cloud.enable=0
+   ro.camera.cloud.enable=0
    ```
-   Это заставляет камеру выполнять **100% операций локально на чипе Snapdragon 8 Elite** (ISP Spectra + NPU Hexagon), полностью предотвращая возникновение розового шума.
+   Дополнительно:
+   - В `service.sh` замораживается фоновый сервис выгрузки: `pm disable com.xiaomi.camera.cloud`.
+   - В базах системных настроек форсируется локальный режим: `settings put system camera_cloud_process 0`.
+   - **Тотальное перекрытие всех 9 разделов (ODM Priority Fix)**: в Android 16 на Snapdragon 8 Elite системный `FeatureParser` опрашивает `/odm/etc/device_features/nezha.xml` в первую очередь. В версии v1.1 модифицированный `nezha.xml` монтируется во все 9 вариантов путей (`/odm`, `/vendor/odm`, `/vendor`, `/product`, `/system`), гарантируя безусловное отключение облачного пайплайна.
+   Это заставляет камеру выполнять **100% операций локально на чипе Snapdragon 8 Elite** (ISP Spectra + NPU Hexagon), полностью предотвращая возникновение розового шума при съёмке в режимах Leica M9 / Ultra RAW.
 
 2. **Активация локального движка Leica Color Science**:
    Для включения оригинальных цветовых профилей и режимов без зависимости от облака инжектируются флаги:

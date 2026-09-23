@@ -62,7 +62,7 @@ nezha_xml_content = """<?xml version="1.0" encoding="utf-8"?>
     <bool name="support_dual_aperture">true</bool>
     <bool name="support_aperture_animation">true</bool>
 
-    <!-- Force 100% OFFLINE Processing (Bypass Broken Cloud Upload) -->
+    <!-- Force 100% OFFLINE Processing (Bypass Broken Cloud / Leica Essential Upload) -->
     <bool name="support_cloud_process">false</bool>
     <bool name="support_cloud_ai_process">false</bool>
     <bool name="support_ultra_raw_cloud">false</bool>
@@ -71,6 +71,11 @@ nezha_xml_content = """<?xml version="1.0" encoding="utf-8"?>
     <bool name="support_ai_cloud">false</bool>
     <bool name="support_cloud_sr">false</bool>
     <bool name="support_cloud_super_resolution">false</bool>
+    <bool name="support_leica_essential_cloud">false</bool>
+    <bool name="support_leica_cloud">false</bool>
+    <bool name="support_aisp_cloud">false</bool>
+    <bool name="is_support_ultra_raw_cloud">false</bool>
+    <bool name="support_gallery_cloud_process">false</bool>
 
     <!-- Offline Leica Camera Engine -->
     <bool name="support_camera_leica">true</bool>
@@ -141,20 +146,30 @@ nezha_xml_content = """<?xml version="1.0" encoding="utf-8"?>
 </features>
 """
 
-with open(os.path.join(staging, 'system', 'etc', 'device_features', 'nezha.xml'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(nezha_xml_content)
-with open(os.path.join(staging, 'system', 'product', 'etc', 'device_features', 'nezha.xml'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(nezha_xml_content)
-with open(os.path.join(staging, 'product', 'etc', 'device_features', 'nezha.xml'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(nezha_xml_content)
+xml_dirs = [
+    os.path.join(staging, 'system', 'etc', 'device_features'),
+    os.path.join(staging, 'system', 'product', 'etc', 'device_features'),
+    os.path.join(staging, 'product', 'etc', 'device_features'),
+    os.path.join(staging, 'system', 'odm', 'etc', 'device_features'),
+    os.path.join(staging, 'odm', 'etc', 'device_features'),
+    os.path.join(staging, 'system', 'vendor', 'etc', 'device_features'),
+    os.path.join(staging, 'system', 'vendor', 'odm', 'etc', 'device_features'),
+    os.path.join(staging, 'vendor', 'etc', 'device_features'),
+    os.path.join(staging, 'vendor', 'odm', 'etc', 'device_features'),
+]
+for d in xml_dirs:
+    os.makedirs(d, exist_ok=True)
+    for name in ['nezha.xml', 'xuanyuan.xml', 'ishtar.xml', 'haotian.xml', 'dada.xml']:
+        with open(os.path.join(d, name), 'w', encoding='utf-8', newline='\n') as f:
+            f.write(nezha_xml_content)
 
 # 6. module.prop
 module_prop = """id=x17u_master_imaging_simplerom_st_nonleica
 name=Xiaomi 17 Ultra Master Imaging MOD (SimpleRom ST Non-Leica Edition)
-version=v1.0-SimpleRom-ST-Offline-A16
-versionCode=20260926
+version=v1.1-SimpleRom-ST-Offline-A16
+versionCode=20260927
 author=borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
-description=Specialized Offline Master Imaging MOD for Xiaomi 17 Ultra (nezha) on SimpleRom 3.0.309.0 ST (Non-Leica edition) / HyperOS 3.0 (Android 16). Prevents pink/magenta digital noise by bypassing broken cloud processing & forcing 100% on-device ISP/NPU demosaicing. Enables offline Leica Authentic/Vibrant color science, Leica M-mode, Leica watermarks, Master Lens portraits, OVX10500U/HP9/JN5 Chromatix tuning, DCG Hardware HDR, 8K video on all rear lenses, 4K120fps, and full 50M/200M RAW. Pure Systemless Overlay (ROM camera APK intact, 0 crash risk).
+description=Specialized Offline Master Imaging MOD for Xiaomi 17 Ultra (nezha) on SimpleRom 3.0.309.0 ST (Non-Leica edition) / HyperOS 3.0 (Android 16). Prevents pink/magenta noise by disabling cloud/Leica Essential upload across ODM/Vendor/System partitions & forcing 100% on-device Spectra ISP/Hexagon NPU demosaicing. Enables offline Leica Authentic/Vibrant color science, Leica M9/M-mode, Leica watermarks, Master Lens portraits, OVX10500U/HP9/JN5 Chromatix tuning, DCG Hardware HDR, 8K video on all rear lenses, 4K120fps, and full 50M/200M RAW. Pure Systemless Overlay (ROM camera APK intact, 0 crash risk).
 """
 
 # 7. system.prop
@@ -165,15 +180,25 @@ system_prop = """# =============================================================
 # by borndead (feat. itzdfplayer, amitkattal & GeorgeKiarie)
 # ==============================================================================
 
-# 1. Force 100% Offline Local Processing (Disable Broken Cloud Server Upload)
+# 1. Force 100% Offline Local Processing (Disable Broken Cloud / Leica Essential Upload)
 # Prevents Pink/Magenta Bayer CFA noise caused by unauthenticated cloud demosaicing on Non-Leica ROMs
 persist.vendor.camera.cloud.enable=0
+persist.sys.camera.cloud.enable=0
 persist.sys.camera.cloud_process=0
 persist.vendor.camera.cloud_process=0
 persist.vendor.camera.ai_cloud.enable=0
 persist.sys.camera.cloud.sr=0
 persist.vendor.camera.cloud.sr.enable=0
 persist.vendor.camera.ultra_raw.cloud=0
+persist.vendor.camera.aisp.cloud=0
+persist.sys.camera.aisp.cloud=0
+persist.vendor.camera.mialgo.cloud=0
+persist.vendor.camera.leica_essential.cloud=0
+persist.sys.camera.leica_essential.cloud=0
+persist.sys.camera.leica.cloud=0
+persist.vendor.camera.leica.cloud=0
+ro.vendor.camera.cloud.enable=0
+ro.camera.cloud.enable=0
 
 # 2. Local Snapdragon 8 Elite ISP (Spectra) & NPU (Hexagon) Acceleration + DCG HDR
 persist.vendor.camera.sensor.hdr=1
@@ -249,10 +274,11 @@ ui_print "  * Snapdragon 8 Elite 100% on-device NPU/ISP processing enforced"
 ui_print "- Locating stock device_features/nezha.xml..."
 REAL_XML=""
 for xml_candidate in \\
+    /odm/etc/device_features/nezha.xml \\
+    /vendor/odm/etc/device_features/nezha.xml \\
+    /vendor/etc/device_features/nezha.xml \\
     /product/etc/device_features/nezha.xml \\
     /system/etc/device_features/nezha.xml \\
-    /odm/etc/device_features/nezha.xml \\
-    /vendor/etc/device_features/nezha.xml \\
     /system_ext/etc/device_features/nezha.xml; do
     if [ -f "$xml_candidate" ]; then
         REAL_XML="$xml_candidate"
@@ -260,9 +286,6 @@ for xml_candidate in \\
     fi
 done
 
-mkdir -p "$MODPATH/system/etc/device_features"
-mkdir -p "$MODPATH/system/product/etc/device_features"
-mkdir -p "$MODPATH/product/etc/device_features"
 TARGET_XML="$MODPATH/system/etc/device_features/nezha.xml"
 
 if [ -n "$REAL_XML" ]; then
@@ -281,7 +304,9 @@ if [ -n "$REAL_XML" ]; then
         support_camera_dcg is_support_dcg support_dcg_hdr support_sensor_hdr support_idcg \\
         support_cloud_process support_cloud_ai_process support_ultra_raw_cloud \\
         is_support_cloud_process support_cloud_photo_enhance support_ai_cloud \\
-        support_cloud_sr support_cloud_super_resolution \\
+        support_cloud_sr support_cloud_super_resolution support_leica_essential_cloud \\
+        support_leica_cloud support_aisp_cloud is_support_ultra_raw_cloud \\
+        support_gallery_cloud_process \\
         support_camera_leica support_leica_style is_support_leica_style \\
         support_leica_color support_leica_watermark support_master_filter \\
         support_leica_m_mode support_portrait_master_lens support_street_mode \\
@@ -294,7 +319,7 @@ if [ -n "$REAL_XML" ]; then
 
     # Append tested, clean offline Leica & 50M/200M configuration
     cat << 'EOF' >> "$TARGET_XML"
-    <!-- Force 100% OFFLINE Processing (Bypass Broken Cloud Upload) -->
+    <!-- Force 100% OFFLINE Processing (Bypass Broken Cloud / Leica Essential Upload) -->
     <bool name="support_cloud_process">false</bool>
     <bool name="support_cloud_ai_process">false</bool>
     <bool name="support_ultra_raw_cloud">false</bool>
@@ -303,6 +328,11 @@ if [ -n "$REAL_XML" ]; then
     <bool name="support_ai_cloud">false</bool>
     <bool name="support_cloud_sr">false</bool>
     <bool name="support_cloud_super_resolution">false</bool>
+    <bool name="support_leica_essential_cloud">false</bool>
+    <bool name="support_leica_cloud">false</bool>
+    <bool name="support_aisp_cloud">false</bool>
+    <bool name="is_support_ultra_raw_cloud">false</bool>
+    <bool name="support_gallery_cloud_process">false</bool>
 
     <!-- Local Leica Camera Engine -->
     <bool name="support_camera_leica">true</bool>
@@ -340,16 +370,25 @@ if [ -n "$REAL_XML" ]; then
     <bool name="support_ois">true</bool>
 </features>
 EOF
-
-    # Mirror to product and system partitions
-    cp -af "$TARGET_XML" "$MODPATH/system/product/etc/device_features/nezha.xml"
-    cp -af "$TARGET_XML" "$MODPATH/product/etc/device_features/nezha.xml"
-    ui_print "  Patched nezha.xml: Cloud bypassed + Offline Leica + 50M/200M injected."
-else
-    ui_print "  Using bundled offline nezha.xml template."
-    cp -af "$MODPATH/system/etc/device_features/nezha.xml" "$MODPATH/system/product/etc/device_features/nezha.xml"
-    cp -af "$MODPATH/system/etc/device_features/nezha.xml" "$MODPATH/product/etc/device_features/nezha.xml"
 fi
+
+# Mirror to ALL 9 possible partition paths (overrides /odm, /vendor, /product, /system)
+for p in \\
+    "$MODPATH/system/etc/device_features" \\
+    "$MODPATH/system/product/etc/device_features" \\
+    "$MODPATH/product/etc/device_features" \\
+    "$MODPATH/system/odm/etc/device_features" \\
+    "$MODPATH/odm/etc/device_features" \\
+    "$MODPATH/system/vendor/etc/device_features" \\
+    "$MODPATH/system/vendor/odm/etc/device_features" \\
+    "$MODPATH/vendor/etc/device_features" \\
+    "$MODPATH/vendor/odm/etc/device_features"; do
+    mkdir -p "$p"
+    for name in nezha.xml xuanyuan.xml ishtar.xml haotian.xml dada.xml; do
+        cp -af "$TARGET_XML" "$p/$name"
+    done
+done
+ui_print "  Patched nezha.xml mirrored across ODM, Vendor, Product and System."
 
 # 4. Handle HAL Compatibility
 ui_print "- Preserving native HyperOS 3.0 / A16 Camera HAL (prevents black screen)."
@@ -367,16 +406,21 @@ if [ -d "$MODPATH/system/odm" ]; then
     fi
 fi
 
-# 6. Clear camera cache to purge stale corrupted state & reset app
-ui_print "- Clearing camera app cache and preferences..."
+# 6. Clear camera and gallery cache to purge stale corrupted state & reset app
+ui_print "- Clearing camera app & gallery cache to purge corrupted cloud queues..."
 pm clear com.android.camera >/dev/null 2>&1
+pm clear com.miui.extraphoto >/dev/null 2>&1
 rm -rf /data/data/com.android.camera/cache/* >/dev/null 2>&1
 rm -rf /data/data/com.android.camera/code_cache/* >/dev/null 2>&1
+rm -rf /data/data/com.miui.extraphoto/cache/* >/dev/null 2>&1
+rm -rf /data/data/com.miui.gallery/cache/* >/dev/null 2>&1
 
 # 7. Set Permissions and SELinux contexts for Android 16
 ui_print "- Setting permissions and SELinux contexts..."
 set_perm_recursive "$MODPATH/system" 0 0 0755 0644
 [ -d "$MODPATH/product" ] && set_perm_recursive "$MODPATH/product" 0 0 0755 0644
+[ -d "$MODPATH/odm" ] && set_perm_recursive "$MODPATH/odm" 0 0 0755 0644
+[ -d "$MODPATH/vendor" ] && set_perm_recursive "$MODPATH/vendor" 0 0 0755 0644
 
 # Contexts for Chromatix sensor binaries
 for bin_file in "$MODPATH/system/odm/lib64/camera"/*.bin; do
@@ -401,18 +445,25 @@ if [ -d "$MODPATH/system/vendor/odm" ]; then
     done
 fi
 
-[ -d "$MODPATH/system/etc/device_features" ] && chcon -R u:object_r:system_file:s0 "$MODPATH/system/etc/device_features" 2>/dev/null
-[ -d "$MODPATH/system/product/etc/device_features" ] && chcon -R u:object_r:system_file:s0 "$MODPATH/system/product/etc/device_features" 2>/dev/null
-[ -d "$MODPATH/product/etc/device_features" ] && chcon -R u:object_r:system_file:s0 "$MODPATH/product/etc/device_features" 2>/dev/null
-[ -d "$MODPATH/system/odm/lib64" ] && chcon -R u:object_r:vendor_file:s0 "$MODPATH/system/odm/lib64" 2>/dev/null
-[ -d "$MODPATH/system/vendor/lib64" ] && chcon -R u:object_r:vendor_file:s0 "$MODPATH/system/vendor/lib64" 2>/dev/null
+for feat_dir in \\
+    "$MODPATH/system/etc/device_features" \\
+    "$MODPATH/system/product/etc/device_features" \\
+    "$MODPATH/product/etc/device_features" \\
+    "$MODPATH/system/odm/etc/device_features" \\
+    "$MODPATH/odm/etc/device_features" \\
+    "$MODPATH/system/vendor/etc/device_features" \\
+    "$MODPATH/system/vendor/odm/etc/device_features" \\
+    "$MODPATH/vendor/etc/device_features" \\
+    "$MODPATH/vendor/odm/etc/device_features"; do
+    [ -d "$feat_dir" ] && chcon -R u:object_r:vendor_configs_file:s0 "$feat_dir" 2>/dev/null || chcon -R u:object_r:system_file:s0 "$feat_dir" 2>/dev/null
+done
 
 ui_print "*********************************************************"
-ui_print "- Xiaomi 17 Ultra SimpleRom ST Non-Leica MOD installed!"
+ui_print "- Xiaomi 17 Ultra SimpleRom ST Non-Leica MOD v1.1 installed!"
 ui_print "- Target: Xiaomi 17 Ultra (nezha) on SimpleRom ST"
 ui_print "- Pure Systemless Overlay: ROM camera APK 100% preserved."
 ui_print "- Magenta/Pink noise FIXED: Cloud processing disabled."
-ui_print "- Offline Leica Authentic/Vibrant & Leica M-Mode enabled."
+ui_print "- Offline Leica Authentic/Vibrant & Leica M9/M-Mode enabled."
 ui_print "- 50MP/200MP FullRes active on all rear sensors."
 ui_print "- 8K Video on all rear lenses & 4K120fps enabled."
 ui_print "- Dual Conversion Gain (DCG / iDCG) Hardware HDR active."
@@ -429,14 +480,30 @@ while [ "$(getprop sys.boot_completed)" != "1" ]; do
 done
 
 # Force override runtime properties via resetprop (Magisk / KernelSU / APatch)
-# Guarantees that broken cloud demosaicing cannot be re-enabled by ROM defaults
+# Guarantees that broken cloud / Leica Essential demosaicing cannot be re-enabled
 resetprop persist.vendor.camera.cloud.enable 0
+resetprop persist.sys.camera.cloud.enable 0
 resetprop persist.sys.camera.cloud_process 0
 resetprop persist.vendor.camera.cloud_process 0
 resetprop persist.vendor.camera.ai_cloud.enable 0
 resetprop persist.sys.camera.cloud.sr 0
 resetprop persist.vendor.camera.cloud.sr.enable 0
 resetprop persist.vendor.camera.ultra_raw.cloud 0
+resetprop persist.vendor.camera.aisp.cloud 0
+resetprop persist.sys.camera.aisp.cloud 0
+resetprop persist.vendor.camera.mialgo.cloud 0
+resetprop persist.vendor.camera.leica_essential.cloud 0
+resetprop persist.sys.camera.leica_essential.cloud 0
+resetprop persist.sys.camera.leica.cloud 0
+resetprop persist.vendor.camera.leica.cloud 0
+resetprop ro.vendor.camera.cloud.enable 0
+resetprop ro.camera.cloud.enable 0
+
+# Disable cloud camera processing service packages & settings if present
+pm disable com.xiaomi.camera.cloud >/dev/null 2>&1
+settings put system camera_cloud_process 0 >/dev/null 2>&1
+settings put global camera_cloud_process 0 >/dev/null 2>&1
+settings put secure camera_cloud_process 0 >/dev/null 2>&1
 
 # Enforce Local Leica Engine
 resetprop ro.miui.camera.leica.supported 1
@@ -446,6 +513,11 @@ resetprop persist.vendor.camera.leica.supported 1
 resetprop persist.vendor.camera.multicam.leica 1
 resetprop ro.miui.camera.leica.watermark 1
 resetprop persist.vendor.camera.maxRAWSizes 55
+resetprop persist.vendor.camera.sensor.hdr 1
+resetprop persist.vendor.camera.dcg.enable 1
+resetprop persist.vendor.camera.hdr.dcg 1
+resetprop persist.vendor.camera.sensor.dcg 1
+resetprop ro.vendor.camera.dcg 1
 
 MODDIR=${0%/*}
 
@@ -472,9 +544,26 @@ fi
 
 # 10. post-fs-data.sh
 post_fs_data_sh = """#!/system/bin/sh
-# post-fs-data.sh - Safe initialization without policy tampering
-# Prevents Magisk Safe Mode and preserves root on all firmwares
+# post-fs-data.sh - Safe initialization & early cloud property neutralization
 MODDIR=${0%/*}
+
+resetprop persist.vendor.camera.cloud.enable 0
+resetprop persist.sys.camera.cloud.enable 0
+resetprop persist.sys.camera.cloud_process 0
+resetprop persist.vendor.camera.cloud_process 0
+resetprop persist.vendor.camera.ai_cloud.enable 0
+resetprop persist.sys.camera.cloud.sr 0
+resetprop persist.vendor.camera.cloud.sr.enable 0
+resetprop persist.vendor.camera.ultra_raw.cloud 0
+resetprop persist.vendor.camera.aisp.cloud 0
+resetprop persist.sys.camera.aisp.cloud 0
+resetprop persist.vendor.camera.mialgo.cloud 0
+resetprop persist.vendor.camera.leica_essential.cloud 0
+resetprop persist.sys.camera.leica_essential.cloud 0
+resetprop persist.sys.camera.leica.cloud 0
+resetprop persist.vendor.camera.leica.cloud 0
+resetprop ro.vendor.camera.cloud.enable 0
+resetprop ro.camera.cloud.enable 0
 """
 
 with open(os.path.join(staging, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
