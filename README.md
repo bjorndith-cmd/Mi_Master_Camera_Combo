@@ -103,8 +103,9 @@
    - [Настройка и проверка 50Мп/200Мп в Google Камере (AGC 8.x/9.x, LMC, Shamim)](#96-настройка-и-проверка-50мп--200мп-в-google-камере-agc-8x--9x-lmc-shamim-ru)
 10. [Скрипт автоматической диагностики (check_support.sh)](#10-скрипт-автоматической-диагностики-check_supportsh-ru)
 11. [Часто задаваемые вопросы (FAQ)](#11-часто-задаваемые-вопросы-faq-ru)
-12. [Сообщество, обратная связь и Telegram](#12-сообщество-обратная-связь-и-telegram-ru)
-13. [Благодарности (Credits)](#13-благодарности-credits-ru)
+12. [История версий и изменений (Changelog)](#12-история-версий-и-изменений-changelog-ru)
+13. [Сообщество, обратная связь и Telegram](#13-сообщество-обратная-связь-и-telegram-ru)
+14. [Благодарности (Credits)](#14-благодарности-credits-ru)
 
 ---
 
@@ -1093,7 +1094,146 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 Они не перезаписывают одни и те же файлы и не содержат сторонних APK, поэтому риск бутлупа равен **0%**!
 </details>
 
-### 12. Сообщество, обратная связь и Telegram (RU)
+---
+
+### 12. История версий и изменений (Changelog) (RU)
+
+Полная хронология развития проекта, устранённых проблем и архитектурных улучшений:
+
+<details open>
+<summary><b>🔥 v6.8-Production-Cleanup (24.09.2026) — Очистка устаревших релизов (-1.44 ГБ) и оптимизация</b></summary>
+
+* **Глобальная очистка дискового пространства и репозитория (~1.44 ГБ освобождено)**:
+  - Удалено 13 устаревших промежуточных архивов, дублирующих алиасов (`Mi13U_..._v5.0/v5.1`, `Mi15U_X17U_..._v5.0/v5.1`, `Mi15_..._v5.0`, `Universal_MultiDevice`, разрозненные AI-модули и старые бета-оверлеи).
+  - Сформирована строгая каноническая линейка из **16 проверенных релизов**: FULL и SLIM для каждого флагмана (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL и SLIM), Leica 13U Port v6.8, Мастер-пак конфигов и объединённый AI Suite All-In-One.
+* **Оптимизация сборочного пайплайна**:
+  - Удалено 19 устаревших scratch-скриптов и генераторов из директории `scripts/`, оставлено 10 модульных рабочих утилит сборки и проверки.
+  - В скриптах `build_full_and_slim_lineup.py` и `fix_ishtar_bootloop_modules.py` вырезаны операции создания дубликатов по алиасам (`mirror_alias`).
+  - Выполнена очистка кэша Git LFS (`git lfs prune` — удалено 145 неиспользуемых LFS-объектов).
+* **Синхронизация документации**:
+  - Полная история изменений проекта сохранена и интегрирована в `README.md` (RU и EN) и `CHANGELOG.md`.
+</details>
+
+<details>
+<summary><b>📸 v6.8-Ishtar-Port-MasterPack (24.09.2026) — Порт камеры Leica v6.8 и Мастер-пак конфигов</b></summary>
+
+* **Эксклюзивный порт камеры Leica v6.8 (6.8.001960.0) для Xiaomi 13 Ultra (`ishtar`)**:
+  - Выпущен отдельный оптимизированный модуль `Mi13U_Camera_v6.8_Port_by_borndead.zip` (141.6 МБ).
+  - **Фикс бага 1.6Мп**: решён таймаут оффлайн-графа Chi-CDK, восстановлена нативная съёмка 12.5Мп и 50Мп без падения в превью-буфер (1440x1080).
+  - **Устранение режима 200Мп и перегрева**: удалён фантомный переключатель 200Мп и остановлен циклический фоновый поток опроса зума, что полностью сняло нагрев процессора и повышенный жор батареи.
+  - **Фикс геометрии селфи Dual Video**: восстановлены нативные пропорции 4:3 для фронтального сенсора OV32C (устранено искажение и вытягивание лиц).
+  - **Восстановление распознавания сцен AI**: снято жесткое требование AISP 2.0 (`o2() -> 0`), возвращена работа классификатора сцен на Snapdragon 8 Gen 2.
+  - **Восстановление авторизации AI Capture Assist**: открыт сетевой сокет авторизации аккаунта Xiaomi при нажатии «Войти».
+  - **Стабильность сессий SAT**: оптимизирован `vendor.camera.aux.packagelist` для бесшовного зума.
+* **Мастер-пак конфигов Leica & GCam**:
+  - Выпущен архив `Leica_13U_Configs_Master_Pack.zip` (4.7 КБ) с авторскими профилями для Leica Camera и GCam (AGC 8.x/9.x, LMC) с тоновыми кривыми Authentic/Vibrant, Black Level 64 и поддержкой Quad-50M RAW16.
+</details>
+
+<details>
+<summary><b>🤖 v6.0-AI-Suite-Ecosystem (23.09.2026) — Экосистема искусственного интеллекта (AI Suite)</b></summary>
+
+* **3-уровневая экосистема искусственного интеллекта**:
+  - **Tier 1 (AISP Hardware)**: аппаратные вычисления на Snapdragon NPU (ускорение ночного шумоподавления и расширение динамического диапазона).
+  - **Tier 2 (HyperAI Studio)**: генеративный ластик и умное расширение границ снимка в галерее HyperOS ExtraPhoto.
+  - **Tier 3 (AI Director & Vision HUD)**: ассистент видоискателя реального времени (правила композиции, горизонт и сетки кадрирования).
+* **Smart Multi-Module Synchronization**:
+  - Интеллектуальный механизм объединения системных файлов в `customize.sh`, исключающий конфликты OverlayFS при одновременной установке с модулями FULL/SLIM.
+* **Единый комбайн All-In-One**:
+  - Выпущен пакет `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` (4 КБ), объединяющий все три уровня с нулевым риском бутлупа.
+</details>
+
+<details>
+<summary><b>🛡️ v5.12-HyperOS4-Compatibility (24.09.2026) — Адаптация под HyperOS 4.x / Android 17</b></summary>
+
+* **Совместимость с ранними сборками HyperOS 4.x (тестирование на Xiaomi 17 Ultra `nezha`)**:
+  - Устранён конфликт позднего монтирования подсистемы хранения `vold`.
+  - Предотвращено переполнение допустимой длины строковых параметров системных свойств `system.prop`.
+  - Внедрён точечный bind-mount для манифеста `device_features`, предотвращающий сбои перемонтирования разделов.
+</details>
+
+<details>
+<summary><b>🏗️ v5.11-Full-Slim-Architecture (23.09.2026) — Разделение на две параллельные линейки (FULL & SLIM)</b></summary>
+
+* **Двухуровневая архитектурная концепция для всех флагманов**:
+  - **FULL Edition**: модифицированный APK камеры Leica с защитой `oat/.replace` от сбоев компилятора ART, 49 нативными ARM64 библиотеками и очищенными системными привилегиями (удалены опасные разрешения `REBOOT` и `DEVICE_POWER`).
+  - **SLIM Edition**: чистый системный оверлей (Pure Systemless Overlay) — не изменяет системный APK камеры, гарантирует 100% защиту от сбоев цифровой подписи на закрытых региональных прошивках (Taiwan, Global, EEA).
+* Сформированы раздельные сборки FULL и SLIM для Xiaomi 13 Ultra, 14 Ultra, 15/15 Pro, 15 Ultra, 17 Ultra и Universal.
+</details>
+
+<details>
+<summary><b>🚨 v5.10-Ishtar-AntiBootloop-Fix (23.09.2026) — Устранение бутлупа на Xiaomi 13 Ultra (HyperOS 3.0 / A16)</b></summary>
+
+* **Ликвидация циклической перезагрузки на официальной тайваньской прошивке (TMATWXM / Android 16)**:
+  - Выявлена первопричина: проверка цифровой подписи платформы при ранней инициализации `PackageManagerService` отвергала модифицированный APK (`SignatureMismatchException`), краша `system_server`.
+  - Модули для Xiaomi 13 Ultra переведены на архитектуру Pure Systemless Overlay.
+  - Из сборок полностью удалён чужеродный бинарник `camera.qcom.so` (27.3 МБ от Android 14), вызывавший сбой динамического компоновщика в AIDL-сервисе сенсоров на A16.
+  - В документацию добавлены обязательный отказ от ответственности (Disclaimer) и руководство по спасению через Bootloop Saver.
+</details>
+
+<details>
+<summary><b>🔧 v5.9-HOS1-A14-Fix (22.09.2026) — Устранение отвала root и черного экрана на HyperOS 1.0 (A14)</b></summary>
+
+* **Устранение отвала прав суперпользователя на Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14)**:
+  - Вырезаны опасные вызовы `magiskpolicy --live permissive` в скриптах `post-fs-data.sh`, переводившие Magisk в безопасный режим (Safe Mode) при перезагрузке.
+* **Устранение черного экрана видоискателя на Android 14**:
+  - Заблокировано монтирование несовместимого системного APK HyperOS 3.0 и экспериментального HAL A16 на устройствах под управлением Android 14.
+* **Выпуск выделенного модуля**:
+  - Собран специальный оверлей `Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip` с нативной калибровкой под HyperOS 1.0.
+</details>
+
+<details>
+<summary><b>⚙️ v5.8-Nezha-SimpleRom-Fix (22.09.2026) — Устранение крашей на Xiaomi 17 Ultra (SimpleRom ST)</b></summary>
+
+* **Устранение аварийного завершения камеры на Xiaomi 17 Ultra (`nezha`) под управлением SimpleRom 3.0.309.0 - ST**:
+  - Проведён ELF-анализ заголовков и удалена библиотека `libremosaiclib.so`, требовавшая отсутствующую зависимость `libdlrmsc_android15.so`.
+  - Восстановлены genuine Chromatix-профили для сенсоров OVX10500U, HP9, JN5 и OV50M.
+  - Внедрён детектор кастомных прошивок (`IS_CUSTOM_ROM`) в `customize.sh`, сохраняющий деодексированный стоковый APK.
+* **Выпуск модуля от розового шума**:
+  - Собран `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip` для устранения розовой заливки в Ultra RAW через 100% локальную обработку на Snapdragon 8 Elite.
+  - Добавлен релиз `X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`.
+</details>
+
+<details>
+<summary><b>💎 v5.7-Universal-DCG-AIO-A16 (22.09.2026) — Интеграция Stock AIO 104 для Xiaomi 15 Ultra</b></summary>
+
+* **Интеграция заводских Chromatix профилей Stock AIO 104 для Xiaomi 15 Ultra (`xuanyuan`)**:
+  - Интегрирован калибровочный бинарник `com.qti.tuned.xuanyuan_semco_LYT900_wide_i.bin` (34.27 МБ) для 1" сенсора Sony LYT-900.
+  - Интегрирован калибровочный бинарник `com.qti.tuned.xuanyuan_semco_s5khp9_tele5x_i.bin` (21.45 МБ) для 200Мп перископа Samsung HP9.
+  - Добавлены таблицы экспозиции SmartAE LN2 и профили ночной съемки.
+</details>
+
+<details>
+<summary><b>📱 v5.6-Nezha-Xuanyuan-DCG-A16 (22.09.2026) — Профиль Xiaomi 15 Ultra EUXM 3.0.9.0</b></summary>
+
+* Официальный профиль Xiaomi 15 Ultra (`xuanyuan`, EUXM 3.0.9.0).
+* Нативный Camera HAL Android 16 `camera.qcom.so` (10.18 МБ) с поддержкой `android.frameworks.sensorservice-V1-ndk.so`.
+* Добавлены модули сенсоров HP9 200MP, IMX858, JN5 и OV32B40.
+</details>
+
+<details>
+<summary><b>⚡ v5.5-Universal-DCG-A16 (22.09.2026) — Аппаратный DCG (Dual Conversion Gain) / iDCG HDR</b></summary>
+
+* **Аппаратный DCG / iDCG HDR**:
+  - Активировано однокадровое аппаратное считывание в режимах HCG/LCG для 1" сенсоров Sony IMX989, Sony LYT-900, Light Hunter 900 и OmniVision LOFIC.
+  - Внедрены свойства `persist.vendor.camera.dcg.enable=1`, `persist.vendor.camera.hdr.dcg=1`, `ro.vendor.camera.dcg=1` и теги XML (`support_camera_dcg`, `support_dcg_hdr`, `support_idcg`).
+  - Полное устранение артефактов движения («призраков») и ореолов на высококонтрастных объектах.
+</details>
+
+<details>
+<summary><b>🚀 v5.0-Universal-A16 (22.09.2026) — Первый универсальный мультидевайсный релиз</b></summary>
+
+* Универсальный мультидевайсный комбайн с поддержкой Xiaomi 13 Ultra, 15, 15 Pro, 15 Ultra, 17 Ultra на Android 16.
+* Разблокировка Quad-50MP / 200MP FullRes на всех объективах в стоковой камере и модах GCam (AGC, LMC, Shamim).
+* George Video MOD: 8K 24fps со всех задних камер, 4K120fps, Dolby Vision 4K60, LOG, Director Mode.
+* Увеличение битрейта видео в 1.5 раза через системные свойства.
+* Байпас замыливающего шумоподавления ArcSoft AISP (`persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1`).
+* Полное устранение зависания видоискателя в режиме «Фото» (Mode 161) на Xiaomi 13 Ultra (вырезаны конфликтующие теги Super Resolution).
+* Арбитраж многокамерных сессий Qualcomm SAT (`vendor.camera.aux.packagelist`).
+</details>
+
+---
+
+### 13. Сообщество, обратная связь и Telegram (RU)
 
 <p align="center">
   <a href="https://t.me/Mi_Master_Camera_Combo">
@@ -1115,7 +1255,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 ---
 ---
 
-### 13. 🤝 Благодарности (Credits) (RU)
+### 14. 🤝 Благодарности (Credits) (RU)
 
 Выражаем искреннюю благодарность разработчикам и исследователям сообщества, чей труд, экспертиза и открытые наработки внесли ключевой вклад в создание и совершенствование комбайна:
 
@@ -1161,8 +1301,9 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
    - [Google Camera (AGC 8.x/9.x, LMC, Shamim) 50MP Setup & Guide](#96-google-camera-agc-8x--9x-lmc-shamim-50mp--200mp-configuration--testing-guide-en)
 10. [Automated Diagnostic Tool (check_support.sh)](#10-automated-diagnostic-tool-check_supportsh-en)
 11. [Frequently Asked Questions (FAQ)](#11-frequently-asked-questions-faq-en)
-12. [Community, Feedback & Telegram Channel](#12-community-feedback--telegram-channel-en)
-13. [Credits & Acknowledgements](#13-credits--acknowledgements-en)
+12. [Version History & Detailed Changelog](#12-version-history--detailed-changelog-en)
+13. [Community, Feedback & Telegram Channel](#13-community-feedback--telegram-channel-en)
+14. [Credits & Acknowledgements](#14-credits--acknowledgements-en)
 
 ---
 
@@ -2135,7 +2276,145 @@ Yes, all cameras shoot in full 50MP / 200MP resolution in AGC, LMC, Shamim, and 
 They target separate system layers and do not conflict. Bootloop risk is **0%**!
 </details>
 
-### 12. Community, Feedback & Telegram Channel (EN)
+---
+
+### 12. Version History & Detailed Changelog (EN)
+
+Complete evolution chronology, architectural milestones, and bug fix logs across all releases:
+
+<details open>
+<summary><b>🔥 v6.8-Production-Cleanup (2026-09-24) — Obsolete Asset Purge (~1.44 GB Freed) & Pipeline Optimization</b></summary>
+
+* **Major Storage & Repository Cleanup (~1.44 GB Freed)**:
+  - Removed 13 obsolete duplicate aliases, intermediate beta packages, and fragmented legacy archives (`Mi13U_..._v5.0/v5.1`, `Mi15U_X17U_..._v5.0/v5.1`, `Mi15_..._v5.0`, `Universal_MultiDevice`, separate AI sub-tier modules, and legacy beta overlays).
+  - Established a verified, canonical lineup of **16 production releases**: FULL & SLIM for each flagship (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL & SLIM), Leica 13U Port v6.8, Leica Configs Master Pack, and the unified AI Suite All-In-One.
+* **Build Pipeline Optimization**:
+  - Purged 19 obsolete scratch scripts and one-off generators from `scripts/`, retaining 10 modular, active build and verification utilities.
+  - Eliminated redundant alias mirroring in `build_full_and_slim_lineup.py` and `fix_ishtar_bootloop_modules.py`.
+  - Executed Git LFS garbage collection (`git lfs prune`), removing 145 unreferenced LFS objects.
+* **Documentation Synchronization**:
+  - Restored and integrated complete version history directly into `README.md` (both Russian and English) and `CHANGELOG.md`.
+</details>
+
+<details>
+<summary><b>📸 v6.8-Ishtar-Port-MasterPack (2026-09-24) — Leica Camera v6.8 Port & Master Configs Pack</b></summary>
+
+* **Exclusive Leica Camera v6.8 (6.8.001960.0) Port for Xiaomi 13 Ultra (`ishtar`)**:
+  - Released dedicated standalone package `Mi13U_Camera_v6.8_Port_by_borndead.zip` (141.6 MB).
+  - **1.6MP Chi-CDK Fallback Bug Fixed**: Resolved offline graph timeout in Qualcomm Chi-CDK pipeline; native 12.5MP and 50MP capture restored without preview buffer fallback (1440x1080).
+  - **200MP Mode & Thermal Lock Eliminated**: Stripped unsupported 200MP UI mode (13U has 50MP sensors) and terminated background continuous zoom polling thread, eliminating CPU overheating and battery drain.
+  - **Front Camera Dual Video Distortion Fixed**: Restored 4:3 native ratio instead of forced 16:9 stretch on OV32C front sensor (no more stretched face).
+  - **AI Scene Recognition Restored**: Bypassed AISP 2.0 requirement (`o2() -> 0`), restoring full AI scene classification on Snapdragon 8 Gen 2 ISP.
+  - **AI Capture Assist Authentication Restored**: Network auth pipe re-opened for seamless Xiaomi Account login upon tapping "Sign In".
+  - **SAT Multi-Camera Session Stability**: Sanitized `vendor.camera.aux.packagelist` for smooth lens transitions without driver arbitration hangs.
+* **Leica 13U Configs Master Pack**:
+  - Released `Leica_13U_Configs_Master_Pack.zip` (4.7 KB) containing handcrafted tuning profiles for Leica Camera & GCam (AGC 8.x/9.x, LMC) with authentic Leica color science, Black Level 64, and Quad-50M RAW16 support.
+</details>
+
+<details>
+<summary><b>🤖 v6.0-AI-Suite-Ecosystem (2026-09-23) — Artificial Intelligence Ecosystem (AI Suite)</b></summary>
+
+* **3-Tier AI Photography Suite**:
+  - **Tier 1 (AISP Hardware)**: Qualcomm Hexagon NPU computational photography acceleration for ultra-fast noise reduction and dynamic range expansion.
+  - **Tier 2 (HyperAI Studio)**: On-device generative AI tools in Gallery and ExtraPhoto editor (generative eraser, smart image expansion).
+  - **Tier 3 (AI Director & Vision HUD)**: Real-time viewfinder assistant providing composition rules, framing guidance, and horizon leveling HUD.
+* **Smart Multi-Module Synchronization**:
+  - Installer-level configuration merge logic in `customize.sh` allowing simultaneous installation of FULL/SLIM modules alongside AI Suite without OverlayFS masking conflicts.
+* **Unified All-In-One Package**:
+  - Released `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` (4 KB) containing all three tiers with zero system APK modification.
+</details>
+
+<details>
+<summary><b>🛡️ v5.12-HyperOS4-Compatibility (2026-09-24) — Next-Gen Android 17 / HyperOS 4.x Compatibility</b></summary>
+
+* **Next-Gen Android 17 / HyperOS 4.x Compatibility (Xiaomi 17 Ultra `nezha`)**:
+  - Fixed `vold` mount conflicts during late-stage boot.
+  - Resolved `system.prop` string length overflow on newer Android property services.
+  - Implemented surgical bind-mount for `device_features` XML to prevent partition remount failures.
+</details>
+
+<details>
+<summary><b>🏗️ v5.11-Full-Slim-Architecture (2026-09-23) — Dual-Tier (FULL & SLIM) Architecture</b></summary>
+
+* **Established Dedicated Dual-Tier Architecture Across Entire Lineup**:
+  - **FULL Edition**: modified Leica Camera APK with `oat/.replace` ART crash protection, 49 native ARM64 companion libraries, safe privapp permissions (`REBOOT`/`DEVICE_POWER` stripped).
+  - **SLIM Edition**: 100% Pure Systemless Overlay, 0% risk of bootloop, 0 bytes touched in `priv-app/MiuiCamera`.
+* Built dedicated packages for `ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`, and Universal Multi-Device.
+</details>
+
+<details>
+<summary><b>🚨 v5.10-Ishtar-AntiBootloop-Fix (2026-09-23) — Bootloop Elimination on Xiaomi 13 Ultra (A16)</b></summary>
+
+* **Bootloop on Xiaomi 13 Ultra (HyperOS 3.0.302.0 Taiwan / TMATWXM / Android 16)**:
+  - Identified root cause: official odexed stock firmware strictly validates platform signatures during early `PackageManagerService` init (`SignatureMismatchException`), causing `system_server` crashes and bootloops.
+  - Converted dedicated Xiaomi 13 Ultra modules to Pure Systemless Overlay mode for official ROMs.
+  - Completely purged 27.3 MB Android 14 `camera.qcom.so` from staging, eliminating AIDL NDK sensor service linker crashes on Android 16.
+  - Added comprehensive Disclaimer and mandatory Bootloop Saver requirements in documentation.
+</details>
+
+<details>
+<summary><b>🔧 v5.9-HOS1-A14-Fix (2026-09-22) — Root Loss & Black Screen Fix on HyperOS 1.0 (A14)</b></summary>
+
+* **Root Loss on Xiaomi 13 Ultra (HyperOS 1.0.14.0 Android 14)**:
+  - Sanitized `post-fs-data.sh`: removed dangerous live permissive calls (`magiskpolicy --live permissive`) that triggered Magisk Safe Mode on reboot.
+* **Black Screen Viewfinder on HyperOS 1.0.14.0 (A14)**:
+  - Blocked mounting of HyperOS 3.0 Camera APK and experimental A16 HAL on Android 14.
+* **Dedicated Module Release**:
+  - Introduced `Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip` calibrated specifically for HyperOS 1.0.
+</details>
+
+<details>
+<summary><b>⚙️ v5.8-Nezha-SimpleRom-Fix (2026-09-22) — Crash Fix on Xiaomi 17 Ultra (SimpleRom ST)</b></summary>
+
+* **Fatal Camera Crash on Xiaomi 17 Ultra (`nezha`) on SimpleRom 3.0.309.0 - ST**:
+  - Removed broken `libremosaiclib.so` which had hard dependency `DT_NEEDED: libdlrmsc_android15.so` missing in HyperOS 3.0 / A16.
+  - Restored genuine OmniVision OVX10500U, HP9, JN5, and OV50M Chromatix tuned bins.
+  - Added intelligent custom ROM detection (`IS_CUSTOM_ROM`) in `customize.sh` preserving native deodexed APK.
+* **Dedicated Modules**:
+  - Released `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip` bypassing broken cloud demosaicing to eliminate pink noise in Ultra RAW via 100% on-device ISP/NPU processing.
+  - Released `X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`.
+</details>
+
+<details>
+<summary><b>💎 v5.7-Universal-DCG-AIO-A16 (2026-09-22) — Stock AIO 104 Integration for Xiaomi 15 Ultra</b></summary>
+
+* **Stock AIO 104 Integration for Xiaomi 15 Ultra (`xuanyuan`)**:
+  - Added Chromatix tuning binary for 1" Sony LYT-900 (34.27 MB) and 200MP Samsung HP9 periscope (21.45 MB).
+  - Added SmartAE LN2 EV tables and night scene profiles.
+</details>
+
+<details>
+<summary><b>📱 v5.6-Nezha-Xuanyuan-DCG-A16 (2026-09-22) — Xiaomi 15 Ultra EUXM 3.0.9.0 Profile</b></summary>
+
+* Official Xiaomi 15 Ultra (`xuanyuan`, EUXM 3.0.9.0) profile with native A16 Camera HAL `camera.qcom.so` (10.18 MB) and `sensorservice-V1-ndk` support.
+* Sensor module binaries for HP9 200MP, IMX858, JN5, and OV32B40.
+</details>
+
+<details>
+<summary><b>⚡ v5.5-Universal-DCG-A16 (2026-09-22) — Hardware DCG / iDCG HDR Single-Frame Readout</b></summary>
+
+* **DCG (Dual Conversion Gain) / iDCG Hardware HDR**:
+  - Single-frame HCG/LCG readout for Sony IMX989, Sony LYT-900, Light Hunter 900, and OmniVision LOFIC.
+  - System properties: `persist.vendor.camera.dcg.enable=1`, `persist.vendor.camera.hdr.dcg=1`, `ro.vendor.camera.dcg=1`.
+  - Feature XML tags: `support_camera_dcg`, `support_dcg_hdr`, `support_idcg`.
+  - Completely eliminates motion ghosting artifacts on high-contrast scenes.
+</details>
+
+<details>
+<summary><b>🚀 v5.0-Universal-A16 (2026-09-22) — Initial Universal Multi-Device Flagship Architecture</b></summary>
+
+* Universal Multi-Device Suite supporting Xiaomi 13 Ultra, 15, 15 Pro, 15 Ultra, and 17 Ultra on Android 16.
+* FullRes Quad-50MP / 200MP unlock across all rear lenses for Stock Camera and GCam mods (AGC, LMC, Shamim).
+* George Video MOD: 8K 24fps on all rear lenses, 4K120fps, Dolby Vision 4K 60fps, LOG, Director Mode.
+* Video bitrate multiplied 1.5x via system properties.
+* ArcSoft AISP noise reduction bypass (`persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1`).
+* Photo Mode (161) viewfinder freeze on Xiaomi 13 Ultra eliminated by purging rogue Super Resolution tags.
+* SAT multi-camera arbitration resolved in `vendor.camera.aux.packagelist`.
+</details>
+
+---
+
+### 13. Community, Feedback & Telegram Channel (EN)
 
 <p align="center">
   <a href="https://t.me/Mi_Master_Camera_Combo">
@@ -2160,7 +2439,7 @@ If you encounter an issue or wish to propose an enhancement, use our official in
 For in-depth register dumps, dynamic linker analysis, and hardware profiles:  
 👉 **[DETAILED_AUDIT_REPORT.md](./DETAILED_AUDIT_REPORT.md)**
 
-### 13. 🤝 Credits & Acknowledgements (EN)
+### 14. 🤝 Credits & Acknowledgements (EN)
 
 We express our heartfelt appreciation and gratitude to the outstanding community developers and researchers whose dedication, expertise, and open research made this project possible:
 
