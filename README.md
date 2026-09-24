@@ -144,6 +144,10 @@
 
 #### 🔥 НОВОЕ: Порт камеры Leica v6.8 и Мастер-пак конфигов (Xiaomi 13 Ultra)
 
+<p align="center">
+  <img src="./assets/ishtar_make_stock_camera_great_again.jpg" alt="Make Stock Camera Great Again - Xiaomi 13 Ultra Master Photography" width="100%">
+</p>
+
 | Модуль / Архив | Размер | Категория | Описание и список исправлений |
 |---|---|---|---|
 | **[`Mi13U_Camera_v6.8_Port_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.8_Port_by_borndead.zip)** | **141.6 МБ** | **Leica Camera v6.8 Port** | **Эксклюзивный порт камеры Leica v6.8 (6.8.001960.0) для Xiaomi 13 Ultra (`ishtar`)**.<br>• **Фикс 1.6Мп**: устранен таймаут буфера Chi-CDK, восстановлены честные 12.5Мп и 50Мп (JPEG/RAW) без сброса в превью-буфер 1440x1080.<br>• **Ликвидация 200Мп и перегрева**: удален режим 200Мп (на 13U все сенсоры 50Мп), отключен фоновый поток опроса мотора непрерывного зума (полностью устранен нагрев процессора и лаги интерфейса).<br>• **Фикс Dual Video**: исправлены пропорции фронтальной камеры с 16:9 на нативные 4:3 (лицо больше не вытягивается по вертикали).<br>• **Фикс AI-фотосцен**: отключен сбойный флаг AISP 2.0 (`o2() -> 0`), восстановлено распознавание сцен на платформе Snapdragon 8 Gen 2.<br>• **Фикс AI Capture Assist**: открыт сетевой доступ для авторизации Xiaomi Account при нажатии кнопки «Войти».<br>• **Чистый SAT**: оптимизирован список `vendor.camera.aux.packagelist` для безупречной логической сессии Qualcomm SAT. |
@@ -1208,6 +1212,10 @@ Modules are organized into two distinct, production-ready tiers:
 >    If you prefer downloading files directly from the repository tree, use the tables below — direct links point straight to the `.zip` archive assets.
 
 #### 🔥 NEW: Flagship Leica Camera v6.8 Port & Master Configs Pack (Xiaomi 13 Ultra)
+
+<p align="center">
+  <img src="./assets/ishtar_make_stock_camera_great_again.jpg" alt="Make Stock Camera Great Again - Xiaomi 13 Ultra Master Photography" width="100%">
+</p>
 
 | Package Name | Size | Category | Highlights & Bug Fixes |
 |---|---|---|---|
