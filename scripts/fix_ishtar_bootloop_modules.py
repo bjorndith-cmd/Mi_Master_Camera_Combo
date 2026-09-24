@@ -445,19 +445,6 @@ def create_magisk_zip(staging_dir, output_zip_path):
         shutil.copy2(output_zip_path, tgt)
         print(f"     Mirrored to: {tgt}")
 
-def mirror_alias(src, alias_name):
-    targets = [
-        os.path.join(repo_releases, alias_name),
-        os.path.join(doc_releases, alias_name),
-        os.path.join(antigravity_releases, alias_name),
-        os.path.join(antigravity_root, alias_name)
-    ]
-    for tgt in targets:
-        if os.path.abspath(src).lower() != os.path.abspath(tgt).lower():
-            os.makedirs(os.path.dirname(tgt), exist_ok=True)
-            shutil.copy2(src, tgt)
-            print(f"     Mirrored alias {alias_name} -> {tgt}")
-
 # ==============================================================================
 # 1. BUILD DEDICATED XIAOMI 13 ULTRA SLIM (Pure Systemless Overlay)
 # ==============================================================================
@@ -516,10 +503,6 @@ if os.path.exists(agc_path):
 # Package 13U SLIM modules
 ishtar_slim_zip = os.path.join(repo_releases, "Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip")
 create_magisk_zip(ishtar_slim_stg, ishtar_slim_zip)
-
-# Legacy aliases
-for alias_name in ["Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip", "Mi13U_Master_Imaging_MOD_HOS1_A14_by_borndead.zip"]:
-    mirror_alias(ishtar_slim_zip, alias_name)
 
 # ==============================================================================
 # 2. BUILD DEDICATED XIAOMI 13 ULTRA FULL (With Camera v6.8 & A16 Protection)
@@ -612,10 +595,6 @@ for perm_target in [
 ishtar_full_zip = os.path.join(repo_releases, "Mi13U_Master_Camera_Combo_Full_by_borndead.zip")
 create_magisk_zip(ishtar_full_stg, ishtar_full_zip)
 
-# Legacy aliases
-for alias_name in ["Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip", "Mi13U_Master_Camera_Combo_v5.0_by_borndead.zip"]:
-    mirror_alias(ishtar_full_zip, alias_name)
-
 # ==============================================================================
 # 3. PATCH UNIVERSAL COMBO MODULES (Universal SLIM & FULL)
 # ==============================================================================
@@ -703,10 +682,6 @@ fi
     # Re-package
     create_magisk_zip(uni_stg, orig_zip)
     
-    # Mirror Universal MultiDevice
-    if "Universal_Full" in uni_name:
-        mirror_alias(orig_zip, "Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip")
-
     shutil.rmtree(uni_stg)
 
 print("\n=== All modules successfully regenerated and verified! ===")

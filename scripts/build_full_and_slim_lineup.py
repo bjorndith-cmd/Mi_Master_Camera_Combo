@@ -696,10 +696,6 @@ with open(os.path.join(uni_slim_staging, 'customize.sh'), 'w', encoding='utf-8',
 # Package Universal FULL
 uni_full_zip = os.path.join(root_antigravity, 'Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip')
 create_zip(uni_full_staging, uni_full_zip)
-# Mirror for backward compatibility
-legacy_uni = os.path.join(root_antigravity, 'Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip')
-shutil.copy2(uni_full_zip, legacy_uni)
-shutil.copy2(uni_full_zip, os.path.join(repo_releases, os.path.basename(legacy_uni)))
 
 # Package Universal SLIM
 uni_slim_zip = os.path.join(root_antigravity, 'Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip')
@@ -770,18 +766,10 @@ with open(os.path.join(ishtar_slim_stg, 'customize.sh'), 'w', encoding='utf-8', 
 # Package 13U FULL
 ishtar_full_zip = os.path.join(root_antigravity, 'Mi13U_Master_Camera_Combo_Full_by_borndead.zip')
 create_zip(ishtar_full_stg, ishtar_full_zip)
-# Mirror to v5.1 legacy
-legacy_13u_v51 = os.path.join(root_antigravity, 'Mi13U_Master_Camera_Combo_v5.1_by_borndead.zip')
-shutil.copy2(ishtar_full_zip, legacy_13u_v51)
-shutil.copy2(ishtar_full_zip, os.path.join(repo_releases, os.path.basename(legacy_13u_v51)))
 
 # Package 13U SLIM
 ishtar_slim_zip = os.path.join(root_antigravity, 'Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip')
 create_zip(ishtar_slim_stg, ishtar_slim_zip)
-# Mirror to v1.0 slim legacy
-legacy_13u_slim = os.path.join(root_antigravity, 'Mi13U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip')
-shutil.copy2(ishtar_slim_zip, legacy_13u_slim)
-shutil.copy2(ishtar_slim_zip, os.path.join(repo_releases, os.path.basename(legacy_13u_slim)))
 
 # -------------------------------------------------------------
 # 4. BUILD DEDICATED FULL & SLIM FOR XIAOMI 17 ULTRA (nezha)
@@ -838,10 +826,6 @@ create_zip(x17u_full_stg, x17u_full_zip)
 
 x17u_slim_zip = os.path.join(root_antigravity, 'X17U_Master_Imaging_MOD_Slim_by_borndead.zip')
 create_zip(x17u_slim_stg, x17u_slim_zip)
-# Mirror to v1.0 slim legacy
-legacy_17u_slim = os.path.join(root_antigravity, 'X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip')
-shutil.copy2(x17u_slim_zip, legacy_17u_slim)
-shutil.copy2(x17u_slim_zip, os.path.join(repo_releases, os.path.basename(legacy_17u_slim)))
 
 # -------------------------------------------------------------
 # 5. BUILD DEDICATED FULL & SLIM FOR XIAOMI 15 ULTRA (xuanyuan)
@@ -949,10 +933,6 @@ with open(os.path.join(mi15_slim_stg, 'customize.sh'), 'w', encoding='utf-8', ne
 
 mi15_full_zip = os.path.join(root_antigravity, 'Mi15_Master_Camera_Combo_Full_by_borndead.zip')
 create_zip(mi15_full_stg, mi15_full_zip)
-# Mirror to legacy v5.0
-legacy_mi15 = os.path.join(root_antigravity, 'Mi15_Master_Camera_Combo_v5.0_by_borndead.zip')
-shutil.copy2(mi15_full_zip, legacy_mi15)
-shutil.copy2(mi15_full_zip, os.path.join(repo_releases, os.path.basename(legacy_mi15)))
 
 mi15_slim_zip = os.path.join(root_antigravity, 'Mi15_Master_Imaging_MOD_Slim_by_borndead.zip')
 create_zip(mi15_slim_stg, mi15_slim_zip)
