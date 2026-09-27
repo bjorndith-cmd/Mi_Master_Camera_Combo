@@ -13,7 +13,7 @@
 
 <p align="center">
   <b>Author / Автор сборки:</b> <code>borndead</code><br>
-  <b>Release / Версия:</b> <code>v5.9-Universal / v6.8-Ishtar-Ultra-v3</code>
+  <b>Release / Версия:</b> <code>v5.9-Universal / v5.4-Ishtar-Full</code>
 </p>
 
 <p align="center">
@@ -139,19 +139,14 @@
 > [!TIP]
 > #### 📦 ДВА УДОБНЫХ СПОСОБА СКАЧИВАНИЯ МОДУЛЕЙ
 > 1. 🚀 **Официальный раздел GitHub Releases (Рекомендуется / Скачивание в 1 клик):**  
->    Перейдите на страницу [**GitHub Releases**](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases) *(кнопка **Releases** всегда доступна в правом сайдбаре на главной странице проекта)*. В этом разделе готовые архивы распределены по версиям (v5.8, v5.9, v6.8 и др.), снабжены подробными журналами изменений (Changelog) и загружаются в один клик на максимальной скорости.
+>    Перейдите на страницу [**GitHub Releases**](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases) *(кнопка **Releases** всегда доступна в правом сайдбаре на главной странице проекта)*. В этом разделе готовые архивы распределены по версиям (v5.8, v5.9 и др.), снабжены подробными журналами изменений (Changelog) и загружаются в один клик на максимальной скорости.
 > 2. 🔗 **Прямые ссылки на файлы в репозитории:**  
 >    Вы можете скачать нужный архив напрямую через таблицы ниже — прямые ссылки ведут непосредственно на `.zip` файлы в репозитории (Git LFS).
 
-#### 🔥 НОВОЕ: Порт камеры Leica v6.8 и Мастер-пак конфигов (Xiaomi 13 Ultra)
+#### 📦 Мастер-пак авторских конфигураций (Xiaomi 13 Ultra)
 
-<p align="center">
-  <img src="./assets/ishtar_make_stock_camera_great_again.jpg" alt="Make Stock Camera Great Again - Xiaomi 13 Ultra Master Photography" width="100%">
-</p>
-
-| Модуль / Архив | Размер | Категория | Описание и список исправлений |
+| Модуль / Архив | Размер | Категория | Описание |
 |---|---|---|---|
-| **[`Mi13U_Camera_v6.8_Port_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.8_Port_by_borndead.zip)** | **141.6 МБ** | **Leica Camera v6.8 Port** | **Эксклюзивный порт камеры Leica v6.8 (6.8.001960.0) для Xiaomi 13 Ultra (`ishtar`)**.<br>• **Фикс 1.6Мп**: устранен таймаут буфера Chi-CDK, восстановлены честные 12.5Мп и 50Мп (JPEG/RAW) без сброса в превью-буфер 1440x1080.<br>• **Ликвидация 200Мп и перегрева**: удален режим 200Мп (на 13U все сенсоры 50Мп), отключен фоновый поток опроса мотора непрерывного зума (полностью устранен нагрев процессора и лаги интерфейса).<br>• **Фикс Dual Video**: исправлены пропорции фронтальной камеры с 16:9 на нативные 4:3 (лицо больше не вытягивается по вертикали).<br>• **Фикс AI-фотосцен**: отключен сбойный флаг AISP 2.0 (`o2() -> 0`), восстановлено распознавание сцен на платформе Snapdragon 8 Gen 2.<br>• **Фикс AI Capture Assist**: открыт сетевой доступ для авторизации Xiaomi Account при нажатии кнопки «Войти».<br>• **Чистый SAT**: оптимизирован список `vendor.camera.aux.packagelist` для безупречной логической сессии Qualcomm SAT. |
 | **[`Leica_13U_Configs_Master_Pack.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Leica_13U_Configs_Master_Pack.zip)** | **4.7 КБ** | **Leica & GCam Configs** | **Мастер-пак авторских конфигураций от `borndead` для Xiaomi 13 Ultra**. Включает откалиброванные профили для Leica Camera & GCam (AGC 8.x/9.x, LMC) с идеальными кривыми тонопередачи Leica Authentic / Vibrant, Black Level 64, калибровками IMX989 + 3x IMX858 и честным Quad-50M RAW16. |
 
 #### 🌐 Универсальные комбайны для всей линейки (13U, 14U, 15, 15 Pro, 15U, 17U)
@@ -249,10 +244,10 @@
   - **Причина бутлупа №2 (Проверка привилегий `privapp-permissions`)**: Android 16 строго валидирует привилегированные разрешения (Protection Level `privileged`). Если приложение запрашивает системные разрешения, отсутствующие в XML-манифесте белого списка, `SystemServer` выбрасывает фатальный `IllegalStateException` и крашит ОС.
   - **Причина бутлупа №3 (Коллизия дубликатов пакетов)**: в HyperOS стоковая камера находится в `/product/priv-app/MiuiCamera`. Монтирование только в `/system/priv-app/` создавало дубликат пакета `com.android.camera`, приводя к сбою PMS.
 * **Архитектурные решения в новой сборке**:
-  1. **FULL Edition (с улучшенным APK камеры Leica v6.8 — ~208 МБ)**:
+  1. **FULL Edition (с проверенным флагманским APK камеры Leica Suite v5.4 — ~208 МБ)**:
      - **Шебанг `#!/bin/sh`**: 100% совместимость со средой восстановления и оболочкой Android 16;
      - **Нулевое вмешательство в `/odm`**: из модуля полностью удалены любые вмешательства в `/odm/lib64/camera`. Нативные аппаратные драйверы IMX989 и IMX858 остаются нетронутыми — 0% риска краша камеры на уровне HAL;
-     - **Собственный порт Leica Camera v6.8 (`MiuiCamera.apk`)**: скомпилирован под targetSdk 36, внедрена нативная поддержка Ishtar, 49 нативных библиотек ARM64 в каталоге `lib/arm64` с правами `0755`;
+     - **Стабильный проверенный пакет Leica Camera (`MiuiCamera.apk`)**: стабильная сборка v5, 47 нативных библиотек ARM64 в каталоге `lib/arm64` с правами `0755`, без регрессий и перегрева;
      - **Полный белый список разрешений**: расширенный `privapp-permissions-camera.xml` с объявлением всех привилегированных разрешений и свойством `ro.control_privapp_permissions=log` (полная защита от падений SystemServer);
      - **Умное зеркалирование разделов**: инсталлятор автоматически определяет наличие камеры в `/product/priv-app/MiuiCamera` и замещает именно целевой каталог с маркерами `.replace` и `.nomedia` в подкаталоге `oat`, исключая конфликты старых odex/vdex и дубликатов пакетов;
      - Разблокированы Quad-50M FullRes на 4 объективах (`0.5x : 1.0x : 3.2x : 5.0x`), физическая переменная диафрагма F1.9/F4.0, DCG Hardware HDR, George 8K видео со всех сенсоров и 4K120fps.
@@ -260,7 +255,7 @@
      - Системный APK камеры **НЕ ЗАТРАГИВАЕТСЯ ВООБЩЕ** — работает как чистый Overlay поверх стока;
      - 0% риска конфликтов подписей платформы, моментальная установка в Magisk / KernelSU / APatch;
      - Через оверлей `device_features/ishtar.xml` и системные свойства активирует Quad-50M, аппаратный DCG HDR, 8K видео на всех сенсорах, Super Resolution и локальную обработку фотосцен без облачных лагов.
-* **Результат**: 100% анти-бутлуп гарантия на HyperOS 1.0, 2.0 и 3.0 (Android 14/15/16). Полная свобода выбора: FULL с улучшенной камерой v6.8 или SLIM для работы на стоковом APK!
+* **Результат**: 100% анти-бутлуп гарантия на HyperOS 1.0, 2.0 и 3.0 (Android 14/15/16). Полная свобода выбора: FULL со стабильной камерой Leica Suite v5 или SLIM для работы на стоковом APK!
 
 #### 5.8. Совместимость с новейшими прошивками (HyperOS 4.x / Android 17): Тестирование на Xiaomi 17 Ultra (`nezha`) (RU)
 
@@ -1101,11 +1096,11 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 Полная хронология развития проекта, устранённых проблем и архитектурных улучшений:
 
 <details open>
-<summary><b>🔥 v6.8-Production-Cleanup (24.09.2026) — Очистка устаревших релизов (-1.44 ГБ) и оптимизация</b></summary>
+<summary><b>🔥 v5.9-Production-Cleanup (24.09.2026) — Очистка устаревших релизов (-1.44 ГБ) и оптимизация</b></summary>
 
 * **Глобальная очистка дискового пространства и репозитория (~1.44 ГБ освобождено)**:
   - Удалено 13 устаревших промежуточных архивов, дублирующих алиасов (`Mi13U_..._v5.0/v5.1`, `Mi15U_X17U_..._v5.0/v5.1`, `Mi15_..._v5.0`, `Universal_MultiDevice`, разрозненные AI-модули и старые бета-оверлеи).
-  - Сформирована строгая каноническая линейка из **16 проверенных релизов**: FULL и SLIM для каждого флагмана (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL и SLIM), Leica 13U Port v6.8, Мастер-пак конфигов и объединённый AI Suite All-In-One.
+  - Сформирована строгая каноническая линейка из **16 проверенных релизов**: FULL и SLIM для каждого флагмана (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL и SLIM), Мастер-пак конфигов и объединённый AI Suite All-In-One.
 * **Оптимизация сборочного пайплайна**:
   - Удалено 19 устаревших scratch-скриптов и генераторов из директории `scripts/`, оставлено 10 модульных рабочих утилит сборки и проверки.
   - В скриптах `build_full_and_slim_lineup.py` и `fix_ishtar_bootloop_modules.py` вырезаны операции создания дубликатов по алиасам (`mirror_alias`).
@@ -1114,20 +1109,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
   - Полная история изменений проекта сохранена и интегрирована в `README.md` (RU и EN) и `CHANGELOG.md`.
 </details>
 
-<details>
-<summary><b>📸 v6.8-Ishtar-Port-MasterPack (24.09.2026) — Порт камеры Leica v6.8 и Мастер-пак конфигов</b></summary>
 
-* **Эксклюзивный порт камеры Leica v6.8 (6.8.001960.0) для Xiaomi 13 Ultra (`ishtar`)**:
-  - Выпущен отдельный оптимизированный модуль `Mi13U_Camera_v6.8_Port_by_borndead.zip` (141.6 МБ).
-  - **Фикс бага 1.6Мп**: решён таймаут оффлайн-графа Chi-CDK, восстановлена нативная съёмка 12.5Мп и 50Мп без падения в превью-буфер (1440x1080).
-  - **Устранение режима 200Мп и перегрева**: удалён фантомный переключатель 200Мп и остановлен циклический фоновый поток опроса зума, что полностью сняло нагрев процессора и повышенный жор батареи.
-  - **Фикс геометрии селфи Dual Video**: восстановлены нативные пропорции 4:3 для фронтального сенсора OV32C (устранено искажение и вытягивание лиц).
-  - **Восстановление распознавания сцен AI**: снято жесткое требование AISP 2.0 (`o2() -> 0`), возвращена работа классификатора сцен на Snapdragon 8 Gen 2.
-  - **Восстановление авторизации AI Capture Assist**: открыт сетевой сокет авторизации аккаунта Xiaomi при нажатии «Войти».
-  - **Стабильность сессий SAT**: оптимизирован `vendor.camera.aux.packagelist` для бесшовного зума.
-* **Мастер-пак конфигов Leica & GCam**:
-  - Выпущен архив `Leica_13U_Configs_Master_Pack.zip` (4.7 КБ) с авторскими профилями для Leica Camera и GCam (AGC 8.x/9.x, LMC) с тоновыми кривыми Authentic/Vibrant, Black Level 64 и поддержкой Quad-50M RAW16.
-</details>
 
 <details>
 <summary><b>🤖 v6.0-AI-Suite-Ecosystem (23.09.2026) — Экосистема искусственного интеллекта (AI Suite)</b></summary>
@@ -1337,19 +1319,14 @@ Modules are organized into two distinct, production-ready tiers:
 > [!TIP]
 > #### 📦 TWO CONVENIENT DOWNLOAD METHODS
 > 1. 🚀 **Official GitHub Releases (Recommended / 1-Click Download):**  
->    Navigate to [**GitHub Releases**](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases) *(the **Releases** button is always accessible on the right sidebar of the project's repository page)*. All modules are organized by release tags (v5.8, v5.9, v6.8, etc.), include detailed changelogs, and can be downloaded with a single click at uncapped speeds.
+>    Navigate to [**GitHub Releases**](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases) *(the **Releases** button is always accessible on the right sidebar of the project's repository page)*. All modules are organized by release tags (v5.8, v5.9, etc.), include detailed changelogs, and can be downloaded with a single click at uncapped speeds.
 > 2. 🔗 **Direct In-Repository Download Links (Git LFS):**  
 >    If you prefer downloading files directly from the repository tree, use the tables below — direct links point straight to the `.zip` archive assets.
 
-#### 🔥 NEW: Flagship Leica Camera v6.8 Port & Master Configs Pack (Xiaomi 13 Ultra)
+#### 📦 Master Configs Pack (Xiaomi 13 Ultra)
 
-<p align="center">
-  <img src="./assets/ishtar_make_stock_camera_great_again.jpg" alt="Make Stock Camera Great Again - Xiaomi 13 Ultra Master Photography" width="100%">
-</p>
-
-| Package Name | Size | Category | Highlights & Bug Fixes |
+| Package Name | Size | Category | Description |
 |---|---|---|---|
-| **[`Mi13U_Camera_v6.8_Port_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.8_Port_by_borndead.zip)** | **141.6 MB** | **Leica Camera v6.8 Port** | **Exclusive Leica Camera v6.8 (6.8.001960.0) Port for Xiaomi 13 Ultra (`ishtar`)**.<br>• **1.6MP Bug Fixed**: Resolved Chi-CDK offline graph timeout; native 12.5MP and 50MP capture restored without preview buffer fallback (1440x1080).<br>• **200MP & Thermal Lock Eliminated**: Stripped unsupported 200MP mode (13U features 50MP sensors) and terminated background continuous zoom polling thread (eliminating CPU overload, lag, and phone heating).<br>• **Dual Video Aspect Ratio Fixed**: Restored 4:3 native ratio instead of forced 16:9 stretch on OV32C front sensor (no more stretched face).<br>• **AI Scene Detection Restored**: Bypassed AISP 2.0 requirement (`o2() -> 0`), restoring full AI scene classification on Snapdragon 8 Gen 2.<br>• **AI Capture Assist Login Restored**: Network auth pipe re-opened for seamless Xiaomi Account login upon tapping "Sign In".<br>• **Clean Qualcomm SAT Session**: Streamlined `vendor.camera.aux.packagelist` for uninterrupted multi-camera logical sessions. |
 | **[`Leica_13U_Configs_Master_Pack.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Leica_13U_Configs_Master_Pack.zip)** | **4.7 KB** | **Leica & GCam Configs** | **Master Leica & GCam Config Collection by `borndead` for Xiaomi 13 Ultra**. Includes precision-tuned profiles for Leica Camera & GCam (AGC 8.x/9.x, LMC) featuring calibrated Leica Authentic / Vibrant tone curves, Black Level 64, IMX989 + 3x IMX858 tunings, and Quad-50M RAW16 support. |
 
 #### 🌐 Universal Multi-Device Packages (13U, 14U, 15, 15 Pro, 15U, 17U)
@@ -2283,11 +2260,11 @@ They target separate system layers and do not conflict. Bootloop risk is **0%**!
 Complete evolution chronology, architectural milestones, and bug fix logs across all releases:
 
 <details open>
-<summary><b>🔥 v6.8-Production-Cleanup (2026-09-24) — Obsolete Asset Purge (~1.44 GB Freed) & Pipeline Optimization</b></summary>
+<summary><b>🔥 v5.9-Production-Cleanup (2026-09-24) — Obsolete Asset Purge (~1.44 GB Freed) & Pipeline Optimization</b></summary>
 
 * **Major Storage & Repository Cleanup (~1.44 GB Freed)**:
   - Removed 13 obsolete duplicate aliases, intermediate beta packages, and fragmented legacy archives (`Mi13U_..._v5.0/v5.1`, `Mi15U_X17U_..._v5.0/v5.1`, `Mi15_..._v5.0`, `Universal_MultiDevice`, separate AI sub-tier modules, and legacy beta overlays).
-  - Established a verified, canonical lineup of **16 production releases**: FULL & SLIM for each flagship (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL & SLIM), Leica 13U Port v6.8, Leica Configs Master Pack, and the unified AI Suite All-In-One.
+  - Established a verified, canonical lineup of **16 production releases**: FULL & SLIM for each flagship (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL & SLIM), Leica Configs Master Pack, and the unified AI Suite All-In-One.
 * **Build Pipeline Optimization**:
   - Purged 19 obsolete scratch scripts and one-off generators from `scripts/`, retaining 10 modular, active build and verification utilities.
   - Eliminated redundant alias mirroring in `build_full_and_slim_lineup.py` and `fix_ishtar_bootloop_modules.py`.
@@ -2296,20 +2273,7 @@ Complete evolution chronology, architectural milestones, and bug fix logs across
   - Restored and integrated complete version history directly into `README.md` (both Russian and English) and `CHANGELOG.md`.
 </details>
 
-<details>
-<summary><b>📸 v6.8-Ishtar-Port-MasterPack (2026-09-24) — Leica Camera v6.8 Port & Master Configs Pack</b></summary>
 
-* **Exclusive Leica Camera v6.8 (6.8.001960.0) Port for Xiaomi 13 Ultra (`ishtar`)**:
-  - Released dedicated standalone package `Mi13U_Camera_v6.8_Port_by_borndead.zip` (141.6 MB).
-  - **1.6MP Chi-CDK Fallback Bug Fixed**: Resolved offline graph timeout in Qualcomm Chi-CDK pipeline; native 12.5MP and 50MP capture restored without preview buffer fallback (1440x1080).
-  - **200MP Mode & Thermal Lock Eliminated**: Stripped unsupported 200MP UI mode (13U has 50MP sensors) and terminated background continuous zoom polling thread, eliminating CPU overheating and battery drain.
-  - **Front Camera Dual Video Distortion Fixed**: Restored 4:3 native ratio instead of forced 16:9 stretch on OV32C front sensor (no more stretched face).
-  - **AI Scene Recognition Restored**: Bypassed AISP 2.0 requirement (`o2() -> 0`), restoring full AI scene classification on Snapdragon 8 Gen 2 ISP.
-  - **AI Capture Assist Authentication Restored**: Network auth pipe re-opened for seamless Xiaomi Account login upon tapping "Sign In".
-  - **SAT Multi-Camera Session Stability**: Sanitized `vendor.camera.aux.packagelist` for smooth lens transitions without driver arbitration hangs.
-* **Leica 13U Configs Master Pack**:
-  - Released `Leica_13U_Configs_Master_Pack.zip` (4.7 KB) containing handcrafted tuning profiles for Leica Camera & GCam (AGC 8.x/9.x, LMC) with authentic Leica color science, Black Level 64, and Quad-50M RAW16 support.
-</details>
 
 <details>
 <summary><b>🤖 v6.0-AI-Suite-Ecosystem (2026-09-23) — Artificial Intelligence Ecosystem (AI Suite)</b></summary>

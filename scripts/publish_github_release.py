@@ -105,50 +105,7 @@ def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     releases_dir = os.path.join(root, "releases")
 
-    # 1. Release v6.8-Ishtar
-    body_68 = """# Xiaomi 13 Ultra — Leica Camera v6.8 Flagship Port & Master Configs Pack 📸⚡
-**Author / Автор:** `borndead`  
-**Target Device:** Xiaomi 13 Ultra (`ishtar`)  
-**Target System:** HyperOS 1.0 / 2.0 / 3.0 (Android 14 / 15 / 16)  
-
----
-
-### 🌟 Что нового в версии v6.8-Ishtar (Changelog)
-
-#### 1. Устранение бага 1.6 Мп (Native 12.5M & 50M)
-- Ликвидирован фатальный таймаут оффлайн-графа Qualcomm Chi-CDK.
-- Восстановлено полноценное сохранение снимков в нативном разрешении сенсоров **12.5 Мп (4096x3072)** и **50 Мп (8192x6144)** в JPEG и RAW/DNG.
-- Полностью устранен сброс в превью-буфер видоискателя 1440x1080 (~160 КБ).
-
-#### 2. Ликвидация лишнего режима 200 Мп и перегрева устройства
-- Удален неподдерживаемый режим 200Мп (`Hongkong.smali`: переопределены методы `c0() -> null`, `Z0() -> ""`, `x() -> 300`).
-- Отключен фоновый поток бесконечного опроса мотора непрерывного оптического зума (`8.6-200mm`), нагружавший CPU на 100%. Телефон больше не греется, интерфейс работает плавно и без лагов.
-
-#### 3. Исправление пропорций лица в режиме «Двойная камера» (Dual Video)
-- Метод `e0()[I` переопределен на возвращение `null`, восстанавливая нативные пропорции 4:3 для фронтального сенсора OmniVision OV32C (устранено искажение и вытягивание лица 16:9).
-
-#### 4. Восстановление работы AI-фотосцен (AI Scene Detection)
-- Метод `o2()Z` переопределен на `false` (0), предотвращая вызов отсутствующего на Snapdragon 8 Gen 2 блока Xiaomi AISP 2.0. Распознавание сцен и оптимизация кадра работают стабильно и корректно.
-
-#### 5. Восстановление авторизации в Xiaomi Account (AI Capture Assist)
-- В `system.prop` и скриптах модуля включен сетевой пайплайн авторизации (`persist.vendor.camera.cloud.enable 1`), благодаря чему окно входа в аккаунт Xiaomi отрабатывает штатно.
-
-#### 6. Оптимизация многокамерной логической сессии Qualcomm SAT
-- Список `vendor.camera.aux.packagelist` очищен от `com.android.camera`, исключая конфликты логической сессии Snapdragon SAT.
-
----
-
-### 📦 Вложенные модули (Attachments):
-- **`Mi13U_Camera_v6.8_Port_by_borndead.zip`** (141.6 MB) — Системный Magisk/KernelSU/APatch модуль с портом камеры Leica v6.8.
-- **`Leica_13U_Configs_Master_Pack.zip`** (4.7 KB) — Полная коллекция авторских конфигов от `borndead` для Leica Camera и GCam (AGC 8.x/9.x, LMC).
-"""
-    rel_68 = create_release("v6.8-Ishtar", "v6.8-Ishtar: Xiaomi 13 Ultra Leica Camera v6.8 Port & Master Configs Pack", body_68)
-    if rel_68:
-        rel_id = rel_68["id"]
-        upload_asset(rel_id, os.path.join(releases_dir, "Mi13U_Camera_v6.8_Port_by_borndead.zip"))
-        upload_asset(rel_id, os.path.join(releases_dir, "Leica_13U_Configs_Master_Pack.zip"))
-
-    # 2. Release v5.9 (Universal Combo)
+    # Release v5.9 (Universal Combo)
     body_59 = """# Xiaomi Master Camera Combo Universal Suite v5.9 📸⚡
 **Author / Автор:** `borndead`  
 **Compatibility:** Xiaomi 13 Ultra, 14 Ultra, 15, 15 Pro, 15 Ultra, 17 Ultra  

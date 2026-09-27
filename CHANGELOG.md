@@ -2,32 +2,24 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
-## [v6.8-Production-Cleanup] - 2026-09-24
+## [v5.4-Ishtar-AntiBootloop] - 2026-09-27
+### Fixed
+- **Xiaomi 13 Ultra Stable v5 Foundation (`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`)**:
+  - Maintained 100% stable Version 5 Leica Camera APK suite (SHA256: `8a626df7...`) with all 47 companion libraries intact.
+  - Calibrated `persist.vendor.camera.maxRAWSizes=55` for full Quad-Bayer 50MP stream resolution in Camera and GCam.
+  - Resolved KernelSU & Magisk multi-partition compatibility with simultaneous deployment across `/system`, `/product`, and `/system/product`.
+  - Implemented Strict Zero-ETC architecture: removed truncated `ishtar.xml` to preserve native device features and prevent bootloops.
+  - Integrated real-time hardware diagnostic daemon logging to `/sdcard/Download/CameraMod_Logs`.
+
+## [v5.9-Production-Cleanup] - 2026-09-24
 ### Optimized
 - **Repository Bloat & Obsolete Release Purge (~1.44 GB Freed)**:
-  - Removed 13 obsolete duplicate aliases, intermediate beta packages, and fragmented legacy archives from `releases/` (`Mi13U_Master_Camera_Combo_v5.0/v5.1`, `Mi15U_X17U_v5.0/v5.1`, `Mi15_v5.0`, `Universal_MultiDevice`, separate AI sub-tiers, and legacy beta overlays).
-  - Consolidated release distribution to strictly 16 canonical, production-grade assets: FULL & SLIM per flagship (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL & SLIM), Leica 13U Port v6.8, Leica Configs Master Pack, and the unified AI Suite All-In-One.
-  - Purged 19 obsolete scratch and one-off generator scripts from `scripts/`, retaining 10 modular, active build and verification utilities.
-  - Optimized packaging scripts (`build_full_and_slim_lineup.py`, `fix_ishtar_bootloop_modules.py`) to prevent duplicate archive generation.
+  - Removed 13 obsolete duplicate aliases, intermediate beta packages, and fragmented legacy archives from `releases/`.
+  - Consolidated release distribution to canonical, production-grade assets: FULL & SLIM per flagship (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`), Universal Multi-Device (FULL & SLIM), Leica Configs Master Pack, and the unified AI Suite All-In-One.
+  - Purged 19 obsolete scratch and one-off generator scripts from `scripts/`, retaining modular, active build and verification utilities.
   - Performed Git LFS garbage collection (`git lfs prune`), removing 145 dangling LFS objects.
 - **Documentation & History Synchronization**:
   - Restored and integrated complete version history and changelog directly into `README.md` (RU and EN) and `CHANGELOG.md`.
-
-## [v6.8-Ishtar-Port-MasterPack] - 2026-09-24
-### Added
-- **Exclusive Leica Camera v6.8 (6.8.001960.0) Port for Xiaomi 13 Ultra (`ishtar`)**:
-  - `Mi13U_Camera_v6.8_Port_by_borndead.zip` (141.6 MB).
-  - Ported and adapted latest Leica Camera app specifically optimized for Snapdragon 8 Gen 2.
-- **Leica 13U Configs Master Pack**:
-  - `Leica_13U_Configs_Master_Pack.zip` (4.7 KB).
-  - Handcrafted tuning profiles for Leica Camera & GCam (AGC 8.x/9.x, LMC) with authentic Leica color science, Black Level 64, and Quad-50M RAW16 support.
-### Fixed
-- **1.6MP Chi-CDK Fallback Bug**: Resolved offline graph timeout in Qualcomm Chi-CDK pipeline; native 12.5MP and 50MP capture restored without preview buffer fallback (1440x1080).
-- **200MP Mode & Thermal Throttle**: Stripped non-functional 200MP UI mode (13U has 50MP sensors) and eliminated continuous zoom sensor polling loop, resolving CPU overheating and battery drain.
-- **Front Camera Dual Video Distortion**: Fixed aspect ratio calculation for OmniVision OV32C sensor in Dual Video mode, restoring 4:3 geometry instead of forced 16:9 stretch.
-- **AI Scene Recognition**: Bypassed AISP 2.0 hard dependency (`o2() -> 0`), restoring full AI scene classification on Snapdragon 8 Gen 2 ISP.
-- **AI Capture Assist Authentication**: Restored network auth pipe enabling direct Xiaomi Account sign-in.
-- **SAT Multi-Camera Session Stability**: Sanitized `vendor.camera.aux.packagelist` for smooth lens transitions without driver arbitration hangs.
 
 ## [v6.0-AI-Suite-Ecosystem] - 2026-09-23
 ### Added
