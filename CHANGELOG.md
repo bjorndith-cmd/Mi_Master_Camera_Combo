@@ -2,7 +2,35 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
-## [v5.4-Ishtar-AntiBootloop] - 2026-09-27
+## [v5.5-Monolith-AllInOne] - 2026-09-27
+### Added & Unified
+- **Monolith All-in-One Architecture (100% Self-Contained)**:
+  - Completely unified the Camera App, Tri-Tier AI Suite (AISP NPU + HyperAI ExtraPhoto Studio + AI Director), Performance Booster, and custom sensor calibrations into a single, seamless module across all supported flagships (`ishtar`, `aurora`, `dada`/`haotian`, `xuanyuan`, `nezha`, and Universal Full).
+  - Out-of-the-box integration of `privapp-permissions-extraphoto.xml` and Gallery NPU properties, unlocking AI Eraser Pro, AI Expand, and Dynamic AI Sky in the Xiaomi Gallery editor without requiring a second module.
+- **Performance Booster & Hardware Acceleration**:
+  - Integrated `libperformance.so` (Xiaomi Camera CPU/GPU Governor Booster) directly referenced by v5 APK DEX bytecode for lag-free shutter release and responsive viewfinder.
+  - Integrated `libpendant.so` for quick-shot accessories and instant capture triggers.
+- **Custom Optical Presets Pack**:
+  - Built-in `Leica_Pure_Optics`, `Street_Photography_35mm`, and `Ultra_Dynamic_Range` presets (JSON & ZIP) automatically deployed upon boot to `/sdcard/Download/XiaomiCamera/` and `/sdcard/DCIM/Camera/configs/`.
+
+### Fixed & Stabilized
+- **Genuine Version 5 Core Foundation**:
+  - Verified authentic Version 5 APK (SHA256: `d7e1fc256ee9671283646f9133cc977839bb944ca91c049179f2aeb813c205dd`, 169,619,006 bytes, 8 DEX classes) across all packages.
+  - Completely eradicated unstable 6.8 beta code to prevent `NoClassDefFoundError` and CamX pipeline crashes.
+- **KernelSU & Magisk Multi-Partition Overlays**:
+  - Stock camera on HyperOS is located in `/product/priv-app/MiuiCamera`. Resolved KernelSU OverlayFS mounting by deploying simultaneously across `/system/priv-app`, `/product/priv-app`, and `/system/product/priv-app` with `.replace`, `oat/.replace`, and `oat/.nomedia`.
+  - Removed destructive `rm -rf "$MODPATH/product"`, guaranteeing 100% KernelSU compatibility without masking the system `/product` partition.
+- **1.6MP Preview Dump Fix & Instant 50MP Capture**:
+  - Purged conflicting `support_super_resolution=true` and `support_200mp=true` on 50MP sensor devices (`ishtar`, `aurora`, `dada`), which previously exhausted CamX buffers and caused fallback to 1.6MP preview dumps.
+  - Enforced `support_50mp=true` and `maxRAWSizes=55`, enabling instantaneous 50MP (8192×6144) captures via hardware MIVI remosaic.
+- **Android 16 / HyperOS 3.0 Installer Fix**:
+  - Updated `META-INF/.../update-binary` shebang from legacy `#!/sbin/sh` to `#!/bin/sh`.
+- **Bootloop Saver Engine & Early Recovery**:
+  - Implemented automated boot counter (`boot_count <= 2`) in `post-fs-data.sh` with automatic reset in `service.sh`.
+  - Added emergency manual disable trigger (`/sdcard/disable_camera`).
+- **Real-Time Diagnostic Logging Daemon**:
+  - Continuous logging directly to public storage `/sdcard/Download/CameraMod_Logs` (`00_SUMMARY.txt`, `01_install.log`, `02_post_fs_data.log`, `03_boot_diagnostics.txt`, `04_dumpsys_package.txt`, `05_logcat_camera.txt`, `07_logcat_crashes.txt`) with `0777` permissions and `MediaScanner` broadcast for immediate USB visibility.
+
 ### Fixed
 - **Xiaomi 13 Ultra Stable v5 Foundation (`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`)**:
   - Maintained 100% stable Version 5 Leica Camera APK suite (SHA256: `8a626df7...`) with all 47 companion libraries intact.
