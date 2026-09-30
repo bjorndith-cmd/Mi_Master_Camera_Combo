@@ -2,6 +2,33 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
+## [v6.1-MasterFinal-Flagship] - 2026-09-30
+### Added & Master Upgrades (All Supported Devices: 13U, 14U, 15, 15U, 17U, Universal)
+- **Full Quad-Lens Optical Zoom Expansion (0.5x — 1x — 2x — 3.2x — 5x — 10x)**:
+  - Added native 10x zoom button in 50MP Ultra HD mode across all packages (`support_ultra_hd_zoom` updated to `0.5:1.0:3.2:5.0:10.0`).
+  - Added full 6-button zoom dock in standard photo mode (`0.5x, 1x, 2x, 3.2x, 5x, 10x`).
+  - Fixed Dalvik DEX strict UTF-16 lexicographical sorting and Adler32/SHA-1 checksums, eliminating `NoClassDefFoundError` on Android 16 (API 36).
+- **DCI-P3 10-bit Wide Color Gamut & Ultra HDR Ecosystem**:
+  - Migrated camera color pipeline from legacy 8-bit sRGB to 10-bit **Display P3** with Ultra HDR metadata. Eliminates banding and posterization in sky gradients and sunsets on WQHD+ AMOLED displays.
+- **Pure Optics Engine (Zero Over-Sharpening & Natural Leica Grain)**:
+  - Bypassed aggressive artificial edge sharpening (`mialgo.edge=0`, `sharpness.tuning=0`). Unlocks soft, organic, film-like optical rendering of 1-inch Sony IMX989 and LYT-900 sensors.
+- **Multi-Sensor 8K Cinema Suite (1x, 3.2x, 5x)**:
+  - Unlocked 8K video capture across all optical sensors (Sony IMX989 wide + Sony IMX858 telephoto lenses).
+- **Studio 3D Spatial Audio & Directional Acoustic Zoom (3-Mic Array)**:
+  - Enabled acoustic beamforming synchronized with optical zoom: zooming in on subject physically focuses directional audio, isolating voice and cutting background street noise.
+- **Custom Leica Watermark Author Text**:
+  - Enabled custom author text and copyright strings in Leica watermark settings (`Photo by borndead` or custom name).
+- **OmniVision OV32C Front Camera 60FPS Sensor Tuning**:
+  - Eliminated buffer starvation and viewfinder stutter in front camera recording. Configured hardware-native 1080p 60fps ultra-smooth capture without dropped frames.
+- **Comprehensive User Manual & Device Guide**:
+  - Added in-depth walkthrough of Leica Authentic vs Vibrant, Physical Dual Aperture (F1.9 / F4.0), Leica Master Lenses (35/50/75/90mm) & Studio Lighting, Pro Mode (14-bit Ultra RAW), and Fastshot Street Snap.
+
+## [v6.0-UltraHD10x-Stabilization] - 2026-09-30
+### Fixed
+- **50MP Ultra HD 10x Zoom Activation**: Re-crafted DEX string `0x872` with verified `pixel:0.5:1:3.2:5:10` and `ishtar.xml` support.
+- **Android 16 ART DEX Verification**: 100% verified all 8 classes DEX with Google Android SDK `dexdump.exe -c`.
+- **Front Camera Stutter Optimization**: Purged illegal 4K60 override on OV32C sensor to guarantee rock-solid 1080p 60fps.
+
 ## [v5.5-Monolith-AllInOne] - 2026-09-27
 ### Added & Unified
 - **Monolith All-in-One Architecture (100% Self-Contained)**:
