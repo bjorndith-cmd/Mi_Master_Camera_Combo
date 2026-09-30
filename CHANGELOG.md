@@ -2,6 +2,20 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
+## [v6.1-MIUI14-EU-Stable] - 2026-09-30
+### Added & Specialized for Xiaomi 13 Ultra (`ishtar` / `2304FPN6DC`)
+- **Dedicated MIUI 14 by xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33) Suite by `borndead`**:
+  - **Full Magisk / KernelSU / APatch Module**: [`Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip) (310 MB).
+  - **Direct Standalone APK for Core Patch**: [`Mi13U_Camera_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_by_borndead.apk) (162 MB).
+- **Dual-Partition System & Product Mirroring**:
+  - Solved partition variation in xiaomi.eu builds by mirroring camera assets simultaneously to `/system/priv-app/MiuiCamera/` AND `/system/product/priv-app/MiuiCamera/` with `.replace` markers in both directories. Guarantees 100% clean replacement of stock camera on Android 13.
+- **Core Patch 1-Tap Instant Installation**:
+  - Enabled direct APK upgrade via Core Patch in 5 seconds without rebooting. Fully signed with Android Signature Schemes (v1, v2, v3), `targetSdkVersion 33`, and full companion native libraries.
+- **Complete Master Feature Set Included**:
+  - 6-button zoom in Photo (`0.5x — 1x — 2x — 3.2x — 5x — 10x`) and 5-button zoom in 50MP Ultra HD (`0.5x — 1x — 3.2x — 5x — 10x`).
+  - Pure Optics Engine (natural Leica film rendering without over-sharpening).
+  - DCI-P3 10-bit Ultra HDR, multi-sensor 8K video, 3D Spatial Audio, and Bootloop Saver.
+
 ## [v6.1-MasterFinal-Flagship] - 2026-09-30
 ### Added & Master Upgrades (All Supported Devices: 13U, 14U, 15, 15U, 17U, Universal)
 - **Full Quad-Lens Optical Zoom Expansion (0.5x — 1x — 2x — 3.2x — 5x — 10x)**:
