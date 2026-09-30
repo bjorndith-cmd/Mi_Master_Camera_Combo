@@ -29,7 +29,9 @@
   🚀 <b>Быстрая загрузка релизов в 1 клик (GitHub Releases):</b><br>
   👉 <a href="https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases"><b>https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases</b></a> <i>(также доступно справа на главной странице в блоке <b>Releases</b>)</i><br>
   📢 <b>Официальный Telegram-канал проекта (новости, обсуждения, пресеты):</b><br>
-  👉 <a href="https://t.me/Mi_Master_Camera_Combo"><b>https://t.me/Mi_Master_Camera_Combo</b></a>
+  👉 <a href="https://t.me/Mi_Master_Camera_Combo"><b>https://t.me/Mi_Master_Camera_Combo</b></a><br>
+  📖 <b>Гайды по настройке камеры Leica Master для Xiaomi 13 Ultra:</b><br>
+  👉 <a href="./ADVANCED_SETTINGS_GUIDE_Mi13U.md"><b>Часть 1: Расширенные настройки (Резкость, Шум, Цветовой тон)</b></a> • <a href="./LAB_SETTINGS_GUIDE_Mi13U.md"><b>Часть 2: Лабораторные настройки (Все 50 пунктов меню)</b></a>
 </p>
 
 ---
