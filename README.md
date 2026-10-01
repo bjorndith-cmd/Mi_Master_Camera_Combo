@@ -13,7 +13,7 @@
 
 <p align="center">
   <b>Author / Автор сборки:</b> <code>borndead</code><br>
-  <b>Release / Версия:</b> <code>v6.1-MasterFinal / All-Platform Lineup by borndead</code>
+  <b>Release / Версия:</b> <code>Xiaomi Master Camera Combo 5 v6.2 (All-Platform Lineup by borndead)</code>
 </p>
 
 <p align="center">
@@ -1005,9 +1005,30 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 ### 12. История версий и изменений (Changelog) (RU)
 
-Полная хронология развития проекта, устранённых проблем и архитектурных улучшений:
-
 <details open>
+<summary><b>🛡️ Xiaomi Master Camera Combo 5 v6.2 (01.10.2026) — Архитектурный апдейт: Разблокировка AUX в GCam, Zero-Daemon режим, защита памяти</b></summary>
+
+* **Единый стандарт версионирования по поколению базового APK камеры**:
+  - **`Xiaomi Master Camera Combo 5 v6.2`**: Актуальная флагманская стабильная сборка на проверенной базе камеры 5-й версии (HyperOS Camera APK 5.x).
+  - **`Xiaomi Master Camera Combo 6 v8.2`**: Экспериментальная ветка на новейшей базе камеры 6-й версии (Camera APK 6.8+).
+* **Полная разблокировка дополнительных камер в сторонних приложениях (`PROP_VALUE_MAX < 92`)**:
+  - В предыдущих версиях Android init молча отбрасывал системные свойства `vendor.camera.aux.packagelist`, превышающие 91 символ.
+  - Списки пакетов разделены на строгие подгруппы (`.packagelist` и `.packagelistext`), каждая короче 92 символов.
+  - Теперь Google Камера (AGC, LMC, Shamim, OpenCamera) гарантированно видит сверхширик, 3.2x и 5x перископ без необходимости ручной правки системных файлов.
+* **Нулевой фоновый расход батареи (Zero-Daemon Runtime)**:
+  - Полностью ликвидирован бесконечный фоновый цикл `logcat` в демоне `service.sh`.
+  - Внедрён **Режим диагностики по требованию (On-Demand Diagnostics)**: логи пишутся строго по запросу при наличии файла-триггера `/data/local/tmp/mmc_debug` или `/sdcard/Download/mmc_debug` с безопасными правами `0750`. Исключен нагрев и износ флеш-памяти.
+* **Безопасность ядра и стабильность памяти**:
+  - Из сопутствующих библиотек исключены конфликтующие платформенные аллокаторы (`libdmabufheap.so`, `libion.so`), вызывавшие микрофризы видоискателя на свежих ядрах Android 14/15/16.
+  - В SLIM-редакции удалено избыточное системное отключение `ro.control_privapp_permissions.enforce 0`.
+* **Инсталлятор AI Master Suite и профили устройств**:
+  - Исправлен `update-binary` в AI Suite: полная совместимость с диспетчером Magisk/KernelSU/APatch.
+  - Исправлен алгоритм определения кастомных прошивок в инсталляторе (устранено жадное совпадение regex).
+  - Инсталлятор теперь строго верифицирует поддерживаемую модель и прерывает установку с понятным предупреждением вместо применения некорректного профиля.
+  - Профиль Xiaomi 15 Pro (`haotian`) скорректирован на физический перископ 5x Sony IMX858 и светосилу F1.44.
+</details>
+
+<details>
 <summary><b>🚀 v6.1-MasterFinal (30.09.2026) — Флагманский релиз: DCI-P3 10-бит, Pure Optics, Зум 10x в 50Мп, 8K на всех сенсорах</b></summary>
 
 * **Полная линейка зума 0.5x — 1x — 2x — 3.2x — 5x — 10x в режиме 50Мп и Фото**:
@@ -2039,6 +2060,27 @@ This section provides verified, production-tested solutions for common issues, r
 Complete evolution chronology, architectural milestones, and bug fix logs across all releases:
 
 <details open>
+<summary><b>🛡️ Xiaomi Master Camera Combo 5 v6.2 (2026-10-01) — Architectural Overhaul: AUX Unlocking, Zero-Daemon Runtime & Kernel Protection</b></summary>
+
+* **Standardized Versioning Scheme by Camera APK Base**:
+  - **`Xiaomi Master Camera Combo 5 v6.2`**: Official flagship production release based on the ultra-stable Camera APK 5.x generation.
+  - **`Xiaomi Master Camera Combo 6 v8.2`**: Experimental branch based on Camera APK 6.x / 6.8 generation.
+* **Full Auxiliary Camera Unlocking in GCam (`PROP_VALUE_MAX < 92`)**:
+  - Solved silent drop of `vendor.camera.aux.packagelist` by Android init: split package lists into sub-properties strictly under 92 characters.
+  - Google Camera ports (AGC, LMC, Shamim, OpenCamera) now reliably access ultrawide, 3.2x telephoto, and 5x periscope lenses across all packages.
+* **Zero-Daemon Runtime & Battery Protection**:
+  - Eliminated continuous infinite `logcat` background loops in `service.sh`.
+  - Introduced **On-Demand Diagnostics**: logging snapshots are triggered only via `/data/local/tmp/mmc_debug` or `/sdcard/Download/mmc_debug` flag with secure `0750` permissions. Zero battery drain in standby.
+* **Kernel Allocator & Memory Stability**:
+  - Purged conflicting legacy memory allocators (`libdmabufheap.so`, `libion.so`) from companion libraries to prevent kernel memory allocator conflicts and HAL camera session crashes.
+  - Removed unnecessary system-wide privilege overrides (`ro.control_privapp_permissions.enforce 0`) from SLIM overlays.
+* **AI Suite Installer & Hardware Profile Fixes**:
+  - Fixed `update-binary` in AI Suite for proper Magisk/KernelSU/APatch dispatcher invocation.
+  - Corrected custom ROM detection regex and added strict hardware model validation (installer cleanly aborts on unsupported devices).
+  - Corrected Xiaomi 15 Pro (`haotian`) hardware profile: 5x Sony IMX858 periscope and F1.44 fixed aperture.
+</details>
+
+<details>
 <summary><b>🔥 v5.9-Production-Cleanup (2026-09-24) — Obsolete Asset Purge (~1.44 GB Freed) & Pipeline Optimization</b></summary>
 
 * **Major Storage & Repository Cleanup (~1.44 GB Freed)**:

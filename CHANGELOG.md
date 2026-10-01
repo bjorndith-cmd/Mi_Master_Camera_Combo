@@ -2,8 +2,12 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
-## [v6.2-Security-Overhaul] - 2026-10-01
-### Security & Portability Overhaul by `borndead`
+## [Xiaomi Master Camera Combo 5 v6.2] - 2026-10-01
+### Security, Performance & Naming Scheme Overhaul by `borndead`
+- **Standardized Versioning Scheme by Camera APK Base**:
+  - Adopted clear major prefix denoting the underlying Xiaomi Camera APK base generation:
+    - **`Xiaomi Master Camera Combo 5 v6.2`**: Built on the ultra-stable Camera APK 5.x base.
+    - **`Xiaomi Master Camera Combo 6 v8.2`**: Dedicated to experimental Camera APK 6.x / 6.8 base ports.
 - **Codebase Portability & Cross-Platform CI/CD Architecture**:
   - All build scripts, packaging pipelines, and verification tools converted to dynamic, relocatable relative paths supporting seamless multi-platform execution across any environment, Docker, and GitHub Actions runners.
   - Hardened cryptographic signing pipeline with secure environment variable pass-through (`KEYSTORE_PATH`, `KEYSTORE_PASS`) and comprehensive repository security rules.
@@ -22,7 +26,6 @@ All notable changes to the **Xiaomi Master Camera Combo** project will be docume
   - Fixed Xiaomi 15 Pro (`haotian`) hardware profile mapping: corrected to 5x Sony IMX858 periscope and fixed F1.44 aperture instead of dada's 3.2x JN5 profile.
   - Fixed Custom ROM detection regex: eliminated greedy `*st*` matching that erroneously wiped `MiuiCamera.apk` on stock builds.
 - **CI/CD Security & Automated QA**:
-  - Patched GitHub Actions Telegram Notification workflow against shell template injection.
   - Added `.github/workflows/ci.yml` running automated strict verification on all pushes and PRs.
   - Introduced unified `tools/verify.py` and `tools/patch_release_modules.py`.
 
