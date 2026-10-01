@@ -1,0 +1,57 @@
+name: Publish Release Announcement to Telegram
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Announcement
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TG_TOKEN" ] || [ -z "$TG_CHAT" ]; then
+            echo "Secrets not configured, skipping."
+            exit 0
+          fi
+
+          python3 -c '
+          import os, json, urllib.request
+
+          token = os.environ.get("TG_TOKEN", "").strip().strip("\"'\''")
+          chat_id = os.environ.get("TG_CHAT", "").strip().strip("\"'\''")
+
+          if not chat_id.startswith("@") and not chat_id.startswith("-"):
+              if "t.me/" in chat_id:
+                  chat_id = "@" + chat_id.split("t.me/")[-1].strip("/")
+              else:
+                  chat_id = "@" + chat_id
+
+          text = """📸⚡️ <b>ОФИЦИАЛЬНЫЙ РЕЛИЗ: Xiaomi Master Camera Combo 5 v6.2!</b>\n\n<b>Автор сборки:</b> @borndead\n<b>База приложения:</b> Xiaomi Leica Camera APK 5-й серии (HyperOS 5.x)\n<b>Совместимость:</b> Xiaomi 13 Ultra, 14 Ultra, 15 / 15 Pro, 15 Ultra, 17 Ultra и вся линейка Universal\n<b>Платформы:</b> Magisk 25.0+ / KernelSU / KernelSU-Next / APatch\n<b>Поддерживаемые ОС:</b> HyperOS 1.0 – 4.0 • MIUI 14 • Android 13 – 17 (API 33–37)\n\nВстречайте масштабное архитектурное обновление модулей Master Camera Combo! Начиная с этого релиза, в проекте действует прозрачная система нумерации: цифра сразу после названия указывает поколение базовой камеры (версия 5 v6.2 построена на ультра-стабильной базе 5-й серии, а экспериментальная ветка камеры 6.8 получит индекс 6 v8.2).\n\n🔥 <b>ЧТО НОВОГО В СБОРКЕ 5 v6.2:</b>\n\n1️⃣ <b>Полная разблокировка доп. объективов в сторонних камерах (PROP_VALUE_MAX &lt; 92)</b>\nВ прошлых версиях Android init отбрасывал системные списки пакетов длиннее 91 символа. Мы разделили параметры на подгруппы: теперь Google Камера (AGC, LMC, Shamim, OpenCamera) гарантированно видит сверхширик, 3.2x и 5x перископ без плясок с бубном!\n\n2️⃣ <b>Нулевой жор аккумулятора (Zero-Daemon Runtime)</b>\nФоновый демон logcat полностью отключён! Логирование переведено в режим On-Demand: система не расходует батарею в простое, нет нагрева процессора и износа памяти UFS.\n\n3️⃣ <b>Защита ядра и стабильность памяти</b>\nУдалены конфликтующие платформенные аллокаторы памяти (libdmabufheap.so, libion.so), вызывавшие сбои и микрофризы видоискателя на современных ядрах Android 14/15/16.\n\n4️⃣ <b>Исправление установщика AI Master Suite</b>\nВосстановлен запуск через диспетчер Magisk/KernelSU/APatch, исправлено определение кастомных прошивок и скорректирован профиль оптики для Xiaomi 15 Pro (haotian — честный 5x перископ IMX858 и диафрагма F1.44).\n\n5️⃣ <b>Защита от установки на несовместимые аппараты</b>\nИнсталлятор строго проверяет поддерживаемое оборудование и прерывает процесс при несовместимости, защищая телефон от бутлупа.\n\n📦 <b>СКАЧАТЬ МОДУЛИ И РЕЛИЗ:</b>\n👉 <a href=\"https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases/latest\">GitHub Release (Latest)</a>\n👉 <a href=\"https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo\">Репозиторий проекта</a>\n\n💬 <b>Официальный чат и поддержка:</b> @Mi_Master_Camera_Combo\n<i>Создано с душой для мобильных фотографов by borndead ❤️</i>"""
+
+          url = f"https://api.telegram.org/bot{token}/sendMessage"
+          payload = {
+              "chat_id": chat_id,
+              "text": text,
+              "parse_mode": "HTML",
+              "disable_web_page_preview": False
+          }
+          req = urllib.request.Request(
+              url,
+              data=json.dumps(payload).encode("utf-8"),
+              headers={"Content-Type": "application/json"}
+          )
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  res = json.loads(resp.read().decode())
+                  if res.get("ok"):
+                      print("Announcement published to Telegram successfully!")
+                  else:
+                      print("Response:", res)
+          except Exception as e:
+              print("Status:", e)
+          '
