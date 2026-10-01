@@ -44,7 +44,7 @@ DANGEROUS_PERMS = [
 
 # Generic patterns to detect non-portable host paths and exposed credentials
 HARDCODED_HOST_PATH_REGEX = re.compile(
-    r'(?:[A-Za-z]:[\\/](?:Users|Users[\\/]|home)|OneDrive|pass:[a-zA-Z0-9_]+123)',
+    r'(?:[A-Za-z]:[\\/](?:Users|home)|(?:storepass|keypass)\s*[:=]\s*[\'"][^\'"]+[\'"])',
     re.IGNORECASE
 )
 

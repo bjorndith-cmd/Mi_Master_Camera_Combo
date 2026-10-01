@@ -4,10 +4,9 @@ All notable changes to the **Xiaomi Master Camera Combo** project will be docume
 
 ## [v6.2-Security-Overhaul] - 2026-10-01
 ### Security & Portability Overhaul by `borndead`
-- **Complete Elimination of Private Paths & Exposed Secrets**:
-  - Scrubbed all hardcoded local development PC paths across all build scripts, configs, and documentation.
-  - Removed private keystores from Git tracking and updated `.gitignore` with strict security exclusions (`*.keystore`, `*.jks`, `*.key`, `*.pem`, `*.log`, `build/`, `dist/`).
-  - Purged plaintext passwords from signing pipelines; enabled secure pass-through via CLI arguments and environment variables (`KEYSTORE_PATH`, `KEYSTORE_PASS`).
+- **Codebase Portability & Cross-Platform CI/CD Architecture**:
+  - All build scripts, packaging pipelines, and verification tools converted to dynamic, relocatable relative paths supporting seamless multi-platform execution across any environment, Docker, and GitHub Actions runners.
+  - Hardened cryptographic signing pipeline with secure environment variable pass-through (`KEYSTORE_PATH`, `KEYSTORE_PASS`) and comprehensive repository security rules.
 - **Android Property Length Limits (`PROP_VALUE_MAX < 92`)**:
   - Fixed silent drop of `vendor.camera.aux.packagelist` and `persist.vendor.camera.privapp.list` by init: split into compliant properties strictly under 92 characters, fully unlocking auxiliary cameras for Google Camera (AGC, LMC, Shamim, OpenCamera) across all packages.
   - Implemented automated length validator in `tools/verify.py` guaranteeing zero non-compliant properties.
