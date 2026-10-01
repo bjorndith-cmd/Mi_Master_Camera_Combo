@@ -154,30 +154,30 @@
 #### 🌐 Универсальные комбайны для всей линейки (13U, 14U, 15, 15 Pro, 15U, 17U)
 | Модуль | Размер | Тип | Описание |
 |---|---|---|---|
-| **[`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip)** | **195.1 МБ** | **FULL (Monolith)** | **Универсальный полный монолит All-in-One**. Включает оригинальный Leica Camera v5 APK, авто-определение любого устройства линейки (13U, 14U, 15, 15 Pro, 15U, 17U), все аппаратные калибровки Chromatix, 50M/200M FullRes, George Video 8K/4K120fps, DCG HDR, защиту `oat/.replace`, встроенный комплекс Tri-Tier AI (AISP NPU + HyperAI ExtraPhoto + AI Director), бустер `libperformance.so` и оверлеи под KernelSU & Magisk. |
-| **[`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip)** | **36.6 МБ** | **SLIM** | **Универсальный чистый оверлей (без APK)**. 100% безопасность на любых прошивках. Включает калибровки под все 5 моделей, 50M/200M, 8K видео и DCG HDR. |
+| **[`Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip)** | **195.1 МБ** | **FULL (Monolith)** | **Универсальный полный монолит All-in-One**. Включает оригинальный Leica Camera v5 APK, авто-определение любого устройства линейки (13U, 14U, 15, 15 Pro, 15U, 17U), все аппаратные калибровки Chromatix, 50M/200M FullRes, George Video 8K/4K120fps, DCG HDR, защиту `oat/.replace`, встроенный комплекс Tri-Tier AI (AISP NPU + HyperAI ExtraPhoto + AI Director), бустер `libperformance.so` и оверлеи под KernelSU & Magisk. |
+| **[`Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip)** | **36.6 МБ** | **SLIM** | **Универсальный чистый оверлей (без APK)**. 100% безопасность на любых прошивках. Включает калибровки под все 5 моделей, 50M/200M, 8K видео и DCG HDR. |
 
 #### 📱 Специализированные модули по моделям
 
 | Модель | Версия FULL (All-in-One Monolith) | Версия SLIM (чистый оверлей без APK) | Особенности профиля |
 |---|---|---|---|
-| **Xiaomi 13 Ultra (MIUI 14 EU)** (`ishtar`) | **[`Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip)** (310 МБ)<br>📦 *Прямой APK (Core Patch):* **[`Mi13U_Camera_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_by_borndead.apk)** (162 МБ) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (28.9 КБ) | **Специальная сборка для MIUI 14 xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33)**. Двойное зеркалирование разделов `/system/priv-app` и `/product/priv-app` (100% замена стоковой камеры), 57 companion-библиотек, зум `0.5x, 1x, 2x, 3.2x, 5x, 10x`, поддержка установки через Core Patch в 1 клик. |
-| **Xiaomi 13 Ultra (HyperOS)** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_Full_by_borndead.zip)** (155.6 МБ) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (28.9 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), физическая диафрагма F1.9 ⟷ F4.0, George Video 8K/4K120, DCG HDR, калибровки IMX989/IMX858, встроенный Tri-Tier AI (AISP + ExtraPhoto GenAI + Director), авторские пресеты оптики (Pure Optics, 35mm, UDR), 100% Anti-Bootloop и KernelSU OverlayFS совместимость. |
-| **Xiaomi 14 Ultra** (`aurora`) | **[`Mi14U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Camera_Combo_Full_by_borndead.zip)** (155.3 МБ) | **[`Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.0 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), бесступенчатая переменная диафрагма F1.63–F4.0, 1" Sony LYT-900, George Video 8K/4K120, DCG Hardware HDR, встроенный Tri-Tier AI, обход облачной обработки, KernelSU & Magisk multi-partition. |
-| **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Camera_Combo_Full_by_borndead.zip)** (170.1 МБ) | **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.9 МБ) | Кастомные калибровки OVX10500U/HP9/JN5, 200Мп FullRes + SuperResolution, DCG HDR, 8K все линзы, 4K120fps, видео-кодек `libqcodec2_v4l2codec.so`, встроенный Tri-Tier AI *(для SimpleRom ST без Leica доступен [SimpleRom_ST](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
-| **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip)** (174.3 МБ) | **[`Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip)** (17.4 МБ) | Официальные калибровки Stock AIO 104 для 1" Sony LYT-900 и 200Мп Samsung HP9 (`16384x12288`), нативный A16 HAL, ночной режим SmartAE LN2, бесступенчатая диафрагма F1.63–F4.0, встроенный Tri-Tier AI. |
-| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (161.1 МБ) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.2 МБ) | Калибровки Light Hunter 900, 50Мп FullRes на 1.0x (на 15) и на всех линзах (на 15 Pro), DCG HDR, встроенный Tri-Tier AI, George 8K Video. |
+| **Xiaomi 13 Ultra (MIUI 14 EU)** (`ishtar`) | **[`Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip)** (310 МБ)<br>📦 *Прямой APK (Core Patch):* **[`Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk)** (162 МБ) | **[`Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (28.9 КБ) | **Специальная сборка для MIUI 14 xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33)**. Двойное зеркалирование разделов `/system/priv-app` и `/product/priv-app` (100% замена стоковой камеры), 57 companion-библиотек, зум `0.5x, 1x, 2x, 3.2x, 5x, 10x`, поддержка установки через Core Patch в 1 клик. |
+| **Xiaomi 13 Ultra (HyperOS)** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (155.6 МБ) | **[`Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (28.9 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), физическая диафрагма F1.9 ⟷ F4.0, George Video 8K/4K120, DCG HDR, калибровки IMX989/IMX858, встроенный Tri-Tier AI (AISP + ExtraPhoto GenAI + Director), авторские пресеты оптики (Pure Optics, 35mm, UDR), 100% Anti-Bootloop и KernelSU OverlayFS совместимость. |
+| **Xiaomi 14 Ultra** (`aurora`) | **[`Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (155.3 МБ) | **[`Mi14U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (5.0 КБ) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), бесступенчатая переменная диафрагма F1.63–F4.0, 1" Sony LYT-900, George Video 8K/4K120, DCG Hardware HDR, встроенный Tri-Tier AI, обход облачной обработки, KernelSU & Magisk multi-partition. |
+| **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (170.1 МБ) | **[`X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (13.9 МБ) | Кастомные калибровки OVX10500U/HP9/JN5, 200Мп FullRes + SuperResolution, DCG HDR, 8K все линзы, 4K120fps, видео-кодек `libqcodec2_v4l2codec.so`, встроенный Tri-Tier AI *(для SimpleRom ST без Leica доступен [SimpleRom_ST](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
+| **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (174.3 МБ) | **[`Mi15U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (17.4 МБ) | Официальные калибровки Stock AIO 104 для 1" Sony LYT-900 и 200Мп Samsung HP9 (`16384x12288`), нативный A16 HAL, ночной режим SmartAE LN2, бесступенчатая диафрагма F1.63–F4.0, встроенный Tri-Tier AI. |
+| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (161.1 МБ) | **[`Mi15_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (5.2 МБ) | Калибровки Light Hunter 900, 50Мп FullRes на 1.0x (на 15) и на всех линзах (на 15 Pro), DCG HDR, встроенный Tri-Tier AI, George 8K Video. |
 
 ---
 
 #### 🤖 Комплекс искусственного интеллекта (AI Suite All-In-One — опциональный аддон)
 
 > [!NOTE]
-> Все функции Tri-Tier AI (AISP NPU, ExtraPhoto GenAI и AI Director) **уже полностью встроены** во все модули FULL Edition выше! Данный отдельный архив `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` сохранён исключительно для пользователей **SLIM Edition** или для тех, кто хочет активировать функции ИИ в стоковой Галерее без замены камеры.
+> Все функции Tri-Tier AI (AISP NPU, ExtraPhoto GenAI и AI Director) **уже полностью встроены** во все модули FULL Edition выше! Данный отдельный архив `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip` сохранён исключительно для пользователей **SLIM Edition** или для тех, кто хочет активировать функции ИИ в стоковой Галерее без замены камеры.
 
 | Модуль | Размер | Уровень | Описание |
 |---|---|---|---|
-| 🌟 **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** | **4.08 КБ** | **All-In-One (Standalone Addon)** | **Автономный пакет для SLIM/Сток прошивок**. Содержит аппаратный AISP NPU (Tier 1: FusionLM, ToneLM, ColorLM, CyberFocus 2.0), генеративную фотолабораторию HyperAI Studio (Tier 2: AI Ластик Pro, Outpainting, AI Небо 3.0) и ассистент видоискателя AI Director (Tier 3: Vision HUD, золотое сечение, горизонт ±0.1°). 100% оффлайн, установка в один клик. |
+| 🌟 **[`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip)** | **4.08 КБ** | **All-In-One (Standalone Addon)** | **Автономный пакет для SLIM/Сток прошивок**. Содержит аппаратный AISP NPU (Tier 1: FusionLM, ToneLM, ColorLM, CyberFocus 2.0), генеративную фотолабораторию HyperAI Studio (Tier 2: AI Ластик Pro, Outpainting, AI Небо 3.0) и ассистент видоискателя AI Director (Tier 3: Vision HUD, золотое сечение, горизонт ±0.1°). 100% оффлайн, установка в один клик. |
 
 ### 4. Готовые пресеты конфигураций GCam (.agc) (RU)
 
@@ -270,7 +270,7 @@
 > [!WARNING]
 > #### 🛑 ЗОЛОТОЕ ПРАВИЛО СОВМЕСТИМОСТИ ДЛЯ HYPEROS 4:
 > * **FULL Edition (с заменой APK камеры)**: **СТРОГО ЗАПРЕЩЕН К УСТАНОВКЕ**. В пакет FULL встроен системный APK `MiuiCamera.apk`, скомпилированный для HyperOS 3.0 (Android 16). При установке на новую мажорную операционную систему HyperOS 4 несовместимость структуры `cameraserver`, AIDL-интерфейсов и ключей подписи платформы гарантированно приведёт к циклическому падению камеры (Force Close) или фатальному бутлупу (`SignatureMismatchException`).
-> * **SLIM Edition ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip))**: **ПОЛНОСТЬЮ БЕЗОПАСЕН И РЕКОМЕНДОВАН К ТЕСТИРОВАНИЮ**.
+> * **SLIM Edition ([`X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip))**: **ПОЛНОСТЬЮ БЕЗОПАСЕН И РЕКОМЕНДОВАН К ТЕСТИРОВАНИЮ**.
 
 ##### Почему SLIM Edition безопасен и работает на HyperOS 4:
 1. **0% вмешательства в системные приложения**: SLIM-модуль не содержит системного APK (`rm -rf $MODPATH/system/priv-app/MiuiCamera`), не трогает odex/vdex кэш виртуальной машины ART и оставляет родную стоковую камеру HyperOS 4 абсолютно нетронутой.
@@ -284,7 +284,7 @@
 
 ##### Порядок безопасного тестирования на HyperOS 4:
 1. **Шаг 1**: Обязательно установите сторожевой модуль **[Simple BootloopSaver](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver)** в Magisk / KernelSU / APatch.
-2. **Шаг 2**: Скачайте и прошейте архив **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 МБ) либо универсальный `Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`.
+2. **Шаг 2**: Скачайте и прошейте архив **[`X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (13.85 МБ) либо универсальный `Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip`.
 3. **Шаг 3**: Перезагрузите устройство.
 4. **Шаг 4 (Обязательно)**: Очистите данные приложения Камера (*Настройки ➔ Приложения ➔ Камера ➔ Очистить всё*), чтобы пересоздался локальный кэш параметров.
 5. **Шаг 5**: Для максимального раскрытия сенсоров в Google Камере используйте готовый конфиг **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)**.
@@ -327,7 +327,7 @@
 
 #### 6.1. Tier 1: Аппаратный ИИ вычислительной фотографии (Xiaomi AISP на NPU Snapdragon) (RU)
 
-Модуль: **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** (3.10 КБ)
+Модуль: **[`Mi_AI_Master_Imaging_AISP_Hardware_5_v6.2_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_5_v6.2_by_borndead.zip)** (3.10 КБ)
 
 * **Что это такое**: Аппаратный пайплайн нейросетевой вычислительной фотографии, выполняющийся в микросекунды непосредственно в момент нажатия на кнопку затвора. Все вычисления производятся локально на NPU Hexagon и ISP Spectra.
 * **Архитектура 4-LM (Large Models)**:
@@ -353,7 +353,7 @@
 
 #### 6.2. Tier 2: Генеративный ИИ постобработки (HyperAI Studio & ExtraPhoto) (RU)
 
-Модуль: **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** (3.12 КБ)
+Модуль: **[`Mi_AI_Studio_GenAI_ExtraPhoto_5_v6.2_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_5_v6.2_by_borndead.zip)** (3.12 КБ)
 
 * **Что это такое**: Комплекс генеративных инструментов, доступных в один клик прямо из превью только что снятого кадра в камере (`com.android.camera` ➔ `com.miui.extraphoto`).
 * **Ключевые генеративные инструменты**:
@@ -371,7 +371,7 @@
 
 #### 6.3. Tier 3: AI-Ассистент видоискателя (AI Director & Vision HUD) (RU)
 
-Модуль: **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** (2.68 КБ)
+Модуль: **[`Mi_AI_Director_Vision_Companion_5_v6.2_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_5_v6.2_by_borndead.zip)** (2.68 КБ)
 
 * **Что это такое**: Интеллектуальный помощник фотографа, встроенный прямо в видоискатель камеры Leica. Работает в реальном времени, помогая выстроить композицию шедеврального уровня.
 * **Возможности AI Director**:
@@ -407,13 +407,13 @@
 - В итоге, независимо от того, в каком порядке Magisk или KernelSU монтирует оверлеи, Android получает **целостный файл со всеми активными функциями всех установленных модулей**!
 
 ##### 3. Полный комбайн «Всё в одном» (All-In-One Edition)
-Если вы не хотите устанавливать три модуля по отдельности, используйте **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** (4.11 КБ). Он объединяет все возможности Tier 1, Tier 2 и Tier 3 в едином модуле с установкой в один клик.
+Если вы не хотите устанавливать три модуля по отдельности, используйте **[`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip)** (4.11 КБ). Он объединяет все возможности Tier 1, Tier 2 и Tier 3 в едином модуле с установкой в один клик.
 
 ---
 
 #### 6.5. Практическое руководство: Почему All-In-One не добавляет лишних кнопок в видоискатель и как активировать/использовать все функции ИИ (RU)
 
-Многие пользователи после установки модуля **`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`** открывают камеру и ожидают увидеть десятки новых громоздких кнопок прямо поверх видоискателя, но видят привычный чистый интерфейс Leica. **Это не ошибка, а продуманная инженерная архитектура!**
+Многие пользователи после установки модуля **`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`** открывают камеру и ожидают увидеть десятки новых громоздких кнопок прямо поверх видоискателя, но видят привычный чистый интерфейс Leica. **Это не ошибка, а продуманная инженерная архитектура!**
 
 Искусственный интеллект в смартфонах Xiaomi разделен на три функциональные зоны, и ни одна из них не должна загромождать кадр лишними элементами:
 
@@ -578,8 +578,8 @@
 
 #### 8.4. 📦 Шаг 2: Прошивка модуля в Magisk / KernelSU / APatch
 1. Скачайте нужный zip-архив из раздела [**GitHub Releases**](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases) или таблицы в [Разделе 3](#3-таблица-модулей-и-ссылки-на-загрузку-ru):
-   - **Xiaomi 13 Ultra:** `Mi13U_Master_Camera_Combo_Full_by_borndead.zip` (для кастомов/CorePatch) или `Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip` (для стока).
-   - **Xiaomi 14 Ultra:** `Mi14U_Master_Camera_Combo_Full_by_borndead.zip` или `Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip`.
+   - **Xiaomi 13 Ultra:** `Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip` (для кастомов/CorePatch) или `Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip` (для стока).
+   - **Xiaomi 14 Ultra:** `Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip` или `Mi14U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`.
    - **Xiaomi 15 / 15 Pro:** `Mi15_Master_Camera_Combo_Full...` / `Mi15U_Master_Camera_Combo_Full...` или соответствующие Slim-версии.
    - **Xiaomi 17 Ultra:** `X17U_Master_Camera_Combo_Full...` или `X17U_Master_Imaging_MOD_Slim...`.
    - **Универсальные архивы:** `Mi_Master_Camera_Combo_Universal_Full...` / `..._Universal_Slim...`.
@@ -923,7 +923,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 
 #### ❓ В7: Совместимы ли модули AI Suite (Tier 1, Tier 2, Tier 3) с FULL и SLIM версиями?
 > **О: Да, на 100% совместимы!**  
-> Модули искусственного интеллекта работают на разных уровнях системы: Tier 1 активирует вычисления на NPU-чипе Hexagon, Tier 2 расширяет фоторедактор ExtraPhoto в Галерее, а Tier 3 добавляет виртуального ассистента в видоискатель. Они не перезаписывают одни и те же файлы и могут использоваться как по отдельности, так и через единый комбайн `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`.
+> Модули искусственного интеллекта работают на разных уровнях системы: Tier 1 активирует вычисления на NPU-чипе Hexagon, Tier 2 расширяет фоторедактор ExtraPhoto в Галерее, а Tier 3 добавляет виртуального ассистента в видоискатель. Они не перезаписывают одни и те же файлы и могут использоваться как по отдельности, так и через единый комбайн `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`.
 
 ---
 
@@ -1076,7 +1076,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 * **Smart Multi-Module Synchronization**:
   - Интеллектуальный механизм объединения системных файлов в `customize.sh`, исключающий конфликты OverlayFS при одновременной установке с модулями FULL/SLIM.
 * **Единый комбайн All-In-One**:
-  - Выпущен пакет `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` (4 КБ), объединяющий все три уровня с нулевым риском бутлупа.
+  - Выпущен пакет `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip` (4 КБ), объединяющий все три уровня с нулевым риском бутлупа.
 </details>
 
 <details>
@@ -1126,7 +1126,7 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
   - Восстановлены genuine Chromatix-профили для сенсоров OVX10500U, HP9, JN5 и OV50M.
   - Внедрён детектор кастомных прошивок (`IS_CUSTOM_ROM`) в `customize.sh`, сохраняющий деодексированный стоковый APK.
 * **Выпуск модуля от розового шума**:
-  - Собран `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip` для устранения розовой заливки в Ultra RAW через 100% локальную обработку на Snapdragon 8 Elite.
+  - Собран `X17U_Master_Imaging_MOD_5_v6.2_SimpleRom_ST_NonLeica_by_borndead.zip` для устранения розовой заливки в Ultra RAW через 100% локальную обработку на Snapdragon 8 Elite.
   - Добавлен релиз `X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`.
 </details>
 
@@ -1287,29 +1287,29 @@ Modules are organized into two distinct, production-ready tiers:
 #### 🌐 Universal Multi-Device Packages (13U, 14U, 15, 15 Pro, 15U, 17U)
 | Module Package | Size | Tier | Description |
 |---|---|---|---|
-| **[`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip)** | **195.1 MB** | **FULL (Monolith)** | **Universal All-in-One Monolith Flagship Suite**. Includes original Leica Camera v5 APK, dynamic multi-device hardware detection (13U, 14U, 15, 15 Pro, 15U, 17U), Chromatix tunings for all 5 phones, 50M/200M FullRes, George 8K/4K120, DCG HDR, `oat/.replace` protection, integrated Tri-Tier AI Suite (AISP NPU + HyperAI ExtraPhoto + AI Director), `libperformance.so` booster, and KernelSU/Magisk multi-partition overlay. |
-| **[`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip)** | **36.6 MB** | **SLIM** | **Universal Pure Systemless Overlay (No APK)**. 100% safe on any ROM. Injects Chromatix sensor profiles for all 5 devices, 50M/200M, 8K video, and DCG HDR without touching the Camera APK. |
+| **[`Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip)** | **195.1 MB** | **FULL (Monolith)** | **Universal All-in-One Monolith Flagship Suite**. Includes original Leica Camera v5 APK, dynamic multi-device hardware detection (13U, 14U, 15, 15 Pro, 15U, 17U), Chromatix tunings for all 5 phones, 50M/200M FullRes, George 8K/4K120, DCG HDR, `oat/.replace` protection, integrated Tri-Tier AI Suite (AISP NPU + HyperAI ExtraPhoto + AI Director), `libperformance.so` booster, and KernelSU/Magisk multi-partition overlay. |
+| **[`Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip)** | **36.6 MB** | **SLIM** | **Universal Pure Systemless Overlay (No APK)**. 100% safe on any ROM. Injects Chromatix sensor profiles for all 5 devices, 50M/200M, 8K video, and DCG HDR without touching the Camera APK. |
 
 #### 📱 Dedicated Per-Device Packages
 
 | Target Hardware | FULL Edition (All-in-One Monolith) | SLIM Edition (Pure Overlay - No APK) | Highlights |
-| **Xiaomi 13 Ultra (MIUI 14 EU)** (`ishtar`) | **[`Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip)** (310 MB)<br>📦 *Direct Standalone APK (Core Patch):* **[`Mi13U_Camera_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_by_borndead.apk)** (162 MB) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (28.9 KB) | **Dedicated edition for MIUI 14 xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33)**. Dual-partition mirroring for `/system/priv-app` and `/product/priv-app` (100% clean replacement of stock camera), 57 companion libraries, 6-button zoom `0.5x, 1x, 2x, 3.2x, 5x, 10x`, instant 1-click install via Core Patch. |
-| **Xiaomi 13 Ultra (HyperOS)** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_Full_by_borndead.zip)** (155.6 MB) | **[`Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip)** (28.9 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), physical aperture F1.9 ⟷ F4.0, George Video 8K/4K120, DCG HDR, IMX989/IMX858 tunings, built-in Tri-Tier AI (AISP + ExtraPhoto GenAI + Director), author optics presets (Pure Optics, 35mm, UDR), 100% Anti-Bootloop and KernelSU OverlayFS compatibility. |
-| **Xiaomi 14 Ultra** (`aurora`) | **[`Mi14U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Camera_Combo_Full_by_borndead.zip)** (155.3 MB) | **[`Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.0 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), stepless variable physical aperture F1.63-F4.0, 1" Sony LYT-900, George Video 8K/4K120, DCG Hardware HDR, built-in Tri-Tier AI, offline processing bypass, KernelSU & Magisk multi-partition. |
-| **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Camera_Combo_Full_by_borndead.zip)** (170.1 MB) | **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.9 MB) | Dedicated OVX10500U/HP9/JN5 Chromatix tunings, 200MP FullRes + SuperResolution, DCG HDR, 8K all lenses, 4K120fps, video codec `libqcodec2_v4l2codec.so`, built-in Tri-Tier AI *(for SimpleRom ST without Leica see [SimpleRom_ST](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
-| **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip)** (174.3 MB) | **[`Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip)** (17.4 MB) | Official Stock AIO 104 Chromatix tunings for 1" Sony LYT-900 & 200MP Samsung HP9 (`16384x12288`), native A16 HAL, SmartAE LN2 night mode, stepless aperture F1.63-F4.0, built-in Tri-Tier AI. |
-| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip)** (161.1 MB) | **[`Mi15_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Imaging_MOD_Slim_by_borndead.zip)** (5.2 MB) | Light Hunter 900 tunings, 50MP FullRes on 1.0x (for 15) and all rear lenses (for 15 Pro), DCG HDR, built-in Tri-Tier AI, George 8K Video. |
+| **Xiaomi 13 Ultra (MIUI 14 EU)** (`ishtar`) | **[`Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip)** (310 MB)<br>📦 *Direct Standalone APK (Core Patch):* **[`Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk)** (162 MB) | **[`Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (28.9 KB) | **Dedicated edition for MIUI 14 xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33)**. Dual-partition mirroring for `/system/priv-app` and `/product/priv-app` (100% clean replacement of stock camera), 57 companion libraries, 6-button zoom `0.5x, 1x, 2x, 3.2x, 5x, 10x`, instant 1-click install via Core Patch. |
+| **Xiaomi 13 Ultra (HyperOS)** (`ishtar`) | **[`Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (155.6 MB) | **[`Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (28.9 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), physical aperture F1.9 ⟷ F4.0, George Video 8K/4K120, DCG HDR, IMX989/IMX858 tunings, built-in Tri-Tier AI (AISP + ExtraPhoto GenAI + Director), author optics presets (Pure Optics, 35mm, UDR), 100% Anti-Bootloop and KernelSU OverlayFS compatibility. |
+| **Xiaomi 14 Ultra** (`aurora`) | **[`Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (155.3 MB) | **[`Mi14U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (5.0 KB) | Quad-50M (`0.5x:1.0x:3.2x:5.0x`), stepless variable physical aperture F1.63-F4.0, 1" Sony LYT-900, George Video 8K/4K120, DCG Hardware HDR, built-in Tri-Tier AI, offline processing bypass, KernelSU & Magisk multi-partition. |
+| **Xiaomi 17 Ultra** (`nezha`) | **[`X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (170.1 MB) | **[`X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (13.9 MB) | Dedicated OVX10500U/HP9/JN5 Chromatix tunings, 200MP FullRes + SuperResolution, DCG HDR, 8K all lenses, 4K120fps, video codec `libqcodec2_v4l2codec.so`, built-in Tri-Tier AI *(for SimpleRom ST without Leica see [SimpleRom_ST](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_SimpleRom_ST_NonLeica_by_borndead.zip))*. |
+| **Xiaomi 15 Ultra** (`xuanyuan`) | **[`Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (174.3 MB) | **[`Mi15U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (17.4 MB) | Official Stock AIO 104 Chromatix tunings for 1" Sony LYT-900 & 200MP Samsung HP9 (`16384x12288`), native A16 HAL, SmartAE LN2 night mode, stepless aperture F1.63-F4.0, built-in Tri-Tier AI. |
+| **Xiaomi 15 / 15 Pro** (`dada`/`haotian`) | **[`Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip)** (161.1 MB) | **[`Mi15_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (5.2 MB) | Light Hunter 900 tunings, 50MP FullRes on 1.0x (for 15) and all rear lenses (for 15 Pro), DCG HDR, built-in Tri-Tier AI, George 8K Video. |
 
 ---
 
 #### 🤖 Dedicated Artificial Intelligence Suite (AI Suite All-In-One — Optional Addon)
 
 > [!NOTE]
-> All Tri-Tier AI features (AISP NPU, ExtraPhoto GenAI, and AI Director) are **already fully integrated** into all FULL Edition modules above! This standalone archive `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` is maintained solely for **SLIM Edition** users or those wishing to unlock AI studio features in stock Gallery without replacing their Camera app.
+> All Tri-Tier AI features (AISP NPU, ExtraPhoto GenAI, and AI Director) are **already fully integrated** into all FULL Edition modules above! This standalone archive `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip` is maintained solely for **SLIM Edition** users or those wishing to unlock AI studio features in stock Gallery without replacing their Camera app.
 
 | Module Package | Size | Tier | Description |
 |---|---|---|---|
-| 🌟 **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** | **4.08 KB** | **All-In-One (Standalone Addon)** | **Standalone package for SLIM/Stock ROMs**. Includes AISP Hardware NPU (Tier 1: FusionLM, ToneLM, ColorLM, CyberFocus 2.0), HyperAI Studio Generative Suite (Tier 2: AI Eraser Pro, Outpainting, AI Sky 3.0), and AI Director Viewfinder HUD (Tier 3: Vision HUD, golden ratio, horizon ±0.1°). 100% offline, single-click install with zero layer conflicts. |
+| 🌟 **[`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip)** | **4.08 KB** | **All-In-One (Standalone Addon)** | **Standalone package for SLIM/Stock ROMs**. Includes AISP Hardware NPU (Tier 1: FusionLM, ToneLM, ColorLM, CyberFocus 2.0), HyperAI Studio Generative Suite (Tier 2: AI Eraser Pro, Outpainting, AI Sky 3.0), and AI Director Viewfinder HUD (Tier 3: Vision HUD, golden ratio, horizon ±0.1°). 100% offline, single-click install with zero layer conflicts. |
 
 ### 4. Ready-to-Use GCam Config Presets (.agc) (EN)
 
@@ -1410,7 +1410,7 @@ If you plan to test modules on upcoming developer builds, closed betas, or futur
 > [!WARNING]
 > #### 🛑 CRITICAL COMPATIBILITY RULE FOR HYPEROS 4:
 > * **FULL Edition (with Leica Camera APK)**: **STRICTLY PROHIBITED**. Bundles `MiuiCamera.apk` compiled against HyperOS 3.0 (Android 16). Flashing an older Camera APK across major OS generations causes fatal `SignatureMismatchException` crashes and system bootloops.
-> * **SLIM Edition ([`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip))**: **100% SAFE AND RECOMMENDED FOR TESTING**.
+> * **SLIM Edition ([`X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip))**: **100% SAFE AND RECOMMENDED FOR TESTING**.
 
 ##### Why SLIM Edition is Safe and Works on HyperOS 4:
 1. **Zero System Application Overwrite**: SLIM does not include `system/priv-app/MiuiCamera`, leaves native odex/vdex caches untouched, and keeps your ROM's stock HyperOS 4 camera app intact.
@@ -1424,7 +1424,7 @@ If you plan to test modules on upcoming developer builds, closed betas, or futur
 
 ##### Safe Testing Procedure for HyperOS 4:
 1. **Step 1**: Always install the watchdog module **[Simple BootloopSaver](https://github.com/Magisk-Modules-Alt-Repo/Simple_BootloopSaver)** in Magisk / KernelSU / APatch.
-2. **Step 2**: Download and flash **[`X17U_Master_Imaging_MOD_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_Slim_by_borndead.zip)** (13.85 MB) or `Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`.
+2. **Step 2**: Download and flash **[`X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip)** (13.85 MB) or `Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip`.
 3. **Step 3**: Reboot your device.
 4. **Step 4 (Mandatory)**: Clear Camera app data: *Settings ➔ Apps ➔ Manage apps ➔ Camera ➔ Clear all data*.
 5. **Step 5**: For GCam capture, load the tuned config preset **[`X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/raw/main/configs/Xiaomi_17_Ultra_nezha/X17U_borndead_Master_OVX10500U_HP9_50M_200M.agc)**.
@@ -1443,7 +1443,7 @@ Complementing the base FULL and SLIM editions, the project introduces a dedicate
 
 #### 6.1. Tier 1: On-Device Hardware NPU Computational Photography (Xiaomi AISP) (EN)
 
-Module: **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip)** (3.10 KB)
+Module: **[`Mi_AI_Master_Imaging_AISP_Hardware_5_v6.2_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Imaging_AISP_Hardware_5_v6.2_by_borndead.zip)** (3.10 KB)
 
 * **What it does**: Direct on-device hardware computational photography executing in real time at shutter click across Snapdragon Hexagon NPU and Spectra ISP.
 * **4-LM (Large Models) Computational Architecture**:
@@ -1469,7 +1469,7 @@ Module: **[`Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip`](https://media.g
 
 #### 6.2. Tier 2: Generative Post-Processing Studio (HyperAI & ExtraPhoto) (EN)
 
-Module: **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip)** (3.12 KB)
+Module: **[`Mi_AI_Studio_GenAI_ExtraPhoto_5_v6.2_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Studio_GenAI_ExtraPhoto_5_v6.2_by_borndead.zip)** (3.12 KB)
 
 * **What it does**: On-device generative editing tools accessible with one tap directly from the camera preview thumbnail (`com.android.camera` ➔ `com.miui.extraphoto`).
 * **Generative AI Toolset**:
@@ -1487,7 +1487,7 @@ Module: **[`Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip`](https://media.github
 
 #### 6.3. Tier 3: Real-Time Viewfinder Assistant (AI Director & Vision HUD) (EN)
 
-Module: **[`Mi_AI_Director_Vision_Companion_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_by_borndead.zip)** (2.68 KB)
+Module: **[`Mi_AI_Director_Vision_Companion_5_v6.2_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Director_Vision_Companion_5_v6.2_by_borndead.zip)** (2.68 KB)
 
 * **What it does**: An intelligent live assistant embedded into the Leica Camera viewfinder, coaching composition and framing in real time.
 * **Core Capabilities**:
@@ -1523,13 +1523,13 @@ To eliminate this risk, all **Mi Master Camera Combo** modules feature **Smart M
 - As a result, regardless of Magisk / KernelSU mount sequence, the operating system always loads a unified, complete feature tree with 0% feature loss!
 
 ##### 3. Complete All-In-One Edition
-For instant deployment without juggling individual archives, install **[`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip)** (4.11 KB). It combines Tier 1, Tier 2, and Tier 3 into a single, high-efficiency package.
+For instant deployment without juggling individual archives, install **[`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip)** (4.11 KB). It combines Tier 1, Tier 2, and Tier 3 into a single, high-efficiency package.
 
 ---
 
 #### 6.5. Comprehensive User Guide: Why All-In-One Doesn't Clutter the Viewfinder and How to Access All AI Features (EN)
 
-Many users, after flashing **`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`**, launch the camera expecting dozen decorative buttons cluttered across the live viewfinder, yet observe Leica's signature clean interface. **This is not an omission — it is deliberate, precision engineering!**
+Many users, after flashing **`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`**, launch the camera expecting dozen decorative buttons cluttered across the live viewfinder, yet observe Leica's signature clean interface. **This is not an omission — it is deliberate, precision engineering!**
 
 Artificial intelligence on Xiaomi flagships is partitioned into three dedicated architectural domains, none of which should obstruct your composition with unnecessary UI clutter:
 
@@ -1694,8 +1694,8 @@ If you previously installed **any other camera modules** (older versions of this
 
 #### 8.4. 📦 Step 2: Flashing Module via Root Manager
 1. Download the required zip package from [**GitHub Releases**](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases) or the tables in [Section 3](#3-module-releases--download-links-en):
-   - **Xiaomi 13 Ultra:** `Mi13U_Master_Camera_Combo_Full_by_borndead.zip` (for Custom ROMs/CorePatch) or `Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip` (for stock).
-   - **Xiaomi 14 Ultra:** `Mi14U_Master_Camera_Combo_Full_by_borndead.zip` or `Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip`.
+   - **Xiaomi 13 Ultra:** `Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip` (for Custom ROMs/CorePatch) or `Mi13U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip` (for stock).
+   - **Xiaomi 14 Ultra:** `Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip` or `Mi14U_Master_Imaging_MOD_5_v6.2_Slim_by_borndead.zip`.
    - **Xiaomi 15 / 15 Pro:** `Mi15_Master_Camera_Combo_Full...` / `Mi15U_Master_Camera_Combo_Full...` or corresponding Slim archives.
    - **Xiaomi 17 Ultra:** `X17U_Master_Camera_Combo_Full...` or `X17U_Master_Imaging_MOD_Slim...`.
    - **Universal Multi-Device:** `Mi_Master_Camera_Combo_Universal_Full...` / `..._Universal_Slim...`.
@@ -2039,7 +2039,7 @@ This section provides verified, production-tested solutions for common issues, r
 
 #### ❓ Q7: Are the AI Suite modules (Tier 1, Tier 2, Tier 3) compatible with FULL and SLIM?
 > **A: Yes, fully cross-compatible with zero conflicts!**  
-> The AI Suite operates on orthogonal system layers: Tier 1 accelerates Snapdragon Hexagon NPU computations, Tier 2 enhances ExtraPhoto inside the HyperOS Gallery, and Tier 3 adds composition HUD tools to the viewfinder. They can be installed individually or via the combined package `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`.
+> The AI Suite operates on orthogonal system layers: Tier 1 accelerates Snapdragon Hexagon NPU computations, Tier 2 enhances ExtraPhoto inside the HyperOS Gallery, and Tier 3 adds composition HUD tools to the viewfinder. They can be installed individually or via the combined package `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`.
 
 ---
 
@@ -2106,7 +2106,7 @@ Complete evolution chronology, architectural milestones, and bug fix logs across
 * **Smart Multi-Module Synchronization**:
   - Installer-level configuration merge logic in `customize.sh` allowing simultaneous installation of FULL/SLIM modules alongside AI Suite without OverlayFS masking conflicts.
 * **Unified All-In-One Package**:
-  - Released `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` (4 KB) containing all three tiers with zero system APK modification.
+  - Released `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip` (4 KB) containing all three tiers with zero system APK modification.
 </details>
 
 <details>
@@ -2156,7 +2156,7 @@ Complete evolution chronology, architectural milestones, and bug fix logs across
   - Restored genuine OmniVision OVX10500U, HP9, JN5, and OV50M Chromatix tuned bins.
   - Added intelligent custom ROM detection (`IS_CUSTOM_ROM`) in `customize.sh` preserving native deodexed APK.
 * **Dedicated Modules**:
-  - Released `X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip` bypassing broken cloud demosaicing to eliminate pink noise in Ultra RAW via 100% on-device ISP/NPU processing.
+  - Released `X17U_Master_Imaging_MOD_5_v6.2_SimpleRom_ST_NonLeica_by_borndead.zip` bypassing broken cloud demosaicing to eliminate pink noise in Ultra RAW via 100% on-device ISP/NPU processing.
   - Released `X17U_Master_Imaging_MOD_v1.0_Slim_by_borndead.zip`.
 </details>
 

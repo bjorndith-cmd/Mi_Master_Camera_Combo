@@ -54,16 +54,16 @@ BODY = """# Xiaomi Master Camera Combo 5 v6.2 (Security & Performance Overhaul) 
 ---
 
 ### 📦 Загрузка модулей из Git LFS (Direct Download Links):
-- [Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip) (488 MB)
-- [Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip) (284 MB)
-- [Mi13U_Master_Camera_Combo_v6.1_MasterFinal_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_v6.1_MasterFinal_by_borndead.zip) (431 MB)
-- [Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip) (431 MB)
-- [Mi13U_Camera_v6.1_MIUI14_by_borndead.apk](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_by_borndead.apk) (162 MB)
-- [Mi14U_Master_Camera_Combo_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Camera_Combo_Full_by_borndead.zip) (201 MB)
-- [Mi15_Master_Camera_Combo_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_Full_by_borndead.zip) (212 MB)
-- [Mi15U_Master_Camera_Combo_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Camera_Combo_Full_by_borndead.zip) (305 MB)
-- [X17U_Master_Camera_Combo_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Camera_Combo_Full_by_borndead.zip) (370 MB)
-- [Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip) (10 KB)
+- [Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip) (488 MB)
+- [Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip) (284 MB)
+- [Mi13U_Master_Camera_Combo_5_v6.2_MasterFinal_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v6.2_MasterFinal_by_borndead.zip) (431 MB)
+- [Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip) (431 MB)
+- [Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk) (162 MB)
+- [Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip) (201 MB)
+- [Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip) (212 MB)
+- [Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip) (305 MB)
+- [X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip) (370 MB)
+- [Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip) (10 KB)
 
 ---
 

@@ -32,8 +32,8 @@ All notable changes to the **Xiaomi Master Camera Combo** project will be docume
 ## [v6.1-MIUI14-EU-Stable] - 2026-09-30
 ### Added & Specialized for Xiaomi 13 Ultra (`ishtar` / `2304FPN6DC`)
 - **Dedicated MIUI 14 by xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33) Suite by `borndead`**:
-  - **Full Magisk / KernelSU / APatch Module**: [`Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip) (310 MB).
-  - **Direct Standalone APK for Core Patch**: [`Mi13U_Camera_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_v6.1_MIUI14_by_borndead.apk) (162 MB).
+  - **Full Magisk / KernelSU / APatch Module**: [`Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip) (310 MB).
+  - **Direct Standalone APK for Core Patch**: [`Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_5_v6.1_MIUI14_by_borndead.apk) (162 MB).
 - **Dual-Partition System & Product Mirroring**:
   - Solved partition variation in xiaomi.eu builds by mirroring camera assets simultaneously to `/system/priv-app/MiuiCamera/` AND `/system/product/priv-app/MiuiCamera/` with `.replace` markers in both directories. Guarantees 100% clean replacement of stock camera on Android 13.
 - **Core Patch 1-Tap Instant Installation**:
@@ -100,7 +100,7 @@ All notable changes to the **Xiaomi Master Camera Combo** project will be docume
   - Continuous logging directly to public storage `/sdcard/Download/CameraMod_Logs` (`00_SUMMARY.txt`, `01_install.log`, `02_post_fs_data.log`, `03_boot_diagnostics.txt`, `04_dumpsys_package.txt`, `05_logcat_camera.txt`, `07_logcat_crashes.txt`) with `0777` permissions and `MediaScanner` broadcast for immediate USB visibility.
 
 ### Fixed
-- **Xiaomi 13 Ultra Stable v5 Foundation (`Mi13U_Master_Camera_Combo_Full_by_borndead.zip`)**:
+- **Xiaomi 13 Ultra Stable v5 Foundation (`Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip`)**:
   - Maintained 100% stable Version 5 Leica Camera APK suite (SHA256: `8a626df7...`) with all 47 companion libraries intact.
   - Calibrated `persist.vendor.camera.maxRAWSizes=55` for full Quad-Bayer 50MP stream resolution in Camera and GCam.
   - Resolved KernelSU & Magisk multi-partition compatibility with simultaneous deployment across `/system`, `/product`, and `/system/product`.
@@ -123,7 +123,7 @@ All notable changes to the **Xiaomi Master Camera Combo** project will be docume
   - **Tier 1 (AISP Hardware)**: Qualcomm Hexagon NPU computational photography acceleration for ultra-fast noise reduction and dynamic range expansion.
   - **Tier 2 (HyperAI Studio)**: On-device generative AI tools in Gallery and ExtraPhoto editor (generative eraser, smart image expansion).
   - **Tier 3 (AI Director & Vision HUD)**: Real-time viewfinder assistant providing composition rules, framing guidance, and horizon leveling HUD.
-  - **Unified All-In-One Package**: `Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip` containing all three tiers with zero system APK modification.
+  - **Unified All-In-One Package**: `Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip` containing all three tiers with zero system APK modification.
 - **Smart Multi-Module Synchronization**:
   - Installer-level configuration merge logic in `customize.sh` allowing simultaneous installation of FULL/SLIM modules alongside AI Suite without OverlayFS masking conflicts.
 
