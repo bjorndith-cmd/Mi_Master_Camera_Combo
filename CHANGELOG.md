@@ -1,6 +1,31 @@
 # Changelog
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
+## [Xiaomi Master Camera Combo 6 v8.2] - 2026-10-01
+### Breakthrough Camera 6.8 Port for Xiaomi 13 Ultra (HyperOS 3 / Android 16) by `borndead`
+- **Deliverables**:
+  - **Standalone Installable APK**: [`Mi13U_Camera_6_v8.2_by_borndead.apk`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Camera_6_v8.2_by_borndead.apk) (162.5 MB) — Direct Core Patch installation without system reboot.
+  - **Magisk / KernelSU / APatch Module**: [`Mi13U_Master_Camera_Combo_6_v8.2_Full_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_6_v8.2_Full_by_borndead.zip) (282.7 MB) — Complete system suite with dual mirror and 49 companion native libraries.
+- **Chi-CDK HAL Crash Elimination (SIGABRT & Black Screen Fix)**:
+  - Surgically patched Dalvik DEX bytecode operatingMode calls (`0x9005` MIVI 3.0 session mode and `0x9002` ALGO UP SAT) to `0x0000` standard Camera2 session mode across all 11 DEX files.
+  - Eliminates the fatal Qualcomm CamX abort (`chxusecase.cpp:1143 ProcessCaptureRequest() ECR Errored Out! Usecase:3 cameraId:7 in state: CamxResultEFailed`) on Snapdragon 8 Gen 2 (`ishtar`).
+- **Pro Mode Custom LUT Preset Import ('+' Button Unlock)**:
+  - Decompiled and patched filter panel adapter logic in `classes.dex` (`LK2/b;->a0()` and `com/android/camera/features/mode/capture/M`):
+  - Enabled the '+' button in the Pro mode filter dock, allowing 1-tap import of custom LUT cube/presets, ZIP archives, and QR code filters.
+- **Portrait Improvements & Beautification Tab Unlock**:
+  - Fully enabled Portrait Beautification and Studio Lighting features in `ishtar.xml` device definitions and system properties:
+  - Enabled `support_front_beauty_mianju`, `support_beauty_makeup`, `support_portrait_beauty_makeup`, `support_beauty_body`, and `support_super_portrait`.
+- **Offline MIVI Daemon Handshake**:
+  - Resolved the 12-second hang and lag on xiaomi.eu builds by patching `AidlBGServiceClient` in `classes8.dex`: activates offline fallback mode when `vendor.xiaomi.hardware.aidlbgservice` is absent.
+- **Quad-Lens Zoom (0.5x, 1x, 2x, 3.2x, 5x, 10x) & Dual Physical Aperture (F1.9 / F4.0)**:
+  - Seamless switching between all 4 physical lenses (Sony IMX989 + 3x Sony IMX858).
+  - Unlocked physical dual aperture stepping (F1.9 / F4.0) with smooth shutter iris actuation.
+  - Native Quad-50MP FullRes unlock via `persist.vendor.camera.maxRAWSizes=55`.
+- **Authentic Leica Color Science Calibration**:
+  - Calibrated Bayer gains for Sony IMX989, disabling unstable AISP and DCG overrides that caused cold blue tint.
+- **Strict Zero-ETC Architecture & Bootloop Auto-Rescue**:
+  - Zero partition masking: strictly avoids overriding `/system/etc`, preserving modem, telephony, audio, and theme engines.
+  - Auto-rescue mechanism with boot attempt counter prevents bootloops.
 
 ## [Xiaomi Master Camera Combo 5 v6.2] - 2026-10-01
 ### Security, Performance & Naming Scheme Overhaul by `borndead`
