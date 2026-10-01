@@ -25,7 +25,7 @@ def main():
     releases_dir.mkdir(parents=True, exist_ok=True)
 
     staging_dir = Path(args.staging) if args.staging else (repo_root / "build" / "staging" / "Universal_Full_Staging")
-    out_zip = Path(args.out_zip) if args.out_zip else (releases_dir / "Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip")
+    out_zip = Path(args.out_zip) if args.out_zip else (releases_dir / "Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip")
 
     if not staging_dir.exists():
         print(f"[INFO] Staging directory {staging_dir} does not exist. Skipping standalone packaging.")

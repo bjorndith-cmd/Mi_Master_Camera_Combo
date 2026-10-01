@@ -18,12 +18,12 @@ def main():
     existing = [a["name"] for a in rel.get("assets", [])]
     
     remaining = [
-        "Mi13U_Master_Camera_Combo_v6.1_MasterFinal_by_borndead.zip",
-        "Mi13U_Camera_v6.1_MIUI14_EU_Stable_by_borndead.zip",
-        "Mi14U_Master_Camera_Combo_Full_by_borndead.zip",
-        "Mi15_Master_Camera_Combo_Full_by_borndead.zip",
-        "Mi15U_Master_Camera_Combo_Full_by_borndead.zip",
-        "X17U_Master_Camera_Combo_Full_by_borndead.zip",
+        "Mi13U_Master_Camera_Combo_5_v6.2_MasterFinal_by_borndead.zip",
+        "Mi13U_Camera_5_v6.1_MIUI14_EU_Stable_by_borndead.zip",
+        "Mi14U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip",
+        "Mi15_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip",
+        "Mi15U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip",
+        "X17U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip",
     ]
     
     for name in remaining:

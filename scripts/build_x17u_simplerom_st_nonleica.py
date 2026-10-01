@@ -25,7 +25,7 @@ def main():
     releases_dir.mkdir(parents=True, exist_ok=True)
 
     staging_dir = Path(args.staging) if args.staging else (repo_root / "build" / "staging" / "X17U_SimpleRom_Staging")
-    out_zip = Path(args.out_zip) if args.out_zip else (releases_dir / "X17U_Master_Imaging_MOD_SimpleRom_ST_NonLeica_by_borndead.zip")
+    out_zip = Path(args.out_zip) if args.out_zip else (releases_dir / "X17U_Master_Imaging_MOD_5_v6.2_SimpleRom_ST_NonLeica_by_borndead.zip")
 
     if not staging_dir.exists():
         print(f"[INFO] Staging directory {staging_dir} does not exist. Skipping standalone packaging.")

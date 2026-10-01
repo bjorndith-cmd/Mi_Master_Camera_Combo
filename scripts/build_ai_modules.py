@@ -5,10 +5,10 @@ Mi Master Camera Combo - AI Suite Builder (Tiers 1, 2, 3 & All-In-One)
 Author: borndead
 
 Builds:
-  - Tier 1: Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip
-  - Tier 2: Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip
-  - Tier 3: Mi_AI_Director_Vision_Companion_by_borndead.zip
-  - Tier 4: Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip
+  - Tier 1: Mi_AI_Master_Imaging_AISP_Hardware_5_v6.2_by_borndead.zip
+  - Tier 2: Mi_AI_Studio_GenAI_ExtraPhoto_5_v6.2_by_borndead.zip
+  - Tier 3: Mi_AI_Director_Vision_Companion_5_v6.2_by_borndead.zip
+  - Tier 4: Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip
 """
 
 import os
@@ -234,7 +234,7 @@ set_perm_recursive "$MODPATH/system" 0 0 0755 0644
 ui_print "- AISP Neural Engine active!"
 """
     (t1_dir / "customize.sh").write_text(t1_customize, encoding="utf-8", newline="\n")
-    write_magisk_zip(t1_dir, output_dir / "Mi_AI_Master_Imaging_AISP_Hardware_by_borndead.zip")
+    write_magisk_zip(t1_dir, output_dir / "Mi_AI_Master_Imaging_AISP_Hardware_5_v6.2_by_borndead.zip")
 
     # ==============================================================================
     # 2. TIER 2: HyperAI Studio & ExtraPhoto GenAI Suite
@@ -376,7 +376,7 @@ set_perm_recursive "$MODPATH/system" 0 0 0755 0644
 ui_print "- HyperAI Studio Suite ready!"
 """
     (t2_dir / "customize.sh").write_text(t2_customize, encoding="utf-8", newline="\n")
-    write_magisk_zip(t2_dir, output_dir / "Mi_AI_Studio_GenAI_ExtraPhoto_by_borndead.zip")
+    write_magisk_zip(t2_dir, output_dir / "Mi_AI_Studio_GenAI_ExtraPhoto_5_v6.2_by_borndead.zip")
 
     # ==============================================================================
     # 3. TIER 3: AI Director & Vision Companion
@@ -502,7 +502,7 @@ set_perm_recursive "$MODPATH/system" 0 0 0755 0644
 ui_print "- AI Director & Vision Companion ready!"
 """
     (t3_dir / "customize.sh").write_text(t3_customize, encoding="utf-8", newline="\n")
-    write_magisk_zip(t3_dir, output_dir / "Mi_AI_Director_Vision_Companion_by_borndead.zip")
+    write_magisk_zip(t3_dir, output_dir / "Mi_AI_Director_Vision_Companion_5_v6.2_by_borndead.zip")
 
     # ==============================================================================
     # 4. TIER 4: Complete All-In-One AI Master Suite
@@ -660,7 +660,7 @@ ui_print "- Complete Tri-Tier AI Suite armed & ready!"
 ui_print "*********************************************************"
 """
     (t4_dir / "customize.sh").write_text(t4_customize, encoding="utf-8", newline="\n")
-    write_magisk_zip(t4_dir, output_dir / "Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip")
+    write_magisk_zip(t4_dir, output_dir / "Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip")
 
     # Cleanup temp build
     shutil.rmtree(build_dir, ignore_errors=True)

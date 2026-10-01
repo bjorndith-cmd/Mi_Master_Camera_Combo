@@ -124,16 +124,16 @@ def main():
 ---
 
 ### 📦 Вложенные модули (Attachments):
-- **`Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip`** (182.5 MB)
-- **`Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip`** (36.6 MB)
-- **`Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip`** (4.1 KB)
+- **`Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip`** (182.5 MB)
+- **`Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip`** (36.6 MB)
+- **`Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip`** (4.1 KB)
 """
     rel_59 = create_release("v5.9", "v5.9-Universal: Universal Flagship Suite for Xiaomi 13U / 14U / 15 / 15 Pro / 15U / 17U", body_59)
     if rel_59:
         rel_id_59 = rel_59["id"]
-        upload_asset(rel_id_59, os.path.join(releases_dir, "Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip"))
-        upload_asset(rel_id_59, os.path.join(releases_dir, "Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip"))
-        upload_asset(rel_id_59, os.path.join(releases_dir, "Mi_AI_Master_Camera_Suite_AllInOne_by_borndead.zip"))
+        upload_asset(rel_id_59, os.path.join(releases_dir, "Mi_Master_Camera_Combo_5_v6.2_Universal_Full_by_borndead.zip"))
+        upload_asset(rel_id_59, os.path.join(releases_dir, "Mi_Master_Camera_Combo_5_v6.2_Universal_Slim_by_borndead.zip"))
+        upload_asset(rel_id_59, os.path.join(releases_dir, "Mi_AI_Master_Camera_Suite_5_v6.2_AllInOne_by_borndead.zip"))
 
 if __name__ == "__main__":
     main()

@@ -31,7 +31,7 @@ def main():
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parent.parent
-    zip_path = Path(args.zip) if args.zip else (repo_root / "releases" / "Mi13U_Master_Camera_Combo_Full_by_borndead.zip")
+    zip_path = Path(args.zip) if args.zip else (repo_root / "releases" / "Mi13U_Master_Camera_Combo_5_v6.2_Full_by_borndead.zip")
 
     if not zip_path.exists():
         print(f"Error: Zip not found: {zip_path}")
