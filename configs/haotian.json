@@ -12,12 +12,12 @@
     "performSingleCaptureForHdrPlusMfnr": true
   },
   {
-    "f4": true
+    "fixedAperture": "f/1.44"
   },
   {
     "current_hdr": "normal"
   },
   {
-    "description": "Xiaomi 15 Pro Triple-Camera Leica Tuning Profile"
+    "description": "Xiaomi 15 Pro Triple-Camera Leica Tuning Profile (OV50H + JN1 + IMX858 5x)"
   }
 ]

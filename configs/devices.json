@@ -1,0 +1,84 @@
+{
+  "devices": {
+    "ishtar": {
+      "name": "Xiaomi 13 Ultra",
+      "codename": "ishtar",
+      "soc": "Snapdragon 8 Gen 2 (SM8550)",
+      "zoom_grid": "0.5:1.0:3.2:5.0",
+      "main_sensor": "Sony IMX989 (1-inch 50MP)",
+      "tele_sensor": "Sony IMX858 (50MP 3.2x)",
+      "periscope_sensor": "Sony IMX858 (50MP 5.0x)",
+      "uw_sensor": "Sony IMX858 (50MP 0.5x)",
+      "variable_aperture": true,
+      "aperture_values": "1.9,4.0",
+      "stepless_aperture": false,
+      "xml_names": ["ishtar.xml"]
+    },
+    "aurora": {
+      "name": "Xiaomi 14 Ultra",
+      "codename": "aurora",
+      "soc": "Snapdragon 8 Gen 3 (SM8650)",
+      "zoom_grid": "0.5:1.0:3.2:5.0",
+      "main_sensor": "Sony LYT-900 (1-inch 50MP)",
+      "tele_sensor": "Sony IMX858 (50MP 3.2x)",
+      "periscope_sensor": "Sony IMX858 (50MP 5.0x)",
+      "uw_sensor": "Sony IMX858 (50MP 0.5x)",
+      "variable_aperture": true,
+      "aperture_values": "1.63,4.0",
+      "stepless_aperture": true,
+      "xml_names": ["aurora.xml", "ishtar.xml"]
+    },
+    "dada": {
+      "name": "Xiaomi 15",
+      "codename": "dada",
+      "soc": "Snapdragon 8 Elite (SM8750)",
+      "zoom_grid": "0.6:1.0:3.2",
+      "main_sensor": "Light Hunter 900 / OV50H (50MP)",
+      "tele_sensor": "Samsung JN5 (50MP 3.2x)",
+      "periscope_sensor": null,
+      "uw_sensor": "Samsung JN1 (50MP 0.6x)",
+      "variable_aperture": false,
+      "stepless_aperture": false,
+      "xml_names": ["dada.xml", "ishtar.xml"]
+    },
+    "haotian": {
+      "name": "Xiaomi 15 Pro",
+      "codename": "haotian",
+      "soc": "Snapdragon 8 Elite (SM8750)",
+      "zoom_grid": "0.6:1.0:5.0",
+      "main_sensor": "Light Hunter 900 / OV50H (50MP)",
+      "tele_sensor": null,
+      "periscope_sensor": "Sony IMX858 (50MP 5.0x)",
+      "uw_sensor": "Samsung JN1 (50MP 0.6x)",
+      "variable_aperture": false,
+      "stepless_aperture": false,
+      "xml_names": ["haotian.xml", "dada.xml", "ishtar.xml"]
+    },
+    "xuanyuan": {
+      "name": "Xiaomi 15 Ultra",
+      "codename": "xuanyuan",
+      "soc": "Snapdragon 8 Elite (SM8750)",
+      "zoom_grid": "0.5:1.0:3.0:5.0",
+      "main_sensor": "Sony LYT-900 (1-inch 50MP)",
+      "tele_sensor": "Sony IMX858 (50MP 3.0x)",
+      "periscope_sensor": "Samsung HP9 (200MP 4.3x)",
+      "uw_sensor": "Samsung JN5 (50MP 0.5x)",
+      "variable_aperture": true,
+      "stepless_aperture": true,
+      "xml_names": ["xuanyuan.xml", "ishtar.xml"]
+    },
+    "nezha": {
+      "name": "Xiaomi 17 Ultra",
+      "codename": "nezha",
+      "soc": "Snapdragon 8 Elite (SM8750)",
+      "zoom_grid": "0.5:1.0:3.0:5.0",
+      "main_sensor": "OmniVision OVX10500U (1-inch 50MP)",
+      "tele_sensor": "50MP 3.0x",
+      "periscope_sensor": "Samsung HP9 (200MP 5.0x)",
+      "uw_sensor": "50MP 0.5x",
+      "variable_aperture": true,
+      "stepless_aperture": true,
+      "xml_names": ["nezha.xml", "xuanyuan.xml", "ishtar.xml"]
+    }
+  }
+}

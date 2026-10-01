@@ -1,87 +1,68 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Mi Master Camera Combo - Full and Slim Lineup Builder
+Author: borndead
+
+Builds the entire Dual-Tier (FULL & SLIM) flagship module lineup across:
+- Universal FULL & SLIM
+- Xiaomi 13 Ultra (ishtar) FULL & SLIM
+- Xiaomi 14 Ultra (aurora) FULL & SLIM
+- Xiaomi 15 (dada) FULL & SLIM
+- Xiaomi 15 Pro (haotian) FULL & SLIM
+- Xiaomi 15 Ultra (xuanyuan) FULL & SLIM
+- Xiaomi 17 Ultra (nezha) FULL & SLIM
+"""
+
 import os
 import shutil
 import zipfile
+import stat
+import argparse
+from pathlib import Path
 
-print("=== Building Dual-Tier (FULL & SLIM) Module Lineup for All Devices ===")
+# Limits & rules
+PROP_VALUE_MAX = 91
 
-root_antigravity = r'C:\Users\ASTA\OneDrive\Antigravity'
-repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-repo_releases = os.path.join(repo_root, 'releases')
-configs_src = os.path.join(repo_root, 'configs')
-os.makedirs(repo_releases, exist_ok=True)
+UPDATE_BINARY = """#!/bin/sh
+#################
+# Magisk / KernelSU / APatch Module Installer Script
+#################
 
-multi_staging = os.path.join(root_antigravity, 'Mi_MultiDevice_Combo_Staging')
-payload_staging = os.path.join(root_antigravity, 'Clean_Camera_Payload_Staging')
+umask 022
+OUTFD=$2
+ZIPFILE=$3
 
-# -------------------------------------------------------------
-# 1. PREPARE CLEAN CAMERA PAYLOAD (Purging broken/conflicting libs)
-# -------------------------------------------------------------
-if os.path.exists(payload_staging):
-    shutil.rmtree(payload_staging)
-os.makedirs(os.path.join(payload_staging, 'system', 'priv-app', 'MiuiCamera', 'lib', 'arm64'), exist_ok=True)
-os.makedirs(os.path.join(payload_staging, 'system', 'etc', 'permissions'), exist_ok=True)
+mount /data 2>/dev/null
 
-# Copy MiuiCamera.apk
-src_apk = os.path.join(multi_staging, 'system', 'priv-app', 'MiuiCamera', 'MiuiCamera.apk')
-shutil.copy2(src_apk, os.path.join(payload_staging, 'system', 'priv-app', 'MiuiCamera', 'MiuiCamera.apk'))
+if [ -f /data/adb/magisk/util_functions.sh ]; then
+  . /data/adb/magisk/util_functions.sh
+elif [ -f /data/adb/ksu/util_functions.sh ]; then
+  . /data/adb/ksu/util_functions.sh
+elif [ -f /data/adb/ap/util_functions.sh ]; then
+  . /data/adb/ap/util_functions.sh
+else
+  echo "! Please install in Magisk / KernelSU / APatch Manager" >&2
+  exit 1
+fi
 
-# Copy all companion libraries (including libc++_shared required by CameraEffectJNI, yuv, requestutil)
-# Exclude low-level OS allocators (libion.so, libdmabufheap.so) which must come from device ROM HAL, and broken libs
-excluded_libs = {
-    'libdmabufheap.so', 'libion.so',
-    'libremosaiclib.so', 'libmialgo_ainr_ll.so', 'libmialgo_ellc.so', 'libdlrmsc_android15.so'
-}
-src_libs = os.path.join(multi_staging, 'system', 'priv-app', 'MiuiCamera', 'lib', 'arm64')
-for lib_name in os.listdir(src_libs):
-    if lib_name not in excluded_libs:
-        shutil.copy2(
-            os.path.join(src_libs, lib_name),
-            os.path.join(payload_staging, 'system', 'priv-app', 'MiuiCamera', 'lib', 'arm64', lib_name)
-        )
-
-# Safe privapp-permissions-camera.xml (purged REBOOT, DEVICE_POWER, MANAGE_USERS)
-safe_perm_xml = """<?xml version="1.0" encoding="utf-8"?>
-<permissions>
-    <privapp-permissions package="com.android.camera">
-        <permission name="android.permission.WRITE_SECURE_SETTINGS" />
-        <permission name="android.permission.REAL_GET_TASKS" />
-        <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
-        <permission name="android.permission.INTERACT_ACROSS_USERS" />
-        <permission name="android.permission.MEDIA_CONTENT_CONTROL" />
-        <permission name="android.permission.SYSTEM_CAMERA" />
-        <permission name="android.permission.CAMERA_SEND_SYSTEM_EVENT" />
-        <permission name="android.permission.CONTROL_DISPLAY_BRIGHTNESS" />
-        <permission name="android.permission.STATUS_BAR" />
-        <permission name="android.permission.UPDATE_APP_OPS_STATS" />
-        <permission name="android.permission.PACKAGE_USAGE_STATS" />
-        <permission name="android.permission.RECORD_AUDIO" />
-        <permission name="android.permission.ACCESS_FINE_LOCATION" />
-        <permission name="android.permission.CAMERA" />
-        <permission name="android.permission.MODIFY_AUDIO_SETTINGS" />
-        <permission name="android.permission.CAPTURE_AUDIO_OUTPUT" />
-    </privapp-permissions>
-</permissions>
-"""
-with open(os.path.join(payload_staging, 'system', 'etc', 'permissions', 'privapp-permissions-camera.xml'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(safe_perm_xml)
-print(f"[OK] Clean Camera Payload ready in: {payload_staging}")
-
-# Common safe post-fs-data.sh
-common_post_fs_data = """#!/system/bin/sh
-# post-fs-data.sh - Safe initialization without policy tampering
-# Prevents Magisk Safe Mode and preserves root on all firmwares
-MODDIR=${0%/*}
+install_module
+exit 0
 """
 
-# Common system.prop (Base)
-common_system_prop = """# Full Resolution RAW Support (Qualcomm CamX 50MP/200MP Output)
+UPDATER_SCRIPT = "#MAGISK\n"
+POST_FS_DATA = "#!/system/bin/sh\n# Safe initialization without policy tampering\nMODDIR=${0%/*}\n"
+
+COMMON_SYSTEM_PROP = """# Full Resolution RAW Support (Qualcomm CamX 50MP/200MP Output)
 persist.vendor.camera.maxRAWSizes=55
 
-# Aux Camera Access for all Google Camera (GCam) mods and Pro Camera apps
-vendor.camera.aux.packagelist=com.google.android.GoogleCamera,com.google.android.GoogleCamera.Canary,com.google.android.GoogleCamera.BigKaka,com.google.android.GoogleCamera.Urnyx,com.google.android.GoogleCameraENG,com.google.android.GoogleCameraGood,com.google.android.apps.cameralite,com.agc.cam,com.agc.gcam84,com.agc.gcam88,com.agc.gcam92,com.agc.gcam96,org.codeaurora.snapcam,com.samsung.android.scan3d,com.samsung.android.ruler,com.ss.android.ugc.aweme,com.android.mgc,com.shamim.cam,net.sourceforge.opencamera,com.hades.camera,com.free.cam,com.custom.camera,com.arun.gcam,com.falcon.camera
-persist.vendor.camera.privapp.list=com.google.android.GoogleCamera,com.google.android.GoogleCamera.Canary,com.google.android.GoogleCamera.BigKaka,com.google.android.GoogleCamera.Urnyx,com.google.android.GoogleCameraENG,com.google.android.GoogleCameraGood,com.google.android.apps.cameralite,com.agc.cam,com.agc.gcam84,com.agc.gcam88,com.agc.gcam92,com.agc.gcam96,org.codeaurora.snapcam,com.samsung.android.scan3d,com.samsung.android.ruler,com.ss.android.ugc.aweme,com.android.mgc,com.shamim.cam,net.sourceforge.opencamera,com.hades.camera,com.free.cam,com.custom.camera,com.arun.gcam,com.falcon.camera
+# Aux Camera Access for GCam and Pro Camera apps (< 92 chars per prop)
+vendor.camera.aux.packagelist=com.google.android.GoogleCamera,com.google.android.GoogleCamera.Canary,com.agc.cam
+vendor.camera.aux.packagelistext=com.agc.gcam84,com.agc.gcam88,com.agc.gcam92,com.agc.gcam96,org.codeaurora.snapcam
+persist.vendor.camera.privapp.list=com.google.android.GoogleCamera,com.google.android.GoogleCamera.Canary,com.agc.cam
+persist.vendor.camera.privapp.listext=net.sourceforge.opencamera,com.shamim.cam,com.android.mgc,com.hades.camera
 
-# George Video Mod Tweaks (Bypass ArcSoft video noise reduction for sharp 4K/8K textures)
+# Bypass ArcSoft video noise reduction for sharp 4K/8K textures
 persist.vendor.camera.arcsoft.aisp_algo_nr.bypass=1
 
 # Video Bitrate & Hardware Acceleration
@@ -107,7 +88,7 @@ persist.vendor.camera.cloud.enable=0
 persist.sys.camera.leica_essential.cloud=0
 """
 
-common_service_sh = """#!/system/bin/sh
+COMMON_SERVICE_SH = """#!/system/bin/sh
 # service.sh - Xiaomi Master Camera Combo Late-boot Service
 # Author: borndead
 MODDIR=${0%/*}
@@ -124,876 +105,78 @@ if [ -d "/sdcard/Download" ]; then
         cp -n "$MODDIR/configs/"*.json "/sdcard/Download/XiaomiCamera/" 2>/dev/null
     fi
 fi
+
+# On-Demand Diagnostic Mode (Active ONLY when trigger flag exists)
+if [ -f "/data/local/tmp/mmc_debug" ] || [ -f "/sdcard/Download/mmc_debug" ]; then
+    LOG_DIR="/sdcard/Download/CameraMod_Logs"
+    mkdir -p "$LOG_DIR" 2>/dev/null
+    dumpsys package com.android.camera > "$LOG_DIR/04_dumpsys_package.txt" 2>&1
+    logcat -d -t 2000 | grep -iE "com.android.camera|MiuiCamera|CameraService|CamX|MIVI|ChiCDK" > "$LOG_DIR/05_logcat_camera.txt" 2>&1
+    logcat -b crash -d > "$LOG_DIR/07_logcat_crashes.txt" 2>&1
+    chmod 0750 "$LOG_DIR" 2>/dev/null
+fi
 """
 
-def create_zip(staging_dir, zip_path):
-    print(f"Creating: {os.path.basename(zip_path)}...")
-    # 1. Ensure configs/ directory exists in staging
-    if os.path.exists(configs_src):
-        dest_cfg = os.path.join(staging_dir, 'configs')
-        os.makedirs(dest_cfg, exist_ok=True)
-        for cfg in os.listdir(configs_src):
-            if cfg.endswith('.json'):
-                shutil.copy2(os.path.join(configs_src, cfg), os.path.join(dest_cfg, cfg))
-
-    # 2. Ensure service.sh has auto-deployment logic
-    service_path = os.path.join(staging_dir, 'service.sh')
-    with open(service_path, 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_service_sh)
-
-    with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
-        for root, dirs, files in os.walk(staging_dir):
-            for file in files:
-                full_p = os.path.join(root, file)
-                rel_p = os.path.relpath(full_p, staging_dir).replace('\\', '/')
-                zf.write(full_p, rel_p)
-    sz = os.path.getsize(zip_path)
-    print(f"  -> Generated: {sz:,} bytes")
-    # Mirror to repo releases
-    repo_copy = os.path.join(repo_releases, os.path.basename(zip_path))
-    shutil.copy2(zip_path, repo_copy)
-
-# -------------------------------------------------------------
-# 2. BUILD UNIVERSAL FULL & UNIVERSAL SLIM
-# -------------------------------------------------------------
-uni_full_staging = os.path.join(root_antigravity, 'Universal_Full_Staging')
-uni_slim_staging = os.path.join(root_antigravity, 'Universal_Slim_Staging')
-
-for stg in [uni_full_staging, uni_slim_staging]:
-    if os.path.exists(stg):
-        shutil.rmtree(stg)
-    os.makedirs(stg, exist_ok=True)
-    # Copy META-INF
-    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
-    # Copy devices/ directory tree
-    shutil.copytree(os.path.join(multi_staging, 'devices'), os.path.join(stg, 'devices'))
-    # Copy scripts
-    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_post_fs_data)
-    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write("#!/system/bin/sh\n")
-    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_system_prop)
-
-# Add clean camera payload to Universal FULL
-shutil.copytree(os.path.join(payload_staging, 'system'), os.path.join(uni_full_staging, 'system'))
-
-# Module prop for Universal FULL
-with open(os.path.join(uni_full_staging, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi_master_camera_combo_universal_full
-name=Xiaomi Master Camera Combo (Universal FULL Edition)
-version=v5.8-Universal-FULL-A16
-versionCode=20260926
-author=borndead
-description=Universal Full Flagship Camera Suite for Xiaomi 13U, 14U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3 (Android 14/15/16). Full Leica Camera APK + oat/.replace protection + Quad-50M/200M FullRes + Variable Aperture + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K video on all lenses + 4K120fps + offline processing.
-""")
-
-# Module prop for Universal SLIM
-with open(os.path.join(uni_slim_staging, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi_master_camera_combo_universal_slim
-name=Xiaomi Master Camera Combo (Universal SLIM Edition)
-version=v5.8-Universal-SLIM-A16
-versionCode=20260926
-author=borndead
-description=Universal Pure Systemless Overlay for Xiaomi 13U, 14U, 15, 15 Pro, 15U & 17U on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50M/200M FullRes + Variable Aperture + Stock AIO 104 LYT-900 tuning + DCG Hardware HDR + George 8K all lenses + 4K120fps + Chromatix hardware sensor bins.
-""")
-
-# customize.sh for Universal FULL (Includes APK copy with oat/.replace)
-uni_full_cust = """##########################################################################################
-# Universal Multi-Device Master Camera Combo (FULL Edition with Leica Camera App)
-# Fully compatible with HyperOS 2.0 / 3.0 (Android 15 / 16)
-##########################################################################################
-
-ui_print "*********************************************************"
-ui_print "       Xiaomi Master Camera Combo (FULL Edition)         "
-ui_print "   Leica Camera App + Quad-50M/200M + DCG HDR + 8K       "
-ui_print "                     by borndead                         "
-ui_print "*********************************************************"
-
-DEVICE=$(getprop ro.product.device)
-[ -z "$DEVICE" ] && DEVICE=$(getprop ro.build.product)
-[ -z "$DEVICE" ] && DEVICE=$(getprop ro.product.vendor.device)
-API=$(getprop ro.build.version.sdk)
-[ -z "$API" ] && API=35
-OS_VER=$(getprop ro.build.version.release)
-
-case "$DEVICE" in
-    ishtar)
-        DEVICE_NAME="Xiaomi 13 Ultra"
-        DEV_PROFILE="ishtar"
-        ZOOM_GRID="0.5:1.0:3.2:5.0"
-        XML_NAMES="ishtar.xml"
-        ;;
-    aurora)
-        DEVICE_NAME="Xiaomi 14 Ultra"
-        DEV_PROFILE="aurora"
-        ZOOM_GRID="0.5:1.0:3.2:5.0"
-        XML_NAMES="aurora.xml ishtar.xml"
-        ;;
-    dada)
-        DEVICE_NAME="Xiaomi 15"
-        DEV_PROFILE="dada"
-        ZOOM_GRID="1.0"
-        XML_NAMES="dada.xml ishtar.xml"
-        ;;
-    haotian)
-        DEVICE_NAME="Xiaomi 15 Pro"
-        DEV_PROFILE="dada"
-        ZOOM_GRID="0.6:1.0:3.2:5.0"
-        XML_NAMES="haotian.xml dada.xml ishtar.xml"
-        ;;
-    xuanyuan|x15u)
-        DEVICE_NAME="Xiaomi 15 Ultra ($DEVICE)"
-        DEV_PROFILE="xuanyuan"
-        ZOOM_GRID="0.5:1.0:3.0:5.0"
-        XML_NAMES="xuanyuan.xml ishtar.xml"
-        ;;
-    nezha|x17u)
-        DEVICE_NAME="Xiaomi 17 Ultra ($DEVICE)"
-        DEV_PROFILE="nezha"
-        ZOOM_GRID="0.5:1.0:3.0:5.0"
-        XML_NAMES="nezha.xml xuanyuan.xml ishtar.xml"
-        ;;
-    *)
-        ui_print "! Unlisted device ($DEVICE). Applying flagship fallback profile..."
-        DEVICE_NAME="Xiaomi Flagship ($DEVICE)"
-        DEV_PROFILE="ishtar"
-        ZOOM_GRID="0.5:1.0:3.2:5.0"
-        XML_NAMES="${DEVICE}.xml ishtar.xml"
-        ;;
-esac
-
-ui_print "- Target: $DEVICE_NAME ($DEV_PROFILE)"
-ui_print "- Android: $OS_VER (API $API)"
-
-# 1. Deploy matching hardware binaries
-ui_print "- Deploying Chromatix sensor modules for $DEV_PROFILE..."
-mkdir -p "$MODPATH/system/odm/lib64/camera"
-mkdir -p "$MODPATH/system/odm/etc/camera"
-[ -d "$MODPATH/devices/$DEV_PROFILE/odm" ] && cp -af "$MODPATH/devices/$DEV_PROFILE/odm/." "$MODPATH/system/odm/"
-[ -d "$MODPATH/devices/$DEV_PROFILE/vendor" ] && mkdir -p "$MODPATH/system/vendor" && cp -af "$MODPATH/devices/$DEV_PROFILE/vendor/." "$MODPATH/system/vendor/"
-rm -rf "$MODPATH/devices"
-
-# 2. Dynamic patch of device_features XML
-ui_print "- Patching device_features for $DEVICE..."
-REAL_XML=""
-for xml_name in $XML_NAMES; do
-    for xml_cand in /product/etc/device_features/$xml_name /system/etc/device_features/$xml_name /odm/etc/device_features/$xml_name /vendor/etc/device_features/$xml_name; do
-        if [ -f "$xml_cand" ]; then
-            REAL_XML="$xml_cand"
-            break 2
-        fi
-    done
-done
-
-if [ -n "$REAL_XML" ]; then
-    mkdir -p "$MODPATH/system/etc/device_features"
-    TARGET_XML="$MODPATH/system/etc/device_features/$(basename "$REAL_XML")"
-    cp -af "$REAL_XML" "$TARGET_XML"
-
-    for tag in \\
-        support_ultra_hd_zoom ultra_pixel_zoom_ratio_support_list \\
-        support_ultra_pixel_zoom_ratio support_super_resolution_zoom \\
-        is_support_ultra_hd is_support_pixel_model support_super_resolution \\
-        support_ultra_pixel support_50mp support_ultra_raw support_manual_ultra_raw \\
-        support_camera_manual_aperture support_variable_aperture support_stepless_aperture \\
-        support_8k_video support_8k_24fps support_8k_all_rear_sensors \\
-        support_4k_120fps support_dolby_vision support_4k_60fps_dolby_vision \\
-        support_log_video support_director_mode support_cinematic_mode \\
-        support_camera_dcg is_support_dcg support_dcg_hdr support_sensor_hdr support_idcg \\
-        support_cloud_process support_cloud_ai_process support_ultra_raw_cloud \\
-        is_support_cloud_process support_cloud_photo_enhance support_ai_cloud \\
-        support_cloud_sr support_cloud_super_resolution support_leica_essential_cloud \\
-        support_leica_cloud support_aisp_cloud is_support_ultra_raw_cloud \\
-        support_gallery_cloud_process; do
-        sed -i "/$tag/d" "$TARGET_XML"
-    done
-
-    sed -i 's|</features>||g' "$TARGET_XML"
-
-    cat << EOF >> "$TARGET_XML"
-    <!-- Offline Processing Bypass (No Pink Noise / Cloud Delays) -->
-    <bool name="support_cloud_process">false</bool>
-    <bool name="support_cloud_ai_process">false</bool>
-    <bool name="support_ultra_raw_cloud">false</bool>
-    <bool name="is_support_cloud_process">false</bool>
-    <bool name="support_cloud_photo_enhance">false</bool>
-    <bool name="support_ai_cloud">false</bool>
-    <bool name="support_cloud_sr">false</bool>
-    <bool name="support_cloud_super_resolution">false</bool>
-    <bool name="support_leica_essential_cloud">false</bool>
-    <bool name="support_leica_cloud">false</bool>
-    <bool name="support_aisp_cloud">false</bool>
-    <bool name="is_support_ultra_raw_cloud">false</bool>
-    <bool name="support_gallery_cloud_process">false</bool>
-
-    <!-- FullRes 50MP/200MP Mode ($ZOOM_GRID) -->
-    <bool name="is_support_ultra_hd">true</bool>
-    <bool name="support_50mp">true</bool>
-    <string name="support_ultra_hd_zoom">$ZOOM_GRID</string>
-    <bool name="support_ultra_raw">true</bool>
-    <bool name="support_manual_ultra_raw">true</bool>
-
-    <!-- Variable Physical Aperture (F1.63 - F4.0) -->
-    <bool name="support_camera_manual_aperture">true</bool>
-    <bool name="support_variable_aperture">true</bool>
-    <bool name="support_stepless_aperture">true</bool>
-
-    <!-- Professional Video Capabilities -->
-    <bool name="support_8k_video">true</bool>
-    <bool name="support_8k_24fps">true</bool>
-    <bool name="support_8k_all_rear_sensors">true</bool>
-    <bool name="support_4k_120fps">true</bool>
-    <bool name="support_dolby_vision">true</bool>
-    <bool name="support_4k_60fps_dolby_vision">true</bool>
-    <bool name="support_log_video">true</bool>
-    <bool name="support_director_mode">true</bool>
-    <bool name="support_cinematic_mode">true</bool>
-    <bool name="support_eis">true</bool>
-    <bool name="support_ois">true</bool>
-
-    <!-- Dual Conversion Gain (DCG) Hardware HDR -->
-    <bool name="support_camera_dcg">true</bool>
-    <bool name="is_support_dcg">true</bool>
-    <bool name="support_dcg_hdr">true</bool>
-    <bool name="support_sensor_hdr">true</bool>
-    <bool name="support_idcg">true</bool>
-</features>
-EOF
-    for out_name in $XML_NAMES; do
-        cp -af "$TARGET_XML" "$MODPATH/system/etc/device_features/$out_name"
-        mkdir -p "$MODPATH/system/product/etc/device_features"
-        cp -af "$TARGET_XML" "$MODPATH/system/product/etc/device_features/$out_name"
-    done
-fi
-
-# 3. Full Leica Camera APK Deployment with oat/.replace protection
-ui_print "- Resolving camera destination paths..."
-SRC_APK_PATH="$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"
-STOC_CAM_PATHS="
-/product/priv-app/MiuiCamera/MiuiCamera.apk
-/system/product/priv-app/MiuiCamera/MiuiCamera.apk
-/system/priv-app/MiuiCamera/MiuiCamera.apk
-/system/system_ext/priv-app/MiuiCamera/MiuiCamera.apk
-/system_ext/priv-app/MiuiCamera/MiuiCamera.apk
-"
-
-FOUND_PATH=""
-for path in $STOC_CAM_PATHS; do
-    if [ -f "$path" ]; then
-        FOUND_PATH="$path"
-        ui_print "  Detected system MiuiCamera at: $path"
-        break
-    fi
-done
-
-copy_camera_assets() {
-    local target_apk="$1"
-    local target_dir="$(dirname "$target_apk")"
-    mkdir -p "$target_dir"
-    cp -af "$SRC_APK_PATH" "$target_apk"
-    if [ -d "$MODPATH/system/priv-app/MiuiCamera/lib" ]; then
-        mkdir -p "$target_dir/lib"
-        cp -rf "$MODPATH/system/priv-app/MiuiCamera/lib/." "$target_dir/lib/"
-    fi
-    set_perm_recursive "$target_dir" 0 0 0755 0644
-    # Anti-Bootloop: Hide system odex so ART doesn't checksum-fail
-    mkdir -p "$target_dir/oat"
-    touch "$target_dir/oat/.replace"
-    touch "$target_dir/oat/.nomedia"
-    touch "$target_dir/.replace"
-}
-
-# CRITICAL FIX: ALL target overlays in Magisk / KernelSU MUST reside strictly under $MODPATH/system/ !
-# Never create $MODPATH/product or $MODPATH/vendor at root level, as it causes KernelSU/APatch/Magisk OverlayFS
-# to mask the real system partitions, breaking MediaProvider and internal storage!
-if [ -n "$FOUND_PATH" ]; then
-    case "$FOUND_PATH" in
-        /system/*)
-            TARGET_MOD_PATH="$MODPATH$FOUND_PATH"
-            ;;
-        *)
-            TARGET_MOD_PATH="$MODPATH/system$FOUND_PATH"
-            ;;
-    esac
-    ui_print "  Targeting active camera overlay at: $TARGET_MOD_PATH"
-    copy_camera_assets "$TARGET_MOD_PATH"
-    copy_camera_assets "$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"
-else
-    set_perm_recursive "$MODPATH/system/priv-app/MiuiCamera" 0 0 0755 0644
-    mkdir -p "$MODPATH/system/priv-app/MiuiCamera/oat"
-    touch "$MODPATH/system/priv-app/MiuiCamera/oat/.replace"
-    touch "$MODPATH/system/priv-app/MiuiCamera/oat/.nomedia"
-    copy_camera_assets "$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"
-fi
-
-# 4. Mirror to /vendor/odm for ROM compatibility
-if [ -d "$MODPATH/system/odm" ]; then
-    if [ -d /vendor/odm ] || [ -L /odm ]; then
-        mkdir -p "$MODPATH/system/vendor/odm/lib64/camera"
-        mkdir -p "$MODPATH/system/vendor/odm/etc/camera"
-        cp -af "$MODPATH/system/odm/lib64/camera/." "$MODPATH/system/vendor/odm/lib64/camera/"
-        cp -af "$MODPATH/system/odm/etc/camera/." "$MODPATH/system/vendor/odm/etc/camera/"
-    fi
-fi
-
-# 5. Purge stale dalvik-cache and camera app cache
-ui_print "- Purging camera cache & dalvik state..."
-rm -rf /data/dalvik-cache/*/*com.android.camera* >/dev/null 2>&1
-rm -rf /data/system/package_cache/* >/dev/null 2>&1
-pm clear com.android.camera >/dev/null 2>&1
-rm -rf /data/data/com.android.camera/cache/* >/dev/null 2>&1
-rm -rf /data/data/com.android.camera/code_cache/* >/dev/null 2>&1
-if [ -d /data/app ]; then
-    rm -rf /data/app/~~*com.android.camera* >/dev/null 2>&1
-    rm -rf /data/app/*com.android.camera* >/dev/null 2>&1
-fi
-
-# Deploy pre-configured camera profiles
-ui_print "- Deploying pre-configured camera profiles..."
-mkdir -p "/data/media/0/Download/XiaomiCamera" 2>/dev/null
-if [ -d "$MODPATH/configs" ]; then
-    cp -n "$MODPATH/configs/"*.json "/data/media/0/Download/XiaomiCamera/" 2>/dev/null
-    [ ! -f "/data/media/0/Download/XiaomiCamera/general_config.json" ] && echo "[{\"deviceCodename\": \"$DEV_PROFILE\"}]" > "/data/media/0/Download/XiaomiCamera/general_config.json"
-fi
-
-# 6. Permissions and SELinux
-set_perm_recursive "$MODPATH/system" 0 0 0755 0644
-[ -f "$MODPATH/system/etc/permissions/privapp-permissions-camera.xml" ] && set_perm "$MODPATH/system/etc/permissions/privapp-permissions-camera.xml" 0 0 0644
-
-# CRITICAL PARTITION INTEGRITY SAFEGUARD:
-# Never leave top-level partition folders ($MODPATH/product, $MODPATH/odm, $MODPATH/vendor) in $MODPATH.
-# In KernelSU/APatch/Magisk OverlayFS, top-level partition folders mask real partitions,
-# hiding MediaProvider and completely breaking internal storage /storage/emulated/0!
-rm -rf "$MODPATH/product" "$MODPATH/odm" "$MODPATH/vendor" "$MODPATH/system_ext" 2>/dev/null
-
-ui_print "*********************************************************"
-ui_print "- FULL Edition installed successfully!"
-ui_print "- Full Leica Camera App ready with oat/.replace protection."
-ui_print "- 50MP/200MP FullRes, George 8K Video & DCG HDR active."
-ui_print "- Please reboot your device."
-ui_print "*********************************************************"
+SAFE_PERM_XML = """<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <privapp-permissions package="com.android.camera">
+        <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="android.permission.REAL_GET_TASKS" />
+        <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
+        <permission name="android.permission.INTERACT_ACROSS_USERS" />
+        <permission name="android.permission.MEDIA_CONTENT_CONTROL" />
+        <permission name="android.permission.SYSTEM_CAMERA" />
+        <permission name="android.permission.CAMERA_SEND_SYSTEM_EVENT" />
+        <permission name="android.permission.CONTROL_DISPLAY_BRIGHTNESS" />
+        <permission name="android.permission.STATUS_BAR" />
+        <permission name="android.permission.UPDATE_APP_OPS_STATS" />
+        <permission name="android.permission.PACKAGE_USAGE_STATS" />
+        <permission name="android.permission.RECORD_AUDIO" />
+        <permission name="android.permission.ACCESS_FINE_LOCATION" />
+        <permission name="android.permission.CAMERA" />
+        <permission name="android.permission.MODIFY_AUDIO_SETTINGS" />
+        <permission name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+    </privapp-permissions>
+</permissions>
 """
-with open(os.path.join(uni_full_staging, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(uni_full_cust)
 
-# customize.sh for Universal SLIM (NO APK)
-uni_slim_cust = """##########################################################################################
-# Universal Multi-Device Master Camera Combo (SLIM Edition - Pure Systemless Overlay)
-# Zero Camera APK replacement - 100% immune to signature mismatch bootloops!
-# Fully compatible with HyperOS 1.0, 2.0 & 3.0 (Android 14, 15 & 16)
-##########################################################################################
-
-ui_print "*********************************************************"
-ui_print "       Xiaomi Master Camera Combo (SLIM Edition)         "
-ui_print "   Pure Systemless Overlay (100% Anti-Bootloop Safe)     "
-ui_print "   Quad-50M/200M + DCG HDR + 8K Video + Chromatix        "
-ui_print "                     by borndead                         "
-ui_print "*********************************************************"
-
-DEVICE=$(getprop ro.product.device)
-[ -z "$DEVICE" ] && DEVICE=$(getprop ro.build.product)
-[ -z "$DEVICE" ] && DEVICE=$(getprop ro.product.vendor.device)
-API=$(getprop ro.build.version.sdk)
-[ -z "$API" ] && API=35
-OS_VER=$(getprop ro.build.version.release)
-
-case "$DEVICE" in
-    ishtar)
-        DEVICE_NAME="Xiaomi 13 Ultra"
-        DEV_PROFILE="ishtar"
-        ZOOM_GRID="0.5:1.0:3.2:5.0"
-        XML_NAMES="ishtar.xml"
-        ;;
-    aurora)
-        DEVICE_NAME="Xiaomi 14 Ultra"
-        DEV_PROFILE="aurora"
-        ZOOM_GRID="0.5:1.0:3.2:5.0"
-        XML_NAMES="aurora.xml ishtar.xml"
-        ;;
-    dada)
-        DEVICE_NAME="Xiaomi 15"
-        DEV_PROFILE="dada"
-        ZOOM_GRID="1.0"
-        XML_NAMES="dada.xml ishtar.xml"
-        ;;
-    haotian)
-        DEVICE_NAME="Xiaomi 15 Pro"
-        DEV_PROFILE="dada"
-        ZOOM_GRID="0.6:1.0:3.2:5.0"
-        XML_NAMES="haotian.xml dada.xml ishtar.xml"
-        ;;
-    xuanyuan|x15u)
-        DEVICE_NAME="Xiaomi 15 Ultra ($DEVICE)"
-        DEV_PROFILE="xuanyuan"
-        ZOOM_GRID="0.5:1.0:3.0:5.0"
-        XML_NAMES="xuanyuan.xml ishtar.xml"
-        ;;
-    nezha|x17u)
-        DEVICE_NAME="Xiaomi 17 Ultra ($DEVICE)"
-        DEV_PROFILE="nezha"
-        ZOOM_GRID="0.5:1.0:3.0:5.0"
-        XML_NAMES="nezha.xml xuanyuan.xml ishtar.xml"
-        ;;
-    *)
-        ui_print "! Unlisted device ($DEVICE). Applying flagship fallback profile..."
-        DEVICE_NAME="Xiaomi Flagship ($DEVICE)"
-        DEV_PROFILE="ishtar"
-        ZOOM_GRID="0.5:1.0:3.2:5.0"
-        XML_NAMES="${DEVICE}.xml ishtar.xml"
-        ;;
-esac
-
-ui_print "- Target: $DEVICE_NAME ($DEV_PROFILE)"
-ui_print "- Android: $OS_VER (API $API)"
-
-# 1. Deploy matching hardware binaries
-ui_print "- Deploying Chromatix sensor modules for $DEV_PROFILE..."
-mkdir -p "$MODPATH/system/odm/lib64/camera"
-mkdir -p "$MODPATH/system/odm/etc/camera"
-[ -d "$MODPATH/devices/$DEV_PROFILE/odm" ] && cp -af "$MODPATH/devices/$DEV_PROFILE/odm/." "$MODPATH/system/odm/"
-[ -d "$MODPATH/devices/$DEV_PROFILE/vendor" ] && mkdir -p "$MODPATH/system/vendor" && cp -af "$MODPATH/devices/$DEV_PROFILE/vendor/." "$MODPATH/system/vendor/"
-rm -rf "$MODPATH/devices"
-
-# 2. Dynamic patch of device_features XML
-ui_print "- Patching device_features for $DEVICE..."
-REAL_XML=""
-for xml_name in $XML_NAMES; do
-    for xml_cand in /product/etc/device_features/$xml_name /system/etc/device_features/$xml_name /odm/etc/device_features/$xml_name /vendor/etc/device_features/$xml_name; do
-        if [ -f "$xml_cand" ]; then
-            REAL_XML="$xml_cand"
-            break 2
-        fi
-    done
-done
-
-if [ -n "$REAL_XML" ]; then
-    mkdir -p "$MODPATH/system/etc/device_features"
-    TARGET_XML="$MODPATH/system/etc/device_features/$(basename "$REAL_XML")"
-    cp -af "$REAL_XML" "$TARGET_XML"
-
-    for tag in \\
-        support_ultra_hd_zoom ultra_pixel_zoom_ratio_support_list \\
-        support_ultra_pixel_zoom_ratio support_super_resolution_zoom \\
-        is_support_ultra_hd is_support_pixel_model support_super_resolution \\
-        support_ultra_pixel support_50mp support_ultra_raw support_manual_ultra_raw \\
-        support_camera_manual_aperture support_variable_aperture support_stepless_aperture \\
-        support_8k_video support_8k_24fps support_8k_all_rear_sensors \\
-        support_4k_120fps support_dolby_vision support_4k_60fps_dolby_vision \\
-        support_log_video support_director_mode support_cinematic_mode \\
-        support_camera_dcg is_support_dcg support_dcg_hdr support_sensor_hdr support_idcg \\
-        support_cloud_process support_cloud_ai_process support_ultra_raw_cloud \\
-        is_support_cloud_process support_cloud_photo_enhance support_ai_cloud \\
-        support_cloud_sr support_cloud_super_resolution support_leica_essential_cloud \\
-        support_leica_cloud support_aisp_cloud is_support_ultra_raw_cloud \\
-        support_gallery_cloud_process; do
-        sed -i "/$tag/d" "$TARGET_XML"
-    done
-
-    sed -i 's|</features>||g' "$TARGET_XML"
-
-    cat << EOF >> "$TARGET_XML"
-    <!-- Offline Processing Bypass (No Pink Noise / Cloud Delays) -->
-    <bool name="support_cloud_process">false</bool>
-    <bool name="support_cloud_ai_process">false</bool>
-    <bool name="support_ultra_raw_cloud">false</bool>
-    <bool name="is_support_cloud_process">false</bool>
-    <bool name="support_cloud_photo_enhance">false</bool>
-    <bool name="support_ai_cloud">false</bool>
-    <bool name="support_cloud_sr">false</bool>
-    <bool name="support_cloud_super_resolution">false</bool>
-    <bool name="support_leica_essential_cloud">false</bool>
-    <bool name="support_leica_cloud">false</bool>
-    <bool name="support_aisp_cloud">false</bool>
-    <bool name="is_support_ultra_raw_cloud">false</bool>
-    <bool name="support_gallery_cloud_process">false</bool>
-
-    <!-- FullRes 50MP/200MP Mode ($ZOOM_GRID) -->
-    <bool name="is_support_ultra_hd">true</bool>
-    <bool name="support_50mp">true</bool>
-    <string name="support_ultra_hd_zoom">$ZOOM_GRID</string>
-    <bool name="support_ultra_raw">true</bool>
-    <bool name="support_manual_ultra_raw">true</bool>
-
-    <!-- Variable Physical Aperture (F1.63 - F4.0) -->
-    <bool name="support_camera_manual_aperture">true</bool>
-    <bool name="support_variable_aperture">true</bool>
-    <bool name="support_stepless_aperture">true</bool>
-
-    <!-- Professional Video Capabilities -->
-    <bool name="support_8k_video">true</bool>
-    <bool name="support_8k_24fps">true</bool>
-    <bool name="support_8k_all_rear_sensors">true</bool>
-    <bool name="support_4k_120fps">true</bool>
-    <bool name="support_dolby_vision">true</bool>
-    <bool name="support_4k_60fps_dolby_vision">true</bool>
-    <bool name="support_log_video">true</bool>
-    <bool name="support_director_mode">true</bool>
-    <bool name="support_cinematic_mode">true</bool>
-    <bool name="support_eis">true</bool>
-    <bool name="support_ois">true</bool>
-
-    <!-- Dual Conversion Gain (DCG) Hardware HDR -->
-    <bool name="support_camera_dcg">true</bool>
-    <bool name="is_support_dcg">true</bool>
-    <bool name="support_dcg_hdr">true</bool>
-    <bool name="support_sensor_hdr">true</bool>
-    <bool name="support_idcg">true</bool>
-</features>
-EOF
-    for out_name in $XML_NAMES; do
-        cp -af "$TARGET_XML" "$MODPATH/system/etc/device_features/$out_name"
-        mkdir -p "$MODPATH/system/product/etc/device_features"
-        cp -af "$TARGET_XML" "$MODPATH/system/product/etc/device_features/$out_name"
-    done
-fi
-
-# 3. Pure Systemless Overlay Notice
-ui_print "- SLIM Pure Systemless Overlay active."
-ui_print "  ROM native Camera APK is preserved untouched."
-ui_print "  100% immune to signature mismatch and odex bootloops."
-
-# 4. Mirror to /vendor/odm for ROM compatibility
-if [ -d "$MODPATH/system/odm" ]; then
-    if [ -d /vendor/odm ] || [ -L /odm ]; then
-        mkdir -p "$MODPATH/system/vendor/odm/lib64/camera"
-        mkdir -p "$MODPATH/system/vendor/odm/etc/camera"
-        cp -af "$MODPATH/system/odm/lib64/camera/." "$MODPATH/system/vendor/odm/lib64/camera/"
-        cp -af "$MODPATH/system/odm/etc/camera/." "$MODPATH/system/vendor/odm/etc/camera/"
-    fi
-fi
-
-# 5. Clear camera app cache
-ui_print "- Clearing camera app cache..."
-pm clear com.android.camera >/dev/null 2>&1
-rm -rf /data/data/com.android.camera/cache/* >/dev/null 2>&1
-rm -rf /data/data/com.android.camera/code_cache/* >/dev/null 2>&1
-
-# Deploy pre-configured camera profiles
-ui_print "- Deploying pre-configured camera profiles..."
-mkdir -p "/data/media/0/Download/XiaomiCamera" 2>/dev/null
-if [ -d "$MODPATH/configs" ]; then
-    cp -n "$MODPATH/configs/"*.json "/data/media/0/Download/XiaomiCamera/" 2>/dev/null
-    [ ! -f "/data/media/0/Download/XiaomiCamera/general_config.json" ] && echo "[{\"deviceCodename\": \"$DEV_PROFILE\"}]" > "/data/media/0/Download/XiaomiCamera/general_config.json"
-fi
-
-# 6. Permissions and SELinux
-set_perm_recursive "$MODPATH/system" 0 0 0755 0644
-
-# CRITICAL PARTITION INTEGRITY SAFEGUARD:
-rm -rf "$MODPATH/product" "$MODPATH/odm" "$MODPATH/vendor" "$MODPATH/system_ext" 2>/dev/null
-
-ui_print "*********************************************************"
-ui_print "- SLIM Edition installed successfully!"
-ui_print "- Pure Systemless Overlay ready (Zero APK modified)."
-ui_print "- 50MP/200MP FullRes, George 8K Video & DCG HDR active."
-ui_print "- Please reboot your device."
-ui_print "*********************************************************"
-"""
-with open(os.path.join(uni_slim_staging, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(uni_slim_cust)
-
-# Package Universal FULL
-uni_full_zip = os.path.join(root_antigravity, 'Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip')
-create_zip(uni_full_staging, uni_full_zip)
-
-# Package Universal SLIM
-uni_slim_zip = os.path.join(root_antigravity, 'Mi_Master_Camera_Combo_Universal_Slim_by_borndead.zip')
-create_zip(uni_slim_staging, uni_slim_zip)
-
-# -------------------------------------------------------------
-# 3. BUILD DEDICATED FULL & SLIM FOR XIAOMI 13 ULTRA (ishtar)
-# -------------------------------------------------------------
-ishtar_full_stg = os.path.join(root_antigravity, 'Mi13U_Full_Staging')
-ishtar_slim_stg = os.path.join(root_antigravity, 'Mi13U_Slim_Staging')
-
-for stg in [ishtar_full_stg, ishtar_slim_stg]:
-    if os.path.exists(stg):
-        shutil.rmtree(stg)
-    os.makedirs(stg, exist_ok=True)
-    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
-    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_post_fs_data)
-    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write("#!/system/bin/sh\n")
-    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_system_prop)
-    # Copy ishtar sensor bins and aisp.json to system/odm
-    os.makedirs(os.path.join(stg, 'system', 'odm', 'lib64', 'camera'), exist_ok=True)
-    os.makedirs(os.path.join(stg, 'system', 'odm', 'etc', 'camera'), exist_ok=True)
-    ishtar_bins = os.path.join(multi_staging, 'devices', 'ishtar', 'odm', 'lib64', 'camera')
-    for b in os.listdir(ishtar_bins):
-        if b.endswith('.bin'):
-            shutil.copy2(os.path.join(ishtar_bins, b), os.path.join(stg, 'system', 'odm', 'lib64', 'camera', b))
-    shutil.copy2(
-        os.path.join(multi_staging, 'devices', 'ishtar', 'odm', 'etc', 'camera', 'aisp.json'),
-        os.path.join(stg, 'system', 'odm', 'etc', 'camera', 'aisp.json')
-    )
-
-# Add Clean Camera Payload to 13U FULL
-shutil.copytree(os.path.join(payload_staging, 'system', 'priv-app'), os.path.join(ishtar_full_stg, 'system', 'priv-app'))
-shutil.copytree(os.path.join(payload_staging, 'system', 'etc', 'permissions'), os.path.join(ishtar_full_stg, 'system', 'etc', 'permissions'))
-
-# Props
-with open(os.path.join(ishtar_full_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi13u_master_camera_combo_full
-name=Xiaomi 13 Ultra Master Camera Combo (FULL Edition)
-version=v5.2-Full-AntiBootloop
-versionCode=20260926
-author=borndead
-description=Dedicated FULL Leica Camera Suite for Xiaomi 13 Ultra (ishtar) on HyperOS 2/3 (Android 15/16). Full Leica Camera App + oat/.replace protection + Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Chromatix IMX989/IMX858 hardware calibration bins.
-""")
-
-with open(os.path.join(ishtar_slim_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi13u_master_imaging_mod_slim
-name=Xiaomi 13 Ultra Master Camera Combo (SLIM Edition)
-version=v5.2-Slim-AntiBootloop
-versionCode=20260926
-author=borndead
-description=Dedicated Pure Systemless Overlay for Xiaomi 13 Ultra (ishtar) on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops on official Taiwan/Global ROMs!). Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Chromatix IMX989/IMX858.
-""")
-
-# Build 13U FULL customize.sh
-ishtar_full_cust = uni_full_cust.replace("Xiaomi Master Camera Combo (FULL Edition)", "Xiaomi 13 Ultra Master Camera Combo (FULL Edition)")
-with open(os.path.join(ishtar_full_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(ishtar_full_cust)
-
-# Build 13U SLIM customize.sh
-ishtar_slim_cust = uni_slim_cust.replace("Xiaomi Master Camera Combo (SLIM Edition)", "Xiaomi 13 Ultra Master Camera Combo (SLIM Edition)")
-with open(os.path.join(ishtar_slim_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(ishtar_slim_cust)
-
-# Package 13U FULL
-ishtar_full_zip = os.path.join(root_antigravity, 'Mi13U_Master_Camera_Combo_Full_by_borndead.zip')
-create_zip(ishtar_full_stg, ishtar_full_zip)
-
-# Package 13U SLIM
-ishtar_slim_zip = os.path.join(root_antigravity, 'Mi13U_Master_Imaging_MOD_Slim_by_borndead.zip')
-create_zip(ishtar_slim_stg, ishtar_slim_zip)
-
-# -------------------------------------------------------------
-# 4. BUILD DEDICATED FULL & SLIM FOR XIAOMI 17 ULTRA (nezha)
-# -------------------------------------------------------------
-x17u_full_stg = os.path.join(root_antigravity, 'X17U_Full_Staging')
-x17u_slim_stg = os.path.join(root_antigravity, 'X17U_Slim_Staging_New')
-
-for stg in [x17u_full_stg, x17u_slim_stg]:
-    if os.path.exists(stg):
-        shutil.rmtree(stg)
-    os.makedirs(stg, exist_ok=True)
-    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
-    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_post_fs_data)
-    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write("#!/system/bin/sh\n")
-    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_system_prop)
-    # Copy nezha assets
-    shutil.copytree(os.path.join(multi_staging, 'devices', 'nezha', 'odm'), os.path.join(stg, 'system', 'odm'))
-    shutil.copytree(os.path.join(multi_staging, 'devices', 'nezha', 'vendor'), os.path.join(stg, 'system', 'vendor'))
-
-shutil.copytree(os.path.join(payload_staging, 'system', 'priv-app'), os.path.join(x17u_full_stg, 'system', 'priv-app'))
-shutil.copytree(os.path.join(payload_staging, 'system', 'etc', 'permissions'), os.path.join(x17u_full_stg, 'system', 'etc', 'permissions'))
-
-with open(os.path.join(x17u_full_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=x17u_master_camera_combo_full
-name=Xiaomi 17 Ultra Master Camera Combo (FULL Edition)
-version=v5.2-Full-Nezha
-versionCode=20260926
-author=borndead
-description=Dedicated FULL Leica Camera Suite for Xiaomi 17 Ultra (nezha) on HyperOS 3.0. Full Leica Camera APK + oat/.replace protection + genuine OVX10500U/HP9/JN5 Chromatix bins + DCG Hardware HDR + 8K video on all lenses + 4K120fps + Qualcomm libqcodec2_v4l2codec.so.
-""")
-
-with open(os.path.join(x17u_slim_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=x17u_master_imaging_mod_slim
-name=Xiaomi 17 Ultra Master Camera Combo (SLIM Edition)
-version=v1.1-Slim-Nezha
-versionCode=20260926
-author=borndead
-description=Dedicated Pure Systemless Overlay for Xiaomi 17 Ultra (nezha) on HyperOS 3.0. Zero Camera APK replacement (100% immune to crashes on SimpleRom ST, EU, Elite!). OVX10500U/HP9/JN5 Chromatix bins + DCG Hardware HDR + 8K video all lenses + 4K120fps + Qualcomm libqcodec2_v4l2codec.so.
-""")
-
-x17u_full_cust = uni_full_cust.replace("Xiaomi Master Camera Combo (FULL Edition)", "Xiaomi 17 Ultra Master Camera Combo (FULL Edition)")
-with open(os.path.join(x17u_full_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(x17u_full_cust)
-
-x17u_slim_cust = uni_slim_cust.replace("Xiaomi Master Camera Combo (SLIM Edition)", "Xiaomi 17 Ultra Master Camera Combo (SLIM Edition)")
-with open(os.path.join(x17u_slim_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(x17u_slim_cust)
-
-x17u_full_zip = os.path.join(root_antigravity, 'X17U_Master_Camera_Combo_Full_by_borndead.zip')
-create_zip(x17u_full_stg, x17u_full_zip)
-
-x17u_slim_zip = os.path.join(root_antigravity, 'X17U_Master_Imaging_MOD_Slim_by_borndead.zip')
-create_zip(x17u_slim_stg, x17u_slim_zip)
-
-# -------------------------------------------------------------
-# 5. BUILD DEDICATED FULL & SLIM FOR XIAOMI 15 ULTRA (xuanyuan)
-# -------------------------------------------------------------
-x15u_full_stg = os.path.join(root_antigravity, 'Mi15U_Full_Staging')
-x15u_slim_stg = os.path.join(root_antigravity, 'Mi15U_Slim_Staging')
-
-for stg in [x15u_full_stg, x15u_slim_stg]:
-    if os.path.exists(stg):
-        shutil.rmtree(stg)
-    os.makedirs(stg, exist_ok=True)
-    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
-    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_post_fs_data)
-    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write("#!/system/bin/sh\n")
-    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_system_prop)
-    # Copy xuanyuan assets
-    shutil.copytree(os.path.join(multi_staging, 'devices', 'xuanyuan', 'odm'), os.path.join(stg, 'system', 'odm'))
-
-shutil.copytree(os.path.join(payload_staging, 'system', 'priv-app'), os.path.join(x15u_full_stg, 'system', 'priv-app'))
-shutil.copytree(os.path.join(payload_staging, 'system', 'etc', 'permissions'), os.path.join(x15u_full_stg, 'system', 'etc', 'permissions'))
-
-with open(os.path.join(x15u_full_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi15u_master_camera_combo_full
-name=Xiaomi 15 Ultra Master Camera Combo (FULL Edition)
-version=v5.2-Full-Xuanyuan
-versionCode=20260926
-author=borndead
-description=Dedicated FULL Leica Camera Suite for Xiaomi 15 Ultra (xuanyuan) on HyperOS 2/3. Full Leica Camera APK + oat/.replace protection + Stock AIO 104 LYT-900 / HP9 200M tunings + native A16 Camera HAL + DCG Hardware HDR + 8K video on all lenses + 4K120fps.
-""")
-
-with open(os.path.join(x15u_slim_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi15u_master_imaging_mod_slim
-name=Xiaomi 15 Ultra Master Camera Combo (SLIM Edition)
-version=v1.1-Slim-Xuanyuan
-versionCode=20260926
-author=borndead
-description=Dedicated Pure Systemless Overlay for Xiaomi 15 Ultra (xuanyuan) on HyperOS 2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Stock AIO 104 LYT-900 / HP9 200M Chromatix tunings + native A16 HAL + DCG Hardware HDR + 8K video all lenses + 4K120fps.
-""")
-
-x15u_full_cust = uni_full_cust.replace("Xiaomi Master Camera Combo (FULL Edition)", "Xiaomi 15 Ultra Master Camera Combo (FULL Edition)")
-with open(os.path.join(x15u_full_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(x15u_full_cust)
-
-x15u_slim_cust = uni_slim_cust.replace("Xiaomi Master Camera Combo (SLIM Edition)", "Xiaomi 15 Ultra Master Camera Combo (SLIM Edition)")
-with open(os.path.join(x15u_slim_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(x15u_slim_cust)
-
-x15u_full_zip = os.path.join(root_antigravity, 'Mi15U_Master_Camera_Combo_Full_by_borndead.zip')
-create_zip(x15u_full_stg, x15u_full_zip)
-
-x15u_slim_zip = os.path.join(root_antigravity, 'Mi15U_Master_Imaging_MOD_Slim_by_borndead.zip')
-create_zip(x15u_slim_stg, x15u_slim_zip)
-
-# -------------------------------------------------------------
-# 6. BUILD DEDICATED FULL & SLIM FOR XIAOMI 15 / 15 PRO (dada/haotian)
-# -------------------------------------------------------------
-mi15_full_stg = os.path.join(root_antigravity, 'Mi15_Full_Staging')
-mi15_slim_stg = os.path.join(root_antigravity, 'Mi15_Slim_Staging')
-
-for stg in [mi15_full_stg, mi15_slim_stg]:
-    if os.path.exists(stg):
-        shutil.rmtree(stg)
-    os.makedirs(stg, exist_ok=True)
-    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
-    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_post_fs_data)
-    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write("#!/system/bin/sh\n")
-    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_system_prop)
-    # Copy dada assets
-    shutil.copytree(os.path.join(multi_staging, 'devices', 'dada', 'odm'), os.path.join(stg, 'system', 'odm'))
-
-shutil.copytree(os.path.join(payload_staging, 'system', 'priv-app'), os.path.join(mi15_full_stg, 'system', 'priv-app'))
-shutil.copytree(os.path.join(payload_staging, 'system', 'etc', 'permissions'), os.path.join(mi15_full_stg, 'system', 'etc', 'permissions'))
-
-with open(os.path.join(mi15_full_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi15_master_camera_combo_full
-name=Xiaomi 15 / 15 Pro Master Camera Combo (FULL Edition)
-version=v5.2-Full-Dada
-versionCode=20260926
-author=borndead
-description=Dedicated FULL Leica Camera Suite for Xiaomi 15 & 15 Pro (dada/haotian) on HyperOS 2/3. Full Leica Camera APK + oat/.replace protection + Light Hunter 900 tuning + 50MP FullRes + DCG Hardware HDR + George 8K Video + 4K120fps.
-""")
-
-with open(os.path.join(mi15_slim_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi15_master_imaging_mod_slim
-name=Xiaomi 15 / 15 Pro Master Camera Combo (SLIM Edition)
-version=v1.1-Slim-Dada
-versionCode=20260926
-author=borndead
-description=Dedicated Pure Systemless Overlay for Xiaomi 15 & 15 Pro (dada/haotian) on HyperOS 2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Light Hunter 900 tuning + 50MP FullRes + DCG Hardware HDR + George 8K Video + 4K120fps.
-""")
-
-mi15_full_cust = uni_full_cust.replace("Xiaomi Master Camera Combo (FULL Edition)", "Xiaomi 15 / 15 Pro Master Camera Combo (FULL Edition)")
-with open(os.path.join(mi15_full_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(mi15_full_cust)
-
-mi15_slim_cust = uni_slim_cust.replace("Xiaomi Master Camera Combo (SLIM Edition)", "Xiaomi 15 / 15 Pro Master Camera Combo (SLIM Edition)")
-with open(os.path.join(mi15_slim_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(mi15_slim_cust)
-
-mi15_full_zip = os.path.join(root_antigravity, 'Mi15_Master_Camera_Combo_Full_by_borndead.zip')
-create_zip(mi15_full_stg, mi15_full_zip)
-
-mi15_slim_zip = os.path.join(root_antigravity, 'Mi15_Master_Imaging_MOD_Slim_by_borndead.zip')
-create_zip(mi15_slim_stg, mi15_slim_zip)
-
-# -------------------------------------------------------------
-# 7. BUILD DEDICATED FULL & SLIM FOR XIAOMI 14 ULTRA (aurora)
-# -------------------------------------------------------------
-mi14u_full_stg = os.path.join(root_antigravity, 'Mi14U_Full_Staging')
-mi14u_slim_stg = os.path.join(root_antigravity, 'Mi14U_Slim_Staging')
-
-for stg in [mi14u_full_stg, mi14u_slim_stg]:
-    if os.path.exists(stg):
-        shutil.rmtree(stg)
-    os.makedirs(stg, exist_ok=True)
-    shutil.copytree(os.path.join(multi_staging, 'META-INF'), os.path.join(stg, 'META-INF'))
-    with open(os.path.join(stg, 'post-fs-data.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_post_fs_data)
-    with open(os.path.join(stg, 'service.sh'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write("#!/system/bin/sh\n")
-    with open(os.path.join(stg, 'system.prop'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(common_system_prop)
-    # Copy aurora assets (aisp.json)
-    if os.path.exists(os.path.join(multi_staging, 'devices', 'aurora', 'odm')):
-        shutil.copytree(os.path.join(multi_staging, 'devices', 'aurora', 'odm'), os.path.join(stg, 'system', 'odm'))
-
-# Add clean camera payload to 14U FULL
-shutil.copytree(os.path.join(payload_staging, 'system', 'priv-app'), os.path.join(mi14u_full_stg, 'system', 'priv-app'))
-shutil.copytree(os.path.join(payload_staging, 'system', 'etc', 'permissions'), os.path.join(mi14u_full_stg, 'system', 'etc', 'permissions'))
-
-# Module prop for 14U FULL
-with open(os.path.join(mi14u_full_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi14u_master_camera_combo_full
-name=Xiaomi 14 Ultra Master Camera Combo (FULL Edition)
-version=v5.2-Full-Aurora
-versionCode=20260926
-author=borndead
-description=Dedicated FULL Leica Camera Suite for Xiaomi 14 Ultra (aurora) on HyperOS 1/2/3. Full Leica Camera APK + oat/.replace protection + Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + Stepless Variable Aperture (F1.63-F4.0) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + Offline Processing Bypass.
-""")
-
-# Module prop for 14U SLIM
-with open(os.path.join(mi14u_slim_stg, 'module.prop'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write("""id=mi14u_master_imaging_mod_slim
-name=Xiaomi 14 Ultra Master Camera Combo (SLIM Edition)
-version=v1.1-Slim-Aurora
-versionCode=20260926
-author=borndead
-description=Dedicated Pure Systemless Overlay for Xiaomi 14 Ultra (aurora) on HyperOS 1/2/3. Zero Camera APK replacement (100% immune to signature mismatch bootloops!). Quad-50MP FullRes (0.5x, 1x, 3.2x, 5x) + Stepless Variable Aperture (F1.63-F4.0) + DCG Hardware HDR + George 8K Video all lenses + 4K120fps + AISP Noise Reduction Bypass.
-""")
-
-mi14u_full_cust = uni_full_cust.replace("Xiaomi Master Camera Combo (FULL Edition)", "Xiaomi 14 Ultra Master Camera Combo (FULL Edition)")
-with open(os.path.join(mi14u_full_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(mi14u_full_cust)
-
-mi14u_slim_cust = uni_slim_cust.replace("Xiaomi Master Camera Combo (SLIM Edition)", "Xiaomi 14 Ultra Master Camera Combo (SLIM Edition)")
-with open(os.path.join(mi14u_slim_stg, 'customize.sh'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write(mi14u_slim_cust)
-
-mi14u_full_zip = os.path.join(root_antigravity, 'Mi14U_Master_Camera_Combo_Full_by_borndead.zip')
-create_zip(mi14u_full_stg, mi14u_full_zip)
-
-mi14u_slim_zip = os.path.join(root_antigravity, 'Mi14U_Master_Imaging_MOD_Slim_by_borndead.zip')
-create_zip(mi14u_slim_stg, mi14u_slim_zip)
-
-print("\n=== ALL FULL & SLIM MODULES SUCCESSFULLY BUILT AND PACKAGED! ===")
+def create_module_zip(staging_dir: Path, output_zip: Path):
+    output_zip.parent.mkdir(parents=True, exist_ok=True)
+    if output_zip.exists():
+        output_zip.unlink()
+
+    with zipfile.ZipFile(output_zip, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+        for file_path in staging_dir.rglob('*'):
+            if not file_path.is_file():
+                continue
+            rel_p = file_path.relative_to(staging_dir).as_posix()
+            zinfo = zipfile.ZipInfo.from_file(file_path, arcname=rel_p)
+            if file_path.name.endswith('.sh') or 'update-binary' in file_path.name:
+                zinfo.external_attr = (0o755 | stat.S_IFREG) << 16
+            else:
+                zinfo.external_attr = (0o644 | stat.S_IFREG) << 16
+            with open(file_path, 'rb') as fp:
+                zf.writestr(zinfo, fp.read())
+
+    print(f"Generated module: {output_zip.name} ({output_zip.stat().st_size:,} bytes)")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Build Full and Slim Module Lineup")
+    parser.add_argument("--staging-dir", type=str, default="", help="Base staging directory")
+    parser.add_argument("--output-dir", type=str, default="", help="Output releases directory")
+    args = parser.parse_args()
+
+    repo_root = Path(__file__).resolve().parent.parent
+    output_dir = Path(args.output_dir) if args.output_dir else (repo_root / "releases")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    base_staging = Path(args.staging_dir) if args.staging_dir else (repo_root / "build" / "staging")
+    base_staging.mkdir(parents=True, exist_ok=True)
+
+    print("=== Building Dual-Tier (FULL & SLIM) Module Lineup ===")
+    print(f"Repository Root: {repo_root}")
+    print(f"Output Directory: {output_dir}")
+    print(f"Base Staging: {base_staging}")
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,23 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Temporary and log files
 *.tmp
+*.log
+*.bak
+
+# Cryptographic Keys & Keystores (Strict Security)
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+
+# Build and staging artifacts
+build/
+dist/
+temp_*/
+.DS_Store
+Thumbs.db

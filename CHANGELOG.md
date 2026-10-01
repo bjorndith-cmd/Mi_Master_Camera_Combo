@@ -2,6 +2,31 @@
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
 
+## [v6.2-Security-Overhaul] - 2026-10-01
+### Security & Portability Overhaul by `borndead`
+- **Complete Elimination of Private Paths & Exposed Secrets**:
+  - Scrubbed all hardcoded local development PC paths across all build scripts, configs, and documentation.
+  - Removed private keystores from Git tracking and updated `.gitignore` with strict security exclusions (`*.keystore`, `*.jks`, `*.key`, `*.pem`, `*.log`, `build/`, `dist/`).
+  - Purged plaintext passwords from signing pipelines; enabled secure pass-through via CLI arguments and environment variables (`KEYSTORE_PATH`, `KEYSTORE_PASS`).
+- **Android Property Length Limits (`PROP_VALUE_MAX < 92`)**:
+  - Fixed silent drop of `vendor.camera.aux.packagelist` and `persist.vendor.camera.privapp.list` by init: split into compliant properties strictly under 92 characters, fully unlocking auxiliary cameras for Google Camera (AGC, LMC, Shamim, OpenCamera) across all packages.
+  - Implemented automated length validator in `tools/verify.py` guaranteeing zero non-compliant properties.
+- **Battery & Flash Optimization (Zero-Daemon Runtime)**:
+  - Eliminated continuous infinite `logcat` background daemons in `service.sh`, preventing high battery drain, flash memory wear, and disk storage bloat.
+  - Replaced with an **On-Demand Diagnostic Mode**: logcat snapshots are generated strictly when requested via trigger flag (`/data/local/tmp/mmc_debug` or `/sdcard/Download/mmc_debug`) with restricted `0750` permissions.
+- **Platform Security & Privapp Compliance**:
+  - Removed unnecessary `ro.control_privapp_permissions.enforce 0` system-wide bypass from SLIM editions.
+  - Purged dangerous platform allocators (`libdmabufheap.so`, `libion.so`) from companion library payloads to prevent kernel allocator conflicts and HAL memory crashes.
+- **Magisk / KernelSU / APatch Installer Modernization**:
+  - Repaired broken `update-binary` in AI Suite to properly source `util_functions.sh` and invoke `install_module`.
+  - Added strict hardware detection: unsupported device installations abort immediately instead of falling back to incorrect hardware profiles.
+  - Fixed Xiaomi 15 Pro (`haotian`) hardware profile mapping: corrected to 5x Sony IMX858 periscope and fixed F1.44 aperture instead of dada's 3.2x JN5 profile.
+  - Fixed Custom ROM detection regex: eliminated greedy `*st*` matching that erroneously wiped `MiuiCamera.apk` on stock builds.
+- **CI/CD Security & Automated QA**:
+  - Patched GitHub Actions Telegram Notification workflow against shell template injection.
+  - Added `.github/workflows/ci.yml` running automated strict verification on all pushes and PRs.
+  - Introduced unified `tools/verify.py` and `tools/patch_release_modules.py`.
+
 ## [v6.1-MIUI14-EU-Stable] - 2026-09-30
 ### Added & Specialized for Xiaomi 13 Ultra (`ishtar` / `2304FPN6DC`)
 - **Dedicated MIUI 14 by xiaomi.eu (14.0.20.0.TMACNXM, Android 13, API 33) Suite by `borndead`**:

@@ -1,93 +1,51 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Mi Master Camera Combo - Universal Multi-Device Combo Packager
+Author: borndead
+
+Packages the Universal Multi-Device module with safe ROM detection and proper overlay paths.
+"""
+
 import os
 import shutil
 import zipfile
+import stat
+import argparse
+from pathlib import Path
 
-staging = r'C:\Users\ASTA\OneDrive\Antigravity\Mi_MultiDevice_Combo_Staging'
+def main():
+    parser = argparse.ArgumentParser(description="Package Universal Multi-Device Combo")
+    parser.add_argument("--staging", type=str, default="", help="Staging directory containing module files")
+    parser.add_argument("--out-zip", type=str, default="", help="Output zip path")
+    args = parser.parse_args()
 
-# Update customize.sh in Mi_MultiDevice_Combo_Staging
-customize_path = os.path.join(staging, 'customize.sh')
-with open(customize_path, 'r', encoding='utf-8') as f:
-    cust = f.read()
+    repo_root = Path(__file__).resolve().parent.parent
+    releases_dir = repo_root / "releases"
+    releases_dir.mkdir(parents=True, exist_ok=True)
 
-# Check vendor copy
-if 'devices/$DEV_PROFILE/vendor' not in cust:
-    old_deploy = '''if [ -d "$MODPATH/devices/$DEV_PROFILE/odm" ]; then
-    cp -af "$MODPATH/devices/$DEV_PROFILE/odm/." "$MODPATH/system/odm/"
-fi'''
-    new_deploy = '''if [ -d "$MODPATH/devices/$DEV_PROFILE/odm" ]; then
-    cp -af "$MODPATH/devices/$DEV_PROFILE/odm/." "$MODPATH/system/odm/"
-fi
+    staging_dir = Path(args.staging) if args.staging else (repo_root / "build" / "staging" / "Universal_Full_Staging")
+    out_zip = Path(args.out_zip) if args.out_zip else (releases_dir / "Mi_Master_Camera_Combo_Universal_Full_by_borndead.zip")
 
-if [ -d "$MODPATH/devices/$DEV_PROFILE/vendor" ]; then
-    mkdir -p "$MODPATH/system/vendor"
-    cp -af "$MODPATH/devices/$DEV_PROFILE/vendor/." "$MODPATH/system/vendor/"
-fi'''
-    cust = cust.replace(old_deploy, new_deploy)
+    if not staging_dir.exists():
+        print(f"[INFO] Staging directory {staging_dir} does not exist. Skipping standalone packaging.")
+        return
 
-# Custom ROM & Nezha preservation check
-old_cam_resolv = '''# 4. Resolve system Camera APK installation path
-ui_print "- Resolving camera destination paths..."
-SRC_APK_PATH="$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"'''
+    print(f"Packaging Universal Combo: {out_zip.name}...")
+    with zipfile.ZipFile(out_zip, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+        for file_path in staging_dir.rglob('*'):
+            if not file_path.is_file():
+                continue
+            rel_p = file_path.relative_to(staging_dir).as_posix()
+            zinfo = zipfile.ZipInfo.from_file(file_path, arcname=rel_p)
+            if file_path.name.endswith('.sh') or 'update-binary' in file_path.name:
+                zinfo.external_attr = (0o755 | stat.S_IFREG) << 16
+            else:
+                zinfo.external_attr = (0o644 | stat.S_IFREG) << 16
+            with open(file_path, 'rb') as fp:
+                zf.writestr(zinfo, fp.read())
 
-new_cam_resolv = '''# 4. Resolve system Camera APK & Custom ROM Handling
-BUILD_ID=$(getprop ro.build.display.id)
-BUILD_FLAVOR=$(getprop ro.build.flavor)
-MOD_DEV=$(getprop ro.product.mod_device)
-ROM_VER=$(getprop ro.build.version.incremental)
+    print(f"Packaged Universal Combo: {out_zip} ({out_zip.stat().st_size:,} bytes)")
 
-IS_CUSTOM_ROM=false
-case "$BUILD_ID $BUILD_FLAVOR $MOD_DEV $ROM_VER" in
-    *[Ss]imple*|*ST*|*st*|*[Ee][Uu]*|*[Ee]lite*|*[Pp]ulse*|*[Cc]ustom*)
-        IS_CUSTOM_ROM=true
-        ;;
-esac
-
-if [ "$IS_CUSTOM_ROM" = "true" ] || [ "$DEV_PROFILE" = "nezha" ]; then
-    ui_print "- Custom ROM ($BUILD_ID) or Xiaomi 17 Ultra detected:"
-    ui_print "  Preserving ROM's native patched MiuiCamera.apk (prevents crash)."
-    ui_print "  Deploying Chromatix hardware modules, FullRes RAW, DCG HDR & Video MOD."
-    rm -rf "$MODPATH/system/priv-app/MiuiCamera"
-    rm -rf "$MODPATH/system/product/priv-app/MiuiCamera"
-    rm -rf "$MODPATH/product/priv-app/MiuiCamera"
-else
-ui_print "- Resolving camera destination paths..."
-SRC_APK_PATH="$MODPATH/system/priv-app/MiuiCamera/MiuiCamera.apk"'''
-
-if 'IS_CUSTOM_ROM' not in cust:
-    cust = cust.replace(old_cam_resolv, new_cam_resolv)
-    # close the else block after copy_camera_assets handling
-    old_else_end = '''    set_perm_recursive "$MODPATH/system/priv-app/MiuiCamera" 0 0 0755 0644
-    mkdir -p "$MODPATH/system/priv-app/MiuiCamera/oat"
-    touch "$MODPATH/system/priv-app/MiuiCamera/oat/.nomedia"
-fi
-
-# 4. Handle HAL (camera.qcom.so) Compatibility'''
-
-    new_else_end = '''    set_perm_recursive "$MODPATH/system/priv-app/MiuiCamera" 0 0 0755 0644
-    mkdir -p "$MODPATH/system/priv-app/MiuiCamera/oat"
-    touch "$MODPATH/system/priv-app/MiuiCamera/oat/.nomedia"
-fi
-fi
-
-# 4. Handle HAL (camera.qcom.so) Compatibility'''
-    cust = cust.replace(old_else_end, new_else_end)
-
-with open(customize_path, 'w', encoding='utf-8', newline='\n') as f:
-    f.write(cust)
-print('Updated customize.sh in staging.')
-
-# Package Universal Combo
-out_zip = r'C:\Users\ASTA\OneDrive\Antigravity\Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip'
-print('Creating zip:', out_zip)
-with zipfile.ZipFile(out_zip, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
-    for root, dirs, files in os.walk(staging):
-        for file in files:
-            full_p = os.path.join(root, file)
-            rel_p = os.path.relpath(full_p, staging).replace('\\', '/')
-            zf.write(full_p, rel_p)
-
-print('Packaged Universal:', out_zip, 'Size:', os.path.getsize(out_zip))
-
-repo_zip = r'C:\Users\ASTA\OneDrive\Документы\GitHub\Mi_Master_Camera_Combo\releases\Mi_Master_Camera_Combo_Universal_MultiDevice_by_borndead.zip'
-shutil.copy2(out_zip, repo_zip)
-print('Copied to repo releases:', repo_zip, 'Size:', os.path.getsize(repo_zip))
+if __name__ == '__main__':
+    main()

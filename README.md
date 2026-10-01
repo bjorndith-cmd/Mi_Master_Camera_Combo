@@ -889,8 +889,8 @@ adb shell "su -c sh /data/local/tmp/check_support.sh"
 ---
 
 #### ❓ В3: Видео или видоискатель притормаживают / дёргаются (дропы кадров при зуме). Как это решено?
-> **О:** На смартфонах с четырьмя матрицами (например, Xiaomi 13 Ultra) стоковый драйвер пытается принудительно синхронизировать тактовые генераторы всех 4 сенсоров (`persist.vendor.camera.multicam.hwsync=1`). При малейшем рассинхроне времени кадров возникают рывки.  
-> В нашем модуле в `service.sh` и `system.prop` этот параметр принудительно переведён в **`hwsync=0`**. Это даёт абсолютно плавные **60 fps в видоискателе** и бесшовное переключение зума без микрофризов.
+> **О:** На смартфонах с четырьмя матрицами (например, Xiaomi 13 Ultra) для плавного переключения зума необходима стабильная аппаратная синхронизация потоков Qualcomm CamX (`persist.vendor.camera.multicam.hwsync=1`).  
+> В нашем модуле в `service.sh` и `system.prop` этот параметр синхронизирован и дополнен разгрузкой DSP через локальный MIVI-пайплайн (`persist.vendor.camera.mivi.enable=1`). Это обеспечивает абсолютно плавные **60 fps в видоискателе** и бесшовное переключение объективов (0.5x ➔ 1x ➔ 3.2x ➔ 5x) без микрофризов и разрывов кадров.
 
 ---
 
@@ -1984,8 +1984,8 @@ This section provides verified, production-tested solutions for common issues, r
 ---
 
 #### ❓ Q3: Viewfinder stutters or drops frames in video / zoom switching. How is this solved?
-> **A:** On quad-camera flagship setups (like Xiaomi 13 Ultra), the stock Qualcomm driver attempts aggressive hardware timestamp synchronization across all 4 physical sensors (`persist.vendor.camera.multicam.hwsync=1`). Clock drift between sensors causes dropped frames and viewfinder micro-stuttering.  
-> Our module automatically overrides this in `service.sh` and `system.prop` to **`persist.vendor.camera.multicam.hwsync=0`**. This ensures rock-solid **60 fps viewfinder fluidity** and seamless lens switching without lag.
+> **A:** On quad-camera flagship setups (like Xiaomi 13 Ultra), smooth lens switching requires calibrated Qualcomm CamX hardware pipeline synchronization (`persist.vendor.camera.multicam.hwsync=1`).  
+> Our module ensures this parameter is active in `service.sh` and `system.prop` alongside local MIVI fast remosaicing (`persist.vendor.camera.mivi.enable=1`). This delivers rock-solid **60 fps viewfinder fluidity** and seamless lens transitions (0.5x ➔ 1x ➔ 3.2x ➔ 5x) without frame tears or micro-stutters.
 
 ---
 
