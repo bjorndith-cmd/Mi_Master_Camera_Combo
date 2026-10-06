@@ -1,6 +1,38 @@
 # Changelog
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.
+
+## [Xiaomi Master Camera Combo 5 v6.6 EU Local AI] - 2026-10-06
+### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu · HyperOS 3 / Android 16 by `borndead`
+- **Deliverables**:
+  - **Magisk / KernelSU / APatch Module**: [`Mi13U_Master_Camera_Combo_5_v6.6_EU_LocalAI_by_borndead.zip`](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases/download/v6.6-EU/Mi13U_Master_Camera_Combo_5_v6.6_EU_LocalAI_by_borndead.zip) (153.7 MB)
+  - **Complete Tuning & Settings Manual (RU)**: [`MANUAL_Mi13U_v6.6_EU_RU.md`](./MANUAL_Mi13U_v6.6_EU_RU.md)
+- **Rock-Solid Foundation (Universal 5.0 Beta 8.3 Payload)**:
+  - Stable tested base (versionCode 599830000) with 55 companion native libraries and strict 16KB ELF page alignment (`SO_PAGE_ALIGN = 16384`).
+- **Local AI Pack on NPU / DSP (100% On-Device, Cloud Disabled)**:
+  - **Xiaomi AISP**: Advanced Neural Processing Unit frame enhancement (tonality, dynamic range, scene detail).
+  - **AINR**: Deep-learning neural noise reduction for low-light captures.
+  - **CyberFocus 2.0**: Real-time AI motion tracking and predictive focus lock.
+  - **MIVI Super Resolution**: Hardware-accelerated local detail enhancement and upscaling.
+  - **AI Scene Recognition (ASD) & AI Director / Coach**: Intelligent local scene tuning without external network requests.
+  - **Gallery AI Editor Integration**: HyperAI tag integration for photo editing (compatible with MiuiExtraPhoto).
+  - **One-Tap Toggle in Magisk Action Menu**: Toggle `10) Toggle LOCAL AI pack (no_ai flag)` instantly switches between AI enhancement and pure ultra-fast ISP.
+- **EPERM Cache Lock Elimination**:
+  - Configs and cache storage are deployed with proper permissions (`chmod 0777`, `media_rw:media_rw` ownership, and SELinux contexts), allowing the camera to seamlessly write and refresh its internal MIVI cache without permission errors.
+- **Smooth Video SAT Multi-Lens Zoom**:
+  - Fluid optical transition between all 4 physical sensors (0.5x ↔ 1.0x ↔ 3.2x ↔ 5.0x) during continuous video recording.
+  - High-speed buffer sync and frame synchronization.
+- **Full 50 MP Quad-Sensor Resolution & Stepless Aperture**:
+  - 50 MP (8192×6144) full-resolution envelope across all lenses.
+  - Physical dual-stepping aperture (f/1.9 ↔ f/4.0) with smooth iris actuation.
+  - Street Photography mode with hyperfocal distance scale.
+- **Expanded Diagnostic Engine**:
+  - Automated logging in `/sdcard/Download/CameraMod_Logs` with enhanced real-time filters: `SAT|Zoom|Lens|Focal|Switch|AISP|mialgo|AINR|ASD|CyberFocus`.
+- **Honest Platform Transparency**:
+  - `com.miui.extraphoto` is not part of custom ROM base; requires optional MiuiExtraPhoto APK for AI eraser/frame expansion.
+  - 8K/4K120 sessions are configured by camera and dispatched directly to hardware vendor HAL.
+  - AI vs speed trade-off: AI improves noise and detail at the cost of shutter delay; can be instantly disabled via Action menu toggle 10 or toggle 8.
+
 ## [Xiaomi Master Camera Combo 6 v8.2] - 2026-10-01
 ### Breakthrough Camera 6.8 Port for Xiaomi 13 Ultra (HyperOS 3 / Android 16) by `borndead`
 - **Deliverables**:
