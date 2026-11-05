@@ -1,3 +1,15 @@
+## [Xiaomi Master Camera Combo 5 v5.48.0-EU-Definitive] - 2026-11-05
+### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu · HyperOS 3 / Android 16 · **FINAL** by `borndead`
+- **Deliverables**:
+  - **Magisk / KernelSU / APatch Module**: [`Mi13U_Master_Camera_Combo_5_v5.48.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.48.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+- **Rolled-back clean mode set**: removed experimental AI Capture mode entry from the mode selector; kept the stock, predictable mode lineup (Photo / Video / Portrait / Night / 50MP / Documents / More).
+- **Maximum still-image quality (JPEG SUPER = 100)** in every mode and in 50MP full-resolution capture (8192×6144).
+- **Video bitrate factor raised to 2.5** (4K/8K masters) + 320 kbps audio, hardware-accelerated encode.
+- **AI Scene Recognition (ASD) fully enabled**: live scene badge over viewfinder (food/sky/flowers/people/...), AI toggle in the top shade, CyberFocus 2.0, MIVI Super Resolution (`super_resolution=1`), `maxRAWSizes=55`.
+- **Fixed crash during camera startup**: `DataItemFeature` config read now handles `Short`/`Integer` safely (`ClassCastException` eliminated).
+- **More menu opens with swipe-up from the bottom** (user gesture); drag-edit of the mode ribbon preserves order (unlocked 50MP positioning; 228/232 dead entries removed from registry; Long Exposure moved to "More").
+- **Stable base**: Universal 5.0 Beta 8.3 (versionCode 599830000), zero ETC partition masking, no bootloop risk guard.
+
 # Changelog
 
 All notable changes to the **Xiaomi Master Camera Combo** project will be documented in this file.

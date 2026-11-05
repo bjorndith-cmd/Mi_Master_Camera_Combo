@@ -13,7 +13,7 @@
 
 <p align="center">
   <b>Author / Автор сборки:</b> <code>borndead</code><br>
-  <b>Release / Версия:</b> <code>Xiaomi Master Camera Combo 5 v6.2 (All-Platform Lineup by borndead)</code>
+  <b>Release / Версия:</b> <code>Xiaomi Master Camera Combo 5 v5.48.0-EU-Definitive (FINAL · Mi13U) by borndead</code>
 </p>
 
 <p align="center">
@@ -33,6 +33,22 @@
   📖 <b>Гайды по настройке камеры Leica Master для Xiaomi 13 Ultra:</b><br>
   👉 <a href="./MANUAL_Mi13U_v6.6_EU_RU.md"><b>📘 Полный мануал v6.6 EU (Local AI & Action)</b></a> • <a href="./ADVANCED_SETTINGS_GUIDE_Mi13U.md"><b>Часть 1: Расширенные настройки</b></a> • <a href="./LAB_SETTINGS_GUIDE_Mi13U.md"><b>Часть 2: Лабораторные настройки</b></a> • <a href="./UNIVERSAL_SETTINGS_GUIDE_Mi13U.md"><b>Часть 3: Универсальные настройки</b></a>
 </p>
+
+---
+
+### 🔥 НОВЫЙ РЕЛИЗ: Xiaomi Master Camera Combo 5 v5.48.0-EU-Definitive (FINAL) — Xiaomi 13 Ultra
+
+> **Дата:** 2026-11-05 · **Автор:** `borndead` · **База:** Universal 5.0 Beta 8.3 (HyperOS 3 / Android 16)
+>
+> 📦 **Модуль:** [`Mi13U_Master_Camera_Combo_5_v5.48.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.48.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+>
+> **Что внутри:**
+> - Максимальное качество фото — **JPEG SUPER (100)** во всех режимах и в 50 МП (полное разрешение 8192×6144)
+> - Видео: битрейт-фактор **2.5** + аудио 320 kbps
+> - **ИИ-сцены (ASD)** включены: живой значок сцены над видоискателем, переключатель AI в шторке, CyberFocus 2.0, MIVI Super Resolution
+> - Меню «Ещё» открывается свайпом снизу вверх; редактирование ленты сохраняет порядок
+> - Удалены нерабочие пункты (Мгновенное фото / Фото на документы), «Длинная выдержка» — в «Ещё»
+> - Исправлен краш при запуске (Short/Integer в конфиге)
 
 ---
 
