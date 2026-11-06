@@ -1,3 +1,15 @@
+## [Xiaomi Master Camera Combo 5 v5.50.0-EU-Definitive FINAL] - 2026-11-06
+### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu · HyperOS 3 / Android 16 · **FINAL** by `borndead`
+- **Deliverables**:
+  - **Magisk / KernelSU / APatch / SukiSU / Kitsune Module**: [`Mi13U_Master_Camera_Combo_5_v5.50.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.50.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+- **Bilingual UI (EN/RU)**: Action menu, WebUI and installer auto-detect (EN default / RU on ru locale). Language switch in Action menu item 16 and WebUI selector. No blocking install prompt.
+- **Fixed RU-lang hang in Action menu**: recursive translation lookup rewritten; switching to Russian is instant.
+- **JPEG SUPER (100) in all modes & 50MP & burst**; video bitrate factor 2.5 + 320 kbps audio.
+- **AI Scene Detection (ASD)** ON: live scene badge over viewfinder, shade toggle, CyberFocus 2.0, MIVI Super Resolution, maxRAWSizes=55.
+- **Front selfie beauty (TrueSight)**: HAL JSON region unwrap + unconditional vendor-tag writes + beauty props. Sliders wired to pipeline — visual morphing may still vary per front-sensor HAL (YMMV).
+- **Bootloop Saver** verified; zero Magisk-only calls (Magisk/KernelSU/SukiSU/Kitsune safe).
+- Removed dead modes 228/232; Long Exposure in More; startup crash (Short/Integer) fixed.
+
 ## [Xiaomi Master Camera Combo 5 v5.48.0-EU-Definitive] - 2026-11-05
 ### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu · HyperOS 3 / Android 16 · **FINAL** by `borndead`
 - **Deliverables**:

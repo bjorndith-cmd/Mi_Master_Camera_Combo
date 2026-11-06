@@ -52,6 +52,22 @@
 
 ---
 
+### 🔥 НОВЫЙ РЕЛИЗ: Xiaomi Master Camera Combo 5 v5.50.0-EU-Definitive (FINAL) — Xiaomi 13 Ultra
+
+> **Дата:** 2026-11-06 · **Автор:** `borndead` · **База:** Universal 5.0 Beta 8.3 (HyperOS 3 / Android 16)
+>
+> 📦 **Модуль:** [`Mi13U_Master_Camera_Combo_5_v5.50.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.50.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+>
+> **Что нового (EN/RU):**
+> - Двуязычный интерфейс: меню Action + WebUI (EN/RU), выбор языка в пункте 16 / переключателем
+> - Исправлено зависание меню при русском языке
+> - JPEG SUPER (100) во всех режимах и 50 МП; видео-битрейт 2.5
+> - ИИ-сцены (ASD) включены
+> - Бьютификация фронталки (TrueSight): ползунки работают — визуальный морфинг может отличаться («но это не точно»)
+> - Защита от бутлупа, совместимость с SukiSU/Kitsune/KernelSU
+
+---
+
 ### ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ И ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ (DISCLAIMER)
 
 > [!CAUTION]
