@@ -1,3 +1,10 @@
+## [Xiaomi Master Camera Combo 5 v5.52.0-EU-Definitive] - 2026-11-06
+### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu 3.0.308.0 · HyperOS 3 / Android 16 · **SPECIAL: stable Magisk build** by `borndead`
+- **Deliverables**:
+  - **Module**: [`Mi13U_Master_Camera_Combo_5_v5.52.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.52.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+- **This is a special build for users on `xiaomi.eu 3.0.308.0 / Android 16` with **stable (non-Alpha) Magisk**, where the replaced camera APK was left in `run-from-apk` state (no dexopt artifacts → crash at launch). Now the module runs an automatic AOT compile of the camera on first boot, fixing the crash.
+- All previous builds were developed and tested on **xiaomi.eu 3 / Android 16 with Magisk Alpha**; regular Magisk users may need this special build (or run Action menu item 4 "AOT Speed compile").
+
 ## [Xiaomi Master Camera Combo 5 v5.50.0-EU-Definitive FINAL] - 2026-11-06
 ### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu · HyperOS 3 / Android 16 · **FINAL** by `borndead`
 - **Deliverables**:

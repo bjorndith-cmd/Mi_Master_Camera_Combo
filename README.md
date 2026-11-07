@@ -68,6 +68,18 @@
 
 ---
 
+### 🔥 ОСОБАЯ СБОРКА: Xiaomi Master Camera Combo 5 v5.52.0-EU-Definitive (SPECIAL — stable Magisk)
+
+> **Дата:** 2026-11-06 · **Автор:** `borndead` · **Для:** xiaomi.eu 3.0.308.0 / Android 16 · **Стабильный Magisk**
+>
+> 📦 **Модуль:** [`Mi13U_Master_Camera_Combo_5_v5.52.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.52.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+>
+> **О чём эта версия:** на стабильном Magisk (не Alpha) заменённый APK камеры оставался в состоянии `run-from-apk` (система не создавала dexopt-артефакты → краш при запуске). В этой сборке добавлена автоматическая AOT-компиляция камеры при первом буте.
+>
+> **Примечание:** все предыдущие версии разрабатывались и тестировались на **xiaomi.eu 3 / Android 16 с Magisk Alpha**. Пользователям стабильного Magisk может понадобиться эта спецсборка (или пункт 4 «AOT Speed compile»).
+
+---
+
 ### ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ И ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ (DISCLAIMER)
 
 > [!CAUTION]
