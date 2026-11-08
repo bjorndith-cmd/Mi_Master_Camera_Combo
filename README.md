@@ -80,6 +80,13 @@
 
 ---
 
+### 🔥 РЕЛИЗ: Xiaomi Master Camera Combo 5 v5.53.0-EU-Definitive — Xiaomi 13 Ultra / 14 Ultra
+
+> **Дата:** 2026-11-08 · **Автор:** `borndead`
+> 📦 **Модуль:** [`Mi13U_Master_Camera_Combo_5_v5.53.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.53.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+
+---
+
 ### ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ И ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ (DISCLAIMER)
 
 > [!CAUTION]

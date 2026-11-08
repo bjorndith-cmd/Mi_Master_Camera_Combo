@@ -1,3 +1,11 @@
+## [Xiaomi Master Camera Combo 5 v5.53.0-EU-Definitive] - 2026-11-08
+### Xiaomi 13 Ultra (`ishtar`) / 14 Ultra (`shennong`) · xiaomi.eu · HyperOS 3 / Android 16 · by `borndead`
+- **Deliverables**: [`Mi13U_Master_Camera_Combo_5_v5.53.0_EU_Definitive_by_borndead.zip`](https://media.githubusercontent.com/media/bjorndith-cmd/Mi_Master_Camera_Combo/main/releases/Mi13U_Master_Camera_Combo_5_v5.53.0_EU_Definitive_by_borndead.zip) (240.6 MB)
+- **Fixed camera not launching (any Magisk)**: removed stale `oat/` dir that shadowed the system oat and broke dexopt (`run-from-apk` / `location is error`).
+- **Fixed Action menu language**: 1 = Русский, 2 = English (was swapped). Default EN.
+- **Added auto AOT compile** of camera on first boot (one-time, background).
+- Works with Magisk (stable & Alpha), KernelSU, SukiSU, Kitsune.
+
 ## [Xiaomi Master Camera Combo 5 v5.52.0-EU-Definitive] - 2026-11-06
 ### Xiaomi 13 Ultra (`ishtar`) · xiaomi.eu 3.0.308.0 · HyperOS 3 / Android 16 · **SPECIAL: stable Magisk build** by `borndead`
 - **Deliverables**:
