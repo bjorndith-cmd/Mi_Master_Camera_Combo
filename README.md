@@ -1,8 +1,8 @@
 # Xiaomi Master Camera Combo 5
-**Magisk / KernelSU / SukiSU / Kitsune module for Xiaomi 13 Ultra (ishtar) & 14 Ultra (shennong)**
+**Magisk / KernelSU / SukiSU / Kitsune module for Xiaomi 13 Ultra (ishtar) & 14 Pro (shennong)**
 Base: Universal 5.0 Beta 8.3 · xiaomi.eu HyperOS 3.0 / Android 16 · by `borndead`
 
-**Latest:** [v5.56.0-EU-Definitive](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases/tag/v5.56.0-EU-Definitive)
+**Latest:** [v5.57.0-EU-Definitive](https://github.com/bjorndith-cmd/Mi_Master_Camera_Combo/releases/tag/v5.57.0-EU-Definitive)
 
 ---
 
